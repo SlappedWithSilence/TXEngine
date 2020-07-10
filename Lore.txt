@@ -1,0 +1,75 @@
+- Planet
+   - Age: Young
+   - Type: Varied
+   - Size: Huge
+   - Resources: Mixed
+- Universe:
+	- Alone: Yes
+	- Dense Solar System
+
+
+- Creatures:
+	- Humans:
+		- Hearty, durable, adaptable
+		- Has reached the age of Iron
+		- Can't use magic inherently, but has figured out ways to create devices that wield magic for them
+		- Experts in manufacturing
+		- Diplomats who use their experience in large-scale war to broker peace between the major intellegent species.
+		- Secretly conducting scientific experiments on intellegence creatures. Humans, Frei, etc.
+		- Humans rely on indentured Frei to detect corruption within their own ranks and maintain the integrity of their peace-making council
+
+	- Frei
+		- Woodland dwelling
+		- Humanoid, avg 5 ft tall.
+		- Soft skin with some hard bark-like material that protects the joints and back
+		- Intelligent
+		- Lives for aprox 120 years
+		- Move quickly and with precision
+		- Extremely powerful grip
+		- Somewhat competent magic users
+		- Not very good at manufacturing
+		- Medicinal experts
+		- Prefers close-quarters combat against larger enemies
+		- Uses a special razor-wire-based weapon to ensnare enemies, then finishes them off with a blade
+		- Not reclusive, but generally unhappy with human expansion and indisutry.
+		- Amenable to peace, but suspicious by nature. Has a unique magic that can determine whether or not someone is lying. A small subset of the Frei can use this skill.
+
+	- Drejlahem
+		- Mountain dwellers.
+		- Large race, humanoid. Avg 7ft tall
+		- Slow movers, but can achieve startling straight-line speeds
+		- Hard, leathery skin. 
+		- Bulky, four arms. Small, round eyes.
+		- Three large fingers and a thumb. Somewhat sharp nails.
+		- Elephant-like feet,
+		- One of the strongest races
+		- Powerful magic users
+		- Dedicated to preserving their lands and promoting peace within their terretory
+		- Reclusive
+		- Lives for approx 400 years
+		- Does not reproduce often. As such, the population remains a stable and steady low number.
+		- Enhances their magic's strength with complex arcanic-metalurgy
+		- No record of the Drejlahem taking part in war exists. There are several reports of individual Drejlahelm, dubbed The Eight Guards, anihalating large invasionary forces that cross in Drejlahelm terrotory.
+		- Rarely engages in trade with other species. When they do, they barter for huge sums of resources in exchange for their highly-sought-after magic-infused metals and top-of-the-line alloys.
+
+	- Jhio
+		- Hot-Spring dwellers
+		- Inhabit a unique biome: a large interconnected network of above-ground hot-springs and geysers within a frozen desert.
+		- Has thick, armor-like scales that cover lay on top of a potent layer of insulating fat
+		- Round in appearence. Two arms, two legs, and a powerful tail
+		- Not very intelligent, but have great memory.
+		- Average life span is 40-50 years due to environmental hazards in their homeland, though many can live to be as long as 200 if they are lucky.
+		- Jhio's great memory makes them incredible translators. Unfortunately the Jhio can't stay in warm climates for long as their internal insulation will make them overheat. As such, for very important inter-species communication, they often will travel to guarded outposts on the Jhio's home territory. The Jhio perform this service, for a cost: food, wood, and even books.
+		- The Jhio are the continent's history keepers. Within the Jhio, there are many factions. Each records different types of history, as they all disagree as to what matters most in a historical record. Ironically, this ends up producing much more accurate and objective historical records in aggregate. 
+		- The Jhio can use magic, but rarely do. It's considered a social taboo.
+
+	- Mehkal
+		- A close relative of the human. The Mehkal split off from Humans long before the Jhio initial contact with them.
+		- Skin is tinged a dark green and grey
+		- Similar life-spans to humans
+		- Can't use magic
+		- Have enhanced sexual characteristics
+		- Have the ability to change sex at will
+		- Were persecuted by humans long ago. Now the Mehkal live in solitude, only accepting visitors for temporary lodging in their "service" towns.
+		- Shrewd merchants who engage in trade using a small and exclusive group of human proxies. These humans are thought to be under some sort o Mehkal durress, though the details are entirely unknown to outsiders.
+		- Lives in a variety of cities in the west of the continent.
