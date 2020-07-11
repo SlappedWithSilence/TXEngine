@@ -10,7 +10,7 @@
 
   <name>thealley</name>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>https://github.com/TopperMcKek/TheAlley</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,6 +25,14 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+
+  <!-- https://mvnrepository.com/artifact/io.github.kostaskougios/cloning -->
+<dependency>
+    <groupId>io.github.kostaskougios</groupId>
+    <artifactId>cloning</artifactId>
+    <version>1.10.3</version>
+</dependency>
+
   </dependencies>
 
   <build>
@@ -69,6 +77,27 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>1.2.1</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>java</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <mainClass>mckeken.main.Manager</mainClass>
+            <arguments>
+              <argument>foo</argument>
+              <argument>bar</argument>
+            </arguments>
+          </configuration>
+        </plugin>
+
       </plugins>
     </pluginManagement>
   </build>
