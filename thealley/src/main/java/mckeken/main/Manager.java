@@ -11,14 +11,15 @@ public class Manager
 									   "\t*****            The Alley             *****\n" +
 									   "\t********************************************\n" +
 									   "\n\nWelcome to The Alley. This is a fantasy text-based game. All features and functions of this game" +
-									   " and its story are original and fictional. Please do not modify or re-host this software without asking first.\n";
+									   " and its story are original and fictional. Please do not modify or re-host this software without\n"   +
+                     " askisng first.\n";
 
    // *** Variables *** //
    private static boolean saveExists = false;
    private static boolean createNewGame = false;
    
 
-   
+
    // The class that handles the main menu, then launches the game.
     public static void main( String[] args )
     {
