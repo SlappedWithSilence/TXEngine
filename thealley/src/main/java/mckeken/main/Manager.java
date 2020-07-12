@@ -11,12 +11,12 @@ public class Manager
 	// *** Constants *** //
 	private static String INTRO_TEXT = 
                      "\t********************************************\n" +
-									   "\t*****            The Alley             *****\n" +
+									   "\t*****            " + Colors.PURPLE_UNDERLINED + "The Alley" + Colors.RESET + "             *****\n" +
 									   "\t********************************************\n" +
 									   "\n\nWelcome to The Alley. This is a fantasy text-based game. All features and functions of this game" +
-									   " and its story are original and fictional. Please do not modify or re-host this software without\n"   +
-                     " askisng first.\n";
-                     
+									   " and its story are\noriginal and fictional. Please do not modify or re-host this software without"   +
+                     "asking first.\n";
+
   private static String LOAD_GAME_TEXT = "\nWould you like to resume from your saved game? (Y/N)\n";
 
    // *** Variables *** //
