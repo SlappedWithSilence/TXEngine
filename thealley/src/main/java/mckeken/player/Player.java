@@ -1,5 +1,7 @@
 package mckeken.player;
 
+import mckeken.inventory.*;
+
 public class Player {
 
 	private int DEFAULT_MAX_HEALTH = 100;
