@@ -2,12 +2,12 @@ package mckeken.io;
 
 public class Load {
 
-	public static bool hasSave() {
-		
+	public static boolean hasSave() {
+		return true;
 	}
 
-	public static void loadSave() {
-		
+	public static void loadGame() {
+
 	}
 
 }

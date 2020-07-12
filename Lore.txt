@@ -63,16 +63,16 @@
 		- The Jhio are the continent's history keepers. Within the Jhio, there are many factions. Each records different types of history, as they all disagree as to what matters most in a historical record. Ironically, this ends up producing much more accurate and objective historical records in aggregate. All together, the Jhio have dutifully archived more than 10,000 years of continental history.
 		- The Jhio can use magic, but rarely do. It's considered a social taboo.
 
-	- Mehkal
-		- A close relative of the human. The Mehkal split off from Humans long before the Jhio initial contact with them
+	- Asoah
+		- A close relative of the human. The Asoah split off from Humans long before the Jhio initial contact with them
 		- Skin is tinged a dark green and grey
 		- Similar life-spans to humans
 		- Can't use magic
 		- Have enhanced sexual characteristics throughout their entire population, both male and female.
-		- A side effect of the enhanced sexual characteristics is that secondary characteristics, such as long hair for females, and strong bodys for males, are also exagerated. The Mehkal are fierece warriors that are difficult to subjugate.
-		- Were persecuted by humans long ago. Now the Mehkal live in solitude, only accepting visitors for temporary lodging in their "service" towns. It is unknown what the Mehkal civilization is like outside of these towns.
-		- Long, long ago the Mehkal were attacked by a human nation that tried to force them into sexual slavery
-		- Shrewd merchants who engage in trade using a small and exclusive group of human proxies. These humans are thought to be under some sort of Mehkal duress, though the details are entirely unknown to outsiders.
+		- A side effect of the enhanced sexual characteristics is that secondary characteristics, such as long hair for females, and strong bodys for males, are also exagerated. The Asoah are fierece warriors that are difficult to subjugate.
+		- Were persecuted by humans long ago. Now the Asoah live in solitude, only accepting visitors for temporary lodging in their "service" towns. It is unknown what the Asoah civilization is like outside of these towns.
+		- Long, long ago the Asoah were attacked by a human nation that tried to force them into sexual slavery
+		- Shrewd merchants who engage in trade using a small and exclusive group of human proxies. These humans are thought to be under some sort of Asoah duress, though the details are entirely unknown to outsiders.
 		- Lives in a variety of cities in the west of the continent.
 
 	- O'h-Ra
@@ -98,18 +98,30 @@ Major Historical Events
 
 - Year 304: The Jhio make contact with a Drejlahem explorer, known as He Who Finds. This Derjlahem spends the entire winter in the Jhio capitol, slowly teaching the foremost Jhio scholars (Kaokin's younger brothers, Jaihak and Oloo) how to speak Drejla, the native Drejlahemian tongue.
 
-- Year 450: A band of Mehkal refuges flee uniwttingly into Jhio terretory during a terrible storm. Oddly enough, the Jhio find these strangers very attractive and take them in until the blizzard passes. During this time, the Jhio learn several Mehkal words and phrases, as well as some Human ones, but they ultimately fail to get much out of the traumatized and weathered refugees.
+- Year 450: A band of Asoah refuges flee uniwttingly into Jhio terretory during a terrible storm. Oddly enough, the Jhio find these strangers very attractive and take them in until the blizzard passes. During this time, the Jhio learn several Asoah words and phrases, as well as some Human ones, but they ultimately fail to get much out of the traumatized and weathered refugees.
 
 - Year 523: Strange vessels appear in the eastern sea within the Jhio territory. The Jhio, unsure as to what this means, set out meager offerings of peace along the beach where the vessels were sighted. Contact with these mysterous sailors was never made, though several of the offerings went missing over night.
 
-- Year 808: Humans, hearing of the Jhio and their vast knowlege, make an expedition out to a known outpost discovered many years earlier by a group of Mehkal. They are surprised to hear the the Jhio declare to them "Oi, We hear stop! We hear stop!" as they arrived. After the Humans finished teaching their language to the Jhio a number of months later, it was discovered that the Jhio simply were trying to say "Hello, we can't understand you". The humans, learning of the Mehkal arrivals many hundreds of years ago set off on another journey to locate any descendants of that raggedy band.
+- Year 808: Humans, hearing of the Jhio and their vast knowlege, make an expedition out to a known outpost discovered many years earlier by a group of Asoah. They are surprised to hear the the Jhio declare to them "Oi, We hear stop! We hear stop!" as they arrived. After the Humans finished teaching their language to the Jhio a number of months later, it was discovered that the Jhio simply were trying to say "Hello, we can't understand you". The humans, learning of the Asoah arrivals many hundreds of years ago set off on another journey to locate any descendants of that raggedy band.
 
-- Year 810: The Human explorers who left the Jhio in search of a Mehkal settlement succeed. They are never heard of again.
+- Year 810: The Human explorers who left the Jhio in search of a Asoah settlement succeed. They are never heard of again.
 
 - Year 1009: The 42 Human nation-states unify after a 20-year war. They vow to never set the sparks of war again, and were pretty good at keeping their promise. Tod II was an exception to this rule, and Humans have an unspoken agreement amongst eachother to pretend he never existed.
 
 - Year 1079: The Humans defuse a war between two Frei nations who were threatening to disrupt their only supply of high-quality leather. After the Humans realized that they were pretty good peace-brokers, this job was formally self-appointed by the Human high-council. Tod II was officially condemned as a jerk and state emissaries were sent out to all nearby nations to extend gestures of good will.
 
-- Year 1500: The Drejlahem, annoyed with how much the son of He Who Finds bragged about his late father, send out two more explorers to trade with foriegn lands. The first makes the first Drejlahemian contact with the Mehkal, while the second meets with both the Frei and the Humans. The humans barter half a ton of skrei backon (a fatty fried meat snack) for six ingots of medium-tier mana-ore. The Drejlahemian explorer carrierd all 1000 pounds of skrei backon on his back for the entirety of his 200-mile journey home. Thus began the Backon-Mana Ingot Exchange Era that yeilded the Humans a massive amount of wealth and prosperity for all 600 years that it lasted.
+- Year 1500: The Drejlahem, annoyed with how much the son of He Who Finds bragged about his late father, send out two more explorers to trade with foriegn lands. The first makes the first Drejlahemian contact with the Asoah, while the second meets with both the Frei and the Humans. The humans barter half a ton of skrei backon (a fatty fried meat snack) for six ingots of medium-tier mana-ore. The Drejlahemian explorer carrierd all 1000 pounds of skrei backon on his back for the entirety of his 200-mile journey home. Thus began the Backon-Mana Ingot Exchange Era that yeilded the Humans a massive amount of wealth and prosperity for all 600 years that it lasted.
 
 - Year 2129: The end of the Backon-Mana Ingot Exchange Era. After a human accidentally injured a Drejlahemian, the species retreated into their territory for many hundreds of years, cutting off all trade with the rest of the continent. This inadvertently led to a massive over-supply of skrei backon, leading to The Great Waste: a brief period, lasting only until Year 2133, where Humans had to bury hundreds of tons of skrei backon that no longer had any buyers.
+
+- Year 2718: The Asoah obtain a group of human proxies for use in trade with the rest of the continent. They are taken in by overwhelming attraction to the Asoah and eventually had children with them. It was discovered that all children derived from Human-Asoah are just attractive Humans. Thus began the ever-lasting creation of the internal proxy-class in Asoah society.
+
+- Year 2720: The Asoah proxys make diplomatic contact wtih the Frei and the Humans. The Frei initially reject diplomacy, demanding that the Asoah proxys leave. The Humans accept the diplomatic offering and engage in trade.
+
+- Year 2723: The Frei, having expent most of their metal reserves, decide to barter with the Humans for copper and iron. The Humans are more than happy to engage in trade and offer to exchange low-tier ore and ingots for the Frei's well-hardened leathers. The Frei, aware of the fact that they got the shor end of this trade, reluctantly agree, as they are desperate.
+
+- Year 2728: Legend of the Asoah and their beauty still entrances the Human population. Desire for direct contact expands and a private company launches an investigative force to track the Asoah proxys in an attempt to locate the Asoah homeland. This journey is succesfull. As the investigative force approaches the exterior gates of the Asoah city, Hir, the guards block then and threaten them with violence. Scared, the Humans tell the Asoah that they are representing Humans who wish to solicit the Asoah's "services".
+
+- Year 2801: The Asoah, after fending off multiple attempts by Humans to enter Hir, a large Asoahn city, in order to solicit their "services", the Asoah establish a fortified town in which they exclusively sell the afformentioned romantic services, named Kehar. Kehar is 10 miles east of Hir, located on the edge of Ouron, a small lake. The Asoah make an enormous amount of wealth from Hir, and due to extensive demand, make plans to establish a second service town. This town will be named Oyir and be located 12 miles South-East of Hir.
+
+- Year 2992: A lone Jhio, bored with its homeland's relatively peace and tranquility, sets out East to chart the coast line. During this expedition, it encounters lone O'h-Ra. The Jhio, startled by the size and sinister appearance of the O'h-Ra attempts to flee, but soon finds itself unable to move. Frozen in place, the O'h-Ra's voice echoes within the Jhio's head. It states that it has heard that the Jhio are excellent history-keepers and asks it about any appearances of vessels out in the Eastern Sea's waters. After the Jhio recites a single story, one recorded by his ancestors nearly 2500 years prior, the Oh-Ra melts away into a nearby-shadow and releases the Jhio from its arcane hold.
