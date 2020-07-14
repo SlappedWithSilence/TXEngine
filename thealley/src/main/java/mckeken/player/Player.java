@@ -24,6 +24,12 @@ public class Player {
 
 	private static Inventory inventory;
 
+	// The room that the player is currently in. This value must always be a valid room id.
+	private static int location;
+
+	//*** Constructors ***//
+
+	// Default constructor
 	public Player() {
 		name = DEFAULT_PLAYER_NAME;
 
@@ -34,6 +40,29 @@ public class Player {
 		maxStamina = DEFAULT_MAX_STAMINA;
 
 		inventory = new Inventory();
+
+		location = 0;
 	}
+
+	// Specific constructor
+	public Player(String name, int health, int maxHealth, int stamina, int maxStamina, Inventory inventory, int location) {
+		this.name = name;
+
+		this.health = health;
+		this.maxHealth = maxHealth;
+
+		this.stamina = stamina;
+		this.maxStamina = maxStamina;
+
+		this.inventory = inventory;
+
+		this.location = location;
+	}
+
+	public void modifyHealth(int amount) {
+		health += amount;
+
+		if (health > maxHealth) health = maxHealth;
+	}	
 
 }
