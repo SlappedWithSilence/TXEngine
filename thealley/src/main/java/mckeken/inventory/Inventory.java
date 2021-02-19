@@ -6,6 +6,7 @@ import java.util.Collections;
 import mckeken.color.ColorConsole;
 import mckeken.io.LogUtils;
 import mckeken.item.Item;
+import mckeken.util.Utils;
 
 public class Inventory {
 
@@ -61,19 +62,34 @@ public class Inventory {
 					itemIDs.add(i.getId());     // Push the item's ID to the inventory
 					itemQuantities.add(1);      // Push a stack size of one to the inventory
 				}
-
 			break;
 
 			default: // There are multiple existing stacks of this item
+				ArrayList<Integer> indexes = Utils.getAllInstances(itemIDs, i.getId());
+				boolean stackFound = false;
+				for (int indx: indexes) {
+					if (itemQuantities.get(indx) < i.getMaxStacks()) {
+						incrementItem(indx); // Increment the stack count of that item
+						stackFound = true;
+						break;
+					}
+				}
+
+				if (!stackFound) {
+					usage++;
+					itemNames.add(i.getName());
+					itemIDs.add(i.getId());
+					itemQuantities.add(1);
+				}
 			break;
 		}
 
 	}
 
 	public void removeItem(int index) {
-		itemNames.set(index, null);
-		itemIDs.set(index, null); 
-		itemQuantities.set(index, null); 
+		itemNames.remove(index);
+		itemIDs.remove(index); 
+		itemQuantities.remove(index); 
 	}
 
 	public void decrementItem(int index) {

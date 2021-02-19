@@ -6,6 +6,7 @@ import mckeken.player.Player;
 
 
 
+
 public class Manager {
 
 	// *** Constants *** //
@@ -39,6 +40,7 @@ public class Manager {
             Load.initializeNewGame();     // Set up a new game
         }
 
+      
     }
 
   // **** Prompt functions ****
