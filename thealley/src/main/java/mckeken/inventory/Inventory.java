@@ -65,19 +65,19 @@ public class Inventory {
 			break;
 
 			default: // There are multiple existing stacks of this item
-				ArrayList<Integer> indexes = Utils.getAllInstances(itemIDs, i.getId());
+				ArrayList<Integer> indexes = Utils.getAllInstances(itemIDs, i.getId()); // Seek the index of each stack
 				boolean stackFound = false;
-				for (int indx: indexes) {
-					if (itemQuantities.get(indx) < i.getMaxStacks()) {
+				for (int indx: indexes) { // For each stack
+					if (itemQuantities.get(indx) < i.getMaxStacks()) { // Check if it is full
 						incrementItem(indx); // Increment the stack count of that item
-						stackFound = true;
+						stackFound = true;   // Flag that a non-full stack was located
 						break;
 					}
 				}
 
-				if (!stackFound) {
-					usage++;
-					itemNames.add(i.getName());
+				if (!stackFound) { // If no non-full stack was found
+					usage++; // Create a new stack
+					itemNames.add(i.getName()); 
 					itemIDs.add(i.getId());
 					itemQuantities.add(1);
 				}
