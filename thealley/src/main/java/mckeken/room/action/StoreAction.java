@@ -3,6 +3,8 @@ package mckeken.room.action;
 import mckeken.room.Action;
 import mckeken.color.*;
 import mckeken.io.*;
+import mckeken.item.Item;
+import java.util.ArrayList;
 
 // This action emulates the player entering a store
 public class StoreAction extends Action {
@@ -28,13 +30,13 @@ public class StoreAction extends Action {
 	}
 
 	private void displayInventory() {
-		System.out.println("-------------------------------------------------------")
-		System.out.println("------------        Store Inventory      --------------")
-		System.out.println("-------------------------------------------------------")
-		for (int i; i < inventory.size(); i++ ) {
+		System.out.println("-------------------------------------------------------");
+		System.out.println("------------        Store Inventory      --------------");
+		System.out.println("-------------------------------------------------------");
+		for (int i = 0; i < inventory.size(); i++ ) {
 			System.out.println(inventory.get(i).getName() + "/t" + Colors.CYAN_BOLD + cost.get(i) + Colors.RESET);
 		}
-		System.out.println("-------------------------------------------------------")
+		System.out.println("-------------------------------------------------------");
 	}
 
 	private boolean checkConfig() {
