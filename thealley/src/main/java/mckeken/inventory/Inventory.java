@@ -102,6 +102,7 @@ public class Inventory {
 		}
 	}
 
+	// Increments the quantity of the item located at 'index'
 	public void incrementItem(int index) {
 		if (itemQuantities.get(index) != null) {
 			itemQuantities.set(index, itemQuantities.get(index) + 1);
@@ -126,6 +127,22 @@ public class Inventory {
 
 	public int getUsage() {
 		return usage;
+	}
+
+	// Prints the inventory in a vertical numbered list
+	public void display() {
+		System.out.println("-------------------------------------------------------");
+		System.out.println("------------          Inventory          --------------");
+		System.out.println("-------------------------------------------------------");
+		for (int i = 0; i < inventory.size(); i++ ) {
+			System.out.println("[" + i + "]" + itemNames.get(i) + "/t" + Colors.CYAN_BOLD + itemQuantities.get(i) + Colors.RESET);
+		}
+		System.out.println("-------------------------------------------------------");
+	}
+
+	// Returns an instance of the item class associated with the ID located at 'index' in the inventory
+	public Item getItemClass(int index) {
+		return Manager.itemList.get( itemIDs.get(index) );
 	}
 
 }

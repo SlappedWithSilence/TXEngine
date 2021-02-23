@@ -1,5 +1,7 @@
 package mckeken.io;
 
+import mckeken.main.Manager;
+
 public class Load {
 
 	// Checks for a saved game
@@ -17,7 +19,7 @@ public class Load {
 	// Sets up and configures a new game state
 	// TODO: Implement
 	public static void initializeNewGame() {
-
+		Manager.player = new Player();
 	}
 
 	// Loads items from disk

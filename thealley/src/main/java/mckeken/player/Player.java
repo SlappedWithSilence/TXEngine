@@ -4,6 +4,11 @@ import mckeken.inventory.*;
 
 public class Player {
 
+	public Enum gender {
+		MALE,
+		FEMALE;
+	}
+
 	private int DEFAULT_MAX_HEALTH = 100;
 	private int DEFAULT_HEALTH     = 100;
 
