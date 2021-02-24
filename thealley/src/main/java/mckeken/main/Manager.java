@@ -5,12 +5,12 @@ import mckeken.io.*;
 import mckeken.player.Player;
 import java.util.HashMap;
 import mckeken.item.Item;
-
+import mckeken.room.*;
 
 public class Manager {
 
 	// *** Constants *** //
-	private static String INTRO_TEXT = 
+	private static String INTRO_TEXT =
                      "\t********************************************\n" +
 									   "\t*****            " + Colors.PURPLE_UNDERLINED + "The Alley" + Colors.RESET + "             *****\n" +
 									   "\t********************************************\n" +
@@ -18,21 +18,26 @@ public class Manager {
 									   " and its story are\noriginal and fictional. Please do not modify or re-host this software without"   +
                      "asking first.\n";
 
-  private static String LOAD_GAME_TEXT = "\nWould you like to resume from your saved game? (Y/N)\n";
+   private static String LOAD_GAME_TEXT = "\nWould you like to resume from your saved game? (Y/N)\n";
 
    // *** Variables *** //
    private static boolean saveExists = false;
    private static boolean createNewGame = true;
-   
+
    public static Player player;
 
    public static HashMap<Integer, Item> itemList;
+	 public static HashMap<Integer, Room> roomList;
 
    // The class that handles the main menu, then launches the game.
     public static void main( String[] args )
     {
         intro();                     // Display the intro text
         saveExists = Load.hasSave(); // Check for a saved game
+
+				itemList = Load.loadItems();
+				roomList = Load.loadRooms();
+
 
         if (saveExists) {            // If the save exists
             promptLoadGame();        // Ask the user if they want to resume from that save
@@ -41,7 +46,7 @@ public class Manager {
             Load.initializeNewGame();     // Set up a new game
         }
 
-      
+
     }
 
   // **** Prompt functions ****
@@ -57,5 +62,3 @@ public class Manager {
 
 
 }
-
-
