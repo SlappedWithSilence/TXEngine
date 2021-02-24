@@ -3,7 +3,8 @@ package mckeken.inventory;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import mckeken.color.ColorConsole;
+import mckeken.main.Manager;
+import mckeken.color.*;
 import mckeken.io.LogUtils;
 import mckeken.item.Item;
 import mckeken.util.Utils;
@@ -134,7 +135,7 @@ public class Inventory {
 		System.out.println("-------------------------------------------------------");
 		System.out.println("------------          Inventory          --------------");
 		System.out.println("-------------------------------------------------------");
-		for (int i = 0; i < inventory.size(); i++ ) {
+		for (int i = 0; i < getUsage(); i++ ) {
 			System.out.println("[" + i + "]" + itemNames.get(i) + "/t" + Colors.CYAN_BOLD + itemQuantities.get(i) + Colors.RESET);
 		}
 		System.out.println("-------------------------------------------------------");

@@ -4,9 +4,9 @@ import mckeken.inventory.*;
 
 public class Player {
 
-	public Enum gender {
+	enum Gender {
 		MALE,
-		FEMALE;
+		FEMALE
 	}
 
 	private int DEFAULT_MAX_HEALTH = 100;
@@ -68,6 +68,10 @@ public class Player {
 		health += amount;
 
 		if (health > maxHealth) health = maxHealth;
-	}	
+	}
+
+	public Inventory getInventory() {
+		return inventory;
+	}
 
 }

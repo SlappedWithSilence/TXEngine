@@ -4,6 +4,7 @@ import mckeken.color.ColorConsole;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.ArrayList;
 
 // A class of static functions designed to stream-line getting typical forms of user input. 
 public class LogUtils {
@@ -83,5 +84,13 @@ public class LogUtils {
 
 	public static void error(String text) {
 		ColorConsole.e(text);
+	}
+
+	public static void numberedList(ArrayList<String> list) {
+		System.out.println("------------------------------------------------");
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println("[" + i + "]: " + list.get(i));
+		}
+		System.out.println("------------------------------------------------");
 	}
 }

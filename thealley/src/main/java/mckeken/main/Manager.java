@@ -4,8 +4,7 @@ import mckeken.color.*;
 import mckeken.io.*;
 import mckeken.player.Player;
 import java.util.HashMap;
-
-
+import mckeken.item.Item;
 
 
 public class Manager {
@@ -27,7 +26,7 @@ public class Manager {
    
    public static Player player;
 
-   public static HasMap<int, Item> itemList;
+   public static HashMap<Integer, Item> itemList;
 
    // The class that handles the main menu, then launches the game.
     public static void main( String[] args )

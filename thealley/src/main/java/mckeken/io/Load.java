@@ -1,6 +1,7 @@
 package mckeken.io;
 
 import mckeken.main.Manager;
+import mckeken.player.Player;
 
 public class Load {
 
