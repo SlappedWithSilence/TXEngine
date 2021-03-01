@@ -37,7 +37,7 @@ public class Load {
 	// - Modes: 0 generic | 1: consumable | 2: usable | 3: wearable | 4:wieldable
 	//
 	//
-	public static HashMap<Integer, Item> loadItems() {
+	public static HashMap<Integer, Item> loadItems(File file) {
 
 		HashMap<Integer, Item> itemList = new HashMap<Integer, Item>();
 
@@ -46,7 +46,7 @@ public class Load {
 			DocumentBuilderFactory dBfactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = dBfactory.newDocumentBuilder();
 			// Fetch XML File
-			Document document = builder.parse(new File("students.xml"));
+			Document document = builder.parse(file);
 			document.getDocumentElement().normalize();
 			//Get root node
 			Element root = document.getDocumentElement();
@@ -71,7 +71,7 @@ public class Load {
 		} catch (ParserConfigurationException e) {
 
 		} catch (org.xml.sax.SAXException e) {
-			
+
 		}
 
 		return itemList;

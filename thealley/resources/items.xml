@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<item id="1"> <!-- Item id -->
+  <Type>0</Type> <!-- Decoding type (0=Item.java) -->
+  <Name>Rock</Name> <!-- Item name -->
+  <Desc>A small, hard rock. Could be useful in a fight.</Desc> <!-- Item description -->
+  <Value>2</Value> <!-- Sale value of the item -->
+  <MaxStacks>32</MaxStacks> <!-- Max item per stack -->
+</item>
