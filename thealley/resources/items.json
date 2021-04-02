@@ -1,0 +1,20 @@
+{
+   "Items": [
+    
+      {
+         "type"      :  "item",
+         "name"      :  "Rock",
+         "id"        :  "1",
+         "value"     :  "0",
+         "maxStacks" :  "16"
+      },
+    
+      {
+         "type"      :  "consumable", 
+         "name"      :  "Leg of Fowl",
+         "id"        :  1,
+         "value"     :  0,
+         "maxStacks" : 16
+      }
+   ]
+}

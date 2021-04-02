@@ -7,6 +7,9 @@ import java.util.HashMap;
 import mckeken.item.Item;
 import mckeken.room.*;
 
+import mckeken.item.effect.EffectFactory;
+import mckeken.item.effect.effects.*;
+
 public class Manager {
 
 	// *** Constants *** //
@@ -48,6 +51,8 @@ public class Manager {
             Load.initializeNewGame();     // Set up a new game
         }
 
+
+       
 
     }
 

@@ -40,6 +40,11 @@ public abstract class Effect {
 		}
 	}
 
+	public void setProperties(int[] props) {
+		properties = props;
+		numProperties = props.length;
+	}
+
 	//*** Abstract Member Functions ***//
 
 	// Performs a function on the player or world
