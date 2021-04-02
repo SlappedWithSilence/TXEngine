@@ -52,7 +52,7 @@ public class Load {
 			Element root = document.getDocumentElement();
 			System.out.println(root.getNodeName());
 			//Get all students
-			NodeList nList = document.getElementsByTagName("student");
+			NodeList nList = document.getElementsByTagName("item");
 			System.out.println(".................................");
 
 			for (int i = 0; i < nList.getLength(); i++)

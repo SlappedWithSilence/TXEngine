@@ -10,7 +10,7 @@ import mckeken.room.*;
 public class Manager {
 
 	// *** Constants *** //
-	private static String INTRO_TEXT =
+	private static final String INTRO_TEXT =
                      "\t********************************************\n" +
 									   "\t*****            " + Colors.PURPLE_UNDERLINED + "The Alley" + Colors.RESET + "             *****\n" +
 									   "\t********************************************\n" +
@@ -18,7 +18,9 @@ public class Manager {
 									   " and its story are\noriginal and fictional. Please do not modify or re-host this software without"   +
                      "asking first.\n";
 
-   private static String LOAD_GAME_TEXT = "\nWould you like to resume from your saved game? (Y/N)\n";
+   private static final String LOAD_GAME_TEXT = "\nWould you like to resume from your saved game? (Y/N)\n";
+
+   private static final String ITEM_RESOURCE_FILE = "items.xml";
 
    // *** Variables *** //
    private static boolean saveExists = false;
@@ -35,8 +37,8 @@ public class Manager {
         intro();                     // Display the intro text
         saveExists = Load.hasSave(); // Check for a saved game
 
-				itemList = Load.loadItems();
-				roomList = Load.loadRooms();
+				itemList = Load.loadItems(Resources.getResourceAsFile(ITEM_RESOURCE_FILE));
+        roomList = Load.loadRooms();
 
 
         if (saveExists) {            // If the save exists
