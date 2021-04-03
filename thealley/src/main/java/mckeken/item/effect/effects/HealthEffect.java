@@ -15,10 +15,11 @@ import mckeken.main.*;
 public class HealthEffect extends Effect {
 	//*** Constants ***//
 	final static int DEFAULT_HP_CHANGE = 10;
+	
 
 	// Default constructor.
 	public HealthEffect() {
-		super(new int[] {DEFAULT_HP_CHANGE, 0, 0}); // Configure the effect to have a maximum of 3 properties
+		super(new int[] {DEFAULT_HP_CHANGE, 1, 0}); // Configure the effect to have a maximum of 3 properties
 
 	}
 

@@ -7,8 +7,7 @@ import java.util.HashMap;
 import mckeken.item.Item;
 import mckeken.room.*;
 
-import mckeken.item.effect.EffectFactory;
-import mckeken.item.effect.effects.*;
+import mckeken.item.effect.*;
 
 public class Manager {
 
@@ -52,7 +51,14 @@ public class Manager {
         }
 
 
-       
+        //DEBUGGING CODE
+        player = new Player();
+        System.out.println(player.getHealth());
+        int[] arr = {1,1,1};
+        Effect e = EffectFactory.build("HealthEffect", arr);
+        e.perform();
+        System.out.println(player.getHealth());
+      
 
     }
 

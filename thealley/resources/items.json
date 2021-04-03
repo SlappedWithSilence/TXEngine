@@ -12,9 +12,10 @@
       {
          "type"      :  "consumable", 
          "name"      :  "Leg of Fowl",
-         "id"        :  1,
-         "value"     :  0,
-         "maxStacks" : 16
+         "id"        :  "1",
+         "value"     :  "0",
+         "maxStacks" : "16",
+         "effect"    : "HealthEffect"
       }
    ]
 }

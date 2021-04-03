@@ -10,7 +10,7 @@ public class Player {
 	}
 
 	private int DEFAULT_MAX_HEALTH = 100;
-	private int DEFAULT_HEALTH     = 100;
+	private int DEFAULT_HEALTH     = 50;
 
 	private int DEFAULT_MAX_STAMINA = 50;
 	private int DEFAULT_STAMINA     = 50;
@@ -70,8 +70,18 @@ public class Player {
 		if (health > maxHealth) health = maxHealth;
 	}
 
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int i) {
+		health = i;
+	}
+
 	public Inventory getInventory() {
 		return inventory;
 	}
+
+
 
 }
