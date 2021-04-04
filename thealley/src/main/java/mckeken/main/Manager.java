@@ -16,13 +16,13 @@ public class Manager {
                      "\t********************************************\n" +
 									   "\t*****            " + Colors.PURPLE_UNDERLINED + "The Alley" + Colors.RESET + "             *****\n" +
 									   "\t********************************************\n" +
-									   "\n\nWelcome to The Alley. This is a fantasy text-based game. All features and functions of this game" +
-									   " and its story are\noriginal and fictional. Please do not modify or re-host this software without"   +
+									   "\n\nWelcome to The Alley. This is a fantasy text-based game. All features and functions of this game " +
+									   "and its story are\noriginal and fictional. Please do not modify or re-host this software without "   +
                      "asking first.\n";
 
    private static final String LOAD_GAME_TEXT = "\nWould you like to resume from your saved game? (Y/N)\n";
 
-   private static final String ITEM_RESOURCE_FILE = "items.xml";
+   private static final String ITEM_RESOURCE_FILE = "items.json";
 
    // *** Variables *** //
    private static boolean saveExists = false;
@@ -46,19 +46,9 @@ public class Manager {
         if (saveExists) {            // If the save exists
             promptLoadGame();        // Ask the user if they want to resume from that save
             if (LogUtils.getAffirmative()) Load.loadGame(); // If the user says yes, load the game
-        } else {                     // if no save exists
-            Load.initializeNewGame();     // Set up a new game
+        } else {                        // if no save exists
+            Load.initializeNewGame();   // Set up a new game
         }
-
-
-        //DEBUGGING CODE
-        player = new Player();
-        System.out.println(player.getHealth());
-        int[] arr = {1,1,1};
-        Effect e = EffectFactory.build("HealthEffect", arr);
-        e.perform();
-        System.out.println(player.getHealth());
-      
 
     }
 
