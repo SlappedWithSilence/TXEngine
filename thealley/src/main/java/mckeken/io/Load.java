@@ -5,8 +5,10 @@ import org.json.simple.parser.*;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.lang.Math;
+import java.util.ArrayList;
+import java.lang.Long;	
 
+import mckeken.item.effect.Effect;
 import mckeken.main.Manager;
 import mckeken.player.Player;
 import mckeken.item.*;
@@ -69,18 +71,53 @@ public class Load {
 
 			switch(itemType) {
 				case "item":
-					String name = (String) rawItem.get("name");
-					String desc = (String) rawItem.get("description");
-					int id = ((Long) rawItem.get("id")).intValue();
-					int value = ((Long) rawItem.get("value")).intValue();
-					int maxStacks = ((Long) rawItem.get("maxStacks")).intValue();
+					try {
+						String name = (String) rawItem.get("name");
+						String desc = (String) rawItem.get("description");
+						int id = ((Long) rawItem.get("id")).intValue();
+						int value = ((Long) rawItem.get("value")).intValue();
+						int maxStacks = ((Long) rawItem.get("maxStacks")).intValue();
 
-					Item i = new Item(name, desc, id, value, maxStacks); // Build the item from the read values
+						Item i = new Item(name, desc, id, value, maxStacks); // Build the item from the read values
 
-					itemList.put(id, i); // Add the newly build item to the itemList hashmap
+						itemList.put(id, i); // Add the newly build item to the itemList hashmap
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				break;
 
 				case "consumable":
+					try {
+						String name = (String) rawItem.get("name");
+						String desc = (String) rawItem.get("description");
+						int id = ((Long) rawItem.get("id")).intValue();
+						int value = ((Long) rawItem.get("value")).intValue();
+						int maxStacks = ((Long) rawItem.get("maxStacks")).intValue();
+
+						ArrayList<Effect> effects = new ArrayList<Effect>();
+
+						// Begin loading effects
+						JSONArray jsonEffects = (JSONArray) rawItem.get("effects"); // Grab the JSON array of effects
+						Iterator<JSONObject> effectsIterator = jsonEffects.iterator();
+
+						// Begin loading the properties for each effect
+						ArrayList<JSONArray> properties = JSONArrayToArrayList<JSONArray>((JSONArray) rawItem.get("properties")); // Get an array of arrays that stores the properties for each effect
+						Iterator<JSONArray> propertiesIterator = properties.iterator();
+						
+						while (effectsIterator.hasNext()) {
+							JSONObject rawEffect = effectsIterator.next();
+							//ArrayList<Long> rawProperties = 
+							JSONArrayToArrayList<int>(propertiesIterator.next());
+							
+						}
+
+						Consumable c = new Consumable(name, desc, id, value, maxStacks, effects); // Build the item from the read values
+
+						itemList.put(id, c); // Add the newly build item to the itemList hashmap
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
 				break;
 
 				default:
@@ -97,5 +134,17 @@ public class Load {
 		HashMap<Integer, Room> roomList = new HashMap<Integer, Room>();
 
 		return roomList;
+	}
+
+	public static <T> ArrayList<T> JSONArrayToArrayList(JSONArray arr) {
+		ArrayList<T> al = new ArrayList<T>();
+		Iterator<JSONObject> iterator = arr.iterator();
+
+		while (iterator.hasNext()) {
+			JSONObject rawItem = iterator.next();
+			al.add((T) rawItem);
+		}
+
+		return al;
 	}
 }

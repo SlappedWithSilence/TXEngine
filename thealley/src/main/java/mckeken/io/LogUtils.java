@@ -93,4 +93,12 @@ public class LogUtils {
 		}
 		System.out.println("------------------------------------------------");
 	}
+
+	public static void numberedList(String[] list) {
+		System.out.println("------------------------------------------------");
+		for (int i = 0; i < list.length; i++) {
+			System.out.println("[" + i + "]: " + list[i]);
+		}
+		System.out.println("------------------------------------------------");
+	}
 }

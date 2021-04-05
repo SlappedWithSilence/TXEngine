@@ -26,7 +26,8 @@
          "id"        :  2,
          "value"     :  10,
          "maxStacks" :  16,
-         "effects"    :  ["HealthEffect"]
-      }
+         "effects"   :  ["HealthEffect"],
+         "properties":  [[0,0,1]]
+      },
    ]
 }

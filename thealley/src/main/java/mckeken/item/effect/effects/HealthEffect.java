@@ -4,7 +4,7 @@ import mckeken.item.effect.Effect;
 import mckeken.main.*;
 
 /* Effect Functionality:
- * Number of properties: 2
+ * Number of properties: 3
  * Property Descriptions:
  * - 0: Health modifier. This is the quantity by which the player's health will change. May be positive or negative.
  * - 1: Level multiplier. This is the quantity by which property 0 will scale with the player's level. May only be positive.

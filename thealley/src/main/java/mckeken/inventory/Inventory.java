@@ -142,7 +142,7 @@ public class Inventory {
 	}
 
 	// Returns an instance of the item class associated with the ID located at 'index' in the inventory
-	public Item getItemClass(int index) {
+	public Item getItemInstance(int index) {
 		return Manager.itemList.get( itemIDs.get(index) );
 	}
 
