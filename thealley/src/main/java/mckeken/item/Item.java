@@ -19,6 +19,10 @@ public class Item {
 		this.maxStacks = maxStacks;
 	}
 
+	public void print() {
+		System.out.println(name + " | " + id + " | " + value + " | " + maxStacks);
+	}
+
 	public String getName() {
 		return name;
 	}

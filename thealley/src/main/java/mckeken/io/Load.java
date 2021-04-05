@@ -5,6 +5,7 @@ import org.json.simple.parser.*;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.lang.Math;
 
 import mckeken.main.Manager;
 import mckeken.player.Player;
@@ -46,6 +47,7 @@ public class Load {
 		try {
 			obj = (JSONObject) parser.parse(new FileReader(file));
 		} catch (FileNotFoundException e) {
+			LogUtils.error("Attempted to load from file: " + file.getAbsolutePath());
 			e.printStackTrace();
 			return null;
 		} catch (IOException e) {
@@ -68,9 +70,9 @@ public class Load {
 			switch(itemType) {
 				case "item":
 					String name = (String) rawItem.get("name");
-					int id = (int) rawItem.get("id");
-					int value = (int) rawItem.get("value");
-					int maxStacks = (int) rawItem.get("maxStacks");
+					int id = ((Long) rawItem.get("id")).intValue();
+					int value = ((Long) rawItem.get("value")).intValue();
+					int maxStacks = ((Long) rawItem.get("maxStacks")).intValue();
 
 					Item i = new Item(name, id, value, maxStacks); // Build the item from the read values
 

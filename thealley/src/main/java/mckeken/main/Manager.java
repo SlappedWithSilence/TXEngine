@@ -50,6 +50,9 @@ public class Manager {
             Load.initializeNewGame();   // Set up a new game
         }
 
+        itemList.get(1).print();
+        itemList.get(2).print();
+
     }
 
   // **** Prompt functions ****
