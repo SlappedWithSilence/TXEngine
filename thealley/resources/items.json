@@ -4,6 +4,7 @@
       {
          "type"      :  "item",
          "name"      :  "Rock",
+         "description": " A small round rock. Good for throwing!",
          "id"        :  1,
          "value"     :  0,
          "maxStacks" :  40
@@ -12,6 +13,7 @@
       {
          "type"      :  "item",
          "name"      :  "Tarnished Necklace",
+         "description": "A once-beatiful necklace, now tarnished with age. It should fetch a small sum when sold.",
          "id"        :  2,
          "value"     :  30,
          "maxStacks" :  8
@@ -20,10 +22,11 @@
       {
          "type"      :  "consumable", 
          "name"      :  "Leg of Fowl",
+         "description": "A cooked leg of a small bird. It smells delicious.",
          "id"        :  2,
          "value"     :  10,
          "maxStacks" :  16,
-         "effect"    :  "HealthEffect"
+         "effects"    :  ["HealthEffect"]
       }
    ]
 }

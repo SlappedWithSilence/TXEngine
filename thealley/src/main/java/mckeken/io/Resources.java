@@ -14,8 +14,6 @@ public class Resources {
   	File file = new File(ResourcesRelativePathPrefix + ResourcesRelativePath + fileName); // Create a file object
     
     if (file.exists()) return file; // return the object if the file exists
-    System.out.println((new File("")).getAbsolutePath());
-
 
     return null; // if it doesn't, return null
 

@@ -19,6 +19,8 @@ public class Player {
 
 	private static String name;
 
+	private static int level;
+
 	// HP
 	private static int health;
 	private static int maxHealth;
@@ -38,6 +40,8 @@ public class Player {
 	public Player() {
 		name = DEFAULT_PLAYER_NAME;
 
+		level = 1;
+
 		health = DEFAULT_HEALTH;
 		maxHealth = DEFAULT_MAX_HEALTH;
 
@@ -50,8 +54,10 @@ public class Player {
 	}
 
 	// Specific constructor
-	public Player(String name, int health, int maxHealth, int stamina, int maxStamina, Inventory inventory, int location) {
+	public Player(String name, int level, int health, int maxHealth, int stamina, int maxStamina, Inventory inventory, int location) {
 		this.name = name;
+
+		this.level = level;
 
 		this.health = health;
 		this.maxHealth = maxHealth;
@@ -68,6 +74,14 @@ public class Player {
 		health += amount;
 
 		if (health > maxHealth) health = maxHealth;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 	public int getHealth() {

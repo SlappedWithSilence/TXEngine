@@ -70,11 +70,12 @@ public class Load {
 			switch(itemType) {
 				case "item":
 					String name = (String) rawItem.get("name");
+					String desc = (String) rawItem.get("description");
 					int id = ((Long) rawItem.get("id")).intValue();
 					int value = ((Long) rawItem.get("value")).intValue();
 					int maxStacks = ((Long) rawItem.get("maxStacks")).intValue();
 
-					Item i = new Item(name, id, value, maxStacks); // Build the item from the read values
+					Item i = new Item(name, desc, id, value, maxStacks); // Build the item from the read values
 
 					itemList.put(id, i); // Add the newly build item to the itemList hashmap
 				break;

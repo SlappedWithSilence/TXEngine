@@ -28,7 +28,7 @@ public class HealthEffect extends Effect {
 	}
 
 	public void perform() {
-		Manager.player.modifyHealth( super.properties[0] * super.properties[1] + super.properties[2] );
+		Manager.player.modifyHealth( super.properties[0] * (Manager.player.getLevel() * super.properties[1]) + super.properties[2] );
 	}
 
 }
