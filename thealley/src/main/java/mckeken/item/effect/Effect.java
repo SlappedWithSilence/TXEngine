@@ -7,24 +7,24 @@ public abstract class Effect {
 	final static int DEFAULT_NUM_PROPERTY = 3;
 
 	protected int numProperties;
-	protected int[] properties;
+	protected Integer[] properties;
 
 	//*** Constructors ***//
 
 	// Default constructor
 	public Effect() {
 		numProperties = DEFAULT_NUM_PROPERTY;
-		properties = new int[numProperties];
+		properties = new Integer[numProperties];
 	}
 
 	// Empty properties constructor. Useful when you don't already know the values of a property, but you do know how many there are.
 	public Effect(int numProperties) {
 		this.numProperties = numProperties;
-		properties = new int[numProperties];
+		properties = new Integer[numProperties];
 	}
 
 	// Pre-existing properties constructor. Useful when loading from disk, creating an anonymous Effect
-	public Effect(int[] properties) {
+	public Effect(Integer[] properties) {
 		this.numProperties = properties.length;
 		this.properties = properties;
 	}
@@ -40,7 +40,7 @@ public abstract class Effect {
 		}
 	}
 
-	public void setProperties(int[] props) {
+	public void setProperties(Integer[] props) {
 		properties = props;
 		numProperties = props.length;
 	}

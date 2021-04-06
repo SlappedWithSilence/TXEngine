@@ -15,7 +15,7 @@ public class EffectFactory {
 	}
 
 	// Returns an instance of an Effect that has the properties passed in the paramter
-	public static Effect build(String className, int[] properties) {
+	public static Effect build(String className, Integer[] properties) {
 		try {
 			Class clasz = Class.forName(EFFECTS_PACKAGE + className); // Looks up the class name passed in
 			Effect e = (Effect)clasz.newInstance(); // Generates an instance of it cast to an Effect
@@ -28,7 +28,7 @@ public class EffectFactory {
 			return null;
 		
 		} catch (ClassNotFoundException e) {
-			LogUtils.error("Can't locate class.");
+			LogUtils.error("Can't locate class: " + className);
 			e.printStackTrace();
 			return null;
 		} catch (Exception e) {

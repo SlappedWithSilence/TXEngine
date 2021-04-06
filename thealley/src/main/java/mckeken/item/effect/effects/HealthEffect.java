@@ -19,16 +19,16 @@ public class HealthEffect extends Effect {
 
 	// Default constructor.
 	public HealthEffect() {
-		super(new int[] {DEFAULT_HP_CHANGE, 1, 0}); // Configure the effect to have a maximum of 3 properties
+		super(new Integer[] {DEFAULT_HP_CHANGE, 1, 0}); // Configure the effect to have a maximum of 3 properties
 
 	}
 
 	public HealthEffect(int modifier, int multiplier, int bonus) {
-		super(new int[] {modifier, multiplier, bonus});
+		super(new Integer[] {modifier, multiplier, bonus});
 	}
 
 	public void perform() {
-		Manager.player.modifyHealth( super.properties[0] * (Manager.player.getLevel() * super.properties[1]) + super.properties[2] );
+		Manager.player.modifyHealth( super.properties[0] * super.properties[1] + super.properties[2] );
 	}
 
 }

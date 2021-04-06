@@ -2,6 +2,7 @@ package mckeken.main;
 
 import mckeken.color.*;
 import mckeken.io.*;
+import mckeken.item.Usable;
 import mckeken.player.Player;
 import java.util.HashMap;
 import mckeken.item.Item;
@@ -31,15 +32,14 @@ public class Manager {
    public static Player player;
 
    public static HashMap<Integer, Item> itemList;
-	 public static HashMap<Integer, Room> roomList;
+   public static HashMap<Integer, Room> roomList;
 
    // The class that handles the main menu, then launches the game.
     public static void main( String[] args )
     {
         intro();                     // Display the intro text
         saveExists = Load.hasSave(); // Check for a saved game
-
-				itemList = Load.loadItems(Resources.getResourceAsFile(ITEM_RESOURCE_FILE));
+        itemList = Load.loadItems(Resources.getResourceAsFile(ITEM_RESOURCE_FILE));
         roomList = Load.loadRooms();
 
 
@@ -49,9 +49,6 @@ public class Manager {
         } else {                        // if no save exists
             Load.initializeNewGame();   // Set up a new game
         }
-
-        itemList.get(1).print();
-        itemList.get(2).print();
 
     }
 

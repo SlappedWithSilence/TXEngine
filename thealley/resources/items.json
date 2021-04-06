@@ -23,11 +23,13 @@
          "type"      :  "consumable", 
          "name"      :  "Leg of Fowl",
          "description": "A cooked leg of a small bird. It smells delicious.",
-         "id"        :  2,
+         "id"        :  3,
          "value"     :  10,
          "maxStacks" :  16,
-         "effects"   :  ["HealthEffect"],
-         "properties":  [[0,0,1]]
-      },
+         "effects"   :  [{
+            "className" : "HealthEffect",
+            "properties": [0,0,16]
+         }]
+      }
    ]
 }
