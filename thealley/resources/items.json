@@ -13,7 +13,7 @@
       {
          "type"      :  "item",
          "name"      :  "Tarnished Necklace",
-         "description": "A once-beatiful necklace, now tarnished with age. It should fetch a small sum when sold.",
+         "description": "A once-beautiful necklace, now tarnished with age. It should fetch a small sum when sold.",
          "id"        :  2,
          "value"     :  30,
          "maxStacks" :  8
@@ -26,10 +26,30 @@
          "id"        :  3,
          "value"     :  10,
          "maxStacks" :  16,
-         "effects"   :  [{
-            "className" : "HealthEffect",
-            "properties": [0,0,16]
-         }]
+         "effects"   :  [
+            {
+               "className" : "HealthEffect",
+               "properties": [0,0,16]
+            }
+         ]
+      },
+      {
+         "type"      :  "consumable",
+         "name"      :  "Cykia Dust",
+         "description": "A shining gold dust. It is popular among coal miners as a energizing remedy. ",
+         "id"        :  4,
+         "value"     :  13,
+         "maxStacks" :  20,
+         "effects"   :  [
+            {
+               "className" : "HealthEffect",
+               "properties": [0,0,-5]
+            },
+            {
+               "className": "StaminaEffect",
+               "properties": [0,0,16]
+            }
+         ]
       }
    ]
 }

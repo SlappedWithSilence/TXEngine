@@ -142,11 +142,4 @@ public class Load {
 		return roomList;
 	}
 
-	public static <T> ArrayList<T> JSONArrayToArrayList(JSONArray arr, T t) {
-		ArrayList<T> al = new ArrayList<T>();
-
-		for (int i = 0; i < arr.size(); i++) al.add((T) arr.get(i));
-
-		return al;
-	}
 }

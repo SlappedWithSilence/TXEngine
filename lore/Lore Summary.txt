@@ -14,9 +14,11 @@
 		- Has reached the age of Iron
 		- Can't use magic inherently, but has figured out ways to create devices that wield magic for them
 		- Experts in manufacturing
-		- Diplomats who use their experience in large-scale war to broker peace between the major intellegent species.
-		- Secretly conducting scientific experiments on intellegence creatures. Humans, Frei, etc.
+		- Diplomats who use their experience in large-scale war to broker peace between the major intelligent species.
+		- Secretly conducting scientific experiments on intelligence creatures. Humans, Frei, etc.
 		- Humans rely on indentured Frei to detect corruption within their own ranks and maintain the integrity of their peace-making council
+		- Manufacturers of many drugs, some of which are used between species:
+		    - Cykia: A stimulant. It provides the user with a great deal of energy and stamina, but at the cost of the occasional migraine.
 
 	- Frei
 		- Woodland dwelling
@@ -31,7 +33,7 @@
 		- Medicinal experts
 		- Prefers close-quarters combat against larger enemies
 		- Uses a special razor-wire-based weapon to ensnare enemies, then finishes them off with a blade
-		- Not reclusive, but generally unhappy with human expansion and indisutry.
+		- Not reclusive, but generally unhappy with human expansion and industry.
 		- Amenable to peace, but suspicious by nature. Has a unique magic that can determine whether or not someone is lying. A small subset of the Frei can use this skill.
 
 	- Drejlahem
@@ -44,19 +46,19 @@
 		- Elephant-like feet,
 		- One of the strongest races
 		- Powerful magic users
-		- Dedicated to preserving their lands and promoting peace within their terretory
+		- Dedicated to preserving their lands and promoting peace within their territory
 		- Reclusive
 		- Lives for approx 400 years
 		- Does not reproduce often. As such, the population remains a stable and steady low number.
-		- Enhances their magic's strength with complex arcanic-metalurgy
-		- No record of the Drejlahem taking part in war exists. There are several reports of individual Drejlahelm, dubbed The Eight Guards, anihalating large invasionary forces that cross in Drejlahelm terrotory.
+		- Enhances their magic's strength with complex arcanic-metallurgy
+		- No record of the Drejlahem taking part in war exists. There are several reports of individual Drejlahelm, dubbed The Eight Guards, annihilating large invasion forces that cross in Drejlahelm territory.
 		- Rarely engages in trade with other species. When they do, they barter for huge sums of resources in exchange for their highly-sought-after magic-infused metals and top-of-the-line alloys.
 
 	- Jhio
 		- Hot-Spring dwellers
 		- Inhabit a unique biome: a large interconnected network of above-ground hot-springs and geysers within a frozen desert.
 		- Has thick, armor-like scales that cover lay on top of a potent layer of insulating fat
-		- Round in appearence. Two arms, two legs, and a powerful tail
+		- Round in appearance. Two arms, two legs, and a powerful tail
 		- Not very intelligent, but have great memory.
 		- Average life span is 40-50 years due to environmental hazards in their homeland, though many can live to be as long as 200 if they are lucky.
 		- Jhio's great memory makes them incredible translators. Unfortunately the Jhio can't stay in warm climates for long as their internal insulation will make them overheat. As such, for very important inter-species communication, they often will travel to guarded outposts on the Jhio's home territory. The Jhio perform this service, for a cost: food, wood, and even books.
@@ -69,7 +71,7 @@
 		- Similar life-spans to humans
 		- Can't use magic
 		- Have enhanced sexual characteristics throughout their entire population, both male and female.
-		- A side effect of the enhanced sexual characteristics is that secondary characteristics, such as long hair for females, and strong bodys for males, are also exagerated. The Asoah are fierece warriors that are difficult to subjugate.
+		- A side effect of the enhanced sexual characteristics is that secondary characteristics, such as long hair for females, and strong bodies for males, are also exaggerated. The Asoah are fierce warriors that are difficult to subjugate.
 		- Were persecuted by humans long ago. Now the Asoah live in solitude, only accepting visitors for temporary lodging in their "service" towns. It is unknown what the Asoah civilization is like outside of these towns.
 		- Long, long ago the Asoah were attacked by a human nation that tried to force them into sexual slavery
 		- Shrewd merchants who engage in trade using a small and exclusive group of human proxies. These humans are thought to be under some sort of Asoah duress, though the details are entirely unknown to outsiders.
@@ -77,9 +79,9 @@
 
 	- O'h-Ra
 		- A near-extinct race of arcanic masters. There are few known throughout the world, though rumors of a massive O'h-Ra city embedded deep within the earth have been gaining traction in recent years.
-		- Very tall, their slim bodies extending nearly 8.5 feet in hight.
+		- Very tall, their slim bodies extending nearly 8.5 feet in height.
 		- Humanoid
-		- Pitch black skin, diamond-like heads, sharp angular eyes, and highly-jointed extremeties
+		- Pitch black skin, diamond-like heads, sharp angular eyes, and highly-jointed extremities
 		- No mouth, but three nose-holes near the center of the head
 		- Hunched backs with skinny, bent legs.
 		- Move silently
@@ -89,7 +91,7 @@
 		- Not much is known of their biology, except that O'h-Ra corpses turn to obsidian within a couple years after their death
 		- The last band of adventurers to seek out a known O'h-Ra was found dismembered, and cut in half... vertically. They were each smiling.
 		- The O'h-Ra were a war-faring nation before their massive decline in population
-		- An indivual O'h-Ra is capable of weilding magic strong enough to obliterate an entire platoon of well-trained soldiers. There isn't much a human can do against a 30-foot-wide ball of fire.
+		- An individual O'h-Ra is capable of welding magic strong enough to obliterate an entire platoon of well-trained soldiers. There isn't much a human can do against a 30-foot-wide ball of fire.
 
 
 Major Historical Events, as Recorded in Aggregated Jhio History Books
@@ -98,9 +100,9 @@ Major Historical Events, as Recorded in Aggregated Jhio History Books
 
 - Year 304: The Jhio make contact with a Drejlahem explorer, known as He Who Finds. This Derjlahem spends the entire winter in the Jhio capitol, slowly teaching the foremost Jhio scholars (Kaokin's younger brothers, Jaihak and Oloo) how to speak Drejla, the native Drejlahemian tongue. The Drejlahem explorer leaves behind an ingot of pure hecta-copper, as a token of good-will.
 
-- Year 446: 11 Human nation-states form an alliance to try and take the nearby Asoah towns and enslave their population. This is a long and brutal war that lasts more than five years. Durin this time, the Asoahns and Humans wreak havok on eachother: the humans with their superior numbers, and the Asoahns, with their far more competent warriors. The war concluded with no clear winners. The human nation states who participated in this war ultimately failed, as their economy and working population had been devastated, and the Asoahns became a people with no home: all of their towns and settlements had been burned to the ground.
+- Year 446: 11 Human nation-states form an alliance to try and take the nearby Asoah towns and enslave their population. This is a long and brutal war that lasts more than five years. During this time, the Asoahns and Humans wreak havoc on eachother: the humans with their superior numbers, and the Asoahns, with their far more competent warriors. The war concluded with no clear winners. The human nation states who participated in this war ultimately failed, as their economy and working population had been devastated, and the Asoahns became a people with no home: all of their towns and settlements had been burned to the ground.
 
-- Year 450: A band of Asoah refuges flee uniwttingly into Jhio terretory during a terrible storm. Oddly enough, the Jhio find these strangers very attractive and take them in until the blizzard passes. During this time, the Jhio learn several Asoah words and phrases, as well as some Human ones, but they ultimately fail to get much out of the traumatized and weathered refugees. Of the Jhio's limited vocabulary, they learned "war", "fire", "dead" and "run".
+- Year 450: A band of Asoah refuges flee unwittingly into Jhio territory during a terrible storm. Oddly enough, the Jhio find these strangers very attractive and take them in until the blizzard passes. During this time, the Jhio learn several Asoah words and phrases, as well as some Human ones, but they ultimately fail to get much out of the traumatized and weathered refugees. Of the Jhio's limited vocabulary, they learned "war", "fire", "dead" and "run".
 
 - Year 523: Strange vessels appear in the Eastern Sea within the Jhio territory. The Jhio, unsure as to what this means, set out meager offerings of peace along the beach where the vessels were sighted. Contact with these mysterous sailors was never made, though several of the offerings went missing over night.
 

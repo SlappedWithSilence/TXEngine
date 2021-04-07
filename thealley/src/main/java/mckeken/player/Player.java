@@ -9,8 +9,8 @@ public class Player {
 		FEMALE
 	}
 
-	private int DEFAULT_MAX_HEALTH = 100;
-	private int DEFAULT_HEALTH     = 50;
+	final private int DEFAULT_MAX_HEALTH = 100;
+	final private int DEFAULT_HEALTH     = 50;
 
 	private int DEFAULT_MAX_STAMINA = 50;
 	private int DEFAULT_STAMINA     = 50;
@@ -55,19 +55,19 @@ public class Player {
 
 	// Specific constructor
 	public Player(String name, int level, int health, int maxHealth, int stamina, int maxStamina, Inventory inventory, int location) {
-		this.name = name;
+		Player.name = name;
 
-		this.level = level;
+		Player.level = level;
 
-		this.health = health;
-		this.maxHealth = maxHealth;
+		Player.health = health;
+		Player.maxHealth = maxHealth;
 
-		this.stamina = stamina;
-		this.maxStamina = maxStamina;
+		Player.stamina = stamina;
+		Player.maxStamina = maxStamina;
 
-		this.inventory = inventory;
+		Player.inventory = inventory;
 
-		this.location = location;
+		Player.location = location;
 	}
 
 	public void modifyHealth(int amount) {
@@ -76,12 +76,18 @@ public class Player {
 		if (health > maxHealth) health = maxHealth;
 	}
 
+	public void modifyStamina(int amount) {
+		stamina += amount;
+
+		if (health > maxStamina) stamina = maxStamina;
+	}
+
 	public int getLevel() {
 		return level;
 	}
 
 	public void setLevel(int level) {
-		this.level = level;
+		Player.level = level;
 	}
 
 	public int getHealth() {
@@ -96,6 +102,23 @@ public class Player {
 		return inventory;
 	}
 
+	public  String getName() {
+		return name;
+	}
 
+	public  int getMaxHealth() {
+		return maxHealth;
+	}
 
+	public  int getStamina() {
+		return stamina;
+	}
+
+	public  int getMaxStamina() {
+		return maxStamina;
+	}
+
+	public  int getLocation() {
+		return location;
+	}
 }

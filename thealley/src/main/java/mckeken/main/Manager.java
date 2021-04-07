@@ -50,6 +50,12 @@ public class Manager {
             Load.initializeNewGame();   // Set up a new game
         }
 
+        LogUtils.error("HP:" + player.getHealth() + "\n");
+        LogUtils.error("STA:" + player.getStamina()+ "\n");
+        ((Usable) itemList.get(4)).use();
+        LogUtils.error("HP:" + player.getHealth()+ "\n");
+        LogUtils.error("STA:" + player.getStamina()+ "\n");
+
     }
 
   // **** Prompt functions ****
