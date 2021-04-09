@@ -24,6 +24,7 @@ public class Manager {
    private static final String LOAD_GAME_TEXT = "\nWould you like to resume from your saved game? (Y/N)\n";
 
    private static final String ITEM_RESOURCE_FILE = "items.json";
+   private static final String ROOM_RESOURCE_FILE = "room.json";
 
    // *** Variables *** //
    private static boolean saveExists = false;
@@ -40,7 +41,7 @@ public class Manager {
         intro();                     // Display the intro text
         saveExists = Load.hasSave(); // Check for a saved game
         itemList = Load.loadItems(Resources.getResourceAsFile(ITEM_RESOURCE_FILE));
-        roomList = Load.loadRooms();
+        roomList = Load.loadRooms(Resources.getResourceAsFile(ROOM_RESOURCE_FILE));
 
 
         if (saveExists) {            // If the save exists
@@ -50,11 +51,6 @@ public class Manager {
             Load.initializeNewGame();   // Set up a new game
         }
 
-        LogUtils.error("HP:" + player.getHealth() + "\n");
-        LogUtils.error("STA:" + player.getStamina()+ "\n");
-        ((Usable) itemList.get(4)).use();
-        LogUtils.error("HP:" + player.getHealth()+ "\n");
-        LogUtils.error("STA:" + player.getStamina()+ "\n");
 
     }
 

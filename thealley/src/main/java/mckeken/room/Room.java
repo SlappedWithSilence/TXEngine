@@ -1,5 +1,7 @@
 package mckeken.room;
 
+import mckeken.room.action.Action;
+
 import java.util.ArrayList;
 
 public class Room {

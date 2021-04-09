@@ -1,9 +1,9 @@
-package mckeken.room.action;
+package mckeken.room.action.actions;
 
-import mckeken.room.Action;
 import mckeken.color.*;
-import mckeken.io.*;
 import mckeken.item.Item;
+import mckeken.room.action.Action;
+
 import java.util.ArrayList;
 
 // This action emulates the player entering a store
