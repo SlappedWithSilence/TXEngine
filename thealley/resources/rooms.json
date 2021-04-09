@@ -1,0 +1,35 @@
+{
+  "Rooms" : [
+    {
+      "name"        : "Debug Room",
+      "id"          : 0,
+      "text"        : "Welcome to the Debug Room! How did you get in here, anyways?",
+      "actions"  : [
+        {
+          "className"   : "StoreAction",
+          "menuName"    : "Visit the Debug Store",
+          "text"        : "Welcome to the Debug Store! Nothing's free, and everything sucks. What can I help you with?",
+          "enabled"     : false,
+          "properties"  : ["1", "1", "2", "50", "3", "5", "4", "15"],
+          "unlockedIndex" : -1
+        },
+        {
+          "className"   : "InventoryAction",
+          "menuName"    : "Check your inventory",
+          "text"        : "You decide to check the contents of your pack.",
+          "enabled"     : "True",
+          "properties"  : [],
+          "unlockedIndex" : -1
+        },
+        {
+          "className" : "DialogueAction",
+          "menuName"  : "Speak with shady Frei",
+          "text"      : "You approach the Frei.",
+          "enabled"   : true,
+          "properties" : ["Hey, I know a guy... He's got the stuff. You want in?"],
+          "unlockedIndex" : 0
+        }
+      ]
+    }
+  ]
+}

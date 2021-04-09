@@ -8,31 +8,39 @@ public abstract class Action {
 	protected String text; // The text that is printed when action is selected
 	protected boolean enabled = true; // Whether or not the user is able to use this action.
 	protected int numProperties = 3; // The expected number of properties
+	protected int unlockIndex = -1;	 // The other Action in the room this Action is in that should be unlocked if this Action succeeds
 
 	/* Constructors */
 	public Action() {
 
 	}
 
-	public Action(String menuName, String text, String[] properties, boolean enabled) {
+	public Action(String menuName, String text, String[] properties, boolean enabled, int unlockIndex) {
 		this.menuName = menuName;
 		this.enabled = enabled;
 		this.properties = properties;
 		this.text = text;
+		this.unlockIndex = unlockIndex;
 	}
 
-	public Action(String menuName, String text, String[] properties, boolean enabled, int numProperties) {
+	public Action(String menuName, String text, String[] properties, boolean enabled, int unlockIndex, int numProperties) {
 		this.menuName = menuName;
 		this.enabled = enabled;
 		this.properties = properties;
 		this.text = text;
 		this.numProperties = numProperties;
+		this.unlockIndex = unlockIndex;
 	}
 
 
 	/* Abstract Member Functions */
 	// Performs the action
-	public abstract void perform();
+	public abstract int perform();
+
+	//
+	public int enableOnComplete() {
+		return unlockIndex;
+	}
 
 	/* Concrete Member Functions */
 

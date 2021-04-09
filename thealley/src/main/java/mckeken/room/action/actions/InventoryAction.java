@@ -19,7 +19,7 @@ public class InventoryAction extends Action {
 
 	@Override
 	// Performs the action
-	public void perform() {
+	public int perform() {
 		Manager.player.getInventory().display();
 		
 		System.out.println("What slot would you like to interact with? (enter -1 to exit)");
@@ -27,6 +27,8 @@ public class InventoryAction extends Action {
 
 		System.out.println("What would you like to do with " + Manager.player.getInventory().getItemInstance(input));
 		LogUtils.numberedList(itemOptions);
+
+		return enableOnComplete();
 
 	}
 

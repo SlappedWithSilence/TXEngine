@@ -9,24 +9,23 @@ import java.util.ArrayList;
 // This action emulates the player entering a store
 public class StoreAction extends Action {
 
-	String storePrompt;
 	ArrayList<Item> inventory;
 	ArrayList<Integer> cost;
 
 	@Override
 	// Performs the action
-	public void perform() {
+	public int perform() {
 		if (!checkConfig()) {
-			return;
+			return -1;
 		}
 
 		printStorePrompt();
 		displayInventory();
-
+		return enableOnComplete();
 	}
 
 	private void printStorePrompt() {
-		System.out.println(storePrompt);
+		System.out.println(super.text);
 	}
 
 	private void displayInventory() {

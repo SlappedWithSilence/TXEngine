@@ -24,7 +24,7 @@ public class Manager {
    private static final String LOAD_GAME_TEXT = "\nWould you like to resume from your saved game? (Y/N)\n";
 
    private static final String ITEM_RESOURCE_FILE = "items.json";
-   private static final String ROOM_RESOURCE_FILE = "room.json";
+   private static final String ROOM_RESOURCE_FILE = "rooms.json";
 
    // *** Variables *** //
    private static boolean saveExists = false;

@@ -15,6 +15,8 @@ public class Resources {
     
     if (file.exists()) return file; // return the object if the file exists
 
+    LogUtils.error("Couldn't load " + file + " as a resource! Does it exist?\n");
+
     return null; // if it doesn't, return null
 
   }
