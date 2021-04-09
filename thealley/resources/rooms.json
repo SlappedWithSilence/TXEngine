@@ -4,6 +4,7 @@
       "name"        : "Debug Room",
       "id"          : 0,
       "text"        : "Welcome to the Debug Room! How did you get in here, anyways?",
+      "onFirstEnterActions" : [],
       "actions"  : [
         {
           "className"   : "StoreAction",
@@ -17,7 +18,7 @@
           "className"   : "InventoryAction",
           "menuName"    : "Check your inventory",
           "text"        : "You decide to check the contents of your pack.",
-          "enabled"     : "True",
+          "enabled"     : true,
           "properties"  : [],
           "unlockedIndex" : -1
         },

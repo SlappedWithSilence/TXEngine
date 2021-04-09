@@ -51,6 +51,8 @@ public class Manager {
             Load.initializeNewGame();   // Set up a new game
         }
 
+        // Start the main game loop
+        RoomManager.roomLoop();
 
     }
 

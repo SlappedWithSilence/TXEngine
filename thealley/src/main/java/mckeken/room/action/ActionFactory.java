@@ -12,11 +12,15 @@ public class ActionFactory {
         }
 
         // Returns an instance of an Effect that has the properties passed in the paramter
-        public static Action build(String className, String[] properties) {
+        public static Action build(String className, String menuName, String text, boolean enabled, int unlockedIndex, String[] properties) {
             try {
                 Class clasz = Class.forName(ACTIONS_PACKAGE + className); // Looks up the class name passed in
                 Action a = (Action)clasz.newInstance(); // Generates an instance of it cast to an Effect
-                a.setProperties(properties); // Sets the Effect's internal properties to the values passed in the paramters
+                a.setProperties(properties); // Sets the Effect's internal properties to the values passed in the parameters
+                a.setMenuName(menuName);
+                a.setText(text);
+                a.setEnabled(enabled);
+                a.setUnlockIndex(unlockedIndex);
                 return a;	// Returns the effect
 
             } catch (InstantiationException e) {

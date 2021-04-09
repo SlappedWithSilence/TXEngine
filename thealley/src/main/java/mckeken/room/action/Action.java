@@ -34,15 +34,17 @@ public abstract class Action {
 
 
 	/* Abstract Member Functions */
-	// Performs the action
+	// Performs the action. In MOST CASES, properties should only be accessed in this function. Manipulating properties in the constructors wastes memory.
 	public abstract int perform();
 
-	//
+
+
+	/* Concrete Member Functions */
+
+	// Returns the index of the Action that should be enabled if this action succeeds.
 	public int enableOnComplete() {
 		return unlockIndex;
 	}
-
-	/* Concrete Member Functions */
 
 	// Determines whether or not the Action can be executed. Each action should override this function as needed.
 	public boolean isEnabled() {
@@ -80,5 +82,13 @@ public abstract class Action {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public int getUnlockIndex() {
+		return unlockIndex;
+	}
+
+	public void setUnlockIndex(int unlockIndex) {
+		this.unlockIndex = unlockIndex;
 	}
 }

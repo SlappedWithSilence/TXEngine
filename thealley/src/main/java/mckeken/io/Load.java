@@ -1,6 +1,8 @@
 package mckeken.io;
 
 import mckeken.item.effect.EffectFactory;
+import mckeken.room.action.Action;
+import mckeken.room.action.ActionFactory;
 import org.json.simple.*;
 import org.json.simple.parser.*;
 import java.io.*;
@@ -106,7 +108,7 @@ public class Load {
 
 						while (effectsIterator.hasNext()) {								// Iterate through the JSONArray that holds the effect data
 							JSONObject rawEffect = effectsIterator.next();
-							String effectName = (String) rawEffect.get("className");	// Get the class name of the effect we're instanciating
+							String effectName = (String) rawEffect.get("className");	// Get the class name of the effect we're instantiating
 							JSONArray propertiesArray = (JSONArray) rawEffect.get("properties");	// Get a sub-array of property integer values for the current effect
 
 							Integer[] effectProperties = new Integer[ propertiesArray.size()];		// Create a java-array to store the effect's property values
@@ -160,16 +162,57 @@ public class Load {
 		}
 
 		// Get the JSON array that contains all the items
-		JSONArray items = (JSONArray) obj.get("Rooms");
-		Iterator<JSONObject> iterator = items.iterator(); // Create an iterator over the list of items
+		JSONArray rooms = (JSONArray) obj.get("Rooms");
+		Iterator<JSONObject> iterator = rooms.iterator(); // Create an iterator over the list of items
 
-		// Loop through the item JSON objects
+		// Loop through the room JSON objects
 		while (iterator.hasNext()) {
-			JSONObject rawItem = iterator.next();
+			JSONObject rawRoom = iterator.next();
 
+			String roomName = (String) rawRoom.get("name");
+			int id = ((Long) rawRoom.get("id")).intValue();
+			String roomText = (String) rawRoom.get("text");
+
+			ArrayList<Action> onFirstEnterActions = getActions((JSONArray) rawRoom.get("onFirstEnterActions"));
+			ArrayList<Action> actions = getActions((JSONArray) rawRoom.get("actions"));
+
+			Room room = new Room(id, roomName, roomText);
+			room.setRoomActions(actions);
+			room.setOnFirstEnterActions(onFirstEnterActions);
+
+			roomList.put(id, room);
 
 		}
 		return roomList;
+	}
+
+	private static ArrayList<Action> getActions(JSONArray JSONActions) {
+		ArrayList<Action> actions = new ArrayList<Action>();
+
+		Iterator<JSONObject> iterator = JSONActions.iterator();
+
+		while (iterator.hasNext()) {
+			JSONObject rawAction = iterator.next();
+
+			String className = 	(String) rawAction.get("className");
+			String menuName = 	(String) rawAction.get("menuName");
+			String text =		(String) rawAction.get("text");
+			boolean enabled = 	(Boolean) rawAction.get("enabled");
+			int unlockIndex = 	((Long) rawAction.get("unlockedIndex")).intValue();
+
+			JSONArray propertiesArray = (JSONArray) rawAction.get("properties");	// Get a sub-array of property string values for the current action
+
+			String[] actionProperties = new String[ propertiesArray.size()];		// Create a java-array to store the action's property values
+			for (int i = 0; i < propertiesArray.size(); i++) {						// Iterate through the JSONArray that stores the property values
+				String prop = (String) propertiesArray.get(i);						// Collect a property values and convert it to an string.
+				actionProperties[i] = prop;											// Store it in the array
+			}
+
+			Action a = ActionFactory.build(className, menuName, text, enabled, unlockIndex, actionProperties);
+			actions.add(a);
+		}
+
+		return actions;
 	}
 
 }
