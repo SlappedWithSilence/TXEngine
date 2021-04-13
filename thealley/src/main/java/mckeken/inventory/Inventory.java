@@ -87,6 +87,25 @@ public class Inventory {
 
 	}
 
+	// An overload for addItem() that allows the programmer to specify a quantity to add to the inventory
+	public void addItem(Item item, int quantity) {
+		for (int i = 0; i < quantity; i++) {
+			addItem(item);
+		}
+	}
+
+	// An overload for addItem() that allows the programmer to specify the item ID instead of a literal object
+	public void addItem(int id) {
+		addItem(Manager.itemList.get(id));
+	}
+
+	// An overload for addItem() that allows the programmer to specify the item ID instead of a literal object as well as quantity
+	public void addItem(int id, int quantity) {
+		for (int i = 0; i < quantity; i++) {
+			addItem(id);
+		}
+	}
+
 	public void removeItem(int index) {
 		itemNames.remove(index);
 		itemIDs.remove(index); 

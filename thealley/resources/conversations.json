@@ -1,0 +1,43 @@
+{
+  "conversations" : [
+    {
+      "id": 0,
+      "layers" : [
+        {
+          "__comment__" : " This is the first layer. It contains two options, each with one event.",
+          "npcText" : "Who do you think you are?",
+          "options" : ["Running around leaving scars!", "It goes off like a gun"],
+          "events"  : [
+            [
+              {
+                "className" : "ItemEvent",
+                "properties" : ["1", "1"]
+              }
+            ],
+            [
+              {
+                "className" : "ItemEvent",
+                "properties" : ["2", "2"]
+              }
+            ]
+          ],
+          "targets" : [0, -1]
+        },
+        {
+        "__comment__" : "This is the second layer.",
+          "npcText" : "So you've made it this far. Why?",
+          "options" :["Because I'm a genius"],
+          "events"  :
+          [
+            [
+              {
+                "className" : "FlagEvent",
+                "properties" : ["TEST_FLAG", true]
+              }
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

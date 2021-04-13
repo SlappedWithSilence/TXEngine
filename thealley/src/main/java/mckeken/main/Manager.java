@@ -2,13 +2,10 @@ package mckeken.main;
 
 import mckeken.color.*;
 import mckeken.io.*;
-import mckeken.item.Usable;
 import mckeken.player.Player;
 import java.util.HashMap;
 import mckeken.item.Item;
 import mckeken.room.*;
-
-import mckeken.item.effect.*;
 
 public class Manager {
 

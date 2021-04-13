@@ -1,6 +1,7 @@
 package mckeken.room;
 
 import mckeken.io.LogUtils;
+import mckeken.main.RoomManager;
 import mckeken.room.action.Action;
 import mckeken.room.action.actions.MoveAction;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 
 public class Room {
 
-	// *** Class Varaibles ***//
+	// *** Class Variables ***//
 	int id;      // The room's id. This is used to track which room the user is in as well as to map the user into new rooms. All IDs must be unique.
 	String name; // The room's name. Used for visual prompting.
 	String text; // The text that is printed when you enter the room
@@ -21,6 +22,7 @@ public class Room {
 	public Room() {
 
 	}
+
 	public Room(int id, String name, String text) {
 		this.id = id;
 		this.name = name;
