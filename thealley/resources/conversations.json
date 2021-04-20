@@ -37,10 +37,11 @@
                 [
                   {
                     "className" : "FlagEvent",
-                    "properties" : ["TEST_FLAG", true]
+                    "properties" : ["TEST_FLAG", "true"]
                   }
                 ]
-              ]
+              ],
+              "targets" : [-1]
             }
           ]
         }

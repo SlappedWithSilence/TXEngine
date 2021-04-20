@@ -34,8 +34,10 @@ public class Conversation {
       while (layerIterator.hasNext()) {
           ConversationLayer layer = layerIterator.next();
           index = layer.getModules()[index].perform();
-          if (index < 0) break;
+          if (index < 0) break; // End the conversation if the user has reached a branch that doesn't continue
       }
+
+      index = 0; // Reset the index. This prevents crashes when the user tries to re-enter a conversation.
     }
 
     // Getters and setters

@@ -13,8 +13,7 @@ public class FlagEvent extends Event {
     }
 
     public FlagEvent(String[] properties) {
-        flagName = properties[0];
-        flagValue = Boolean.parseBoolean(properties[1]);
+        this.setProperties(properties);
     }
 
 
@@ -25,6 +24,8 @@ public class FlagEvent extends Event {
 
     @Override
     public void perform() {
+        flagName = super.getProperties()[0];
+        flagValue = Boolean.parseBoolean(super.getProperties()[1]);
         LogUtils.error("Setting flag " + flagName + " to " + flagValue.toString() + "\n" );
     }
 

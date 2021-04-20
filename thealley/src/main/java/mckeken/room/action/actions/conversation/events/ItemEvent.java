@@ -9,12 +9,13 @@ public class ItemEvent extends Event {
     int itemQuantity;
 
     public ItemEvent () {
-        itemID = 0;
-        itemQuantity = 1;
+
     }
 
     @Override
     public void perform() {
+        itemID = Integer.parseInt(super.getProperties()[0]);
+        itemQuantity = Integer.parseInt(super.getProperties()[1]);
         Manager.player.getInventory().addItem(itemID, itemQuantity);
     }
 

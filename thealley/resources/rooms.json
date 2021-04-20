@@ -36,7 +36,7 @@
           "text"      : "You approach the autist.",
           "enabled"   : true,
           "properties" : ["0"],
-          "unlockedIndex" : 0
+          "unlockedIndex" : -1
         }
       ]
     }
