@@ -3,6 +3,7 @@ package mckeken.io;
 import mckeken.item.effect.EffectFactory;
 import mckeken.room.action.Action;
 import mckeken.room.action.ActionFactory;
+import mckeken.room.action.actions.conversation.Conversation;
 import org.json.simple.*;
 import org.json.simple.parser.*;
 import java.io.*;
@@ -136,8 +137,44 @@ public class Load {
 		return itemList;
 	}
 
+	public static HashMap<Integer, Conversation> loadConversations(File file) {
+		HashMap<Integer, Conversation> conversationList = new HashMap<Integer, Conversation>();
+
+		// Read the JSON storage file
+		JSONParser parser = new JSONParser();
+
+		JSONObject obj;
+
+		try {
+			obj = (JSONObject) parser.parse(new FileReader(file));
+		} catch (FileNotFoundException e) {
+			LogUtils.error("Attempted to load from file: " + file.getAbsolutePath());
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} catch (ParseException e) {
+			LogUtils.error(file.getName() + " appears to be corrupted. Please re-download it from https://github.com/TopperMcKek/TheAlley/blob/master/thealley/resources/items.json\n");
+			e.printStackTrace();
+			return null;
+		}
+
+		// Get the JSON array that contains all the items
+		JSONArray items = (JSONArray) obj.get("Items");
+		Iterator<JSONObject> iterator = items.iterator(); // Create an iterator over the list of items
+
+		// Loop through the item JSON objects
+		while (iterator.hasNext()) {
+			JSONObject rawItem = iterator.next();
+		}
+
+
+		return conversationList;
+	}
+
 	// Loads rooms from disk
-	// TODOL Implement
+	// TODO Implement
 	public static HashMap<Integer, Room> loadRooms(File file) {
 		HashMap<Integer, Room> roomList = new HashMap<Integer, Room>();
 

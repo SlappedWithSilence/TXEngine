@@ -29,6 +29,14 @@
           "enabled"   : true,
           "properties" : ["Hey, I know a guy... He's got the stuff. You want in?"],
           "unlockedIndex" : 0
+        },
+        {
+          "className" : "ConversationAction",
+          "menuName"  : "Converse with the local autist",
+          "text"      : "You approach the autist.",
+          "enabled"   : true,
+          "properties" : ["0"],
+          "unlockedIndex" : 0
         }
       ]
     }

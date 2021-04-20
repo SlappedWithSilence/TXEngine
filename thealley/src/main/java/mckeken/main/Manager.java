@@ -6,6 +6,7 @@ import mckeken.player.Player;
 import java.util.HashMap;
 import mckeken.item.Item;
 import mckeken.room.*;
+import mckeken.room.action.actions.conversation.Conversation;
 
 public class Manager {
 
@@ -22,6 +23,7 @@ public class Manager {
 
    private static final String ITEM_RESOURCE_FILE = "items.json";
    private static final String ROOM_RESOURCE_FILE = "rooms.json";
+   private static final String CONVERSATION_RESOURCE_FILE = "conversations.json";
 
    // *** Variables *** //
    private static boolean saveExists = false;
@@ -31,15 +33,16 @@ public class Manager {
 
    public static HashMap<Integer, Item> itemList;
    public static HashMap<Integer, Room> roomList;
+   public static HashMap<Integer, Conversation> conversationList;
 
    // The class that handles the main menu, then launches the game.
     public static void main( String[] args )
     {
         intro();                     // Display the intro text
         saveExists = Load.hasSave(); // Check for a saved game
-        itemList = Load.loadItems(Resources.getResourceAsFile(ITEM_RESOURCE_FILE));
+        itemList = new ItemLoader().load(Resources.getResourceAsFile(ITEM_RESOURCE_FILE));
         roomList = Load.loadRooms(Resources.getResourceAsFile(ROOM_RESOURCE_FILE));
-
+        conversationList = new ConversationLoader().load(Resources.getResourceAsFile(CONVERSATION_RESOURCE_FILE));
 
         if (saveExists) {            // If the save exists
             promptLoadGame();        // Ask the user if they want to resume from that save
