@@ -37,7 +37,8 @@ public class Conversation {
           if (index < 0) break; // End the conversation if the user has reached a branch that doesn't continue
       }
 
-      index = 0; // Reset the index. This prevents crashes when the user tries to re-enter a conversation.
+      index = 0; // Reset the index. This prevents crashes when the user tries to re-enter a conversation
+      layerIterator = layers.iterator();
     }
 
     // Getters and setters

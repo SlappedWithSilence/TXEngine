@@ -11,13 +11,13 @@ public class EventFactory {
 
     }
 
-    // Returns an instance of an Effect that has the properties passed in the parameter
+    // Returns an instance of an Event that has the properties passed in the parameter
     public static Event build(String className, String[] properties) {
         try {
             Class clasz = Class.forName(EVENTS_PACKAGE + className); // Looks up the class name passed in
-            Event e = (Event) clasz.newInstance(); // Generates an instance of it cast to an Effect
-            e.setProperties(properties); // Sets the Effect's internal properties to the values passed in the parameters
-            return e;	// Returns the effect
+            Event e = (Event) clasz.newInstance(); // Generates an instance of it cast to an Event
+            e.setProperties(properties); // Sets the Events's internal properties to the values passed in the parameters
+            return e;	// Returns the event
 
         } catch (InstantiationException e) {
             LogUtils.error("Failed to build class.");
@@ -29,7 +29,7 @@ public class EventFactory {
             e.printStackTrace();
             return null;
         } catch (Exception e) {
-            LogUtils.error("Something went wrong while building an Action!");
+            LogUtils.error("Something went wrong while building an Event!");
             e.printStackTrace();
             return null;
         }

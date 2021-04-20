@@ -155,7 +155,7 @@ public class Inventory {
 		System.out.println("------------          Inventory          --------------");
 		System.out.println("-------------------------------------------------------");
 		for (int i = 0; i < getUsage(); i++ ) {
-			System.out.println("[" + i + "]" + itemNames.get(i) + "/t" + Colors.CYAN_BOLD + itemQuantities.get(i) + Colors.RESET);
+			System.out.println("[" + i + "]" + itemNames.get(i) + "\t" + Colors.CYAN_BOLD + itemQuantities.get(i) + Colors.RESET);
 		}
 		System.out.println("-------------------------------------------------------");
 	}
