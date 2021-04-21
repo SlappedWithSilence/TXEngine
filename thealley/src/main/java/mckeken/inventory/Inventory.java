@@ -109,7 +109,8 @@ public class Inventory {
 	public void removeItem(int index) {
 		itemNames.remove(index);
 		itemIDs.remove(index); 
-		itemQuantities.remove(index); 
+		itemQuantities.remove(index);
+		usage--;
 	}
 
 	public void decrementItem(int index) {
