@@ -30,8 +30,8 @@ public class Inventory {
 	}
 
 	// Capacity constructor. Initializes the inventory with capacity passed in param 0;
-	public Inventory(int capacacity) {
-		this.capacity = capacity;
+	public Inventory(int capacity) {
+		Inventory.capacity = capacity;
 		itemNames     = new ArrayList<String>();
 		itemIDs       = new ArrayList<Integer>();
 		itemQuantities = new ArrayList<Integer>();
@@ -68,9 +68,9 @@ public class Inventory {
 			default: // There are multiple existing stacks of this item
 				ArrayList<Integer> indexes = Utils.getAllInstances(itemIDs, i.getId()); // Seek the index of each stack
 				boolean stackFound = false;
-				for (int indx: indexes) { // For each stack
-					if (itemQuantities.get(indx) < i.getMaxStacks()) { // Check if it is full
-						incrementItem(indx); // Increment the stack count of that item
+				for (int index: indexes) { // For each stack
+					if (itemQuantities.get(index) < i.getMaxStacks()) { // Check if it is full
+						incrementItem(index); // Increment the stack count of that item
 						stackFound = true;   // Flag that a non-full stack was located
 						break;
 					}

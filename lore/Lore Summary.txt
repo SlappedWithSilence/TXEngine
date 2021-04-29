@@ -29,7 +29,7 @@
 		- Move quickly and with precision
 		- Extremely powerful grip
 		- Somewhat competent magic users
-		- Not very good at manufacturing
+		- Not very good at manufacturing, lack stamina and strength
 		- Medicinal experts
 		- Prefers close-quarters combat against larger enemies
 		- Uses a special razor-wire-based weapon to ensnare enemies, then finishes them off with a blade

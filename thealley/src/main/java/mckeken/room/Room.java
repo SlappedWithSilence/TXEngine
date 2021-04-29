@@ -18,7 +18,6 @@ public class Room {
 
 	String introPrompt; // The string that is printed when the user first enters the room
 
-
 	public Room() {
 
 	}
@@ -51,7 +50,7 @@ public class Room {
 		// Loop until the user performs a MoveAction
 		while (stay) {
 			printActions();
-			int userSelection = LogUtils.getNumber(0, roomActions.size());
+			int userSelection = LogUtils.getNumber(0, roomActions.size()-1);
 
 			int enableNext = roomActions.get(userSelection).perform();
 			if (enableNext >= 0) roomActions.get(enableNext).setEnabled(true); // Enable the Action that was passed through the last performed Action.
