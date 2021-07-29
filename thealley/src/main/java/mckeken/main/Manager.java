@@ -41,7 +41,8 @@ public class Manager {
         intro();                     // Display the intro text
         saveExists = Load.hasSave(); // Check for a saved game
         itemList = new ItemLoader().load(Resources.getResourceAsFile(ITEM_RESOURCE_FILE));
-        roomList = Load.loadRooms(Resources.getResourceAsFile(ROOM_RESOURCE_FILE));
+        //roomList = Load.loadRooms(Resources.getResourceAsFile(ROOM_RESOURCE_FILE));
+        roomList = new RoomLoader().load(Resources.getResourceAsFile(ROOM_RESOURCE_FILE));
         conversationList = new ConversationLoader().load(Resources.getResourceAsFile(CONVERSATION_RESOURCE_FILE));
 
         if (saveExists) {            // If the save exists
