@@ -1,0 +1,19 @@
+{
+  "playerResources" : [
+    {
+      "resourceName" : "Health",
+      "value"        : 100,
+      "maxValue"     : 100
+    },
+    {
+      "resourceName" : "Stamina",
+      "value"        : 50,
+      "maxValue"     : 100
+    },
+    {
+      "resourceName" : "Mana",
+      "value"        : 100,
+      "maxValue"     : 100
+    }
+  ]
+}

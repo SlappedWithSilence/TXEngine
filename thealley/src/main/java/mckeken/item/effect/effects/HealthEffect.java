@@ -28,7 +28,9 @@ public class HealthEffect extends Effect {
 	}
 
 	public void perform() {
-		Manager.player.modifyHealth( super.properties[0] * super.properties[1] + super.properties[2] );
+		Manager.player.getResourceManager().setResource("Health",
+				Manager.player.getResourceManager().getResourceQuantity("Health") +
+						(super.properties[0] * super.properties[1] + super.properties[2]) );
 	}
 
 }

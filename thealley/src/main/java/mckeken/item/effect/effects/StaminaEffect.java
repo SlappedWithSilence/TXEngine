@@ -28,7 +28,8 @@ public class StaminaEffect extends Effect {
     }
 
     public void perform() {
-        Manager.player.modifyStamina( super.properties[0] * super.properties[1] + super.properties[2] );
+        Manager.player.getResourceManager().setResource("Stamina",
+                Manager.player.getResourceManager().getResourceQuantity("Stamina") + (super.properties[0] * super.properties[1] + super.properties[2]) );
     }
 
 }

@@ -1,6 +1,7 @@
 package mckeken.player;
 
 import mckeken.inventory.*;
+import mckeken.main.Manager;
 
 public class Player {
 
@@ -9,11 +10,13 @@ public class Player {
 		FEMALE
 	}
 
-	final private int DEFAULT_MAX_HEALTH = 100;
+	PlayerResourceManager resourceManager;
+
+	/*final private int DEFAULT_MAX_HEALTH = 100;
 	final private int DEFAULT_HEALTH     = 50;
 
 	private int DEFAULT_MAX_STAMINA = 50;
-	private int DEFAULT_STAMINA     = 50;
+	private int DEFAULT_STAMINA     = 50;*/
 
 	private String DEFAULT_PLAYER_NAME = "Player";
 
@@ -21,14 +24,14 @@ public class Player {
 
 	private static int level;
 
-	// HP
+	/* HP
 	private static int health;
 	private static int maxHealth;
 
 	// Stamina
 	private static int stamina;
 	private static int maxStamina;
-
+	*/
 	private static Inventory inventory;
 
 	// The room that the player is currently in. This value must always be a valid room id.
@@ -39,14 +42,8 @@ public class Player {
 	// Default constructor
 	public Player() {
 		name = DEFAULT_PLAYER_NAME;
-
+		resourceManager = new PlayerResourceManager(Manager.playerResourceList);
 		level = 1;
-
-		health = DEFAULT_HEALTH;
-		maxHealth = DEFAULT_MAX_HEALTH;
-
-		stamina = DEFAULT_STAMINA;
-		maxStamina = DEFAULT_MAX_STAMINA;
 
 		inventory = new Inventory();
 
@@ -59,27 +56,25 @@ public class Player {
 
 		Player.level = level;
 
-		Player.health = health;
+		/*Player.health = health;
 		Player.maxHealth = maxHealth;
 
 		Player.stamina = stamina;
-		Player.maxStamina = maxStamina;
+		Player.maxStamina = maxStamina;*/
 
 		Player.inventory = inventory;
 
 		Player.location = location;
+
+		resourceManager = new PlayerResourceManager(Manager.playerResourceList);
 	}
 
-	public void modifyHealth(int amount) {
-		health += amount;
-
-		if (health > maxHealth) health = maxHealth;
+	public PlayerResourceManager getResourceManager() {
+		return resourceManager;
 	}
 
-	public void modifyStamina(int amount) {
-		stamina += amount;
-
-		if (health > maxStamina) stamina = maxStamina;
+	public void setResourceManager(PlayerResourceManager resourceManager) {
+		this.resourceManager = resourceManager;
 	}
 
 	public int getLevel() {
@@ -90,13 +85,6 @@ public class Player {
 		Player.level = level;
 	}
 
-	public int getHealth() {
-		return health;
-	}
-
-	public void setHealth(int i) {
-		health = i;
-	}
 
 	public Inventory getInventory() {
 		return inventory;
@@ -104,18 +92,6 @@ public class Player {
 
 	public  String getName() {
 		return name;
-	}
-
-	public  int getMaxHealth() {
-		return maxHealth;
-	}
-
-	public  int getStamina() {
-		return stamina;
-	}
-
-	public  int getMaxStamina() {
-		return maxStamina;
 	}
 
 	public  int getLocation() {

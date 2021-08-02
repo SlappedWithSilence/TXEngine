@@ -24,17 +24,17 @@ public class Inventory {
 
 	// Default constructor. Initializes in the invetroy without any customization
 	public Inventory() {
-		itemNames     = new ArrayList<String>();
-		itemIDs       = new ArrayList<Integer>();
-		itemQuantities = new ArrayList<Integer>();
+		itemNames     = new ArrayList<>();
+		itemIDs       = new ArrayList<>();
+		itemQuantities = new ArrayList<>();
 	}
 
 	// Capacity constructor. Initializes the inventory with capacity passed in param 0;
 	public Inventory(int capacity) {
 		Inventory.capacity = capacity;
-		itemNames     = new ArrayList<String>();
-		itemIDs       = new ArrayList<Integer>();
-		itemQuantities = new ArrayList<Integer>();
+		itemNames     = new ArrayList<>();
+		itemIDs       = new ArrayList<>();
+		itemQuantities = new ArrayList<>();
 	}
 
 	// Add an item to the inventory. This function should only ever be called after ensuring there is space in the inventory.
@@ -156,7 +156,7 @@ public class Inventory {
 		System.out.println("------------          Inventory          --------------");
 		System.out.println("-------------------------------------------------------");
 		for (int i = 0; i < getUsage(); i++ ) {
-			System.out.println("[" + i + "]" + itemNames.get(i) + "\t" + Colors.CYAN_BOLD + itemQuantities.get(i) + Colors.RESET);
+			System.out.println("[" + i + "] " + itemNames.get(i) + "\t" + Colors.CYAN_BOLD + itemQuantities.get(i) + Colors.RESET);
 		}
 		System.out.println("-------------------------------------------------------");
 	}

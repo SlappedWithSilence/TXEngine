@@ -37,6 +37,14 @@
           "enabled"   : true,
           "properties" : ["0"],
           "unlockedIndex" : -1
+        },
+        {
+          "className" : "SummaryAction",
+          "menuName"  : "Check yo-self",
+          "text"      : "",
+          "enabled"   : true,
+          "properties" : [],
+          "unlockedIndex" : -1
         }
       ]
     }

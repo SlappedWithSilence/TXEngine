@@ -97,8 +97,71 @@ public class LogUtils {
 	public static void numberedList(String[] list) {
 		System.out.println("------------------------------------------------");
 		for (int i = 0; i < list.length; i++) {
-			System.out.println("[" + i + "]: " + list[i]);
+			System.out.println("[" + i + "] " + list[i]);
 		}
 		System.out.println("------------------------------------------------");
+	}
+	// Format: | [0]: Done | [1]: Next | [2]: Back |
+	public static void numberedBar(ArrayList<String> list) {
+		String bar = "|";
+
+		for (int i = 0; i < list.size(); i++) {
+			String s = "";
+			s = s + " [" + i + "]: " + list.get(i) + " |";
+			bar = bar + s;
+		}
+
+		System.out.println(bar);
+	}
+
+	// Format: | [0]: Done | [1]: Next | [2]: Back |
+	public static void numberedBar(String[] list) {
+		String bar = "|";
+
+		for (int i = 0; i < list.length; i++) {
+			String s = "";
+			s = s + " [" + i + "]: " + list[i] + " |";
+			bar = bar + s;
+		}
+
+		System.out.println(bar);
+	}
+
+	public static void numberedBar(String[] list, int length, char sep) {
+		String bar = "|";
+
+		for (int i = 0; i < list.length; i++) {
+			String s = "";
+			s = s + " [" + i + "]: " + list[i] + " |";
+			bar = bar + s;
+		}
+
+		String spacer = "";
+		for (int i = 0; i < (length-bar.length())/2; i++) {
+			spacer += sep;
+		}
+
+		bar = spacer + bar + spacer;
+
+		System.out.println(bar);
+	}
+
+	public static void numberedBar(ArrayList<String> list, int length, char sep) {
+		String bar = "|";
+
+		for (int i = 0; i < list.size(); i++) {
+			String s = "";
+			s = s + " [" + i + "]: " + list.get(i) + " |";
+			bar = bar + s;
+		}
+
+		String spacer = "";
+		for (int i = 0; i < (length-bar.length())/2; i++) {
+			spacer += sep;
+		}
+
+		bar = spacer + bar + spacer;
+
+		System.out.println(bar);
 	}
 }
