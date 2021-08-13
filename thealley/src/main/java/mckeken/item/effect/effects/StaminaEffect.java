@@ -19,17 +19,17 @@ public class StaminaEffect extends Effect {
 
     // Default constructor.
     public StaminaEffect () {
-        super(new Integer[] {DEFAULT_HP_CHANGE, 1, 0}); // Configure the effect to have a maximum of 3 properties
+        super(new String[] {""+DEFAULT_HP_CHANGE, ""+1, ""+0}); // Configure the effect to have a maximum of 3 properties
 
     }
 
     public StaminaEffect (int modifier, int multiplier, int bonus) {
-        super(new Integer[] {modifier, multiplier, bonus});
+        super(new String[] {""+modifier, ""+multiplier, ""+bonus});
     }
 
     public void perform() {
         Manager.player.getResourceManager().setResource("Stamina",
-                Manager.player.getResourceManager().getResourceQuantity("Stamina") + (super.properties[0] * super.properties[1] + super.properties[2]) );
+                Manager.player.getResourceManager().getResourceQuantity("Stamina") + (Integer.getInteger(super.properties[0]) * Integer.getInteger(super.properties[1]) + Integer.getInteger(super.properties[2])) );
     }
 
 }

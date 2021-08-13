@@ -59,12 +59,12 @@ public class Manager {
     // **** Prompt functions ****
     private static void intro() {
         //System.out.print(INTRO_TEXT);
-        ColorConsole.d(INTRO_TEXT);
+        ColorConsole.d(INTRO_TEXT, false);
     }
 
     // Prompts the user if they want to resume their saved game
     private static void promptLoadGame() {
-    ColorConsole.d(LOAD_GAME_TEXT);
+    ColorConsole.d(LOAD_GAME_TEXT, false);
     }
 
     // Perform pre-game initialization.

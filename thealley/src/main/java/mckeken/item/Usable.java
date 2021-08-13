@@ -1,5 +1,6 @@
 package mckeken.item;
 
+import mckeken.io.LogUtils;
 import mckeken.item.effect.*;
 import mckeken.color.ColorConsole;
 
@@ -21,7 +22,7 @@ public class Usable extends Item {
 
 	public void use() {
 		if (this.effects.size() < 1) {
-			ColorConsole.e("Error! Cannot use an item with no effects! Please report this issue on Github at https://github.com/TopperMcKek/TheAlley/issues");
+			LogUtils.error("Error! Cannot use an item with no effects! Please report this issue on Github at https://github.com/TopperMcKek/TheAlley/issues");
 		} else {
 			for (Effect e : this.effects) e.perform();
 		}

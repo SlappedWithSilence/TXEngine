@@ -112,9 +112,9 @@ public class Load {
 							String effectName = (String) rawEffect.get("className");	// Get the class name of the effect we're instantiating
 							JSONArray propertiesArray = (JSONArray) rawEffect.get("properties");	// Get a sub-array of property integer values for the current effect
 
-							Integer[] effectProperties = new Integer[ propertiesArray.size()];		// Create a java-array to store the effect's property values
+							String[] effectProperties = new String[ propertiesArray.size()];		// Create a java-array to store the effect's property values
 							for (int i = 0; i < propertiesArray.size(); i++) {						// Iterate through the JSONArray that stores the property values
-								int prop = ((Long) propertiesArray.get(i)).intValue();				// Collect a property values and convert it to an int.
+								String prop = ((String) propertiesArray.get(i));				// Collect a property values and convert it to an int.
 								effectProperties[i] = prop;											// Store it in the array
 							}
 

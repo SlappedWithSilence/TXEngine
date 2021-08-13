@@ -1,6 +1,7 @@
 package mckeken.io;
 
 import mckeken.color.ColorConsole;
+import mckeken.color.Colors;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
@@ -8,6 +9,9 @@ import java.util.ArrayList;
 
 // A class of static functions designed to stream-line getting typical forms of user input. 
 public class LogUtils {
+
+	public final static int HEADER_LENGTH = 55;
+	public final static int HEADER_SPACES = 3;
 	
 	// Gets a yes or no answer from the user
 	public static boolean getAffirmative() {
@@ -83,7 +87,7 @@ public class LogUtils {
 	}
 
 	public static void error(String text) {
-		ColorConsole.e(text);
+		ColorConsole.e(text, false);
 	}
 
 	public static void numberedList(ArrayList<String> list) {
@@ -102,7 +106,7 @@ public class LogUtils {
 		System.out.println("------------------------------------------------");
 	}
 	// Format: | [0]: Done | [1]: Next | [2]: Back |
-	public static void numberedBar(ArrayList<String> list) {
+	/*public static void numberedBar(ArrayList<String> list) {
 		String bar = "|";
 
 		for (int i = 0; i < list.size(); i++) {
@@ -112,7 +116,7 @@ public class LogUtils {
 		}
 
 		System.out.println(bar);
-	}
+	}*/
 
 	// Format: | [0]: Done | [1]: Next | [2]: Back |
 	public static void numberedBar(String[] list) {
@@ -164,4 +168,41 @@ public class LogUtils {
 
 		System.out.println(bar);
 	}
+
+	public static void numberedBar(ArrayList<String> list) {
+		numberedBar(list, HEADER_LENGTH, ' ');
+	}
+
+	public static void header(String title) {
+		header(title, HEADER_LENGTH, '-', Colors.WHITE);
+	}
+
+	public static void header(String title, int length, char sep, String titleColor) {
+
+		if (title.length() >= length +2) length +=2;
+
+		StringBuilder headerBar = new StringBuilder();
+		for (int i = 0; i < length; i++) {
+			headerBar.append(sep);
+		}
+
+		StringBuilder titleBar = new StringBuilder();
+		for (int i = 0; i< (length - title.length())/2 - HEADER_SPACES; i++) titleBar.append(sep);
+		for (int i = 0; i < HEADER_SPACES; i++) titleBar.append(' ');
+		titleBar.append(title);
+		for (int i = 0; i < HEADER_SPACES; i++) titleBar.append(' ');
+		for (int i = 0; i< (length - title.length())/2 - HEADER_SPACES; i++) titleBar.append(sep);
+
+		String headerBuilder = titleColor + headerBar +
+				'\n' +
+				titleBar +
+				'\n' +
+				headerBar +
+				'\n' +
+				Colors.RESET;
+
+		System.out.println(headerBuilder);
+
+	}
+
 }

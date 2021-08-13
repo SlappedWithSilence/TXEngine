@@ -52,7 +52,7 @@ public abstract class Action {
 	}
 
 	public boolean print() {
-		if (isEnabled()) ColorConsole.d(menuName + "\n");
+		if (isEnabled()) ColorConsole.d(menuName + "\n", false);
 		return isEnabled();
 	}
 

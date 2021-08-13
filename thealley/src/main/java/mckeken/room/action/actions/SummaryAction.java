@@ -10,12 +10,6 @@ public class SummaryAction extends Action {
 
     final int RESOURCES_PER_PAGE = 5;
 
-    final int HEADER_LENGTH = 55;
-    final String HEADER =
-    "-------------------------------------------------------\n"+
-	"------------           Summary           --------------\n"+
-	"-------------------------------------------------------";
-
     final String[] barOptions = {"Previous", "Done", "Next"};
 
     int page = 1;
@@ -29,28 +23,41 @@ public class SummaryAction extends Action {
         return output;
     }
 
-    // Prints one page of Player Resources and their associated quantities.
     public void printPage(int pageNumber, ArrayList<String> barOptions) {
         Object[] keys = Manager.player.getResourceManager().getResources().keySet().toArray(); // the keys from the entire resourceManager map
-        String firstKey = (String) keys[  (pageNumber* RESOURCES_PER_PAGE)- RESOURCES_PER_PAGE  ]; // the first key from the current page (the name of the first resource on the page
-        String finalKey; // the last key from the current page (the name of the last resource on the page)
+
+        int finalIndex;
+        int startIndex = (pageNumber* RESOURCES_PER_PAGE)- RESOURCES_PER_PAGE;
 
         if ( (pageNumber * RESOURCES_PER_PAGE)-1 >= keys.length ) { // Checks to see if the math overshoots the length of the resourceManager map
-            finalKey = (String) keys[keys.length-1]; // If the math overshoots the map, simply set the last key on the page to the last key in the map
+            finalIndex = keys.length-1; // If the math overshoots the map, simply set the last key on the page to the last key in the map
         } else {
-            finalKey = (String) keys[pageNumber * RESOURCES_PER_PAGE -1]; // Use the key at the computed index
+            finalIndex = pageNumber * RESOURCES_PER_PAGE -1; // Use the key at the computed index
         }
 
-        SortedMap<String, Integer[]> map = Manager.player.getResourceManager().getResources().subMap(firstKey, true, finalKey, true); // Generate a sub-selection of the resourceManager map that only contains the resources on the current page
-        Set<String> keySet = map.keySet(); // get the keys from the sub-selection
-
-        for (String k : keySet) { // iterate through the sub-selection's keys
-           Map.Entry<String, Integer[]> p = new AbstractMap.SimpleEntry<>(k, map.get(k)); // generate a key-value pair
+        for (int i = startIndex; i <= finalIndex; i++) {
+            Map.Entry<String, Integer[]> p = new AbstractMap.SimpleEntry<String, Integer[]>((String) keys[i], Manager.player.getResourceManager().getResources().get((String) keys[i])); // generate a key-value pair
             System.out.println(formatPlayerResource(p));    // print the key-value pair
         }
         System.out.println(); // generate an empty line for aesthetic purposes
 
-        LogUtils.numberedBar(barOptions, HEADER_LENGTH, ' ');   // generate a bottom bar
+        LogUtils.numberedBar(barOptions);   // generate a bottom bar
+    }
+
+    public void printLevelBox() {
+        StringBuilder line1 = new StringBuilder();
+
+        String nameText = "Name:\t" + Manager.player.getName();
+        String levelText = "Level\t: " + Manager.player.getLevel();
+
+        line1.append('|');
+        line1.append('\t');
+        line1.append(nameText).append('\t').append(levelText);
+        line1.append(" ".repeat(LogUtils.HEADER_LENGTH - line1.length() - 1));
+        line1.append('|').append('\n');
+        line1.append("|").append("_".repeat(LogUtils.HEADER_LENGTH-2)).append("|");
+
+        System.out.println(line1);
     }
 
     @Override
@@ -60,6 +67,8 @@ public class SummaryAction extends Action {
         boolean done = false; // Tracks if the user wants to exit the page loop
 
         while (!done) {
+            LogUtils.header("Summary");
+            printLevelBox();
 
             ArrayList<String> bottomBarOptions = new ArrayList<>();
 

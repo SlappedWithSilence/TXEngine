@@ -19,18 +19,19 @@ public class HealthEffect extends Effect {
 
 	// Default constructor.
 	public HealthEffect() {
-		super(new Integer[] {DEFAULT_HP_CHANGE, 1, 0}); // Configure the effect to have a maximum of 3 properties
+		super(new String[] {""+DEFAULT_HP_CHANGE, ""+1, ""+0}); // Configure the effect to have a maximum of 3 properties
 
 	}
 
-	public HealthEffect(int modifier, int multiplier, int bonus) {
-		super(new Integer[] {modifier, multiplier, bonus});
+	public HealthEffect(String modifier, String multiplier, String bonus) {
+		super(new String[] {modifier, multiplier, bonus});
 	}
 
 	public void perform() {
+		System.out.println(super.properties[0] + " " + super.properties[1] + " " + super.properties[2]);
 		Manager.player.getResourceManager().setResource("Health",
 				Manager.player.getResourceManager().getResourceQuantity("Health") +
-						(super.properties[0] * super.properties[1] + super.properties[2]) );
+						(Integer.getInteger(super.properties[0]) * Integer.getInteger(super.properties[1]) + Integer.getInteger(super.properties[2])) );
 	}
 
 }

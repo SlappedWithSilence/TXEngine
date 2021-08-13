@@ -15,7 +15,7 @@ public class EffectFactory {
 	}
 
 	// Returns an instance of an Effect that has the properties passed in the paramter
-	public static Effect build(String className, Integer[] properties) {
+	public static Effect build(String className, String[] properties) {
 		try {
 			Class clasz = Class.forName(EFFECTS_PACKAGE + className); // Looks up the class name passed in
 			Effect e = (Effect)clasz.newInstance(); // Generates an instance of it cast to an Effect

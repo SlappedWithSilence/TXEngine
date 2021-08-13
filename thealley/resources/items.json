@@ -29,7 +29,7 @@
          "effects"   :  [
             {
                "className" : "HealthEffect",
-               "properties": [0,0,16]
+               "properties": ["0","0","16"]
             }
          ]
       },
@@ -42,12 +42,30 @@
          "maxStacks" :  20,
          "effects"   :  [
             {
-               "className" : "HealthEffect",
-               "properties": [0,0,-5]
+               "className" : "FlatResourceEffect",
+               "properties": ["Health","-5"]
             },
             {
-               "className": "StaminaEffect",
-               "properties": [0,0,16]
+               "className": "FlatResourceEffect",
+               "properties": ["Stamina", "16"]
+            }
+         ]
+      },
+      {
+         "type"      :  "consumable",
+         "name"      :  "Vial of Fae Blood",
+         "description": "A glass vial of green fluid. It is said to contain the blood of a fae. Many use it to cure all kinds of ailments.",
+         "id"        :  5,
+         "value"     :  1000,
+         "maxStacks" :  33,
+         "effects"   :  [
+            {
+               "className" : "ProportionalResourceEffect",
+               "properties": ["Health","0.5"]
+            },
+            {
+               "className" : "ProportionalResourceEffect",
+               "properties": ["Stamina", "0.5"]
             }
          ]
       }
