@@ -7,7 +7,7 @@
           "__comment__": " This is the first layer. It contains one module with two options, each with one event.",
           "modules": [
             { "npcText" : "Who do you think you are?",
-              "options" : ["Running around leaving scars!", "It goes off like a gun"],
+              "options" : ["Running around leaving scars!", "It goes off like a gun", "Hey now, you're a rock star!"],
               "events"  : [
                 [
                   {
@@ -20,9 +20,15 @@
                     "className" : "ItemEvent",
                     "properties" : ["4", "2"]
                   }
+                ],
+                [
+                  {
+                    "className" : "MoneyEvent",
+                    "properties" : ["100"]
+                  }
                 ]
               ],
-              "targets" : [0, -1]
+              "targets" : [0, -1, -1]
             }
           ]
         },

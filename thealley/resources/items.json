@@ -28,11 +28,12 @@
          "maxStacks" :  16,
          "effects"   :  [
             {
-               "className" : "HealthEffect",
-               "properties": ["0","0","16"]
+               "className" : "FlatResourceEffect",
+               "properties": ["Health", "16"]
             }
          ]
       },
+
       {
          "type"      :  "consumable",
          "name"      :  "Cykia Dust",
@@ -51,6 +52,7 @@
             }
          ]
       },
+
       {
          "type"      :  "consumable",
          "name"      :  "Vial of Fae Blood",

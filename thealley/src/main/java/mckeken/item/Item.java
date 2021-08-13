@@ -28,6 +28,10 @@ public class Item {
 		System.out.println(name + " | " + id + " | " + value + " | " + maxStacks);
 	}
 
+	public String summary() {
+		return ("[" + getName() + "]\tValue: " + getValue() + "\t");
+	}
+
 	public String getName() {
 		return name;
 	}

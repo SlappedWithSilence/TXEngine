@@ -21,8 +21,9 @@ public class ProportionalResourceEffect extends Effect {
 
     @Override
     public void perform() {
+        // Resource[resourceName] = Resources[resourceName][quantity] + Resources[resourceName][maxQuantity]
         Manager.player.getResourceManager().setResource(super.properties[0], Manager.player.getResourceManager().getResourceQuantity(super.properties[0]) +
-                                                                                    Manager.player.getResourceManager().getResourceQuantity(super.properties[0]) * Integer.parseInt(super.properties[1]));
+                                                                                           (int) (Manager.player.getResourceManager().getResources().get(super.properties[0])[0] * Double.parseDouble(super.properties[1])));
     }
 
 

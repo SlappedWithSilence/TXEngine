@@ -2,6 +2,7 @@ package mckeken.room.action.actions;
 
 import mckeken.io.LogUtils;
 import mckeken.main.Manager;
+import mckeken.player.Player;
 import mckeken.room.action.Action;
 
 import java.util.*;
@@ -47,15 +48,29 @@ public class SummaryAction extends Action {
     public void printLevelBox() {
         StringBuilder line1 = new StringBuilder();
 
-        String nameText = "Name:\t" + Manager.player.getName();
-        String levelText = "Level\t: " + Manager.player.getLevel();
+        String nameText =  "Name:     " + Manager.player.getName();
+        String levelText = "Level:    " + Manager.player.getLevel();
+        String moneyText = "Currency: " + Player.getMoney();
 
-        line1.append('|');
-        line1.append('\t');
-        line1.append(nameText).append('\t').append(levelText);
-        line1.append(" ".repeat(LogUtils.HEADER_LENGTH - line1.length() - 1));
+        line1.append(" ").append("_".repeat(LogUtils.HEADER_LENGTH-2));
+        line1.append("\n|").append(" ".repeat(LogUtils.HEADER_LENGTH-2)).append("|"); // Long bar top
+        // The Player's name row
+        line1.append("\n| ");
+        line1.append(nameText);
+        line1.append(" ".repeat(LogUtils.HEADER_LENGTH - nameText.length() - 3));
         line1.append('|').append('\n');
-        line1.append("|").append("_".repeat(LogUtils.HEADER_LENGTH-2)).append("|");
+        // Player's level row
+        line1.append("| ");
+        line1.append(levelText);
+        line1.append(" ".repeat(LogUtils.HEADER_LENGTH - levelText.length()- 3));
+        line1.append('|').append('\n');
+        // Player's money row
+        line1.append("| ");
+        line1.append(moneyText);
+        line1.append(" ".repeat(LogUtils.HEADER_LENGTH - moneyText.length() - 3));
+        line1.append('|').append('\n');
+
+        line1.append("|").append("_".repeat(LogUtils.HEADER_LENGTH-2)).append("|"); // Long bar bottom
 
         System.out.println(line1);
     }

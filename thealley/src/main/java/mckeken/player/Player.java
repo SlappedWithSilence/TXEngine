@@ -24,6 +24,8 @@ public class Player {
 
 	private static int level;
 
+	private static int money;
+
 	/* HP
 	private static int health;
 	private static int maxHealth;
@@ -46,12 +48,12 @@ public class Player {
 		level = 1;
 
 		inventory = new Inventory();
-
+		money = 0;
 		location = 0;
 	}
 
 	// Specific constructor
-	public Player(String name, int level, int health, int maxHealth, int stamina, int maxStamina, Inventory inventory, int location) {
+	public Player(String name, int level, Inventory inventory, int location, int money) {
 		Player.name = name;
 
 		Player.level = level;
@@ -61,6 +63,8 @@ public class Player {
 
 		Player.stamina = stamina;
 		Player.maxStamina = maxStamina;*/
+
+		Player.money = money;
 
 		Player.inventory = inventory;
 
@@ -96,5 +100,13 @@ public class Player {
 
 	public  int getLocation() {
 		return location;
+	}
+
+	public static int getMoney() {
+		return money;
+	}
+
+	public static void setMoney(int money) {
+		Player.money = money;
 	}
 }
