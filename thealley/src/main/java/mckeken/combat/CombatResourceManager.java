@@ -1,4 +1,4 @@
-package mckeken.player;
+package mckeken.combat;
 
 import mckeken.io.LogUtils;
 
@@ -6,28 +6,23 @@ import java.util.HashMap;
 import java.util.TreeMap;
 
 
-/**************************************************************************************************************
- *  This class contains all the functions needed to manage player resources. This may be HP, MP, Stamina, etc *
- **************************************************************************************************************/
-public class PlayerResourceManager {
+/*********************************************************************************************************************
+ *  This class contains all the functions needed to manage combat entity resources. This may be HP, MP, Stamina, etc *
+ *********************************************************************************************************************/
+public class CombatResourceManager {
 
     /* Member variables */
     //HashMap<String, Integer[]> resources; // A map that contains a String mapped to an array of two int. The String is the name of the resource, arr[0] is the max quantity of the resource, and arr[1] is the current quantity of the resource
     TreeMap<String, Integer[]> resources;
 
     /* Constructors */
-    public PlayerResourceManager( TreeMap<String, Integer[]> treeMap) {
+    public CombatResourceManager(TreeMap<String, Integer[]> treeMap) {
         resources = treeMap;
     }
 
-    public PlayerResourceManager( HashMap<String, Integer[]> map) {
+    public CombatResourceManager(HashMap<String, Integer[]> map) {
         resources = new TreeMap<>(map);
     }
-
-
-    /*public PlayerResourceManager(HashMap<String, Integer[]> resources) {
-        this.resources = resources;
-    }*/
 
     /* Member Methods */
 

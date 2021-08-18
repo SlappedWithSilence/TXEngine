@@ -1,5 +1,7 @@
 package mckeken.combat.ability;
 
+import mckeken.combat.CombatEngine;
+import mckeken.combat.CombatEntity;
 import mckeken.item.effect.Effect;
 
 import java.util.ArrayList;
@@ -21,9 +23,13 @@ import java.util.ArrayList;
 
  An ability that targets multiple entities assigns its effects to all targeted entities.
  */
-public class Ability {
-    TargetMode targetMode;
+public abstract class Ability {
+    CombatEngine.TargetMode targetMode;
     String name;
     ArrayList<Effect> effects;
     int damage;
+
+    public abstract boolean hasRequirements(CombatEntity caster); // Returns true if casting requirements are met, false otherwise
 }
+
+

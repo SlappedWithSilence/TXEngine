@@ -1,7 +1,5 @@
 package mckeken.io;
 
-import mckeken.player.PlayerResourceManager;
-import mckeken.room.action.actions.conversation.Conversation;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -14,9 +12,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class PlayerResourceLoader implements Loader{
+public class CombatResourceLoader implements Loader{
 
-    public PlayerResourceLoader() {
+    public CombatResourceLoader() {
 
     }
 
@@ -45,7 +43,7 @@ public class PlayerResourceLoader implements Loader{
         }
 
         // Get the JSON array that contains all the items
-        JSONArray rawResources = (JSONArray) obj.get("playerResources");
+        JSONArray rawResources = (JSONArray) obj.get("combatResources");
         Iterator<JSONObject> iterator = rawResources.iterator(); // Create an iterator over the list of items
 
         // Loop through the conversation JSON objects
