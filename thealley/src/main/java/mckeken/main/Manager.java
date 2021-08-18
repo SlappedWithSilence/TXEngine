@@ -2,7 +2,7 @@ package mckeken.main;
 
 import mckeken.color.*;
 import mckeken.io.*;
-import mckeken.player.Player;
+import mckeken.combat.Player;
 import java.util.HashMap;
 import mckeken.item.Item;
 import mckeken.room.*;
@@ -24,7 +24,7 @@ public class Manager {
     private static final String ITEM_RESOURCE_FILE = "items.json";
     private static final String ROOM_RESOURCE_FILE = "rooms.json";
     private static final String CONVERSATION_RESOURCE_FILE = "conversations.json";
-    private static final String PLAYER_RESOURCE_FILE = "player_resources.json";
+    private static final String PLAYER_RESOURCE_FILE = "combat_resources.json";
 
     // *** Variables *** //
     private static boolean saveExists = false;
@@ -77,7 +77,7 @@ public class Manager {
         itemList = new ItemLoader().load(Resources.getResourceAsFile(ITEM_RESOURCE_FILE));
         roomList = new RoomLoader().load(Resources.getResourceAsFile(ROOM_RESOURCE_FILE));
         conversationList = new ConversationLoader().load(Resources.getResourceAsFile(CONVERSATION_RESOURCE_FILE));
-        playerResourceList = new PlayerResourceLoader().load(Resources.getResourceAsFile(PLAYER_RESOURCE_FILE));
+        playerResourceList = new CombatResourceLoader().load(Resources.getResourceAsFile(PLAYER_RESOURCE_FILE));
 
         // Declare Player Resources
     }

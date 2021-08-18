@@ -14,7 +14,7 @@ import java.lang.Long;
 
 import mckeken.item.effect.Effect;
 import mckeken.main.Manager;
-import mckeken.player.Player;
+import mckeken.combat.Player;
 import mckeken.item.*;
 import mckeken.room.*;
 

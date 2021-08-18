@@ -1,6 +1,7 @@
 package mckeken.room.action.actions.conversation.events;
 
-import mckeken.player.Player;
+import mckeken.combat.Player;
+import mckeken.main.Manager;
 import mckeken.room.action.actions.conversation.Event;
 
 public class MoneyEvent extends Event {
@@ -11,8 +12,8 @@ public class MoneyEvent extends Event {
     public void perform() {
         quantity = Integer.parseInt(super.getProperties()[0]);
 
-        Player.setMoney(Player.getMoney() + quantity);
+        Manager.player.setMoney( Manager.player.getMoney() + quantity);
 
-        if (Player.getMoney() < 0) Player.setMoney(0);
+        if ( Manager.player.getMoney() < 0)  Manager.player.setMoney(0);
     }
 }
