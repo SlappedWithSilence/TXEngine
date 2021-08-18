@@ -2,7 +2,15 @@
 
 package mckeken.color;
 
+import java.util.HashMap;
+import java.util.Locale;
+
 public class Colors {
+
+
+
+    public static final HashMap<String, String> colorMap = getColorMap();
+
     // Reset
     public static final String RESET = "\033[0m";  // Text Reset
 
@@ -75,4 +83,33 @@ public class Colors {
     public static final String PURPLE_BACKGROUND_BRIGHT = "\033[0;105m"; // PURPLE
     public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
     public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
+
+    private static HashMap<String, String> getColorMap() {
+        HashMap<String, String> colorMap = new HashMap<String, String>();
+
+        colorMap.put("BLACK", BLACK);
+        colorMap.put("RED", RED);
+        colorMap.put("GREEN", GREEN);
+        colorMap.put("YELLOW", YELLOW);
+        colorMap.put("BLUE", BLUE);
+        colorMap.put("PURPLE", PURPLE);
+        colorMap.put("CYAN", CYAN);
+        colorMap.put("WHITE", WHITE);
+
+        // Bold
+        colorMap.put("BLACK_BOLD", BLACK_BOLD);
+        colorMap.put("RED_BOLD", RED_BOLD);
+        colorMap.put("GREEN_BOLD", GREEN_BOLD);
+        colorMap.put("YELLOW_BOLD", YELLOW_BOLD);
+        colorMap.put("BLUE_BOLD", BLUE_BOLD);
+        colorMap.put("PURPLE_BOLD", PURPLE_BOLD);
+        colorMap.put("CYAN_BOLD", CYAN_BOLD);
+        colorMap.put("WHITE_BOLD", WHITE_BOLD);
+
+        return colorMap;
+    }
+
+    public static String colored(String text, String color) {
+        return colorMap.get(color.toUpperCase(Locale.ROOT) + text + RESET);
+    }
 }

@@ -2,9 +2,8 @@ package mckeken.room.action.actions;
 
 import mckeken.color.*;
 import mckeken.io.LogUtils;
-import mckeken.item.Item;
 import mckeken.main.Manager;
-import mckeken.player.Player;
+import mckeken.combat.Player;
 import mckeken.room.action.Action;
 
 import java.util.ArrayList;
@@ -39,7 +38,7 @@ public class StoreAction extends Action {
 	}
 
 	private int purchase(int index) {
-		Player.setMoney(Player.getMoney() - costs.get(index)); // Subtract the amount of money that the item costs
+		Manager.player.setMoney(Manager.player.getMoney() - costs.get(index)); // Subtract the amount of money that the item costs
 		Manager.player.getInventory().addItem(inventoryIDs.get(index), 1);
 		switch (storeMode) {
 			default:
@@ -54,8 +53,6 @@ public class StoreAction extends Action {
 				// TODO: Implement
 				return costs.get(index);
 		}
-
-
 	}
 
 	@Override
@@ -93,8 +90,10 @@ public class StoreAction extends Action {
 			} else {
 				int itemChoiceID = inventoryIDs.get(choice);
 				LogUtils.header("Purchase Item");
-				if (Player.getMoney() >= costs.get(choice)) {
+				ColorConsole.d(CHOICE_PROMPT, false);
+				if (Manager.player.getMoney() >= costs.get(choice)) {
 					ColorConsole.d("Are you sure you want to purchase " + Manager.itemList.get(itemChoiceID).getName(), false);
+
 					if (LogUtils.getAffirmative()) {
 						costs.set(choice, purchase(choice)); // Purchase the item, and update the cost of the item based on the store's purchase mode.
 					}

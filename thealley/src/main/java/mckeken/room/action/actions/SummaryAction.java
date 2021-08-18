@@ -2,7 +2,7 @@ package mckeken.room.action.actions;
 
 import mckeken.io.LogUtils;
 import mckeken.main.Manager;
-import mckeken.player.Player;
+import mckeken.combat.Player;
 import mckeken.room.action.Action;
 
 import java.util.*;
@@ -50,7 +50,7 @@ public class SummaryAction extends Action {
 
         String nameText =  "Name:     " + Manager.player.getName();
         String levelText = "Level:    " + Manager.player.getLevel();
-        String moneyText = "Currency: " + Player.getMoney();
+        String moneyText = "Currency: " + Manager.player.getMoney();
 
         line1.append(" ").append("_".repeat(LogUtils.HEADER_LENGTH-2));
         line1.append("\n|").append(" ".repeat(LogUtils.HEADER_LENGTH-2)).append("|"); // Long bar top
