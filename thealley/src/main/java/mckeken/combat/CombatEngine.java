@@ -4,6 +4,7 @@ import mckeken.combat.combatEffect.combatEffects.AddPhaseEffect;
 import mckeken.combat.combatEffect.CombatEffect;
 import mckeken.combat.combatEffect.combatEffects.DispelCombatEffect;
 import mckeken.combat.combatEffect.combatEffects.RemovePhaseEffect;
+import mckeken.main.Manager;
 
 import java.util.*;
 
@@ -52,6 +53,7 @@ public class CombatEngine {
         entities = new HashMap<>();
         entityEffects = new HashMap<>();
         entityIterator = TURN_ORDER.iterator();
+        primaryResourceName = Manager.player.getResourceManager().resources.firstKey();
     }
 
     public CombatEngine(ArrayList<CombatEntity> friendlyEntities, ArrayList<CombatEntity> hostileEntities) {
@@ -71,8 +73,29 @@ public class CombatEngine {
 
         for (CombatEntity entity : entities.get(EntityType.FRIENDLY)) entityEffects.get(EntityType.FRIENDLY).add(new HashMap<>(modelMap)); // For each friendly entity, create a phase hashmap
         for (CombatEntity entity : entities.get(EntityType.HOSTILE)) entityEffects.get(EntityType.HOSTILE).add(new HashMap<>(modelMap));   // For each hostile entity, create a phase hashmap
-
+        primaryResourceName = Manager.player.getResourceManager().resources.firstKey();
     }
+
+    public CombatEngine(ArrayList<CombatEntity> friendlyEntities, ArrayList<CombatEntity> hostileEntities, String primaryResourceName) {
+        entities = new HashMap<>();
+        entityEffects = new HashMap<>();
+
+        // Set up entities
+        entities.put(EntityType.FRIENDLY, friendlyEntities);
+        entities.put(EntityType.HOSTILE, hostileEntities);
+
+        // Set up phases
+        entityEffects.put(EntityType.FRIENDLY, new ArrayList<HashMap<CombatPhase, List<CombatEffect>>>());
+        entityEffects.put(EntityType.HOSTILE, new ArrayList<HashMap<CombatPhase, List<CombatEffect>>>());
+
+        HashMap<CombatPhase, List<CombatEffect>> modelMap = new HashMap<>(); //  Create a master hashmap from which all the entity hashmaps will be copied
+        for (CombatPhase phase : CombatPhase.values()) modelMap.put(phase, new ArrayList<>()); // Fill the model hashmap with an empty arraylist of effects for each phase
+
+        for (CombatEntity entity : entities.get(EntityType.FRIENDLY)) entityEffects.get(EntityType.FRIENDLY).add(new HashMap<>(modelMap)); // For each friendly entity, create a phase hashmap
+        for (CombatEntity entity : entities.get(EntityType.HOSTILE)) entityEffects.get(EntityType.HOSTILE).add(new HashMap<>(modelMap));   // For each hostile entity, create a phase hashmap
+        this.primaryResourceName = primaryResourceName;
+    }
+
     // *************************
     // **** Helper functions ***
     // *************************
