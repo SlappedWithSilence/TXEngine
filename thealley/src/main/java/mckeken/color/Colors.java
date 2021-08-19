@@ -7,8 +7,6 @@ import java.util.Locale;
 
 public class Colors {
 
-
-
     public static final HashMap<String, String> colorMap = getColorMap();
 
     // Reset
@@ -85,7 +83,7 @@ public class Colors {
     public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
 
     private static HashMap<String, String> getColorMap() {
-        HashMap<String, String> colorMap = new HashMap<String, String>();
+        HashMap<String, String> colorMap = new HashMap<>();
 
         colorMap.put("BLACK", BLACK);
         colorMap.put("RED", RED);

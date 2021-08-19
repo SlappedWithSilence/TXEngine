@@ -40,7 +40,6 @@ public class Load {
 	}
 
 	// Loads items from disk
-	// TODO: Implement
 	public static HashMap<Integer, Item> loadItems(File file) {
 
 		HashMap<Integer, Item> itemList = new HashMap<Integer, Item>();  // Store the item instances mapped to their IDs. Requires a collision checker
@@ -174,7 +173,6 @@ public class Load {
 	}
 
 	// Loads rooms from disk
-	// TODO Implement
 	public static HashMap<Integer, Room> loadRooms(File file) {
 		HashMap<Integer, Room> roomList = new HashMap<Integer, Room>();
 

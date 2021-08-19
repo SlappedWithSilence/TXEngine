@@ -2,9 +2,10 @@ package mckeken.combat.ability;
 
 import mckeken.combat.CombatEngine;
 import mckeken.combat.CombatEntity;
+import mckeken.combat.combatEffect.CombatEffect;
 import mckeken.item.effect.Effect;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /*
  An ability is a "move" an entity can use during combat. An Ability may do the following:
@@ -26,10 +27,42 @@ import java.util.ArrayList;
 public abstract class Ability {
     CombatEngine.TargetMode targetMode;
     String name;
-    ArrayList<Effect> effects;
+    List<CombatEffect> effects;
     int damage;
 
     public abstract boolean hasRequirements(CombatEntity caster); // Returns true if casting requirements are met, false otherwise
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<CombatEffect> getEffects() {
+        return effects;
+    }
+
+    public void setEffects(List<CombatEffect> effects) {
+        this.effects = effects;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public CombatEngine.TargetMode getTargetMode() {
+        return targetMode;
+    }
+
+    public void setTargetMode(CombatEngine.TargetMode targetMode) {
+        this.targetMode = targetMode;
+    }
 }
 
 

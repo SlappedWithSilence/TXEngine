@@ -31,4 +31,52 @@ public class CombatEntity {
         this.inventory = Objects.requireNonNullElseGet(inventory, () -> new Inventory(inventorySize));
 
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getOpeningDialog() {
+        return openingDialog;
+    }
+
+    public void setOpeningDialog(String openingDialog) {
+        this.openingDialog = openingDialog;
+    }
+
+    public String getClosingDialog() {
+        return closingDialog;
+    }
+
+    public void setClosingDialog(String closingDialog) {
+        this.closingDialog = closingDialog;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    public CombatResourceManager getResourceManager() {
+        return resourceManager;
+    }
+
+    public void setResourceManager(CombatResourceManager resourceManager) {
+        this.resourceManager = resourceManager;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
 }

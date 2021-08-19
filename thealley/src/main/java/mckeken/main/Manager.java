@@ -1,9 +1,13 @@
 package mckeken.main;
 
 import mckeken.color.*;
+import mckeken.combat.CombatEngine;
+import mckeken.combat.CombatEntity;
 import mckeken.io.*;
 import mckeken.combat.Player;
-import java.util.HashMap;
+
+import java.util.*;
+
 import mckeken.item.Item;
 import mckeken.room.*;
 import mckeken.room.action.actions.conversation.Conversation;
@@ -40,6 +44,7 @@ public class Manager {
     // The class that handles the main menu, then launches the game.
     public static void main( String[] args )
     {
+
         initialize();
         intro();                     // Display the intro text
 
