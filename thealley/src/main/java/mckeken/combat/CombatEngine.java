@@ -10,7 +10,28 @@ import java.util.*;
 
 public class CombatEngine {
 
+    /*********************
+     *   Helper Classes  *
+     *********************/
 
+    // An object that implements EndCondition calculates whether a given CombatEngine instance should end combat.
+    // Any CombatEngine may contain an arbitrary number of EndConditions. Each one is checked after each phase. If one returns true, combat ends.
+    interface EndCondition {
+
+        enum gameState {
+            WIN,
+            LOSS
+        }
+
+        // Arbitrarily calculates if combat should end. This functions returns a pair of values.
+        // The key is whether combat should end, and the value represents if the player has won combat. WIN signals victory, LOSS signals defeat.
+        // Only a pair with a key value of true will be evaluated. If multiple end-conditions are satisfied simultaneously, the first one in the endConditions list is chosen.
+        AbstractMap.SimpleEntry<Boolean, gameState> satisfied(CombatEngine engine);
+    }
+
+    /*******************
+     *   Helper Enums  *
+     *******************/
 
     // Possible Phases of a turn. Note that the order listed here is interpreted as the phase order.
     public enum CombatPhase {
@@ -36,6 +57,10 @@ public class CombatEngine {
         ALL_ENEMY;
     }
 
+    /********************
+     * Member Variables *
+     ********************/
+
     String primaryResourceName; // The name of the resources that triggers death when it hits zero
 
     // Master turn order. All turns follow this phase order by default.
@@ -48,12 +73,22 @@ public class CombatEngine {
 
     Iterator<AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer>> entityIterator;
 
+    List<EndCondition> endConditions;
+
+    EndCondition.gameState endState = null;
+
+    /****************
+     * Constructors *
+     ****************/
+
     public CombatEngine() {
         TURN_ORDER = getTurnOrder();
         entities = new HashMap<>();
         entityEffects = new HashMap<>();
         entityIterator = TURN_ORDER.iterator();
         primaryResourceName = Manager.player.getResourceManager().resources.firstKey();
+        endConditions = new ArrayList<>();
+        endConditions.add(getDefaultEndCondition());
     }
 
     public CombatEngine(ArrayList<CombatEntity> friendlyEntities, ArrayList<CombatEntity> hostileEntities) {
@@ -74,6 +109,9 @@ public class CombatEngine {
         for (CombatEntity entity : entities.get(EntityType.FRIENDLY)) entityEffects.get(EntityType.FRIENDLY).add(new HashMap<>(modelMap)); // For each friendly entity, create a phase hashmap
         for (CombatEntity entity : entities.get(EntityType.HOSTILE)) entityEffects.get(EntityType.HOSTILE).add(new HashMap<>(modelMap));   // For each hostile entity, create a phase hashmap
         primaryResourceName = Manager.player.getResourceManager().resources.firstKey();
+
+        endConditions = new ArrayList<>();
+        endConditions.add(getDefaultEndCondition());
     }
 
     public CombatEngine(ArrayList<CombatEntity> friendlyEntities, ArrayList<CombatEntity> hostileEntities, String primaryResourceName) {
@@ -94,11 +132,74 @@ public class CombatEngine {
         for (CombatEntity entity : entities.get(EntityType.FRIENDLY)) entityEffects.get(EntityType.FRIENDLY).add(new HashMap<>(modelMap)); // For each friendly entity, create a phase hashmap
         for (CombatEntity entity : entities.get(EntityType.HOSTILE)) entityEffects.get(EntityType.HOSTILE).add(new HashMap<>(modelMap));   // For each hostile entity, create a phase hashmap
         this.primaryResourceName = primaryResourceName;
+
+        endConditions = new ArrayList<>();
+        endConditions.add(getDefaultEndCondition());
     }
 
-    // *************************
-    // **** Helper functions ***
-    // *************************
+    public CombatEngine(ArrayList<CombatEntity> friendlyEntities, ArrayList<CombatEntity> hostileEntities, String primaryResourceName, List<EndCondition> endConditions) {
+        entities = new HashMap<>();
+        entityEffects = new HashMap<>();
+
+        // Set up entities
+        entities.put(EntityType.FRIENDLY, friendlyEntities);
+        entities.put(EntityType.HOSTILE, hostileEntities);
+
+        // Set up phases
+        entityEffects.put(EntityType.FRIENDLY, new ArrayList<HashMap<CombatPhase, List<CombatEffect>>>());
+        entityEffects.put(EntityType.HOSTILE, new ArrayList<HashMap<CombatPhase, List<CombatEffect>>>());
+
+        HashMap<CombatPhase, List<CombatEffect>> modelMap = new HashMap<>(); //  Create a master hashmap from which all the entity hashmaps will be copied
+        for (CombatPhase phase : CombatPhase.values()) modelMap.put(phase, new ArrayList<>()); // Fill the model hashmap with an empty arraylist of effects for each phase
+
+        for (CombatEntity entity : entities.get(EntityType.FRIENDLY)) entityEffects.get(EntityType.FRIENDLY).add(new HashMap<>(modelMap)); // For each friendly entity, create a phase hashmap
+        for (CombatEntity entity : entities.get(EntityType.HOSTILE)) entityEffects.get(EntityType.HOSTILE).add(new HashMap<>(modelMap));   // For each hostile entity, create a phase hashmap
+        this.primaryResourceName = primaryResourceName;
+
+        this.endConditions = new ArrayList<>(endConditions);
+    }
+
+    /********************
+     * Public Functions *
+     ********************/
+
+
+    public boolean startCombat() {
+
+        while (endState == null) {
+            turnCycle();
+        }
+
+        return true;
+    }
+
+    /*********************
+     * Private Functions *
+     *********************/
+
+    // Returns a default EndCondition that checks for two things:
+    // - The player's death (loss)
+    // - The death of all enemies (win)
+    public EndCondition getDefaultEndCondition() {
+        return new EndCondition() {
+            @Override
+            public AbstractMap.SimpleEntry<Boolean, gameState> satisfied(CombatEngine engine) {
+                if (Manager.player.getResourceManager().getResourceQuantity(primaryResourceName) <= 0) {
+                    return new AbstractMap.SimpleEntry<Boolean, gameState>(true, gameState.LOSS);
+                }
+
+                if (entities.get(EntityType.HOSTILE).stream().allMatch(n -> n.resourceManager.getResourceQuantity(primaryResourceName) <= 0)) { // If all enemies are dead
+                    return new AbstractMap.SimpleEntry<Boolean, gameState>(true, gameState.WIN); // Return a win
+                }
+
+                return new AbstractMap.SimpleEntry<Boolean, gameState>(false, null);
+            }
+        };
+    }
+
+    public void addEndCondition(EndCondition condition) {
+        endConditions.add(condition);
+    }
 
     // TODO: Rewrite this late-term-abortion of a function
     // TODO: Change to private
@@ -148,6 +249,16 @@ public class CombatEngine {
         }
 
         return turnOrder;
+    }
+
+    private AbstractMap.SimpleEntry<Boolean, EndCondition.gameState> endConditionReached() {
+        for (EndCondition condition : endConditions) {
+            if (condition.satisfied(this).getKey()) {
+                return condition.satisfied(this);
+            }
+        }
+
+        return null;
     }
 
     // Returns the entity of the specified type at the given index
@@ -209,13 +320,17 @@ public class CombatEngine {
 
                         break;
                     default:
-                        // TODO: Implement
-                        // execute effect code
+
+                        combatEffect.perform(entities.get(type).get(index));
 
                 }
 
                 if (combatEffect.getDuration() > 0) combatEffect.setDuration(combatEffect.getDuration() - 1); // Decrement the duration if the duration is greater than 0.
                 cleanup(phaseOrder.get(i)); //  Cleanup any dead effects in the current phase
+            }
+
+            if (endConditionReached() != null) {
+                endState = endConditionReached().getValue();
             }
 
         }
@@ -224,14 +339,6 @@ public class CombatEngine {
 
 
     }
-
-
-
-    private void performPhaseEffects(EntityType type, int index, CombatPhase phase) {
-
-    }
-
-
 
     // Removes any effects with a duration of zero from all phases
     private void cleanup() {

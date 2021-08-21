@@ -1,6 +1,7 @@
 package mckeken.combat.combatEffect.combatEffects;
 
 import mckeken.combat.CombatEngine;
+import mckeken.combat.CombatEntity;
 import mckeken.combat.combatEffect.CombatEffect;
 
 // This is a special combat effect. DispelCombatEffects don't actually do anything on their own, instead relying entirely
@@ -21,6 +22,11 @@ public class DispelCombatEffect extends CombatEffect {
         // Don't do anything.
     }
 
+    @Override
+    public void perform(CombatEntity entity) {
+
+    }
+
     public String getDispelInstanceOf() {
         return dispelInstanceOf;
     }
@@ -36,4 +42,6 @@ public class DispelCombatEffect extends CombatEffect {
     public void setEntityType(CombatEngine.EntityType entityType) {
         this.entityType = entityType;
     }
+
+
 }

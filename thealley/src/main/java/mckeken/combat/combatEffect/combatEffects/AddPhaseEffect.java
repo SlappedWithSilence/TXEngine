@@ -2,6 +2,7 @@ package mckeken.combat.combatEffect.combatEffects;
 
 
 import mckeken.combat.CombatEngine;
+import mckeken.combat.CombatEntity;
 import mckeken.combat.combatEffect.CombatEffect;
 
 // This is a special combat effect. AddPhaseEffect don't actually do anything on their own, instead relying entirely
@@ -16,10 +17,7 @@ public class AddPhaseEffect extends CombatEffect {
         phase = CombatEngine.CombatPhase.valueOf(super.properties[0]);
     }
 
-    @Override
-    public void perform() {
 
-    }
 
 
 
@@ -31,5 +29,13 @@ public class AddPhaseEffect extends CombatEffect {
         this.phase = phase;
     }
 
+    @Override
+    public void perform(CombatEntity entity) {
 
+    }
+
+    @Override
+    public void perform() {
+
+    }
 }
