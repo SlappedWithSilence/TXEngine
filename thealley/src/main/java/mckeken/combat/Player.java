@@ -47,6 +47,10 @@ public class Player extends CombatEntity {
 		resourceManager = new CombatResourceManager(Manager.playerResourceList);
 	}
 
+	public static boolean isPlayer(CombatEntity entity) {
+		return entity instanceof Player;
+	}
+
 	public CombatResourceManager getResourceManager() {
 		return resourceManager;
 	}

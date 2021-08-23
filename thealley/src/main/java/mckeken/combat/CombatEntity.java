@@ -1,19 +1,33 @@
 package mckeken.combat;
 
+import mckeken.combat.ability.Ability;
+import mckeken.combat.ability.AbilityManager;
 import mckeken.inventory.Inventory;
+import mckeken.item.Item;
+import mckeken.room.action.actions.conversation.events.ItemEvent;
 
+import java.util.AbstractMap;
 import java.util.Objects;
+import java.util.Optional;
 
-public class CombatEntity {
+public class CombatEntity implements CombatAgency {
+
     String name;
     String openingDialog;
     String closingDialog;
     Inventory inventory;
     CombatResourceManager resourceManager;
+    AbilityManager abilityManager;
     int speed; // Determines turn order
 
     public CombatEntity() {
-
+        name = "CombatEntity";
+        openingDialog = "Opening Dialog";
+        closingDialog = "Closing Dialog";
+        inventory = new Inventory();
+        resourceManager = new CombatResourceManager();
+        abilityManager = new AbilityManager();
+        speed = 0;
     }
 
     public CombatEntity(String name, String openingDialog, String closingDialog, int inventorySize) {
@@ -21,6 +35,9 @@ public class CombatEntity {
         this.openingDialog = openingDialog;
         this.closingDialog = closingDialog;
         this.inventory = new Inventory(inventorySize);
+        this.abilityManager = new AbilityManager();
+        this.resourceManager = new CombatResourceManager();
+        speed = 0;
     }
 
     public CombatEntity(String name, String openingDialog, String closingDialog, int inventorySize, Inventory inventory) {
@@ -29,8 +46,24 @@ public class CombatEntity {
         this.closingDialog = closingDialog;
 
         this.inventory = Objects.requireNonNullElseGet(inventory, () -> new Inventory(inventorySize));
-
+        this.abilityManager = new AbilityManager();
+        this.resourceManager = new CombatResourceManager();
+        speed = 0;
     }
+
+    // Full constructor. All inputs necessary to instantiate a full-fledged combatEntity are required for this constructor.
+    public CombatEntity(String name, String openingDialog, String closingDialog, int inventorySize, Inventory inventory, AbilityManager abilityManager, CombatResourceManager resourceManager, int speed) {
+        this.name = name;
+        this.openingDialog = openingDialog;
+        this.closingDialog = closingDialog;
+
+        this.inventory = Objects.requireNonNullElseGet(inventory, () -> new Inventory(inventorySize));
+        this.abilityManager = abilityManager;
+        this.resourceManager = resourceManager;
+        this.speed = speed;
+    }
+
+
 
     public String getName() {
         return name;
@@ -78,5 +111,19 @@ public class CombatEntity {
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    public AbilityManager getAbilityManager() {
+        return abilityManager;
+    }
+
+    public void setAbilityManager(AbilityManager abilityManager) {
+        this.abilityManager = abilityManager;
+    }
+
+    // This method will return a Combat choice using a standard AI. It will optimize for damage and try to prevent itself from being killed.
+    @Override
+    public AbstractMap.SimpleEntry<Ability, Item> makeChoice(Optional<CombatEngine> engine) {
+        return null;
     }
 }

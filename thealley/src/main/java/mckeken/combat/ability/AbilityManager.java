@@ -15,4 +15,12 @@ public class AbilityManager {
         this.abilityList = abilityList;
     }
 
+    public void printAbilities() {
+
+    }
+
+    public int getAbilityQuantity() {
+        return abilityList.size();
+    }
+
 }

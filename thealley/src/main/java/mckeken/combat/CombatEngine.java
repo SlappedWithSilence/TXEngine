@@ -1,12 +1,19 @@
 package mckeken.combat;
 
+import mckeken.color.ColorConsole;
+import mckeken.combat.ability.Ability;
 import mckeken.combat.combatEffect.combatEffects.AddPhaseEffect;
 import mckeken.combat.combatEffect.CombatEffect;
 import mckeken.combat.combatEffect.combatEffects.DispelCombatEffect;
 import mckeken.combat.combatEffect.combatEffects.RemovePhaseEffect;
+import mckeken.io.LogUtils;
+import mckeken.item.Item;
 import mckeken.main.Manager;
+import mckeken.room.action.actions.SummaryAction;
 
 import java.util.*;
+
+import static mckeken.io.LogUtils.*;
 
 public class CombatEngine {
 
@@ -279,10 +286,20 @@ public class CombatEngine {
 
     }
 
+
     // Take a turn for a single entity
     private void turn(EntityType type, int index) {
         ArrayList<CombatPhase> phaseOrder = PHASE_ORDER; // Establish initial phase order from master list
         for (int i = 0; i < phaseOrder.size(); i++) { // Iterate through the phase order by index. This is to allow for phases to be added or removed.
+
+            // If the current phase is the ACTION phase, then run the get-action logic
+            if (phaseOrder.get(i) == CombatPhase.ACTION) {
+
+                if (Player.isPlayer(lookUpEntity(type, index))) {
+                    AbstractMap.SimpleEntry<Ability, Item> combatAction = lookUpEntity(type, index).makeChoice(Optional.of(this));
+                }
+
+            }
 
             // Perform phase effects and handle the special effect classes their own way.
             for (CombatEffect combatEffect : entityEffects.get(type).get(index).get(phaseOrder.get(i))) {

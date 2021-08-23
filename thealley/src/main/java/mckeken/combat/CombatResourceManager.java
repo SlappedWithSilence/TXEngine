@@ -24,6 +24,10 @@ public class CombatResourceManager {
         resources = new TreeMap<>(map);
     }
 
+    public CombatResourceManager() {
+        resources = new TreeMap<>();
+    }
+
     /* Member Methods */
 
     public TreeMap<String, Integer[]> getResources() {
