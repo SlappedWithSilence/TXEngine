@@ -5,6 +5,7 @@ import mckeken.combat.CombatEntity;
 import mckeken.combat.combatEffect.CombatEffect;
 import mckeken.item.effect.Effect;
 
+import java.util.AbstractMap;
 import java.util.List;
 
 /*
@@ -27,7 +28,7 @@ import java.util.List;
 public abstract class Ability {
     CombatEngine.TargetMode targetMode;
     String name;
-    List<CombatEffect> effects;
+    List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects;
     int damage;
 
     public abstract boolean hasRequirements(CombatEntity caster); // Returns true if casting requirements are met, false otherwise
@@ -40,11 +41,11 @@ public abstract class Ability {
         this.name = name;
     }
 
-    public List<CombatEffect> getEffects() {
+    public List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> getEffects() {
         return effects;
     }
 
-    public void setEffects(List<CombatEffect> effects) {
+    public void setEffects(List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects) {
         this.effects = effects;
     }
 

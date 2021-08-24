@@ -40,6 +40,7 @@ public class Manager {
     public static HashMap<Integer, Room> roomList;
     public static HashMap<Integer, Conversation> conversationList;
     public static HashMap<String, Integer[]> playerResourceList;
+    public static String primaryResource;
 
     // The class that handles the main menu, then launches the game.
     public static void main( String[] args )

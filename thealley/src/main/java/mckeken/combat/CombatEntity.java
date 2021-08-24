@@ -2,8 +2,11 @@ package mckeken.combat;
 
 import mckeken.combat.ability.Ability;
 import mckeken.combat.ability.AbilityManager;
+import mckeken.combat.combatEffect.CombatEffect;
 import mckeken.inventory.Inventory;
 import mckeken.item.Item;
+import mckeken.item.effect.Effect;
+import mckeken.main.Manager;
 import mckeken.room.action.actions.conversation.events.ItemEvent;
 
 import java.util.AbstractMap;
@@ -126,4 +129,6 @@ public class CombatEntity implements CombatAgency {
     public AbstractMap.SimpleEntry<Ability, Item> makeChoice(Optional<CombatEngine> engine) {
         return null;
     }
+
+
 }

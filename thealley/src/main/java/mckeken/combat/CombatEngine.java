@@ -8,6 +8,7 @@ import mckeken.combat.combatEffect.combatEffects.DispelCombatEffect;
 import mckeken.combat.combatEffect.combatEffects.RemovePhaseEffect;
 import mckeken.io.LogUtils;
 import mckeken.item.Item;
+import mckeken.item.effect.Effect;
 import mckeken.main.Manager;
 import mckeken.room.action.actions.SummaryAction;
 
@@ -285,7 +286,18 @@ public class CombatEngine {
         }
 
     }
+    // Assign an effect to an entity.
+    public void assignEffect(CombatEffect effect, EntityType type,  int index, CombatPhase phase) {
+        entityEffects.get(type).get(index).get(phase).add(effect);
+    }
 
+    // Assign all effects and damage within an ability to a target CombatEntity
+    public void handleAbility(Ability ability, EntityType targetType, int targetIndex) {
+        lookUpEntity(targetType, targetIndex).getResourceManager().decrementResource(Manager.primaryResource, ability.getDamage());
+        for (AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase> effect : ability.getEffects()) { // Iterate through the abilities and assign them to the targets phases
+            assignEffect(effect.getKey(), targetType, targetIndex, effect.getValue());
+        }
+    }
 
     // Take a turn for a single entity
     private void turn(EntityType type, int index) {
@@ -294,11 +306,11 @@ public class CombatEngine {
 
             // If the current phase is the ACTION phase, then run the get-action logic
             if (phaseOrder.get(i) == CombatPhase.ACTION) {
+                AbstractMap.SimpleEntry<Ability, Item> combatAction = lookUpEntity(type, index).makeChoice(Optional.of(this));
 
-                if (Player.isPlayer(lookUpEntity(type, index))) {
-                    AbstractMap.SimpleEntry<Ability, Item> combatAction = lookUpEntity(type, index).makeChoice(Optional.of(this));
+                if (combatAction.getKey() != null) {
+
                 }
-
             }
 
             // Perform phase effects and handle the special effect classes their own way.
