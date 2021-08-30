@@ -3,6 +3,7 @@ package mckeken.main;
 import mckeken.color.*;
 import mckeken.combat.CombatEngine;
 import mckeken.combat.CombatEntity;
+import mckeken.combat.ability.Ability;
 import mckeken.io.*;
 import mckeken.combat.Player;
 
@@ -29,6 +30,7 @@ public class Manager {
     private static final String ROOM_RESOURCE_FILE = "rooms.json";
     private static final String CONVERSATION_RESOURCE_FILE = "conversations.json";
     private static final String PLAYER_RESOURCE_FILE = "combat_resources.json";
+    private static final String ABILITY_RESOURCE_FILE = "abilities.json";
 
     // *** Variables *** //
     private static boolean saveExists = false;
@@ -40,14 +42,18 @@ public class Manager {
     public static HashMap<Integer, Room> roomList;
     public static HashMap<Integer, Conversation> conversationList;
     public static HashMap<String, Integer[]> playerResourceList;
+    public static HashMap<String, Ability> abilityList;
     public static String primaryResource;
 
     // The class that handles the main menu, then launches the game.
     public static void main( String[] args )
     {
 
+
         initialize();
         intro();                     // Display the intro text
+
+
 
         saveExists = Load.hasSave(); // Check for a saved game
         if (saveExists) {            // If the save exists
@@ -56,6 +62,8 @@ public class Manager {
         } else {                        // if no save exists
             Load.initializeNewGame();   // Set up a new game
         }
+
+        initDebug();
 
         // Start the main game loop
         RoomManager.roomLoop();
@@ -84,8 +92,19 @@ public class Manager {
         roomList = new RoomLoader().load(Resources.getResourceAsFile(ROOM_RESOURCE_FILE));
         conversationList = new ConversationLoader().load(Resources.getResourceAsFile(CONVERSATION_RESOURCE_FILE));
         playerResourceList = new CombatResourceLoader().load(Resources.getResourceAsFile(PLAYER_RESOURCE_FILE));
+        abilityList = AbilityLoader.load(Resources.getResourceAsFile(ABILITY_RESOURCE_FILE));
 
         // Declare Player Resources
+    }
+
+    private static void initDebug() {
+
+        System.out.println(Colors.GREEN + "Green" + Colors.RESET);
+        System.out.println(Colors.colored("Red", "Red"));
+
+        player.getAbilityManager().getAbilityList().add(abilityList.get("Smack"));
+        player.getAbilityManager().getAbilityList().add(abilityList.get("Blast"));
+        player.getAbilityManager().getAbilityList().add(abilityList.get("Inversion"));
     }
 
 }

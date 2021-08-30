@@ -8,6 +8,7 @@ import mckeken.combat.combatEffect.combatEffects.DispelCombatEffect;
 import mckeken.combat.combatEffect.combatEffects.RemovePhaseEffect;
 import mckeken.io.LogUtils;
 import mckeken.item.Item;
+import mckeken.item.Usable;
 import mckeken.item.effect.Effect;
 import mckeken.main.Manager;
 import mckeken.room.action.actions.SummaryAction;
@@ -62,7 +63,8 @@ public class CombatEngine {
         SINGLE_FRIENDLY,
         ALL,
         ALL_FRIENDLY,
-        ALL_ENEMY;
+        ALL_ENEMY,
+        SELF
     }
 
     /********************
@@ -308,9 +310,16 @@ public class CombatEngine {
             if (phaseOrder.get(i) == CombatPhase.ACTION) {
                 AbstractMap.SimpleEntry<Ability, Item> combatAction = lookUpEntity(type, index).makeChoice(Optional.of(this));
 
-                if (combatAction.getKey() != null) {
-
+                if (combatAction.getKey() != null) { // If the entity chose to use an ability
+                    AbstractMap.SimpleEntry<EntityType, Integer> target = combatAction.getKey().getTarget(); // get the target of the ability
+                    handleAbility(combatAction.getKey(), target.getKey(), target.getValue());                // apply the ability to the target
                 }
+
+                if (combatAction.getValue() != null) {
+                    if (combatAction.getValue() instanceof Usable) ((Usable) combatAction.getValue()).use();
+                    else System.out.println("You tried to use " + combatAction.getValue().getName() + " but it did nothing.");
+                }
+
             }
 
             // Perform phase effects and handle the special effect classes their own way.
@@ -335,38 +344,31 @@ public class CombatEngine {
                             phaseOrder.add(i+1, phaseToAdd); // Insert new phase right after current phase
                         }
 
-
                         break;
 
                         // TODO: Test
-                    case "DispelCombatEffect":
+                    case "DispelCombatEffect": // Specially handle a DispelCombatEffect
 
-                        String className = ((DispelCombatEffect) combatEffect).getDispelInstanceOf();
+                        String className = ((DispelCombatEffect) combatEffect).getDispelInstanceOf(); // Get the name of the class of CombatEffect that we need to remove
 
-                        for (CombatPhase phase : CombatPhase.values()) {
-                            entityEffects.get(type).get(index).get(phase).removeIf(n -> n.getClass().getSimpleName().equals(className));
+                        for (CombatPhase phase : CombatPhase.values()) { // For each combat phase
+                            entityEffects.get(type).get(index).get(phase).removeIf(n -> n.getClass().getSimpleName().equals(className)); // If the entity who's turn it currently is has any instances of the afformentioned CombatEffect class, remove them.
                         }
-
                         break;
-                    default:
-
+                    default: // If the effect is a standard effect, just execute it.
                         combatEffect.perform(entities.get(type).get(index));
 
                 }
 
                 if (combatEffect.getDuration() > 0) combatEffect.setDuration(combatEffect.getDuration() - 1); // Decrement the duration if the duration is greater than 0.
-                cleanup(phaseOrder.get(i)); //  Cleanup any dead effects in the current phase
+
             }
 
-            if (endConditionReached() != null) {
-                endState = endConditionReached().getValue();
+            if (endConditionReached() != null) { // If combat needs to end
+                endState = endConditionReached().getValue(); // set the global endstate value to true if it was a win, false it was a loss.
             }
-
+            cleanup(phaseOrder.get(i)); //  Cleanup any dead effects in the current phase
         }
-
-
-
-
     }
 
     // Removes any effects with a duration of zero from all phases
@@ -388,6 +390,7 @@ public class CombatEngine {
         }
     }
 
+    // Remove dead effects from a single phase
     private void cleanup(CombatPhase phase) {
         for (HashMap<CombatPhase, List<CombatEffect>> map : entityEffects.get(EntityType.FRIENDLY)) {
             map.get(phase).removeIf(n -> n.getDuration() == 0);

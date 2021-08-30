@@ -1,0 +1,28 @@
+{
+  "Abilities" : [
+    {
+      "target_mode" : "SELF",
+      "name" : "Inversion",
+      "description" : "Converts the user's life force into raw energy, damaging the target.",
+      "damage" : 90,
+      "effects" : [],
+      "resource_cost" : ["Health", 90, "Stamina", 10]
+    },
+    {
+      "target_mode" : "SINGLE",
+      "name" : "Smack",
+      "description" : "The target 'finna catch these hands'",
+      "damage" : 99,
+      "effects" : [],
+      "resource_cost" : ["Stamina", 1]
+    },
+    {
+      "target_mode" : "ALL",
+      "name" : "Blast",
+      "description" : "EXPLOOOOOOSION",
+      "damage" : 9999,
+      "effects" : [],
+      "resource_cost" : ["Mana", 1000]
+    }
+  ]
+}

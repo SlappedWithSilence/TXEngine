@@ -2,7 +2,9 @@ package mckeken.combat;
 
 import mckeken.io.LogUtils;
 
+import java.util.AbstractMap;
 import java.util.HashMap;
+import java.util.List;
 import java.util.TreeMap;
 
 
@@ -12,8 +14,7 @@ import java.util.TreeMap;
 public class CombatResourceManager {
 
     /* Member variables */
-    //HashMap<String, Integer[]> resources; // A map that contains a String mapped to an array of two int. The String is the name of the resource, arr[0] is the max quantity of the resource, and arr[1] is the current quantity of the resource
-    TreeMap<String, Integer[]> resources;
+    TreeMap<String, Integer[]> resources; // A map that contains a String mapped to an array of two int. The String is the name of the resource, arr[0] is the max quantity of the resource, and arr[1] is the current quantity of the resource
 
     /* Constructors */
     public CombatResourceManager(TreeMap<String, Integer[]> treeMap) {
@@ -30,8 +31,22 @@ public class CombatResourceManager {
 
     /* Member Methods */
 
-    public TreeMap<String, Integer[]> getResources() {
-        return resources;
+    // Test if a resource is available at a given quantity. If not, return false.
+    public boolean testResource(String resourceName, Integer resourceQuantity) {
+
+        if (!resources.containsKey(resourceName)) return false;
+
+        return getResourceQuantity(resourceName) >= resourceQuantity;
+    }
+
+    // Test if a list of resources are available at their respective given quantities. If any are not available, return false.
+    public boolean testResource(List<AbstractMap.SimpleEntry<String, Integer>> requirements) {
+
+        for (AbstractMap.SimpleEntry<String, Integer> requirement : requirements) { // Iterate through the list of resource name-quantity pairs
+            if (!testResource(requirement.getKey(), requirement.getValue())) return false; // If a resource doesn't have enough quantity remaining, return false
+        }
+
+        return true; // If all resources have a sufficient quantity remaining, return true.
     }
 
     // Register a new resource into the manager
@@ -46,6 +61,10 @@ public class CombatResourceManager {
         resources.put(resourceName, vals);
         return true;
 
+    }
+
+    public TreeMap<String, Integer[]> getResources() {
+        return resources;
     }
 
     // Set the value of an existing resource

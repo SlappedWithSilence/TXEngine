@@ -1,7 +1,12 @@
 package mckeken.combat;
 
+import mckeken.combat.ability.Ability;
 import mckeken.inventory.*;
+import mckeken.item.Item;
 import mckeken.main.Manager;
+
+import java.util.AbstractMap;
+import java.util.Optional;
 
 public class Player extends CombatEntity {
 
@@ -45,6 +50,16 @@ public class Player extends CombatEntity {
 		this.location = location;
 
 		resourceManager = new CombatResourceManager(Manager.playerResourceList);
+	}
+
+	// Member functions
+	@Override
+	public AbstractMap.SimpleEntry<Ability, Item> makeChoice(Optional<CombatEngine> engine) {
+		AbstractMap.SimpleEntry<Ability, Item> choice = null;
+
+
+
+		return choice;
 	}
 
 	public static boolean isPlayer(CombatEntity entity) {

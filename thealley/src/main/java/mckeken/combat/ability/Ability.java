@@ -6,6 +6,7 @@ import mckeken.combat.combatEffect.CombatEffect;
 import mckeken.item.effect.Effect;
 
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -25,13 +26,47 @@ import java.util.List;
 
  An ability that targets multiple entities assigns its effects to all targeted entities.
  */
-public abstract class Ability {
+public class Ability {
     CombatEngine.TargetMode targetMode;
     String name;
+    String description;
     List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects;
+    List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts;
     int damage;
 
-    public abstract boolean hasRequirements(CombatEntity caster); // Returns true if casting requirements are met, false otherwise
+
+    AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer> target;
+
+    public Ability() {
+        targetMode = CombatEngine.TargetMode.SINGLE;
+        name = "Ability";
+        description = "Generic Ability";
+        effects = new ArrayList<>();
+        damage = 0;
+        target = new AbstractMap.SimpleEntry<>(CombatEngine.EntityType.FRIENDLY, 0);
+        List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts = new ArrayList<>();
+    }
+
+    // Full constructor. Shouldn't often be used, as targets are not determined at instantiation.
+    public Ability(CombatEngine.TargetMode targetMode, String name, String description, List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects, int damage, AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer> target, List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts) {
+        this.targetMode = targetMode;
+        this.name = name;
+        this.description = description;
+        this.effects = effects;
+        this.damage = damage;
+        this.target = target;
+        this.resourceCosts = resourceCosts;
+    }
+
+    // Nearly-full constructor. Should be most-often used. Target is not set as it is determined during run-time.
+    public Ability(CombatEngine.TargetMode targetMode, String name, String description, List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects, int damage, List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts) {
+        this.targetMode = targetMode;
+        this.name = name;
+        this.description = description;
+        this.effects = effects;
+        this.damage = damage;
+        this.resourceCosts = resourceCosts;
+    }
 
     public String getName() {
         return name;
@@ -63,6 +98,30 @@ public abstract class Ability {
 
     public void setTargetMode(CombatEngine.TargetMode targetMode) {
         this.targetMode = targetMode;
+    }
+
+    public AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer> getTarget() {
+        return target;
+    }
+
+    public void setTarget(AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer> target) {
+        this.target = target;
+    }
+
+    public List<AbstractMap.SimpleEntry<String, Integer>> getResourceCosts() {
+        return resourceCosts;
+    }
+
+    public void setResourceCosts(List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts) {
+        this.resourceCosts = resourceCosts;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
 
