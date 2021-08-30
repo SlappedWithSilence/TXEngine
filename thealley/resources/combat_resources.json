@@ -2,12 +2,12 @@
   "combatResources" : [
     {
       "resourceName" : "Health",
-      "value"        : 1,
+      "value"        : 100,
       "maxValue"     : 100
     },
     {
       "resourceName" : "Stamina",
-      "value"        : 2,
+      "value"        : 9,
       "maxValue"     : 100
     },
     {

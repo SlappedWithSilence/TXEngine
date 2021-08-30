@@ -83,7 +83,9 @@ public class SummaryAction extends Action {
 
         while (!done) {
             LogUtils.header("Summary");
-            printLevelBox();
+            LogUtils.subHeader(List.of(new String[]{"Name:     " + Manager.player.getName(),
+                                                    "Level:    " + Manager.player.getLevel(),
+                                                    "Currency: " + Manager.player.getMoney()}));
 
             ArrayList<String> bottomBarOptions = new ArrayList<>();
 

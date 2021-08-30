@@ -82,6 +82,7 @@ public class StoreAction extends Action {
 
 		while(true) {
 			System.out.println();
+
 			displayInventory();
 			int choice = LogUtils.getNumber(-1, inventoryIDs.size() - 1);
 
@@ -90,15 +91,15 @@ public class StoreAction extends Action {
 			} else {
 				int itemChoiceID = inventoryIDs.get(choice);
 				LogUtils.header("Purchase Item");
-				ColorConsole.d(CHOICE_PROMPT, false);
+
 				if (Manager.player.getMoney() >= costs.get(choice)) {
-					ColorConsole.d("Are you sure you want to purchase " + Manager.itemList.get(itemChoiceID).getName(), false);
+					ColorConsole.d("Are you sure you want to purchase " + Manager.itemList.get(itemChoiceID).getName() + "? ", false);
 
 					if (LogUtils.getAffirmative()) {
 						costs.set(choice, purchase(choice)); // Purchase the item, and update the cost of the item based on the store's purchase mode.
 					}
 				} else {
-					ColorConsole.d("You can't afford that item, sorry!", false);
+					ColorConsole.d("You can't afford that item, sorry!\n", false);
 				}
 
 			}
@@ -114,6 +115,7 @@ public class StoreAction extends Action {
 
 	private void displayInventory() {
 		LogUtils.header("Shop Inventory");
+		ColorConsole.d(CHOICE_PROMPT+"\n", false);
 		for (int i = 0; i < inventoryIDs.size(); i++ ) {
 			System.out.println("[" + i + "] " +
 					Manager.itemList.get(inventoryIDs.get(i)).getName()

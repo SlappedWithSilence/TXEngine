@@ -45,6 +45,14 @@
           "enabled"   : true,
           "properties" : [],
           "unlockedIndex" : -1
+        },
+        {
+          "className" : "AbilitySummaryAction",
+          "menuName"  : "Inspect Abilities",
+          "text"      : "",
+          "enabled"   : true,
+          "properties" : [],
+          "unlockedIndex" : -1
         }
       ]
     }

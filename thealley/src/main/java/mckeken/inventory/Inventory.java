@@ -22,7 +22,7 @@ public class Inventory {
 	private ArrayList<Integer>    itemQuantities;
 
 
-	// Default constructor. Initializes in the invetroy without any customization
+	// Default constructor. Initializes in the inventory without any customization
 	public Inventory() {
 		itemNames     = new ArrayList<>();
 		itemIDs       = new ArrayList<>();
@@ -35,6 +35,10 @@ public class Inventory {
 		itemNames     = new ArrayList<>();
 		itemIDs       = new ArrayList<>();
 		itemQuantities = new ArrayList<>();
+	}
+
+	public ArrayList<Integer> getItemIDs() {
+		return itemIDs;
 	}
 
 	// Add an item to the inventory. This function should only ever be called after ensuring there is space in the inventory.
