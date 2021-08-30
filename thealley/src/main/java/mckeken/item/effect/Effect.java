@@ -46,6 +46,10 @@ public abstract class Effect {
 		numProperties = props.length;
 	}
 
+	public String[] getProperties() {
+		return properties;
+	}
+
 	//*** Abstract Member Functions ***//
 
 	// Performs a function on the player or world

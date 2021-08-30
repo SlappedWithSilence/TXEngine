@@ -40,4 +40,7 @@ public class Usable extends Item {
 		effects = ef;
 	}
 
+	public ArrayList<Effect> getEffects() {
+		return effects;
+	}
 }

@@ -2,16 +2,13 @@ package mckeken.combat;
 
 import mckeken.combat.ability.Ability;
 import mckeken.combat.ability.AbilityManager;
-import mckeken.combat.combatEffect.CombatEffect;
+import mckeken.combat.ability.AbilityUtils;
 import mckeken.inventory.Inventory;
+import mckeken.inventory.InventoryUtils;
 import mckeken.item.Item;
-import mckeken.item.effect.Effect;
 import mckeken.main.Manager;
-import mckeken.room.action.actions.conversation.events.ItemEvent;
 
-import java.util.AbstractMap;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class CombatEntity implements CombatAgency {
 
@@ -66,7 +63,26 @@ public class CombatEntity implements CombatAgency {
         this.speed = speed;
     }
 
+    // This returns a Combat choice using a standard AI. It will optimize for damage and try to prevent itself from being killed.
+    @Override
+    public AbstractMap.SimpleEntry<Ability, Item> makeChoice(Optional<CombatEngine> engine) {
+        final double PRIMARY_RESOURCE_TOLERANCE = 0.25; // The lowest the entity's primary resource can be before it tries to restore it
 
+        // Check for primary resource value. If it is too low, attempt to heal.
+        if (this.getResourceManager().resourcePercentage(Manager.primaryResource) <= PRIMARY_RESOURCE_TOLERANCE) {
+            ArrayList<Integer> healingItems = InventoryUtils.getHealingItems(this.getInventory());
+
+            // If the entity possesses healing items in its inventory, use a random one
+            if (healingItems.size() > 0) return new AbstractMap.SimpleEntry<>(null, Manager.itemList.get(healingItems.get(new Random().nextInt(healingItems.size() - 1)))); // TODO: Verify that this won't go out of bounds
+
+            ArrayList<Ability> healingAbilities = AbilityUtils.getHealingAbilities(this.abilityManager);
+
+            if (healingAbilities.size() > 0) return new AbstractMap.SimpleEntry<>(healingAbilities.get(new Random().nextInt(healingAbilities.size() - 1)), null);
+        }
+
+
+        return new AbstractMap.SimpleEntry<>(null, null);
+    }
 
     public String getName() {
         return name;
@@ -124,11 +140,7 @@ public class CombatEntity implements CombatAgency {
         this.abilityManager = abilityManager;
     }
 
-    // This method will return a Combat choice using a standard AI. It will optimize for damage and try to prevent itself from being killed.
-    @Override
-    public AbstractMap.SimpleEntry<Ability, Item> makeChoice(Optional<CombatEngine> engine) {
-        return null;
-    }
+
 
 
 }

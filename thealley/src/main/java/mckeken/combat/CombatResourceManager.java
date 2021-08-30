@@ -31,6 +31,11 @@ public class CombatResourceManager {
 
     /* Member Methods */
 
+    // Returns the percentage of the resource's remaining value
+    public double resourcePercentage(String resourceName) {
+        return ((double) resources.get(resourceName)[1]) / ((double) resources.get(resourceName)[0]); //  Return resource.current/resource.max
+    }
+
     // Test if a resource is available at a given quantity. If not, return false.
     public boolean testResource(String resourceName, Integer resourceQuantity) {
 

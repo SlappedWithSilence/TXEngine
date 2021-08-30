@@ -21,6 +21,7 @@ public class Colors {
     public static final String PURPLE = "\033[0;35m";  // PURPLE
     public static final String CYAN = "\033[0;36m";    // CYAN
     public static final String WHITE = "\033[0;37m";   // WHITE
+    public static final String GRAY = "\033[0;90m";      // Gray
 
     // Bold
     public static final String BLACK_BOLD = "\033[1;30m";  // BLACK
@@ -93,6 +94,7 @@ public class Colors {
         colorMap.put("PURPLE", PURPLE);
         colorMap.put("CYAN", CYAN);
         colorMap.put("WHITE", WHITE);
+        colorMap.put("GRAY", GRAY);
 
         // Bold
         colorMap.put("BLACK_BOLD", BLACK_BOLD);

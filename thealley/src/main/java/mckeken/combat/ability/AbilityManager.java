@@ -12,7 +12,7 @@ import java.util.List;
 public class AbilityManager {
 
     ArrayList<Ability> abilityList;
-    CombatEntity owner; // TODO: Verify that this is a reference to the original object
+    CombatEntity owner;
 
     public AbilityManager() {
         abilityList = new ArrayList<Ability>();
@@ -36,9 +36,9 @@ public class AbilityManager {
             System.out.print("[" + i + "] ");
 
             if (enabled.get(i)) {
-                System.out.print(Colors.colored(abilityList.get(i).getName(), "Green")); // Print name in green if ability costs are satisfied
+                System.out.print(Colors.colored(abilityList.get(i).getName(), "WHITE")); // Print name in green if ability costs are satisfied
             } else {
-                System.out.print(Colors.colored(abilityList.get(i).getName(), "Red"));   // Print name in red if any ability costs aren't satisfied
+                System.out.print(Colors.colored(abilityList.get(i).getName(), "GRAY"));   // Print name in red if any ability costs aren't satisfied
             }
             System.out.println("\t"+resourceCostsAsString(abilityList.get(i))); // Print individual resource costs of the current item
 
