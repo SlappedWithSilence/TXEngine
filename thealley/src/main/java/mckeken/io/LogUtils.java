@@ -2,7 +2,9 @@ package mckeken.io;
 
 import mckeken.color.ColorConsole;
 import mckeken.color.Colors;
+import mckeken.main.Manager;
 
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import java.util.ArrayList;
@@ -23,11 +25,9 @@ public class LogUtils {
 
 			switch(userInput.toLowerCase()) {
 				case "y":
-					return true;
-				case "n":
-					return false;
 				case "yes":
 					return true;
+				case "n":
 				case "no":
 					return false;
 				default:
@@ -48,7 +48,7 @@ public class LogUtils {
 
 			try {
 				userInput = scan.nextInt(); // Get the inout
-				return userInput;			// If its succesful, return the digit
+				return userInput;			// If it's successful, return the digit
 
 			} catch (InputMismatchException e) { // Prompt the user to enter the correct input
 				System.out.println("Input not recognized. Please enter a digit between 1 and 99,999");
@@ -177,6 +177,15 @@ public class LogUtils {
 		header(title, HEADER_LENGTH, '-', Colors.WHITE);
 	}
 
+	public static void bar() {
+		bar('-', HEADER_LENGTH);
+	}
+
+	public static void bar (char sep, int length) {
+		String bar = ""+sep;
+		System.out.println(bar.repeat(length));
+	}
+
 	public static void header(String title, int length, char sep, String titleColor) {
 
 		if (title.length() >= length +2) length +=2;
@@ -187,22 +196,43 @@ public class LogUtils {
 		}
 
 		StringBuilder titleBar = new StringBuilder();
-		for (int i = 0; i< (length - title.length())/2 - HEADER_SPACES; i++) titleBar.append(sep);
-		for (int i = 0; i < HEADER_SPACES; i++) titleBar.append(' ');
+		titleBar.append(String.valueOf(sep).repeat(Math.max(0, (length - title.length()) / 2 - HEADER_SPACES)));
+		titleBar.append(" ".repeat(HEADER_SPACES));
 		titleBar.append(title);
-		for (int i = 0; i < HEADER_SPACES; i++) titleBar.append(' ');
-		for (int i = 0; i< (length - title.length())/2 - HEADER_SPACES; i++) titleBar.append(sep);
+		titleBar.append(" ".repeat(HEADER_SPACES));
+		titleBar.append(String.valueOf(sep).repeat(Math.max(0, (length - title.length()) / 2 - HEADER_SPACES)));
 
 		String headerBuilder = titleColor + headerBar +
 				'\n' +
 				titleBar +
 				'\n' +
 				headerBar +
-				'\n' +
 				Colors.RESET;
 
 		System.out.println(headerBuilder);
 
+	}
+
+	public static void subHeader(Collection<String> strings) {
+		subHeader(strings, HEADER_LENGTH);
+	}
+
+	public static void subHeader(Collection<String> strings, int length) {
+		StringBuilder line1 = new StringBuilder();
+
+		line1.append(" ").append("_".repeat(length-2));
+		line1.append("\n|").append(" ".repeat(length-2)).append("|"); // Long bar top
+
+		for (String s : strings) {
+			line1.append("\n| ");
+			line1.append(s);
+			line1.append(" ".repeat(length - s.length() - 3));
+			line1.append('|');
+		}
+
+		line1.append("\n|").append("_".repeat(LogUtils.HEADER_LENGTH-2)).append("|"); // Long bar bottom
+
+		System.out.println(line1);
 	}
 
 }

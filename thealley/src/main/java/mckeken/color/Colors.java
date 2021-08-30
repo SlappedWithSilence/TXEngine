@@ -108,6 +108,6 @@ public class Colors {
     }
 
     public static String colored(String text, String color) {
-        return colorMap.get(color.toUpperCase(Locale.ROOT) + text + RESET);
+        return getColorMap().get(color.toUpperCase(Locale.ROOT)) + text + RESET;
     }
 }
