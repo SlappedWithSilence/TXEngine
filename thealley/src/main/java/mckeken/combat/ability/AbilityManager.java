@@ -1,13 +1,11 @@
 package mckeken.combat.ability;
 
-import mckeken.color.ColorConsole;
 import mckeken.color.Colors;
 import mckeken.combat.CombatEntity;
 import mckeken.io.LogUtils;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.List;
 
 public class AbilityManager {
 
@@ -15,7 +13,7 @@ public class AbilityManager {
     CombatEntity owner;
 
     public AbilityManager() {
-        abilityList = new ArrayList<Ability>();
+        abilityList = new ArrayList<>();
     }
 
     public AbilityManager(ArrayList<Ability> abilityList) {
@@ -45,9 +43,13 @@ public class AbilityManager {
         }
     }
 
-    // Returns a list of booleans whos index corresponds to the Ability objects in abilityList
+    // Returns a list of booleans whose index corresponds to the Ability objects in abilityList
     private ArrayList<Boolean> getEnabledList(CombatEntity owner) {
         return new ArrayList<>(abilityList.stream().map( a -> owner.getResourceManager().testResource(a.getResourceCosts())).toList()); // Maps each ability to a boolean representing if its requirements can be met by the caster
+    }
+
+    public ArrayList<Ability> getSatisfiedAbilities() {
+        return new ArrayList<>(abilityList.stream().filter(a -> owner.getResourceManager().testResource(a.getResourceCosts())).toList());
     }
 
     // Returns a formatted string of colored resource costs
@@ -56,7 +58,7 @@ public class AbilityManager {
 
         for (AbstractMap.SimpleEntry<String, Integer> cost : a.getResourceCosts()) {
 
-            String color = ""; // The name of the color to set the cost to
+            String color; // The name of the color to set the cost to
 
             if (owner.getResourceManager().testResource(cost.getKey(), cost.getValue())) color = "Green";
             else color = "Red";

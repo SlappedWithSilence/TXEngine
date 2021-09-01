@@ -33,9 +33,9 @@
     </dependency>
 
     <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-core</artifactId>
-      <version>2.11.1</version>
+      <groupId>io.github.kostaskougios</groupId>
+      <artifactId>cloning</artifactId>
+      <version>1.10.3</version>
     </dependency>
 
   </dependencies>

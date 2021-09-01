@@ -1,21 +1,15 @@
 package mckeken.combat;
 
-import mckeken.color.ColorConsole;
 import mckeken.combat.ability.Ability;
-import mckeken.combat.combatEffect.combatEffects.AddPhaseEffect;
 import mckeken.combat.combatEffect.CombatEffect;
+import mckeken.combat.combatEffect.combatEffects.AddPhaseEffect;
 import mckeken.combat.combatEffect.combatEffects.DispelCombatEffect;
 import mckeken.combat.combatEffect.combatEffects.RemovePhaseEffect;
-import mckeken.io.LogUtils;
 import mckeken.item.Item;
 import mckeken.item.Usable;
-import mckeken.item.effect.Effect;
 import mckeken.main.Manager;
-import mckeken.room.action.actions.SummaryAction;
 
 import java.util.*;
-
-import static mckeken.io.LogUtils.*;
 
 public class CombatEngine {
 
@@ -79,13 +73,14 @@ public class CombatEngine {
     ArrayList<AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer>> TURN_ORDER;
 
     HashMap<CombatEngine.EntityType, ArrayList<CombatEntity>> entities; // A collection of CombatEntities sorted by friendly or hostile
-    HashMap<CombatEngine.EntityType, ArrayList<HashMap<CombatPhase, List<CombatEffect>>>> entityEffects; // A collection of sorted effects for all entities
 
     Iterator<AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer>> entityIterator;
 
     List<EndCondition> endConditions;
 
     EndCondition.gameState endState = null;
+
+    EntityType currentTurnType = null;
 
     /****************
      * Constructors *
@@ -94,7 +89,7 @@ public class CombatEngine {
     public CombatEngine() {
         TURN_ORDER = getTurnOrder();
         entities = new HashMap<>();
-        entityEffects = new HashMap<>();
+        //entityEffects = new HashMap<>();
         entityIterator = TURN_ORDER.iterator();
         primaryResourceName = Manager.player.getResourceManager().resources.firstKey();
         endConditions = new ArrayList<>();
@@ -103,21 +98,11 @@ public class CombatEngine {
 
     public CombatEngine(ArrayList<CombatEntity> friendlyEntities, ArrayList<CombatEntity> hostileEntities) {
         entities = new HashMap<>();
-        entityEffects = new HashMap<>();
 
         // Set up entities
         entities.put(EntityType.FRIENDLY, friendlyEntities);
         entities.put(EntityType.HOSTILE, hostileEntities);
 
-        // Set up phases
-        entityEffects.put(EntityType.FRIENDLY, new ArrayList<HashMap<CombatPhase, List<CombatEffect>>>());
-        entityEffects.put(EntityType.HOSTILE, new ArrayList<HashMap<CombatPhase, List<CombatEffect>>>());
-
-        HashMap<CombatPhase, List<CombatEffect>> modelMap = new HashMap<>(); //  Create a master hashmap from which all the entity hashmaps will be copied
-        for (CombatPhase phase : CombatPhase.values()) modelMap.put(phase, new ArrayList<>()); // Fill the model hashmap with an empty arraylist of effects for each phase
-
-        for (CombatEntity entity : entities.get(EntityType.FRIENDLY)) entityEffects.get(EntityType.FRIENDLY).add(new HashMap<>(modelMap)); // For each friendly entity, create a phase hashmap
-        for (CombatEntity entity : entities.get(EntityType.HOSTILE)) entityEffects.get(EntityType.HOSTILE).add(new HashMap<>(modelMap));   // For each hostile entity, create a phase hashmap
         primaryResourceName = Manager.player.getResourceManager().resources.firstKey();
 
         endConditions = new ArrayList<>();
@@ -126,21 +111,11 @@ public class CombatEngine {
 
     public CombatEngine(ArrayList<CombatEntity> friendlyEntities, ArrayList<CombatEntity> hostileEntities, String primaryResourceName) {
         entities = new HashMap<>();
-        entityEffects = new HashMap<>();
 
         // Set up entities
         entities.put(EntityType.FRIENDLY, friendlyEntities);
         entities.put(EntityType.HOSTILE, hostileEntities);
 
-        // Set up phases
-        entityEffects.put(EntityType.FRIENDLY, new ArrayList<HashMap<CombatPhase, List<CombatEffect>>>());
-        entityEffects.put(EntityType.HOSTILE, new ArrayList<HashMap<CombatPhase, List<CombatEffect>>>());
-
-        HashMap<CombatPhase, List<CombatEffect>> modelMap = new HashMap<>(); //  Create a master hashmap from which all the entity hashmaps will be copied
-        for (CombatPhase phase : CombatPhase.values()) modelMap.put(phase, new ArrayList<>()); // Fill the model hashmap with an empty arraylist of effects for each phase
-
-        for (CombatEntity entity : entities.get(EntityType.FRIENDLY)) entityEffects.get(EntityType.FRIENDLY).add(new HashMap<>(modelMap)); // For each friendly entity, create a phase hashmap
-        for (CombatEntity entity : entities.get(EntityType.HOSTILE)) entityEffects.get(EntityType.HOSTILE).add(new HashMap<>(modelMap));   // For each hostile entity, create a phase hashmap
         this.primaryResourceName = primaryResourceName;
 
         endConditions = new ArrayList<>();
@@ -149,21 +124,11 @@ public class CombatEngine {
 
     public CombatEngine(ArrayList<CombatEntity> friendlyEntities, ArrayList<CombatEntity> hostileEntities, String primaryResourceName, List<EndCondition> endConditions) {
         entities = new HashMap<>();
-        entityEffects = new HashMap<>();
 
         // Set up entities
         entities.put(EntityType.FRIENDLY, friendlyEntities);
         entities.put(EntityType.HOSTILE, hostileEntities);
 
-        // Set up phases
-        entityEffects.put(EntityType.FRIENDLY, new ArrayList<HashMap<CombatPhase, List<CombatEffect>>>());
-        entityEffects.put(EntityType.HOSTILE, new ArrayList<HashMap<CombatPhase, List<CombatEffect>>>());
-
-        HashMap<CombatPhase, List<CombatEffect>> modelMap = new HashMap<>(); //  Create a master hashmap from which all the entity hashmaps will be copied
-        for (CombatPhase phase : CombatPhase.values()) modelMap.put(phase, new ArrayList<>()); // Fill the model hashmap with an empty arraylist of effects for each phase
-
-        for (CombatEntity entity : entities.get(EntityType.FRIENDLY)) entityEffects.get(EntityType.FRIENDLY).add(new HashMap<>(modelMap)); // For each friendly entity, create a phase hashmap
-        for (CombatEntity entity : entities.get(EntityType.HOSTILE)) entityEffects.get(EntityType.HOSTILE).add(new HashMap<>(modelMap));   // For each hostile entity, create a phase hashmap
         this.primaryResourceName = primaryResourceName;
 
         this.endConditions = new ArrayList<>(endConditions);
@@ -191,19 +156,16 @@ public class CombatEngine {
     // - The player's death (loss)
     // - The death of all enemies (win)
     public EndCondition getDefaultEndCondition() {
-        return new EndCondition() {
-            @Override
-            public AbstractMap.SimpleEntry<Boolean, gameState> satisfied(CombatEngine engine) {
-                if (Manager.player.getResourceManager().getResourceQuantity(primaryResourceName) <= 0) {
-                    return new AbstractMap.SimpleEntry<Boolean, gameState>(true, gameState.LOSS);
-                }
-
-                if (entities.get(EntityType.HOSTILE).stream().allMatch(n -> n.resourceManager.getResourceQuantity(primaryResourceName) <= 0)) { // If all enemies are dead
-                    return new AbstractMap.SimpleEntry<Boolean, gameState>(true, gameState.WIN); // Return a win
-                }
-
-                return new AbstractMap.SimpleEntry<Boolean, gameState>(false, null);
+        return engine -> {
+            if (Manager.player.getResourceManager().getResourceQuantity(primaryResourceName) <= 0) {
+                return new AbstractMap.SimpleEntry<>(true, EndCondition.gameState.LOSS);
             }
+
+            if (entities.get(EntityType.HOSTILE).stream().allMatch(n -> n.resourceManager.getResourceQuantity(primaryResourceName) <= 0)) { // If all enemies are dead
+                return new AbstractMap.SimpleEntry<>(true, EndCondition.gameState.WIN); // Return a win
+            }
+
+            return new AbstractMap.SimpleEntry<>(false, null);
         };
     }
 
@@ -214,22 +176,22 @@ public class CombatEngine {
     // TODO: Rewrite this late-term-abortion of a function
     // TODO: Change to private
     public ArrayList<AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer>> getTurnOrder() {
-        ArrayList<AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer>> turnOrder = new ArrayList<AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer>>();
+        ArrayList<AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer>> turnOrder = new ArrayList<>();
 
         for (int i = 0; i < entities.get(EntityType.FRIENDLY).size(); i++) { // Iterate through the friendly entities (i=index in the list of friendly entities that we want to add to the turnOrder)
             if (turnOrder.isEmpty()) { // If the turn order is empty, just add the current entity
-                turnOrder.add(new AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer>(EntityType.FRIENDLY, i));
+                turnOrder.add(new AbstractMap.SimpleEntry<>(EntityType.FRIENDLY, i));
             } else { // If the turn order isn't empty, iterate until you find a slower entity, then insert directly in front of them
                 for (int j = 0; j <= turnOrder.size(); j++) { // Iterate through each entity already in the turn order (j = index in the turnOrder list)
                     if (j == turnOrder.size()) {
-                        turnOrder.add(new AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer>(EntityType.FRIENDLY, i)); // If the for loop has reached an end without finding any slower entitys, append to the end of the list
+                        turnOrder.add(new AbstractMap.SimpleEntry<>(EntityType.FRIENDLY, i)); // If the for loop has reached an end without finding any slower entities, append to the end of the list
                         break;
                     }
 
                     CombatEntity entityAlreadySorted = entities.get(turnOrder.get(j).getKey()).get(turnOrder.get(j).getValue());
 
                     if (entityAlreadySorted.speed < entities.get(EntityType.FRIENDLY).get(i).speed) { // If the entity currently being observed from the turnOrder list is slower than the current entity, insert the current entity at this index
-                        turnOrder.add(j, new AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer>(EntityType.FRIENDLY, i));
+                        turnOrder.add(j, new AbstractMap.SimpleEntry<>(EntityType.FRIENDLY, i));
                         break;
                     }
                 }
@@ -239,18 +201,18 @@ public class CombatEngine {
 
         for (int i = 0; i < entities.get(EntityType.HOSTILE).size(); i++) { // Iterate through the hostile entities (i=index in the list of hostile entities that we want to add to the turnOrder)
             if (turnOrder.isEmpty()) { // If the turn order is empty, just add the current entity
-                turnOrder.add(new AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer>(EntityType.HOSTILE, i));
+                turnOrder.add(new AbstractMap.SimpleEntry<>(EntityType.HOSTILE, i));
             } else { // If the turn order isn't empty, iterate until you find a slower entity, then insert directly in front of them
                 for (int j = 0; j <= turnOrder.size(); j++) { // Iterate through each entity already in the turn order (j = index in the turnOrder list)
                     if (j == turnOrder.size()) {
-                        turnOrder.add(new AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer>(EntityType.HOSTILE, i)); // If the for loop has reached an end without finding any slower entities, append to the end of the list
+                        turnOrder.add(new AbstractMap.SimpleEntry<>(EntityType.HOSTILE, i)); // If the for loop has reached an end without finding any slower entities, append to the end of the list
                         break;
                     }
 
                     CombatEntity entityAlreadySorted = entities.get(turnOrder.get(j).getKey()).get(turnOrder.get(j).getValue());
 
                     if (entityAlreadySorted.speed < entities.get(EntityType.HOSTILE).get(i).speed) { // If the entity currently being observed from the turnOrder list is slower than the current entity, insert the current entity at this index
-                        turnOrder.add(j, new AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer>(EntityType.HOSTILE, i));
+                        turnOrder.add(j, new AbstractMap.SimpleEntry<>(EntityType.HOSTILE, i));
                         break;
                     }
                 }
@@ -288,31 +250,64 @@ public class CombatEngine {
         }
 
     }
-    // Assign an effect to an entity.
-    public void assignEffect(CombatEffect effect, EntityType type,  int index, CombatPhase phase) {
-        entityEffects.get(type).get(index).get(phase).add(effect);
-    }
-
-    // Assign all effects and damage within an ability to a target CombatEntity
-    public void handleAbility(Ability ability, EntityType targetType, int targetIndex) {
-        lookUpEntity(targetType, targetIndex).getResourceManager().decrementResource(Manager.primaryResource, ability.getDamage());
-        for (AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase> effect : ability.getEffects()) { // Iterate through the abilities and assign them to the targets phases
-            assignEffect(effect.getKey(), targetType, targetIndex, effect.getValue());
+    // Get the valid targets for an entity using an ability
+    public ArrayList<CombatEntity> getValidTargets(Ability ability) {
+        switch (ability.getTargetMode()) {
+            case SINGLE:
+                ArrayList<CombatEntity> arr = new ArrayList<>(entities.get(EntityType.FRIENDLY));
+                arr.addAll(entities.get(EntityType.HOSTILE));
+                return arr;
+            case SINGLE_ENEMY:
+                if (currentTurnType == EntityType.HOSTILE) return entities.get(EntityType.FRIENDLY);
+                if (currentTurnType == EntityType.FRIENDLY) return entities.get(EntityType.HOSTILE);
+                break;
+            case SINGLE_FRIENDLY:
+                if (currentTurnType == EntityType.HOSTILE)  return entities.get(EntityType.HOSTILE);
+                if (currentTurnType == EntityType.FRIENDLY) return entities.get(EntityType.FRIENDLY);
+                break;
+            default:
+                return null;
         }
+
+        return null;
     }
 
     // Take a turn for a single entity
-    private void turn(EntityType type, int index) {
+    private void turn(EntityType turnType, int index) {
+        currentTurnType = turnType; // Set the global variable so that other functions can tell what turn type it is
+
         ArrayList<CombatPhase> phaseOrder = PHASE_ORDER; // Establish initial phase order from master list
         for (int i = 0; i < phaseOrder.size(); i++) { // Iterate through the phase order by index. This is to allow for phases to be added or removed.
 
             // If the current phase is the ACTION phase, then run the get-action logic
             if (phaseOrder.get(i) == CombatPhase.ACTION) {
-                AbstractMap.SimpleEntry<Ability, Item> combatAction = lookUpEntity(type, index).makeChoice(Optional.of(this));
+                AbstractMap.SimpleEntry<Ability, Item> combatAction = lookUpEntity(turnType, index).makeChoice(this);
 
                 if (combatAction.getKey() != null) { // If the entity chose to use an ability
-                    AbstractMap.SimpleEntry<EntityType, Integer> target = combatAction.getKey().getTarget(); // get the target of the ability
-                    handleAbility(combatAction.getKey(), target.getKey(), target.getValue());                // apply the ability to the target
+
+                    switch (combatAction.getKey().getTargetMode()) { // Handle abilities based on the target type
+                        case ALL: // Apply the ability to all entities.
+                            for (CombatEntity e : entities.get(EntityType.FRIENDLY)) e.handleAbility(combatAction.getKey());
+                            for (CombatEntity e : entities.get(EntityType.HOSTILE))  e.handleAbility(combatAction.getKey());
+                            break;
+                        case SELF: // Apply the ability to the entity whose turn it is
+                            entities.get(turnType).get(index).handleAbility(combatAction.getKey());
+                            break;
+                        case SINGLE: // Apply the ability to the target
+                        case SINGLE_ENEMY: // Apply the ability to the target
+                        case SINGLE_FRIENDLY: // Apply the ability to the target
+                            entities.get(combatAction.getKey().getTarget().getKey()).get(combatAction.getKey().getTarget().getValue()).handleAbility(combatAction.getKey());
+                            break;
+                        case ALL_ENEMY: // Apply the ability to all enemies, relative to the current entity's type. A hostile entity (relative to the player) would apply this type of ability to all friendly entities (relative to the player)
+                            if (turnType == EntityType.FRIENDLY) for (CombatEntity e : entities.get(EntityType.HOSTILE))  e.handleAbility(combatAction.getKey());
+                            else                                 for (CombatEntity e : entities.get(EntityType.FRIENDLY)) e.handleAbility(combatAction.getKey());
+                            break;
+                        case ALL_FRIENDLY:
+                            if (turnType == EntityType.FRIENDLY) for (CombatEntity e : entities.get(EntityType.FRIENDLY)) e.handleAbility(combatAction.getKey());
+                            else                                 for (CombatEntity e : entities.get(EntityType.HOSTILE))  e.handleAbility(combatAction.getKey());
+                            break;
+                        default:
+                    }
                 }
 
                 if (combatAction.getValue() != null) {
@@ -323,41 +318,37 @@ public class CombatEngine {
             }
 
             // Perform phase effects and handle the special effect classes their own way.
-            for (CombatEffect combatEffect : entityEffects.get(type).get(index).get(phaseOrder.get(i))) {
+            for (CombatEffect combatEffect : lookUpEntity(turnType, index).getCombatEffects().get(phaseOrder.get(i))) {
                 switch (combatEffect.getClass().getSimpleName()) {
                     // TODO: Test
-                    case "RemovePhaseEffect": // Handles the removal of a phase. Only works if the phase hasn't already occurred.
+                    case "RemovePhaseEffect" -> { // Handles the removal of a phase. Only works if the phase hasn't already occurred.
 
                         CombatPhase phaseToSkip = ((RemovePhaseEffect) combatEffect).getPhase(); // Get the phase we need to skip
                         if (phaseOrder.indexOf(phaseToSkip) > i) { // Check if it hasn't happened yet
                             phaseOrder.remove(phaseToSkip); // If it hasn't happened yet, remove its first occurrence
                         }
-
-                        break;
+                    }
                     // TODO: Test
-                    case "AddPhaseEffect": // Handles the adding of a new phase to the current turn. Any phase may be added, and it is always added after the current phase
+                    case "AddPhaseEffect" -> { // Handles the adding of a new phase to the current turn. Any phase may be added, and it is always added after the current phase
 
                         CombatPhase phaseToAdd = ((AddPhaseEffect) combatEffect).getPhase(); // Get the phase we need to add
-                        if (i+1 >= phaseOrder.size()) { // Check if we are currently in the last phase
+                        if (i + 1 >= phaseOrder.size()) { // Check if we are currently in the last phase
                             phaseOrder.add(phaseToAdd); // Append to list
                         } else { // If we aren't in the last phase
-                            phaseOrder.add(i+1, phaseToAdd); // Insert new phase right after current phase
+                            phaseOrder.add(i + 1, phaseToAdd); // Insert new phase right after current phase
                         }
+                    }
 
-                        break;
-
-                        // TODO: Test
-                    case "DispelCombatEffect": // Specially handle a DispelCombatEffect
+                    // TODO: Test
+                    case "DispelCombatEffect" -> { // Specially handle a DispelCombatEffect
 
                         String className = ((DispelCombatEffect) combatEffect).getDispelInstanceOf(); // Get the name of the class of CombatEffect that we need to remove
-
                         for (CombatPhase phase : CombatPhase.values()) { // For each combat phase
-                            entityEffects.get(type).get(index).get(phase).removeIf(n -> n.getClass().getSimpleName().equals(className)); // If the entity who's turn it currently is has any instances of the afformentioned CombatEffect class, remove them.
+                            lookUpEntity(turnType, index).getCombatEffects().get(phase).removeIf(n -> n.getClass().getSimpleName().equals(className)); // If the entity whose turn it currently is has any instances of the aforementioned CombatEffect class, remove them.
                         }
-                        break;
-                    default: // If the effect is a standard effect, just execute it.
-                        combatEffect.perform(entities.get(type).get(index));
-
+                    }
+                    default -> // If the effect is a standard effect, just execute it.
+                            combatEffect.perform(entities.get(turnType).get(index));
                 }
 
                 if (combatEffect.getDuration() > 0) combatEffect.setDuration(combatEffect.getDuration() - 1); // Decrement the duration if the duration is greater than 0.
@@ -367,38 +358,10 @@ public class CombatEngine {
             if (endConditionReached() != null) { // If combat needs to end
                 endState = endConditionReached().getValue(); // set the global endstate value to true if it was a win, false it was a loss.
             }
-            cleanup(phaseOrder.get(i)); //  Cleanup any dead effects in the current phase
+            lookUpEntity(turnType, index).cleanupEffects();
         }
     }
 
-    // Removes any effects with a duration of zero from all phases
-    private void cleanup() {
-        for (HashMap<CombatPhase, List<CombatEffect>> entityEffectList : entityEffects.get(EntityType.FRIENDLY)) {
-            for (CombatPhase phase : CombatPhase.values()) {
-                for (int i = 0; i < entityEffectList.size(); i++) {
-                    if (entityEffectList.get(phase).get(i).getDuration() == 0) entityEffectList.get(phase).removeIf(n -> n.getDuration() == 0);
-                }
-            }
-        }
 
-        for (HashMap<CombatPhase, List<CombatEffect>> entityEffectList : entityEffects.get(EntityType.HOSTILE)) {
-            for (CombatPhase phase : CombatPhase.values()) {
-                for (int i = 0; i < entityEffectList.size(); i++) {
-                    if (entityEffectList.get(phase).get(i).getDuration() == 0) entityEffectList.get(phase).removeIf(n -> n.getDuration() == 0);
-                }
-            }
-        }
-    }
-
-    // Remove dead effects from a single phase
-    private void cleanup(CombatPhase phase) {
-        for (HashMap<CombatPhase, List<CombatEffect>> map : entityEffects.get(EntityType.FRIENDLY)) {
-            map.get(phase).removeIf(n -> n.getDuration() == 0);
-        }
-
-        for (HashMap<CombatPhase, List<CombatEffect>> map : entityEffects.get(EntityType.HOSTILE)) {
-            map.get(phase).removeIf(n -> n.getDuration() == 0);
-        }
-    }
 
 }

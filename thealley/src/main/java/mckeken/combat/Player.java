@@ -54,7 +54,7 @@ public class Player extends CombatEntity {
 
 	// Member functions
 	@Override
-	public AbstractMap.SimpleEntry<Ability, Item> makeChoice(Optional<CombatEngine> engine) {
+	public AbstractMap.SimpleEntry<Ability, Item> makeChoice(CombatEngine engine) {
 		AbstractMap.SimpleEntry<Ability, Item> choice = null;
 
 
