@@ -12,6 +12,10 @@ import java.util.*;
 
 public class CombatEntity implements CombatAgency {
 
+    /************************
+     *   Member Variables   *
+     ************************/
+
     String name;
     String openingDialog;
     String closingDialog;
@@ -21,6 +25,10 @@ public class CombatEntity implements CombatAgency {
     int speed; // Determines turn order
 
     HashMap<CombatEngine.CombatPhase, List<CombatEffect>> combatEffects;
+
+    /********************
+     *   Constructors   *
+     ********************/
 
     public CombatEntity() {
         name = "CombatEntity";
@@ -69,6 +77,10 @@ public class CombatEntity implements CombatAgency {
         combatEffects = getPhaseMap();
     }
 
+    /************************
+     *   Public Functions   *
+     ************************/
+
     // This returns a Combat choice using a standard AI. It will optimize for damage and try to prevent itself from being killed.
     @Override
     public AbstractMap.SimpleEntry<Ability, Item> makeChoice(CombatEngine engine) {
@@ -100,6 +112,17 @@ public class CombatEntity implements CombatAgency {
         }
     }
 
+    // Removes any effects with a duration of zero from all phases
+    public void cleanupEffects() {
+        for (CombatEngine.CombatPhase phase : CombatEngine.CombatPhase.values()) {
+            combatEffects.get(phase).removeIf(n -> n.getDuration() == 0);
+        }
+    }
+
+    /*************************
+     *    Helper Functions   *
+     *************************/
+
     // Returns an empty hashmap used for storing CombatEffects
     private  HashMap<CombatEngine.CombatPhase, List<CombatEffect>> getPhaseMap() {
         HashMap<CombatEngine.CombatPhase, List<CombatEffect>> modelMap = new HashMap<>(); //  Create a master hashmap from which all the entity hashmaps will be copied
@@ -108,12 +131,11 @@ public class CombatEntity implements CombatAgency {
         return modelMap;
     }
 
-    // Removes any effects with a duration of zero from all phases
-    public void cleanupEffects() {
-        for (CombatEngine.CombatPhase phase : CombatEngine.CombatPhase.values()) {
-            combatEffects.get(phase).removeIf(n -> n.getDuration() == 0);
-        }
-    }
+
+
+    /***************************
+     *   Getters and Setters   *
+     ***************************/
 
     public String getName() {
         return name;

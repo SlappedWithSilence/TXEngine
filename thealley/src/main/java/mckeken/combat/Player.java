@@ -2,10 +2,12 @@ package mckeken.combat;
 
 import mckeken.combat.ability.Ability;
 import mckeken.inventory.*;
+import mckeken.io.LogUtils;
 import mckeken.item.Item;
 import mckeken.main.Manager;
 
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class Player extends CombatEntity {
@@ -54,10 +56,16 @@ public class Player extends CombatEntity {
 
 	// Member functions
 	@Override
-	public AbstractMap.SimpleEntry<Ability, Item> makeChoice(CombatEngine engine) {
+	public AbstractMap.SimpleEntry<Ability, Item> makeChoice(CombatEngine engine) { //TODO: Write helper functions for UI
 		AbstractMap.SimpleEntry<Ability, Item> choice = null;
 
+		LogUtils.header("Combat - Make a Choice");
 
+		ArrayList<String> data = new ArrayList<>();
+		data.add("Lvl: " + Manager.player.level);
+		data.add(Manager.primaryResource + ": " + Manager.player.getResourceManager().getResourceQuantity(Manager.primaryResource));
+
+		LogUtils.subHeader(data);
 
 		return choice;
 	}

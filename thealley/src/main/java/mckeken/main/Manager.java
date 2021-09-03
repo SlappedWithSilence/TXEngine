@@ -43,7 +43,7 @@ public class Manager {
     public static HashMap<Integer, Conversation> conversationList;
     public static HashMap<String, Integer[]> playerResourceList;
     public static HashMap<String, Ability> abilityList;
-    public static String primaryResource;
+    public static String primaryResource = "Health";
 
     // The class that handles the main menu, then launches the game.
     public static void main( String[] args )
@@ -66,6 +66,8 @@ public class Manager {
         initDebug();
 
         // Start the main game loop
+        if (args.length > 0 && args[0].equals("-D")) return; //TODO: Remove debugging break
+
         RoomManager.roomLoop();
 
     }
@@ -98,9 +100,28 @@ public class Manager {
     }
 
     private static void initDebug() {
+        ArrayList<String> s1 = new ArrayList<>();
+        ArrayList<String> s2 = new ArrayList<>();
 
-        System.out.println(Colors.GREEN + "Green" + Colors.RESET);
-        System.out.println(Colors.colored("Red", "Red"));
+        s1.add("RED");
+        s1.add("GREEN");
+        s1.add("BLUE");
+        s2.add("YELLOW");
+        s2.add("ORANGE");
+        s2.add("BLACK");
+
+        System.out.println(LogUtils.verticalTab(s1));
+        System.out.println(LogUtils.parallelVerticalTab(s1, s2));
+
+        ArrayList<ArrayList<String>> arrs = new ArrayList<>();
+        arrs.add(s1);
+        arrs.add(s2);
+
+        ArrayList<ArrayList<String>> arrs2 = new ArrayList<>();
+        arrs2.add(s1);
+        arrs2.add(s2);
+
+        LogUtils.verticalTabList(arrs);
 
         player.getAbilityManager().getAbilityList().add(abilityList.get("Smack"));
         player.getAbilityManager().getAbilityList().add(abilityList.get("Blast"));

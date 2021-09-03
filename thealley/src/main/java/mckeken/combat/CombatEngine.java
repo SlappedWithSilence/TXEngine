@@ -103,7 +103,7 @@ public class CombatEngine {
         entities.put(EntityType.FRIENDLY, friendlyEntities);
         entities.put(EntityType.HOSTILE, hostileEntities);
 
-        primaryResourceName = Manager.player.getResourceManager().resources.firstKey();
+        primaryResourceName = Manager.primaryResource;
 
         endConditions = new ArrayList<>();
         endConditions.add(getDefaultEndCondition());
@@ -140,12 +140,16 @@ public class CombatEngine {
 
 
     public boolean startCombat() {
+        TURN_ORDER = getTurnOrder();
 
         while (endState == null) {
             turnCycle();
         }
 
-        return true;
+        if (endState == EndCondition.gameState.WIN) return true;
+        else if (endState == EndCondition.gameState.LOSS) return false;
+
+        return false;
     }
 
     /*********************
@@ -296,7 +300,7 @@ public class CombatEngine {
                         case SINGLE: // Apply the ability to the target
                         case SINGLE_ENEMY: // Apply the ability to the target
                         case SINGLE_FRIENDLY: // Apply the ability to the target
-                            entities.get(combatAction.getKey().getTarget().getKey()).get(combatAction.getKey().getTarget().getValue()).handleAbility(combatAction.getKey());
+                            combatAction.getKey().getTarget().handleAbility(combatAction.getKey());
                             break;
                         case ALL_ENEMY: // Apply the ability to all enemies, relative to the current entity's type. A hostile entity (relative to the player) would apply this type of ability to all friendly entities (relative to the player)
                             if (turnType == EntityType.FRIENDLY) for (CombatEntity e : entities.get(EntityType.HOSTILE))  e.handleAbility(combatAction.getKey());

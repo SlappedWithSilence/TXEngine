@@ -34,8 +34,7 @@ public class Ability {
     List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts;
     int damage;
 
-
-    AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer> target;
+    CombatEntity target;
 
     public Ability() {
         targetMode = CombatEngine.TargetMode.SINGLE;
@@ -43,12 +42,12 @@ public class Ability {
         description = "Generic Ability";
         effects = new ArrayList<>();
         damage = 0;
-        target = new AbstractMap.SimpleEntry<>(CombatEngine.EntityType.FRIENDLY, 0);
+        target = null;
         List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts = new ArrayList<>();
     }
 
     // Full constructor. Shouldn't often be used, as targets are not determined at instantiation.
-    public Ability(CombatEngine.TargetMode targetMode, String name, String description, List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects, int damage, AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer> target, List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts) {
+    public Ability(CombatEngine.TargetMode targetMode, String name, String description, List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects, int damage, CombatEntity target, List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts) {
         this.targetMode = targetMode;
         this.name = name;
         this.description = description;
@@ -100,11 +99,11 @@ public class Ability {
         this.targetMode = targetMode;
     }
 
-    public AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer> getTarget() {
+    public CombatEntity getTarget() {
         return target;
     }
 
-    public void setTarget(AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer> target) {
+    public void setTarget(CombatEntity target) {
         this.target = target;
     }
 

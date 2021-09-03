@@ -1,6 +1,7 @@
 package mckeken.combat;
 
 import mckeken.io.LogUtils;
+import mckeken.main.Manager;
 
 import java.util.AbstractMap;
 import java.util.HashMap;
@@ -26,7 +27,12 @@ public class CombatResourceManager {
     }
 
     public CombatResourceManager() {
-        resources = new TreeMap<>();
+        if (Manager.playerResourceList != null) {
+            resources = new TreeMap<>(Manager.playerResourceList);
+        } else {
+            resources = new TreeMap<>();
+        }
+
     }
 
     /* Member Methods */

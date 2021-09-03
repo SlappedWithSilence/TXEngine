@@ -9,32 +9,41 @@ public class CombatEntityTest {
     @Test
     public void getName() {
         assert(new CombatEntity().getName() != null);
+        assert(new CombatEntity("Name", "", "", 1).getName().equals("Name"));
     }
 
     @Test
     public void setName() {
-
+        CombatEntity ce = new CombatEntity();
+        ce.setName("Who");
+        assert ce.getName().equals("Who");
     }
 
     @Test
     public void getOpeningDialog() {
         assert(new CombatEntity().getOpeningDialog() != null);
+        assert(new CombatEntity("Name", "This", "", 1).getOpeningDialog().equals("This"));
 
     }
 
     @Test
-    public void setOpeningDialog() {
-
+    public void setAndGetOpeningDialog() {
+        String d = "Some Dialog";
+        CombatEntity ce = new CombatEntity();
+        ce.setOpeningDialog(d);
+        assert ce.getOpeningDialog().equals(d);
     }
 
     @Test
-    public void getClosingDialog() {
-        assert(new CombatEntity().getClosingDialog() != null);
-    }
+    public void setAndGetClosingDialog() {
+        String d = "Some other dialog";
+        CombatEntity ce = new CombatEntity();
 
-    @Test
-    public void setClosingDialog() {
+        assert ce.getClosingDialog() != null;
 
+        ce.setClosingDialog(d);
+
+        assert ce.getClosingDialog().equals(d);
     }
 
     @Test
