@@ -131,6 +131,31 @@ public class CombatEntity implements CombatAgency {
         return modelMap;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        String nameText = name;
+        String pResourceText = Manager.primaryResource + ": [" + getResourceManager().getResources().get(Manager.primaryResource)[1]
+                                                        + "/"
+                                                        + getResourceManager().getResources().get(Manager.primaryResource)[1]
+                                                        + "]";
+        sb.append(nameText).append("\n");
+        sb.append(pResourceText);
+
+        return sb.toString();
+    }
+
+    public List<String> getData() {
+        String nameText = name;
+        String pResourceText = Manager.primaryResource + ": [" + getResourceManager().getResources().get(Manager.primaryResource)[1]
+                + "/"
+                + getResourceManager().getResources().get(Manager.primaryResource)[1]
+                + "]";
+
+        return List.of(new String[]{nameText, pResourceText});
+    }
+
 
 
     /***************************

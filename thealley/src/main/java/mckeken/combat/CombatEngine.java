@@ -152,6 +152,10 @@ public class CombatEngine {
         return false;
     }
 
+    public final ArrayList<CombatEntity> getEntities(EntityType type) {
+        return entities.get(type);
+    }
+
     /*********************
      * Private Functions *
      *********************/
@@ -159,7 +163,7 @@ public class CombatEngine {
     // Returns a default EndCondition that checks for two things:
     // - The player's death (loss)
     // - The death of all enemies (win)
-    public EndCondition getDefaultEndCondition() {
+    private EndCondition getDefaultEndCondition() {
         return engine -> {
             if (Manager.player.getResourceManager().getResourceQuantity(primaryResourceName) <= 0) {
                 return new AbstractMap.SimpleEntry<>(true, EndCondition.gameState.LOSS);

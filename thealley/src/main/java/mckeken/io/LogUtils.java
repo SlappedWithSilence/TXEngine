@@ -2,12 +2,8 @@ package mckeken.io;
 
 import mckeken.color.ColorConsole;
 import mckeken.color.Colors;
-import mckeken.main.Manager;
 
-import java.util.Collection;
-import java.util.Scanner;
-import java.util.InputMismatchException;
-import java.util.ArrayList;
+import java.util.*;
 
 // A class of static functions designed to stream-line getting typical forms of user input. 
 public class LogUtils {
@@ -170,7 +166,7 @@ public class LogUtils {
 	}
 
 
-	public static String parallelVerticalTab(ArrayList<String> left, ArrayList<String> right) {
+	public static String parallelVerticalTab(List<String> left, List<String> right) {
 		StringBuilder sb = new StringBuilder();
 
 		String topBar = "-".repeat(HEADER_LENGTH);
@@ -209,13 +205,13 @@ public class LogUtils {
 		return sb.toString();
 	}
 
-	public static void verticalTabList(ArrayList<ArrayList<String>> strings) {
-		for (ArrayList<String> arr : strings) {
+	public static void verticalTabList(List<List<String>> strings) {
+		for (List<String> arr : strings) {
 			System.out.println(verticalTab(arr));
 		}
 	}
 
-	public static void parallelVerticalTabList(ArrayList<ArrayList<String>> left, ArrayList<ArrayList<String>> right, int length) {
+	public static void parallelVerticalTabList(List<List<String>> left, List<List<String>> right, int length) {
 		int mode = 0;
 
 		if (left.size() == right.size()) mode = 0; // The tab lengths are the same
@@ -228,6 +224,15 @@ public class LogUtils {
 		if (mode == 2) { // Normalize the tab sizes by inserting empty lines into the left tab
 			for (int i = 0; i < right.size() - left.size(); i++) right.add(new ArrayList<String>());
 		}
+
+		for (int i = 0; i < right.size(); i++) {
+			System.out.println(parallelVerticalTab(left.get(i), right.get(i)));
+		}
+	}
+
+	public static void clearScreen() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
 	}
 
 	public static void numberedBar(String[] list, int length, char sep) {
@@ -247,6 +252,10 @@ public class LogUtils {
 		bar = new StringBuilder(spacer.toString() + bar + spacer);
 
 		System.out.println(bar);
+	}
+
+	public static void parallelVerticalTabList(List<List<String>> left, List<List<String>> right) {
+		parallelVerticalTabList(left, right, HEADER_LENGTH);
 	}
 
 	public static void numberedBar(ArrayList<String> list, int length, char sep) {

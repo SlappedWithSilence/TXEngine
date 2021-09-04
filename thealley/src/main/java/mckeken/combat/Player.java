@@ -8,6 +8,7 @@ import mckeken.main.Manager;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class Player extends CombatEntity {
@@ -65,9 +66,59 @@ public class Player extends CombatEntity {
 		data.add("Lvl: " + Manager.player.level);
 		data.add(Manager.primaryResource + ": " + Manager.player.getResourceManager().getResourceQuantity(Manager.primaryResource));
 
+		String[] options = {"Use an Ability", "Use an Item", "Inspect an Entity"};
+
 		LogUtils.subHeader(data);
 
-		return choice;
+		List<List<String>> friendlyData = engine.getEntities(CombatEngine.EntityType.FRIENDLY).stream().map(CombatEntity::getData).toList();
+		List<List<String>> hostileData = engine.getEntities(CombatEngine.EntityType.HOSTILE).stream().map(CombatEntity::getData).toList();
+
+		LogUtils.parallelVerticalTabList(friendlyData, hostileData);
+
+		while (true) {
+			System.out.println("What would you like to do?");
+			LogUtils.numberedList(options);
+			int userChoice = LogUtils.getNumber(0, options.length);
+
+			switch(userChoice) {
+				case 0:
+					LogUtils.header("Choose an Ability");
+					System.out.println("What ability do you want to use? (-1 to exit)");
+					abilityManager.printAbilities();
+					int abilityChoice = LogUtils.getNumber(-1, abilityManager.getAbilityQuantity()-1);
+
+					if (abilityChoice > -1) {
+						Ability ab = abilityManager.getAbilityList().get(abilityChoice);
+						ab.setTarget(chooseTarget(engine.getValidTargets(ab)));
+						return new AbstractMap.SimpleEntry<>(ab, null);
+					}
+					break;
+				case 1:
+					LogUtils.header("Choose an Item");
+					System.out.println("What item would you like to use? (-1 to exit)");
+
+					inventory.display();
+					int itemChoice = LogUtils.getNumber(-1, inventory.getUsage());
+
+					if (itemChoice > -1) {
+						return new AbstractMap.SimpleEntry<>(null, Manager.itemList.get(itemChoice));
+					}
+
+					break;
+				case 2:
+					break;
+				default:
+			}
+		}
+
+	}
+
+	private static CombatEntity chooseTarget(ArrayList<CombatEntity> entityArrayList) {
+		System.out.println("What is your target?");
+
+		LogUtils.verticalTabList(entityArrayList.stream().map(CombatEntity::getData).toList());
+
+		return entityArrayList.get(LogUtils.getNumber(0,entityArrayList.size()-1));
 	}
 
 	public static boolean isPlayer(CombatEntity entity) {

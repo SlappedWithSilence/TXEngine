@@ -22,44 +22,6 @@ public class CombatEngineTest {
     }
 
     @Test
-    public void getDefaultEndConditionWin() {
-        ArrayList<CombatEntity> friendlies = new ArrayList<>();
-        ArrayList<CombatEntity> enemies = new ArrayList<>();
-
-        friendlies.add(new CombatEntity("F1", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 1));
-        friendlies.add(new CombatEntity("F2", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 1));
-
-        enemies.add(new CombatEntity("E1", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 1));
-        enemies.add(new CombatEntity("E2", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 1));
-
-        for (CombatEntity ce : enemies) ce.getResourceManager().setResource(Manager.primaryResource, 0);
-
-        CombatEngine engine = new CombatEngine(friendlies, enemies);
-        engine.addEndCondition(engine.getDefaultEndCondition());
-
-        assert engine.startCombat();
-    }
-
-    @Test
-    public void getDefaultEndConditionLoss() {
-        ArrayList<CombatEntity> friendlies = new ArrayList<>();
-        ArrayList<CombatEntity> enemies = new ArrayList<>();
-
-        friendlies.add(new CombatEntity("F1", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 1));
-        friendlies.add(new CombatEntity("F2", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 1));
-
-        enemies.add(new CombatEntity("E1", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 1));
-        enemies.add(new CombatEntity("E2", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 1));
-
-        for (CombatEntity ce : friendlies) ce.getResourceManager().setResource(Manager.primaryResource, 0);
-
-        CombatEngine engine = new CombatEngine(friendlies, enemies);
-        engine.addEndCondition(engine.getDefaultEndCondition());
-
-        assert !engine.startCombat();
-    }
-
-    @Test
     public void addEndCondition() {
     }
 

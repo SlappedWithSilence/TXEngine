@@ -3,7 +3,10 @@ package mckeken.main;
 import mckeken.color.*;
 import mckeken.combat.CombatEngine;
 import mckeken.combat.CombatEntity;
+import mckeken.combat.CombatResourceManager;
 import mckeken.combat.ability.Ability;
+import mckeken.combat.ability.AbilityManager;
+import mckeken.inventory.Inventory;
 import mckeken.io.*;
 import mckeken.combat.Player;
 
@@ -100,32 +103,27 @@ public class Manager {
     }
 
     private static void initDebug() {
-        ArrayList<String> s1 = new ArrayList<>();
-        ArrayList<String> s2 = new ArrayList<>();
+        CombatEntity c0 = new CombatEntity("CE 0", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 1);
+        CombatEntity c1 = new CombatEntity("CE 1", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 2);
+        CombatEntity c2 = new CombatEntity("CE 2", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 3);
+        CombatEntity c3 = new CombatEntity("CE 3", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 4);
 
-        s1.add("RED");
-        s1.add("GREEN");
-        s1.add("BLUE");
-        s2.add("YELLOW");
-        s2.add("ORANGE");
-        s2.add("BLACK");
+        List<CombatEntity> arrs = new ArrayList<>();
+        List<CombatEntity> arrs2 = new ArrayList<>();
 
-        System.out.println(LogUtils.verticalTab(s1));
-        System.out.println(LogUtils.parallelVerticalTab(s1, s2));
+        arrs.add(c0);
+        arrs.add(c1);
 
-        ArrayList<ArrayList<String>> arrs = new ArrayList<>();
-        arrs.add(s1);
-        arrs.add(s2);
+        arrs2.add(c2);
+        arrs2.add(c3);
 
-        ArrayList<ArrayList<String>> arrs2 = new ArrayList<>();
-        arrs2.add(s1);
-        arrs2.add(s2);
-
-        LogUtils.verticalTabList(arrs);
-
+        //parallelVerticalTabList(arrs.stream().map(CombatEntity::getData).toList(), arrs2.stream().map(CombatEntity::getData).toList());
         player.getAbilityManager().getAbilityList().add(abilityList.get("Smack"));
         player.getAbilityManager().getAbilityList().add(abilityList.get("Blast"));
         player.getAbilityManager().getAbilityList().add(abilityList.get("Inversion"));
+
+        CombatEngine ce = new CombatEngine(new ArrayList<>(arrs), new ArrayList<>(arrs2));
+        ce.startCombat();
     }
 
 }
