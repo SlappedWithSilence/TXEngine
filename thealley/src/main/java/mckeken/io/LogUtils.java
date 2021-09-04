@@ -212,6 +212,9 @@ public class LogUtils {
 	}
 
 	public static void parallelVerticalTabList(List<List<String>> left, List<List<String>> right, int length) {
+		List<List<String>> leftInternal = new ArrayList<>(left);
+		List<List<String>> rightInternal = new ArrayList<>(right);
+
 		int mode = 0;
 
 		if (left.size() == right.size()) mode = 0; // The tab lengths are the same
@@ -219,14 +222,14 @@ public class LogUtils {
 		if (left.size() < right.size())  mode = 2; // right tab is longer
 
 		if (mode == 1) { // Normalize the tab sizes by inserting empty lines into the right tab
-			for (int i = 0; i < left.size() - right.size(); i++) right.add(new ArrayList<String>());
+			for (int i = 0; i < left.size() - right.size(); i++) rightInternal.add(new ArrayList<String>());
 		}
 		if (mode == 2) { // Normalize the tab sizes by inserting empty lines into the left tab
-			for (int i = 0; i < right.size() - left.size(); i++) right.add(new ArrayList<String>());
+			for (int i = 0; i < right.size() - left.size(); i++) leftInternal.add(new ArrayList<String>());
 		}
 
 		for (int i = 0; i < right.size(); i++) {
-			System.out.println(parallelVerticalTab(left.get(i), right.get(i)));
+			System.out.println(parallelVerticalTab(leftInternal.get(i), rightInternal.get(i)));
 		}
 	}
 

@@ -1,5 +1,6 @@
 package mckeken.combat;
 
+import com.rits.cloning.Cloner;
 import mckeken.io.LogUtils;
 import mckeken.main.Manager;
 
@@ -28,7 +29,8 @@ public class CombatResourceManager {
 
     public CombatResourceManager() {
         if (Manager.playerResourceList != null) {
-            resources = new TreeMap<>(Manager.playerResourceList);
+            Cloner cloner = new Cloner();
+            resources = new TreeMap<>(cloner.deepClone(Manager.playerResourceList));
         } else {
             resources = new TreeMap<>();
         }
@@ -114,24 +116,13 @@ public class CombatResourceManager {
     }
 
     // Decrements the value of an existing resource down to at least zero.
-    public int decrementResource(String resourceName, int decrement) {
+    public void decrementResource(String resourceName, int decrement) {
         if (!resources.containsKey(resourceName)) {
             LogUtils.error("Resource " + resourceName + " does not exist!");
-            return -1;
+            return;
         }
 
-        Integer[] vals = resources.get(resourceName);
-
-        if (vals[0] - decrement < 0) {
-            int amount_removed = vals[0];
-            vals[1] = 0;
-            resources.put(resourceName, vals); // commit changes to resources
-            return amount_removed;
-        } else {
-            vals[1] = vals[1] - decrement;
-            resources.put(resourceName, vals); // commit changes to resources
-            return decrement;
-        }
+        resources.get(resourceName)[1] = Math.max(0, getResourceQuantity(resourceName) - 1);
     }
 
     // Simulates consuming exactly X of a resource. If there is not enough of the resource, none will be consumed and the function will return false.

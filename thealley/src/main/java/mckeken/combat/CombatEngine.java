@@ -5,6 +5,7 @@ import mckeken.combat.combatEffect.CombatEffect;
 import mckeken.combat.combatEffect.combatEffects.AddPhaseEffect;
 import mckeken.combat.combatEffect.combatEffects.DispelCombatEffect;
 import mckeken.combat.combatEffect.combatEffects.RemovePhaseEffect;
+import mckeken.io.LogUtils;
 import mckeken.item.Item;
 import mckeken.item.Usable;
 import mckeken.main.Manager;
@@ -140,11 +141,14 @@ public class CombatEngine {
 
 
     public boolean startCombat() {
+        entities.get(EntityType.FRIENDLY).add(Manager.player);
         TURN_ORDER = getTurnOrder();
 
+        LogUtils.error("Starting combat\n"); //TODO: Remove
         while (endState == null) {
             turnCycle();
         }
+
 
         if (endState == EndCondition.gameState.WIN) return true;
         else if (endState == EndCondition.gameState.LOSS) return false;
@@ -251,6 +255,9 @@ public class CombatEngine {
         entityIterator = TURN_ORDER.iterator();
         while (entityIterator.hasNext()) { // While someone hasn't taken their turn yet
             AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer> currentEntity = entityIterator.next(); // Get the next entity
+
+            LogUtils.error("Starting " + lookUpEntity(currentEntity.getKey(), currentEntity.getValue()).getName() + "'s turn!\n");
+
             if (lookUpEntity(currentEntity.getKey(), currentEntity.getValue()).resourceManager.getResourceQuantity(primaryResourceName) >= 0) { // If the entity isn't dead
                 turn(currentEntity.getKey(), currentEntity.getValue()); // Take the turn
             }
@@ -258,6 +265,7 @@ public class CombatEngine {
         }
 
     }
+
     // Get the valid targets for an entity using an ability
     public ArrayList<CombatEntity> getValidTargets(Ability ability) {
         switch (ability.getTargetMode()) {
@@ -292,6 +300,8 @@ public class CombatEngine {
                 AbstractMap.SimpleEntry<Ability, Item> combatAction = lookUpEntity(turnType, index).makeChoice(this);
 
                 if (combatAction.getKey() != null) { // If the entity chose to use an ability
+
+
 
                     switch (combatAction.getKey().getTargetMode()) { // Handle abilities based on the target type
                         case ALL: // Apply the ability to all entities.

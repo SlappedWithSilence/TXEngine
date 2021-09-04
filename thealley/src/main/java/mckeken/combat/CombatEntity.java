@@ -37,6 +37,8 @@ public class CombatEntity implements CombatAgency {
         inventory = new Inventory();
         resourceManager = new CombatResourceManager();
         abilityManager = new AbilityManager();
+        abilityManager.setOwner(this);
+
         speed = 0;
         combatEffects = getPhaseMap();
     }
@@ -47,6 +49,8 @@ public class CombatEntity implements CombatAgency {
         this.closingDialog = closingDialog;
         this.inventory = new Inventory(inventorySize);
         this.abilityManager = new AbilityManager();
+        abilityManager.setOwner(this);
+
         this.resourceManager = new CombatResourceManager();
         speed = 0;
         combatEffects = getPhaseMap();
@@ -59,6 +63,8 @@ public class CombatEntity implements CombatAgency {
 
         this.inventory = Objects.requireNonNullElseGet(inventory, () -> new Inventory(inventorySize));
         this.abilityManager = new AbilityManager();
+        abilityManager.setOwner(this);
+
         this.resourceManager = new CombatResourceManager();
         speed = 0;
         combatEffects = getPhaseMap();
@@ -72,6 +78,7 @@ public class CombatEntity implements CombatAgency {
 
         this.inventory = Objects.requireNonNullElseGet(inventory, () -> new Inventory(inventorySize));
         this.abilityManager = abilityManager;
+        abilityManager.setOwner(this);
         this.resourceManager = resourceManager;
         this.speed = speed;
         combatEffects = getPhaseMap();
@@ -150,7 +157,7 @@ public class CombatEntity implements CombatAgency {
         String nameText = name;
         String pResourceText = Manager.primaryResource + ": [" + getResourceManager().getResources().get(Manager.primaryResource)[1]
                 + "/"
-                + getResourceManager().getResources().get(Manager.primaryResource)[1]
+                + getResourceManager().getResources().get(Manager.primaryResource)[0]
                 + "]";
 
         return List.of(new String[]{nameText, pResourceText});

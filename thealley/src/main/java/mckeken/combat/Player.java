@@ -114,6 +114,8 @@ public class Player extends CombatEntity {
 	}
 
 	private static CombatEntity chooseTarget(ArrayList<CombatEntity> entityArrayList) {
+		if (entityArrayList == null) return null;
+
 		System.out.println("What is your target?");
 
 		LogUtils.verticalTabList(entityArrayList.stream().map(CombatEntity::getData).toList());

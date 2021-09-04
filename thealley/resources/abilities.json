@@ -1,7 +1,7 @@
 {
   "Abilities" : [
     {
-      "target_mode" : "SELF",
+      "target_mode" : "SINGLE",
       "name" : "Inversion",
       "description" : "Converts the user's life force into raw energy, damaging the target.",
       "damage" : 90,
