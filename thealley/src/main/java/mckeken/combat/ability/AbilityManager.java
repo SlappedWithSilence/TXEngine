@@ -49,7 +49,11 @@ public class AbilityManager {
     }
 
     public ArrayList<Ability> getSatisfiedAbilities() {
-        return new ArrayList<>(abilityList.stream().filter(a -> owner.getResourceManager().testResource(a.getResourceCosts())).toList());
+        return new ArrayList<>(abilityList.stream().filter(this::isSatisfied).toList());
+    }
+
+    public boolean isSatisfied(Ability ability) {
+        return ability.getResourceCosts().stream().allMatch(pair -> owner.getResourceManager().testResource(pair.getKey(), pair.getValue()));
     }
 
     // Returns a formatted string of colored resource costs

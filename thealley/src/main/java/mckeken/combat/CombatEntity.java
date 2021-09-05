@@ -109,9 +109,13 @@ public class CombatEntity implements CombatAgency {
         return new AbstractMap.SimpleEntry<>(null, null);
     }
 
+    public boolean isDead() {
+        return resourceManager.getResourceQuantity(Manager.primaryResource) <= 0;
+    }
+
     // Add all the effects in a given ability to the entity's effects
     public void handleAbility(Ability ability) {
-        getResourceManager().decrementResource(Manager.primaryResource, ability.getDamage()); // Damage this entity's primary resource by the ability's quantity
+        resourceManager.decrementResource(Manager.primaryResource, ability.getDamage()); // Damage this entity's primary resource by the ability's quantity
 
         Cloner cloner = new Cloner();
         for (AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase> ce : ability.getEffects()) { // Iterate through each effect in the ability

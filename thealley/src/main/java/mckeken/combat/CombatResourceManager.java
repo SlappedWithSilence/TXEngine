@@ -122,7 +122,7 @@ public class CombatResourceManager {
             return;
         }
 
-        resources.get(resourceName)[1] = Math.max(0, getResourceQuantity(resourceName) - 1);
+        resources.get(resourceName)[1] = Math.max(0, getResourceQuantity(resourceName) - decrement);
     }
 
     // Simulates consuming exactly X of a resource. If there is not enough of the resource, none will be consumed and the function will return false.

@@ -7,12 +7,12 @@
     },
     {
       "resourceName" : "Stamina",
-      "value"        : 9,
+      "value"        : 11,
       "maxValue"     : 100
     },
     {
       "resourceName" : "Mana",
-      "value"        : 3,
+      "value"        : 100,
       "maxValue"     : 100
     }
   ],

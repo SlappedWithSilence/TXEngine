@@ -9,20 +9,20 @@
       "resource_cost" : ["Health", 90, "Stamina", 10]
     },
     {
-      "target_mode" : "SINGLE",
+      "target_mode" : "SINGLE_ENEMY",
       "name" : "Smack",
       "description" : "The target 'finna catch these hands'",
-      "damage" : 99,
+      "damage" : 100,
       "effects" : [],
       "resource_cost" : ["Stamina", 1]
     },
     {
-      "target_mode" : "ALL",
+      "target_mode" : "ALL_ENEMY",
       "name" : "Blast",
       "description" : "EXPLOOOOOOSION",
-      "damage" : 9999,
+      "damage" : 100,
       "effects" : [],
-      "resource_cost" : ["Mana", 1000]
+      "resource_cost" : ["Mana", 50]
     }
   ]
 }

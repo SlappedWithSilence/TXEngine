@@ -21,6 +21,9 @@ public class Player extends CombatEntity {
 	private final String DEFAULT_PLAYER_NAME = "Player";
 
 	private int level;
+	private int levelXP; // TODO: Implement XP system
+	private int levelXPMax;
+	private int nextLevelXPModifier;
 
 	private int money;
 
@@ -87,11 +90,18 @@ public class Player extends CombatEntity {
 					abilityManager.printAbilities();
 					int abilityChoice = LogUtils.getNumber(-1, abilityManager.getAbilityQuantity()-1);
 
-					if (abilityChoice > -1) {
+					if (abilityChoice > -1 && abilityManager.isSatisfied(abilityManager.getAbilityList().get(abilityChoice))) {
 						Ability ab = abilityManager.getAbilityList().get(abilityChoice);
-						ab.setTarget(chooseTarget(engine.getValidTargets(ab)));
+
+						if (ab.getTargetMode() == CombatEngine.TargetMode.SINGLE || ab.getTargetMode() == CombatEngine.TargetMode.SINGLE_ENEMY || ab.getTargetMode() == CombatEngine.TargetMode.SINGLE_FRIENDLY) {
+							ab.setTarget(chooseTarget(engine.getValidTargets(ab)));
+						}
+
 						return new AbstractMap.SimpleEntry<>(ab, null);
 					}
+
+					if (!abilityManager.isSatisfied(abilityManager.getAbilityList().get(abilityChoice))) System.out.println("You don't have the resources to use that ability!");
+
 					break;
 				case 1:
 					LogUtils.header("Choose an Item");
@@ -113,7 +123,7 @@ public class Player extends CombatEntity {
 
 	}
 
-	private static CombatEntity chooseTarget(ArrayList<CombatEntity> entityArrayList) {
+	private static CombatEntity chooseTarget(List<CombatEntity> entityArrayList) {
 		if (entityArrayList == null) return null;
 
 		System.out.println("What is your target?");

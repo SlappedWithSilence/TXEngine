@@ -250,6 +250,28 @@ public class CombatEngine {
         return entities.get(type).get(index);
     }
 
+    // Get the valid targets for an entity using an ability
+    public List<CombatEntity> getValidTargets(Ability ability) {
+        switch (ability.getTargetMode()) {
+            case SINGLE:
+                ArrayList<CombatEntity> arr = new ArrayList<>(entities.get(EntityType.FRIENDLY));
+                arr.addAll(entities.get(EntityType.HOSTILE).stream().filter(entity -> !entity.isDead()).toList());
+                return arr;
+            case SINGLE_ENEMY:
+                if (currentTurnType == EntityType.HOSTILE) return entities.get(EntityType.FRIENDLY).stream().filter(entity -> !entity.isDead()).toList();
+                if (currentTurnType == EntityType.FRIENDLY) return entities.get(EntityType.HOSTILE).stream().filter(entity -> !entity.isDead()).toList();
+                break;
+            case SINGLE_FRIENDLY:
+                if (currentTurnType == EntityType.HOSTILE)  return entities.get(EntityType.HOSTILE).stream().filter(entity -> !entity.isDead()).toList();
+                if (currentTurnType == EntityType.FRIENDLY) return entities.get(EntityType.FRIENDLY).stream().filter(entity -> !entity.isDead()).toList();
+                break;
+            default:
+                return null;
+        }
+
+        return null;
+    }
+
     // Perform one full turn cycle
     private void turnCycle() {
         entityIterator = TURN_ORDER.iterator();
@@ -264,28 +286,6 @@ public class CombatEngine {
 
         }
 
-    }
-
-    // Get the valid targets for an entity using an ability
-    public ArrayList<CombatEntity> getValidTargets(Ability ability) {
-        switch (ability.getTargetMode()) {
-            case SINGLE:
-                ArrayList<CombatEntity> arr = new ArrayList<>(entities.get(EntityType.FRIENDLY));
-                arr.addAll(entities.get(EntityType.HOSTILE));
-                return arr;
-            case SINGLE_ENEMY:
-                if (currentTurnType == EntityType.HOSTILE) return entities.get(EntityType.FRIENDLY);
-                if (currentTurnType == EntityType.FRIENDLY) return entities.get(EntityType.HOSTILE);
-                break;
-            case SINGLE_FRIENDLY:
-                if (currentTurnType == EntityType.HOSTILE)  return entities.get(EntityType.HOSTILE);
-                if (currentTurnType == EntityType.FRIENDLY) return entities.get(EntityType.FRIENDLY);
-                break;
-            default:
-                return null;
-        }
-
-        return null;
     }
 
     // Take a turn for a single entity
