@@ -87,19 +87,15 @@ public class LogUtils {
 	}
 
 	public static void numberedList(ArrayList<String> list) {
-		System.out.println("------------------------------------------------");
+		System.out.println("-".repeat(HEADER_LENGTH));
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println("[" + i + "] " + list.get(i));
 		}
-		System.out.println("------------------------------------------------");
+		System.out.println("-".repeat(HEADER_LENGTH));
 	}
 
 	public static void numberedList(String[] list) {
-		System.out.println("------------------------------------------------");
-		for (int i = 0; i < list.length; i++) {
-			System.out.println("[" + i + "] " + list[i]);
-		}
-		System.out.println("------------------------------------------------");
+		numberedList(new ArrayList<>(List.of(list)));
 	}
 	// Format: | [0]: Done | [1]: Next | [2]: Back |
 	/*public static void numberedBar(ArrayList<String> list) {
@@ -169,7 +165,8 @@ public class LogUtils {
 	public static String parallelVerticalTab(List<String> left, List<String> right) {
 		StringBuilder sb = new StringBuilder();
 
-		String topBar = "-".repeat(HEADER_LENGTH);
+		String topBar = "-".repeat(HEADER_LENGTH/2);
+		String bottomBar = "_".repeat((HEADER_LENGTH-2)/2);
 		final char SIDE_WALL = '|';
 
 		int mode = 0;
@@ -185,23 +182,23 @@ public class LogUtils {
 			for (int i = 0; i < right.size() - left.size(); i++) right.add("");
 		}
 
-		sb.append(topBar).append('\n');
+		sb.append(topBar + "   " + topBar).append('\n');
 
 		int leftSpaceOffset = 0;
 
 		for (int i = 0; i < right.size(); i++) {
-			sb.append(SIDE_WALL).append(centerString(right.get(i), (HEADER_LENGTH-2)/2)).append(SIDE_WALL);
+			sb.append(SIDE_WALL).append(centerString(left.get(i), (HEADER_LENGTH-2)/2)).append(SIDE_WALL); // Print the text for the r
 
 			if (HEADER_LENGTH % 2 != 0) {
 				sb.append(" ");
 				leftSpaceOffset = 2;
 			}
 
-			sb.append(SIDE_WALL).append(centerString(left.get(i), (HEADER_LENGTH-2)/2 - leftSpaceOffset)).append(SIDE_WALL);
+			sb.append(SIDE_WALL).append(centerString(right.get(i), (HEADER_LENGTH-2)/2)).append(SIDE_WALL);
 			sb.append('\n');
 		}
 
-		sb.append(SIDE_WALL).append("_".repeat(HEADER_LENGTH-2)).append(SIDE_WALL).append('\n');
+		sb.append(SIDE_WALL).append(bottomBar).append(SIDE_WALL).append(" ").append(SIDE_WALL).append(bottomBar).append(SIDE_WALL);
 		return sb.toString();
 	}
 
@@ -211,7 +208,7 @@ public class LogUtils {
 		}
 	}
 
-	public static void parallelVerticalTabList(List<List<String>> left, List<List<String>> right, int length) {
+	public static void parallelVerticalTabList(List<List<String>> left, List<List<String>> right, int length, String lefTitle, String rightTitle) {
 		List<List<String>> leftInternal = new ArrayList<>(left);
 		List<List<String>> rightInternal = new ArrayList<>(right);
 
@@ -226,6 +223,16 @@ public class LogUtils {
 		}
 		if (mode == 2) { // Normalize the tab sizes by inserting empty lines into the left tab
 			for (int i = 0; i < right.size() - left.size(); i++) leftInternal.add(new ArrayList<String>());
+		}
+
+		if (lefTitle != null && rightTitle != null && !rightTitle.equals("") && !lefTitle.equals("")) { // Print headers
+			StringBuilder sb = new StringBuilder();
+
+			String topBar = "-".repeat(HEADER_LENGTH/2);
+			sb.append(topBar).append("   ").append(topBar).append('\n');
+			sb.append('|').append(centerString(lefTitle, HEADER_LENGTH/2 - 2)).append("|").append("   ").append("|").append(centerString(rightTitle, HEADER_LENGTH/2 - 2)).append("|");
+
+			System.out.println(sb);
 		}
 
 		for (int i = 0; i < right.size(); i++) {
@@ -257,8 +264,12 @@ public class LogUtils {
 		System.out.println(bar);
 	}
 
+	public static void parallelVerticalTabList(List<List<String>> left, List<List<String>> right, String leftTitle, String rightTitle) {
+		parallelVerticalTabList(left, right, HEADER_LENGTH, leftTitle, rightTitle);
+	}
+
 	public static void parallelVerticalTabList(List<List<String>> left, List<List<String>> right) {
-		parallelVerticalTabList(left, right, HEADER_LENGTH);
+		parallelVerticalTabList(left, right, HEADER_LENGTH, null, null);
 	}
 
 	public static void numberedBar(ArrayList<String> list, int length, char sep) {

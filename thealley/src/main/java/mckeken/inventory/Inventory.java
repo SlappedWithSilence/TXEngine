@@ -156,13 +156,14 @@ public class Inventory {
 
 	// Prints the inventory in a vertical numbered list
 	public void display() {
-		System.out.println("-------------------------------------------------------");
-		System.out.println("------------          Inventory          --------------");
-		System.out.println("-------------------------------------------------------");
+		LogUtils.header("Inventory");
 		for (int i = 0; i < getUsage(); i++ ) {
 			System.out.println("[" + i + "] " + itemNames.get(i) + "\t" + Colors.CYAN_BOLD + itemQuantities.get(i) + Colors.RESET);
 		}
-		System.out.println("-------------------------------------------------------");
+
+		if(getUsage() == 0) System.out.println("Your inventory is empty");
+
+		System.out.println("-".repeat(LogUtils.HEADER_LENGTH));
 	}
 
 	// Returns an instance of the item class associated with the ID located at 'index' in the inventory

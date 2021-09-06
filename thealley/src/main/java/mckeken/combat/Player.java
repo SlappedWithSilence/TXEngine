@@ -60,7 +60,7 @@ public class Player extends CombatEntity {
 
 	// Member functions
 	@Override
-	public AbstractMap.SimpleEntry<Ability, Item> makeChoice(CombatEngine engine) { //TODO: Write helper functions for UI
+	public AbstractMap.SimpleEntry<Ability, Item> makeChoice(CombatEngine engine) {
 		AbstractMap.SimpleEntry<Ability, Item> choice = null;
 
 		LogUtils.header("Combat - Make a Choice");
@@ -76,7 +76,7 @@ public class Player extends CombatEntity {
 		List<List<String>> friendlyData = engine.getEntities(CombatEngine.EntityType.FRIENDLY).stream().map(CombatEntity::getData).toList();
 		List<List<String>> hostileData = engine.getEntities(CombatEngine.EntityType.HOSTILE).stream().map(CombatEntity::getData).toList();
 
-		LogUtils.parallelVerticalTabList(friendlyData, hostileData);
+		LogUtils.parallelVerticalTabList(friendlyData, hostileData, "Friendly", "Hostile");
 
 		while (true) {
 			System.out.println("What would you like to do?");
