@@ -1,6 +1,7 @@
 package mckeken.item.effect;
 
 import mckeken.color.ColorConsole;
+import mckeken.combat.CombatEntity;
 import mckeken.io.LogUtils;
 
 public abstract class Effect {
@@ -53,6 +54,6 @@ public abstract class Effect {
 	//*** Abstract Member Functions ***//
 
 	// Performs a function on the player or world
-	public abstract void perform();
+	public abstract void perform(CombatEntity user);
 
 }

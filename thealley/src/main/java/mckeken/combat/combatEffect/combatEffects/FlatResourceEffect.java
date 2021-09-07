@@ -27,11 +27,6 @@ public class FlatResourceEffect extends CombatEffect {
     }
 
     @Override
-    public void perform() {
-        Manager.player.getResourceManager().incrementResource(super.properties[0], Integer.parseInt(super.properties[1]));
-    }
-
-    @Override
     public void perform(CombatEntity entity) {
         entity.getResourceManager().incrementResource(super.properties[0], Integer.parseInt(super.properties[1]));
     }

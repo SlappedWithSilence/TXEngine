@@ -1,5 +1,6 @@
 package mckeken.item.effect.effects;
 
+import mckeken.combat.CombatEntity;
 import mckeken.item.effect.Effect;
 import mckeken.main.Manager;
 
@@ -18,7 +19,7 @@ public class FlatResourceEffect extends Effect {
     }
 
     @Override
-    public void perform() {
-        Manager.player.getResourceManager().incrementResource(super.properties[0], Integer.parseInt(super.properties[1]));
+    public void perform(CombatEntity combatEntity) {
+        combatEntity.getResourceManager().incrementResource(super.properties[0], Integer.parseInt(super.properties[1]));
     }
 }

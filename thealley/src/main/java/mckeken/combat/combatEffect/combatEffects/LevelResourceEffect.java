@@ -20,16 +20,9 @@ public class LevelResourceEffect extends CombatEffect {
     }
 
     @Override
-    public void perform() {
-        int newValue = Manager.player.getResourceManager().getResourceQuantity(super.properties[0]);
-        newValue += Manager.player.getLevel() * Integer.parseInt(super.properties[1]);
-        Manager.player.getResourceManager().setResource(super.properties[0], newValue);
-    }
-
-    @Override
     public void perform(CombatEntity entity) {
-        int newValue = Manager.player.getResourceManager().getResourceQuantity(super.properties[0]);
-        newValue += Manager.player.getLevel() * Integer.parseInt(super.properties[1]);
+        int newValue = entity.getResourceManager().getResourceQuantity(super.properties[0]);
+        newValue += entity.getLevel() * Integer.parseInt(super.properties[1]);
         entity.getResourceManager().setResource(super.properties[0], newValue);
     }
 }

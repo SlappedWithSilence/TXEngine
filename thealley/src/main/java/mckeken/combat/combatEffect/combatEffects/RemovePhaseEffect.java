@@ -16,14 +16,9 @@ public class RemovePhaseEffect extends CombatEffect {
         setDuration(1);
     }
 
-    @Override
-    public void perform() {
-
-    }
 
     @Override
     public void perform(CombatEntity entity) {
-        perform();
     }
 
     public CombatEngine.CombatPhase getPhase() {

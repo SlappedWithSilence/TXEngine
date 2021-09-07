@@ -1,5 +1,6 @@
 package mckeken.item.effect.effects;
 
+import mckeken.combat.CombatEntity;
 import mckeken.item.effect.Effect;
 import mckeken.main.Manager;
 
@@ -18,9 +19,9 @@ public class LevelResourceEffect extends Effect {
     }
 
     @Override
-    public void perform() {
-        int newValue = Manager.player.getResourceManager().getResourceQuantity(super.properties[0]);
-        newValue += Manager.player.getLevel() * Integer.parseInt(super.properties[1]);
-        Manager.player.getResourceManager().setResource(super.properties[0], newValue);
+    public void perform(CombatEntity combatEntity) {
+        int newValue = combatEntity.getResourceManager().getResourceQuantity(super.properties[0]);
+        newValue += combatEntity.getLevel() * Integer.parseInt(super.properties[1]);
+        combatEntity.getResourceManager().setResource(super.properties[0], newValue);
     }
 }

@@ -1,5 +1,6 @@
 package mckeken.item.effect.effects;
 
+import mckeken.combat.CombatEntity;
 import mckeken.item.effect.Effect;
 import mckeken.main.Manager;
 
@@ -20,10 +21,10 @@ public class ProportionalResourceEffect extends Effect {
     }
 
     @Override
-    public void perform() {
+    public void perform(CombatEntity combatEntity) {
         // Resource[resourceName] = Resources[resourceName][quantity] + Resources[resourceName][maxQuantity]
-        Manager.player.getResourceManager().setResource(super.properties[0], Manager.player.getResourceManager().getResourceQuantity(super.properties[0]) +
-                                                                                           (int) (Manager.player.getResourceManager().getResources().get(super.properties[0])[0] * Double.parseDouble(super.properties[1])));
+        combatEntity.getResourceManager().setResource(super.properties[0], combatEntity.getResourceManager().getResourceQuantity(super.properties[0]) +
+                                                                                           (int) (combatEntity.getResourceManager().getResources().get(super.properties[0])[0] * Double.parseDouble(super.properties[1])));
     }
 
 

@@ -1,5 +1,6 @@
 package mckeken.item;
 
+import mckeken.combat.CombatEntity;
 import mckeken.io.LogUtils;
 import mckeken.item.effect.*;
 import mckeken.color.ColorConsole;
@@ -20,11 +21,11 @@ public class Usable extends Item {
 	}
 
 
-	public void use() {
+	public void use(CombatEntity combatEntity) {
 		if (this.effects.size() < 1) {
 			LogUtils.error("Error! Cannot use an item with no effects! Please report this issue on Github at https://github.com/TopperMcKek/TheAlley/issues");
 		} else {
-			for (Effect e : this.effects) e.perform();
+			for (Effect e : this.effects) e.perform(combatEntity);
 		}
 	}
 

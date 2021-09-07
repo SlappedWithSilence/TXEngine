@@ -18,11 +18,6 @@ public class DispelCombatEffect extends CombatEffect {
     }
 
     @Override
-    public void perform() {
-        // Don't do anything.
-    }
-
-    @Override
     public void perform(CombatEntity entity) {
 
     }
