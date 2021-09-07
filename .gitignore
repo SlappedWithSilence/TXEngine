@@ -1,4 +1,9 @@
-# Compiled class file
+# Maven ignore
+**/target
+**/.idea/
+**/$*
+
+#Compiled class file
 *.class
 
 # Log file
