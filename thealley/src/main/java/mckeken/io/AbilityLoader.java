@@ -4,6 +4,7 @@ import mckeken.combat.CombatEngine;
 import mckeken.combat.ability.Ability;
 import mckeken.combat.ability.AbilityFactory;
 import mckeken.combat.combatEffect.CombatEffect;
+import mckeken.combat.combatEffect.CombatEffectFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -65,6 +66,7 @@ public class AbilityLoader {
             useText = ((String) rawAbility.get("use_text"));
             damage = ((Long) rawAbility.get("damage")).intValue();
             resourceCosts = parseResourceCosts((JSONArray) rawAbility.get("resource_cost"));
+            effects = parseCombatEffects((JSONArray) rawAbility.get("effects"));
 
             abilityHashMap.put(name, AbilityFactory.build(CombatEngine.TargetMode.valueOf(targetMode), name, description, useText, effects, damage, resourceCosts));
         }
@@ -73,10 +75,37 @@ public class AbilityLoader {
     }
 
     // TODO: Implement
-    private ArrayList<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> parseCombatEffects(JSONArray obj) {
+    private static ArrayList<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> parseCombatEffects(JSONArray obj) {
         ArrayList<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> arr = new ArrayList<>();
 
+        for (int i = 0; i < obj.size(); i++) {
+            JSONObject rawEffect = (JSONObject) obj.get(i);
+
+            String className = (String) rawEffect.get("class_name");
+            int duration = ((Long) rawEffect.get("duration")).intValue();
+            String triggerPhase = (String) rawEffect.get("trigger_phase");
+            String triggerMessage = (String) rawEffect.get("trigger_message");
+            String cleanupMessage = (String) rawEffect.get("cleanup_message");
+            String[] properties = getStringArray((JSONArray) rawEffect.get("properties"));
+
+            System.out.println("Properties[0] = " + properties[0]);
+
+            CombatEffect ce = CombatEffectFactory.build(className, duration, triggerMessage, cleanupMessage, properties);
+
+            arr.add(new AbstractMap.SimpleEntry<>(ce, CombatEngine.CombatPhase.valueOf(triggerPhase)));
+        }
+
         return arr;
+    }
+
+    private static String[] getStringArray(JSONArray stringArray) {
+        String[] array = new String[stringArray.size()];
+
+        for (int i = 0; i < stringArray.size(); i++) {
+            array[i] = (String) stringArray.get(i);
+        }
+
+        return array;
     }
 
     private static ArrayList<AbstractMap.SimpleEntry<String, Integer>> parseResourceCosts(JSONArray obj) {

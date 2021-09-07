@@ -59,7 +59,7 @@
           "menuName"  : "Fight Some Weirdos",
           "text"      : "",
           "enabled"   : true,
-          "properties" : ["{FRIENDLY}","-1","-2","{HOSTILE}", "-1","-1"],
+          "properties" : ["{FRIENDLY}","-1","-2","{HOSTILE}", "-1","-1", "0"],
           "unlockedIndex" : -1
         }
       ]

@@ -109,7 +109,9 @@ public class Manager {
         combatEntityList.put(-1, new CombatEntity("Grunt", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), 2, 1));
         combatEntityList.put(-2, new CombatEntity("Smokey the Bear", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), 5, 25));
 
-
+        player.getAbilityManager().learn("Smack");
+        player.getAbilityManager().learn("Love Tap");
+        player.getAbilityManager().learn("Spit");
     }
 
 }

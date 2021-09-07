@@ -37,6 +37,11 @@ public class CombatResourceManager {
 
     }
 
+    public CombatResourceManager(CombatResourceManager resourceManager) {
+        Cloner cloner = new Cloner();
+        resources = cloner.deepClone(resourceManager.resources);
+    }
+
     /* Member Methods */
 
     // Returns the percentage of the resource's remaining value

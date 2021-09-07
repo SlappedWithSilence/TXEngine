@@ -85,6 +85,7 @@ public class CombatEngine {
 
     final String TARGET_NAME_PLACEHOLDER = "{TARGET}";
     final String CASTER_NAME_PLACEHOLDER = "{CASTER}";
+    final String OWNER_NAME_PLACEHOLDER = "{OWNER}";
 
     /****************
      * Constructors *

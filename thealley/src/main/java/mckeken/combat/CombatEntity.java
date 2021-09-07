@@ -45,6 +45,20 @@ public class CombatEntity implements CombatAgency {
         level = 1;
     }
 
+    public CombatEntity(CombatEntity clone) {
+        name = clone.name;
+        openingDialog = clone.openingDialog;
+        closingDialog = clone.closingDialog;
+        inventory = new Inventory(clone.inventory);
+        resourceManager = new CombatResourceManager(clone.resourceManager);
+        abilityManager = new AbilityManager(clone.abilityManager);
+        abilityManager.setOwner(this);
+
+        speed = clone.speed;
+        combatEffects = getPhaseMap();
+        level = clone.level;
+    }
+
     public CombatEntity(String name, String openingDialog, String closingDialog, int inventorySize) {
         this.name = name;
         this.openingDialog = openingDialog;

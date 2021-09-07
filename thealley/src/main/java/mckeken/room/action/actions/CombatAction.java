@@ -7,7 +7,6 @@ import mckeken.main.Manager;
 import mckeken.room.action.Action;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class CombatAction extends Action {
     CombatEngine combatEngine;
@@ -34,7 +33,7 @@ public class CombatAction extends Action {
                 friendlies.add(cloner.deepClone(Manager.combatEntityList.get(Integer.parseInt(s))));
             }
             else if (loadType == CombatEngine.EntityType.HOSTILE) {
-                hostiles.add(cloner.deepClone(Manager.combatEntityList.get(Integer.parseInt(s))));
+                hostiles.add(new CombatEntity(Manager.combatEntityList.get(Integer.parseInt(s))));
             }
         }
 

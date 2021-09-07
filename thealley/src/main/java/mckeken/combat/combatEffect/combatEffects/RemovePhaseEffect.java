@@ -12,16 +12,17 @@ public class RemovePhaseEffect extends CombatEffect {
     CombatEngine.CombatPhase phase; // The phase to skip
 
     public RemovePhaseEffect() {
-        phase = CombatEngine.CombatPhase.valueOf(super.properties[0]);
         setDuration(1);
     }
 
 
     @Override
     public void perform(CombatEntity entity) {
+
     }
 
     public CombatEngine.CombatPhase getPhase() {
+        phase = CombatEngine.CombatPhase.valueOf(properties[0]);
         return phase;
     }
 

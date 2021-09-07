@@ -21,6 +21,11 @@ public class AbilityManager {
         this.abilityList = abilityList;
     }
 
+    public AbilityManager(AbilityManager abilityManager) {
+        abilityList = new ArrayList<>(abilityManager.abilityList);
+        owner = null;
+    }
+
     public void printAbilities() {
         ArrayList<Boolean> enabled = getEnabledList(owner); // get the list of enabled abilities
 

@@ -9,7 +9,8 @@ public abstract class CombatEffect extends Effect {
     // Member variables
     CombatEngine.EntityType sourceEntityType; // Whether the entity that spawned the effect was hostile or friendly to the player
     int duration; // Duration (in turns) of the effect. A value of -1 means that the effect lasts indefinitely.
-
+    String triggerMessage; // A message that gets printed when the ability triggers
+    String cleanupMessage; // A message that gets printed when the ability is cleaned up
 
     // Constructors
     public CombatEffect() {
@@ -46,5 +47,21 @@ public abstract class CombatEffect extends Effect {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public String getTriggerMessage() {
+        return triggerMessage;
+    }
+
+    public void setTriggerMessage(String triggerMessage) {
+        this.triggerMessage = triggerMessage;
+    }
+
+    public String getCleanupMessage() {
+        return cleanupMessage;
+    }
+
+    public void setCleanupMessage(String cleanupMessage) {
+        this.cleanupMessage = cleanupMessage;
     }
 }

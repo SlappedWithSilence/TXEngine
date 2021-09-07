@@ -21,11 +21,64 @@
     {
       "target_mode" : "ALL_ENEMY",
       "name" : "Blast",
-      "description" : "EXPLOOOOOOSION",
-      "use_text" : "{CASTER} annihaltes all enemies with explosion magic, devastating the enemies.",
+      "description" : "EXPLOOOOOOSION!",
+      "use_text" : "{CASTER} annihilates all enemies with explosion magic, devastating the enemies.",
       "damage" : 100,
       "effects" : [],
       "resource_cost" : ["Mana", 50]
+    },
+    {
+      "target_mode" : "SINGLE_ENEMY",
+      "name" : "Love Tap",
+      "description" : "I didn't hit you, that was a love tap.",
+      "use_text" : "{CASTER} hits {TARGET} hard enough to hurt, but not hard enough to justify retaliation.",
+      "damage" : 15,
+      "effects" : [
+        {
+          "class_name" : "FlatResourceEffect",
+          "duration"  : 3,
+          "trigger_phase" : "POST_ACTION",
+          "trigger_message" : "{OWNER} suffered from being love-tapped.",
+          "cleanup_message" : "{OWNER} is no longer suffering from being love-tapped.",
+          "properties": ["Health", "-5"]
+        },
+        {
+          "class_name" : "FlatResourceEffect",
+          "duration"  : 3,
+          "trigger_phase" : "POST_ACTION",
+          "trigger_message" : "",
+          "cleanup_message" : "",
+          "properties": ["Stamina", "-2"]
+        }
+      ],
+      "resource_cost" : ["Stamina", 3]
+    },
+    {
+      "target_mode" : "SINGLE_ENEMY",
+      "name" : "Kidnap",
+      "description" : "Kidnap the target, making them unable to act for a single turn",
+      "use_text" : "{CASTER} kidnaps {TARGET} (and {TARGET}'s cat), preventing them from acting.",
+      "damage" : 0,
+      "effects" : [
+        {
+          "class_name" : "RemovePhaseEffect",
+          "duration"  : 1,
+          "trigger_phase" : "POST_ACTION",
+          "trigger_message" : "{OWNER} has been kidnapped and cannot act.",
+          "cleanup_message" : "{OWNER} escaped from being kidnapped!",
+          "properties": ["ACTION"]
+        }
+      ],
+      "resource_cost" : ["Stamina", 55, "Health", 20]
+    },
+    {
+      "target_mode" : "SINGLE_ENEMY",
+      "name" : "Spit",
+      "description" : "Spits on the target, accomplishing nearly nothing",
+      "use_text" : "{CASTER} spits on {TARGET}.",
+      "damage" : 1,
+      "effects" : [],
+      "resource_cost" : []
     }
   ]
 }

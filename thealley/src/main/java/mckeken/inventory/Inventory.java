@@ -37,6 +37,14 @@ public class Inventory {
 		itemQuantities = new ArrayList<>();
 	}
 
+	public Inventory(Inventory inventory) {
+		capacity = inventory.capacity;
+		usage = inventory.usage;
+		itemNames = new ArrayList<>(inventory.itemNames);
+		itemIDs = new ArrayList<>(inventory.itemIDs);
+		itemQuantities = new ArrayList<>(inventory.itemQuantities);
+	}
+
 	public ArrayList<Integer> getItemIDs() {
 		return itemIDs;
 	}
