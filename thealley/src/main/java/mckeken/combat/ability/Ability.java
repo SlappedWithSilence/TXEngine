@@ -30,6 +30,7 @@ public class Ability {
     CombatEngine.TargetMode targetMode;
     String name;
     String description;
+    String useText; // The text that gets printed when the ability is used.
     List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects;
     List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts;
     int damage;
@@ -40,6 +41,7 @@ public class Ability {
         targetMode = CombatEngine.TargetMode.SINGLE;
         name = "Ability";
         description = "Generic Ability";
+        useText = " used a generic ability!";
         effects = new ArrayList<>();
         damage = 0;
         target = null;
@@ -47,10 +49,11 @@ public class Ability {
     }
 
     // Full constructor. Shouldn't often be used, as targets are not determined at instantiation.
-    public Ability(CombatEngine.TargetMode targetMode, String name, String description, List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects, int damage, CombatEntity target, List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts) {
+    public Ability(CombatEngine.TargetMode targetMode, String name, String description, String useText, List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects, int damage, CombatEntity target, List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts) {
         this.targetMode = targetMode;
         this.name = name;
         this.description = description;
+        this.useText = useText;
         this.effects = effects;
         this.damage = damage;
         this.target = target;
@@ -58,10 +61,11 @@ public class Ability {
     }
 
     // Nearly-full constructor. Should be most-often used. Target is not set as it is determined during run-time.
-    public Ability(CombatEngine.TargetMode targetMode, String name, String description, List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects, int damage, List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts) {
+    public Ability(CombatEngine.TargetMode targetMode, String name, String description, String useText, List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects, int damage, List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts) {
         this.targetMode = targetMode;
         this.name = name;
         this.description = description;
+        this.useText = useText;
         this.effects = effects;
         this.damage = damage;
         this.resourceCosts = resourceCosts;
@@ -121,6 +125,14 @@ public class Ability {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getUseText() {
+        return useText;
+    }
+
+    public void setUseText(String useText) {
+        this.useText = useText;
     }
 }
 

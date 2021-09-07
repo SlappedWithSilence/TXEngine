@@ -4,6 +4,7 @@
       "target_mode" : "SINGLE",
       "name" : "Inversion",
       "description" : "Converts the user's life force into raw energy, damaging the target.",
+      "use_text" : "{CASTER} drains away its life forcing, hurling it at {TARGET}",
       "damage" : 90,
       "effects" : [],
       "resource_cost" : ["Health", 90, "Stamina", 10]
@@ -12,6 +13,7 @@
       "target_mode" : "SINGLE_ENEMY",
       "name" : "Smack",
       "description" : "The target 'finna catch these hands'",
+      "use_text" : "{CASTER} smacks {TARGET} so hard it alters {TARGET}'s DNA.",
       "damage" : 100,
       "effects" : [],
       "resource_cost" : ["Stamina", 1]
@@ -20,6 +22,7 @@
       "target_mode" : "ALL_ENEMY",
       "name" : "Blast",
       "description" : "EXPLOOOOOOSION",
+      "use_text" : "{CASTER} annihaltes all enemies with explosion magic, devastating the enemies.",
       "damage" : 100,
       "effects" : [],
       "resource_cost" : ["Mana", 50]

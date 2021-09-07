@@ -34,8 +34,4 @@ public class AddPhaseEffect extends CombatEffect {
 
     }
 
-    @Override
-    public void perform() {
-
-    }
 }

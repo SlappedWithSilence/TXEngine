@@ -56,6 +56,11 @@ public class AbilityManager {
         return ability.getResourceCosts().stream().allMatch(pair -> owner.getResourceManager().testResource(pair.getKey(), pair.getValue()));
     }
 
+    // Pay for the resource costs in a given ability
+    public void payCosts(Ability ability) {
+        ability.getResourceCosts().forEach(pair -> owner.getResourceManager().decrementResource(pair.getKey(), pair.getValue()));
+    }
+
     // Returns a formatted string of colored resource costs
     public String resourceCostsAsString(Ability a) {
         StringBuilder s = new StringBuilder();

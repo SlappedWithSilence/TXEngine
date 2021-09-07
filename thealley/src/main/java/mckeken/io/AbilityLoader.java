@@ -52,6 +52,7 @@ public class AbilityLoader {
         String targetMode;
         String name;
         String description;
+        String useText;
         Integer damage;
         List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects = new ArrayList<>();
         ArrayList<AbstractMap.SimpleEntry<String, Integer>> resourceCosts = new ArrayList<>();
@@ -61,10 +62,11 @@ public class AbilityLoader {
             targetMode = ((String) rawAbility.get("target_mode")).toUpperCase(Locale.ROOT);
             name = (String) rawAbility.get("name");
             description = (String) rawAbility.get("description");
+            useText = ((String) rawAbility.get("use_text"));
             damage = ((Long) rawAbility.get("damage")).intValue();
             resourceCosts = parseResourceCosts((JSONArray) rawAbility.get("resource_cost"));
 
-            abilityHashMap.put(name, AbilityFactory.build(CombatEngine.TargetMode.valueOf(targetMode), name, description, effects, damage, resourceCosts));
+            abilityHashMap.put(name, AbilityFactory.build(CombatEngine.TargetMode.valueOf(targetMode), name, description, useText, effects, damage, resourceCosts));
         }
 
         return abilityHashMap;
