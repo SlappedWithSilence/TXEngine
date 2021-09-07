@@ -1,0 +1,28 @@
+{
+  "entities" : [
+    {
+      "id" : 0,
+      "name" : "Dennis, Golden God",
+      "opening_dialog" : "A starter car? This car is a finisher car! A transporter of gods! The Golden God!",
+      "closing_dialog" : "All right, all right, all right, all right~",
+      "inventory_ids"        : [1, 2, 3, 4, 5],
+      "inventory_quantities" : [1, 2, 3, 4, 5],
+      "resources" : ["Health", 100, 100, "Stamina", 100, 100, "Mana", 100, 100],
+      "abilities" : ["Love Tap", "Kidnap"],
+      "speed" : 5,
+      "level" : 9001
+    },
+    {
+      "id" : 1,
+      "name" : "Frank, Mastermind in the Coil",
+      "opening_dialog" : "Mwleh, Charlie, I gotta go to the playground, don't follow me!",
+      "closing_dialog" : "It's Saturday coming up, kids are gonna be here!",
+      "inventory_ids"        : [1, 2, 3, 4, 5],
+      "inventory_quantities" : [1, 2, 3, 4, 5],
+      "resources" : ["Health", 55, 55, "Stamina", 30, 30, "Mana", 200, 200],
+      "abilities" : ["Dupe", "Bomb-Threat"],
+      "speed" : 2,
+      "level" : 71
+    }
+  ]
+}
