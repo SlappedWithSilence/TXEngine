@@ -83,6 +83,9 @@ public class CombatEngine {
 
     EntityType currentTurnType = null;
 
+    final String TARGET_NAME_PLACEHOLDER = "{TARGET}";
+    final String CASTER_NAME_PLACEHOLDER = "{CASTER}";
+
     /****************
      * Constructors *
      ****************/
@@ -278,8 +281,6 @@ public class CombatEngine {
         while (entityIterator.hasNext()) { // While someone hasn't taken their turn yet
             AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer> currentEntity = entityIterator.next(); // Get the next entity
 
-            LogUtils.error("Starting " + lookUpEntity(currentEntity.getKey(), currentEntity.getValue()).getName() + "'s turn!\n");
-
             if (lookUpEntity(currentEntity.getKey(), currentEntity.getValue()).resourceManager.getResourceQuantity(primaryResourceName) >= 0) { // If the entity isn't dead
                 turn(currentEntity.getKey(), currentEntity.getValue()); // Take the turn
             }
@@ -301,36 +302,51 @@ public class CombatEngine {
 
                 if (combatAction.getKey() != null) { // If the entity chose to use an ability
 
-
+                    lookUpEntity(turnType, index).getAbilityManager().payCosts(combatAction.getKey()); // Make the user pay the costs for their ability
 
                     switch (combatAction.getKey().getTargetMode()) { // Handle abilities based on the target type
                         case ALL: // Apply the ability to all entities.
                             for (CombatEntity e : entities.get(EntityType.FRIENDLY)) e.handleAbility(combatAction.getKey());
                             for (CombatEntity e : entities.get(EntityType.HOSTILE))  e.handleAbility(combatAction.getKey());
+
+                            System.out.println(combatAction.getKey().getUseText().replace(CASTER_NAME_PLACEHOLDER, lookUpEntity(turnType, index).getName()));
                             break;
                         case SELF: // Apply the ability to the entity whose turn it is
                             entities.get(turnType).get(index).handleAbility(combatAction.getKey());
+
+                            System.out.println(combatAction.getKey().getUseText().replace(CASTER_NAME_PLACEHOLDER, lookUpEntity(turnType, index).getName()));
                             break;
                         case SINGLE: // Apply the ability to the target
                         case SINGLE_ENEMY: // Apply the ability to the target
                         case SINGLE_FRIENDLY: // Apply the ability to the target
                             combatAction.getKey().getTarget().handleAbility(combatAction.getKey());
+
+                            System.out.println(combatAction.getKey().getUseText().replace(CASTER_NAME_PLACEHOLDER, lookUpEntity(turnType, index).getName()).replace(TARGET_NAME_PLACEHOLDER, combatAction.getKey().getTarget().getName()));
                             break;
                         case ALL_ENEMY: // Apply the ability to all enemies, relative to the current entity's type. A hostile entity (relative to the player) would apply this type of ability to all friendly entities (relative to the player)
                             if (turnType == EntityType.FRIENDLY) for (CombatEntity e : entities.get(EntityType.HOSTILE))  e.handleAbility(combatAction.getKey());
                             else                                 for (CombatEntity e : entities.get(EntityType.FRIENDLY)) e.handleAbility(combatAction.getKey());
+
+                            System.out.println(combatAction.getKey().getUseText().replace(CASTER_NAME_PLACEHOLDER, lookUpEntity(turnType, index).getName()));
                             break;
                         case ALL_FRIENDLY:
                             if (turnType == EntityType.FRIENDLY) for (CombatEntity e : entities.get(EntityType.FRIENDLY)) e.handleAbility(combatAction.getKey());
                             else                                 for (CombatEntity e : entities.get(EntityType.HOSTILE))  e.handleAbility(combatAction.getKey());
+
+                            System.out.println(combatAction.getKey().getUseText().replace(CASTER_NAME_PLACEHOLDER, lookUpEntity(turnType, index).getName()));
                             break;
                         default:
                     }
+
                 }
 
-                if (combatAction.getValue() != null) {
-                    if (combatAction.getValue() instanceof Usable) ((Usable) combatAction.getValue()).use();
-                    else System.out.println("You tried to use " + combatAction.getValue().getName() + " but it did nothing.");
+                if (combatAction.getValue() != null) { // If the user wants to use an item, use it.
+                    if (combatAction.getValue() instanceof Usable) ((Usable) combatAction.getValue()).use(lookUpEntity(turnType, index));
+                    else System.out.println("You tried to use " + combatAction.getValue().getName() + " but it did nothing."); // If the entity selected an Item that can't be used, say so
+                }
+
+                if (combatAction.getKey() == null && combatAction.getValue() == null) { // If for some reason an entity can't choose anything, skip then.
+                    System.out.println(lookUpEntity(turnType, index).getName() + " was unable to act and lost the initiative.");
                 }
 
             }

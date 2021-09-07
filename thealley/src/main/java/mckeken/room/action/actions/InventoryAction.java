@@ -44,7 +44,7 @@ public class InventoryAction extends Action {
 					break;
 				case 1: // The case for Use
 					if (i instanceof Usable) {
-						((Usable) i).use();
+						((Usable) i).use(Manager.player);
 						if (i instanceof Consumable) Manager.player.getInventory().decrementItem(input);
 					} else {
 						System.out.println("It appears that " + i.getName() + " can't be used.");

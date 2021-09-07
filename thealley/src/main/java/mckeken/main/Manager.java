@@ -54,9 +54,6 @@ public class Manager {
 
 
         initialize();
-        intro();                     // Display the intro text
-
-
 
         saveExists = Load.hasSave(); // Check for a saved game
         if (saveExists) {            // If the save exists
@@ -103,27 +100,7 @@ public class Manager {
     }
 
     private static void initDebug() {
-        CombatEntity c0 = new CombatEntity("CE 0", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 1);
-        CombatEntity c1 = new CombatEntity("CE 1", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 2);
-        CombatEntity c2 = new CombatEntity("CE 2", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 3);
-        CombatEntity c3 = new CombatEntity("CE 3", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 4);
 
-        List<CombatEntity> arrs = new ArrayList<>();
-        List<CombatEntity> arrs2 = new ArrayList<>();
-
-        arrs.add(c0);
-        arrs.add(c1);
-
-        arrs2.add(c2);
-        arrs2.add(c3);
-
-        //parallelVerticalTabList(arrs.stream().map(CombatEntity::getData).toList(), arrs2.stream().map(CombatEntity::getData).toList());
-        player.getAbilityManager().getAbilityList().add(abilityList.get("Smack"));
-        player.getAbilityManager().getAbilityList().add(abilityList.get("Blast"));
-        player.getAbilityManager().getAbilityList().add(abilityList.get("Inversion"));
-
-        CombatEngine ce = new CombatEngine(new ArrayList<>(arrs), new ArrayList<>(arrs2));
-        ce.startCombat();
     }
 
 }

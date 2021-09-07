@@ -30,11 +30,11 @@ public class CombatEngineTest {
         ArrayList<CombatEntity> friendlies = new ArrayList<>();
         ArrayList<CombatEntity> enemies = new ArrayList<>();
 
-        friendlies.add(new CombatEntity("F1", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 1));
-        friendlies.add(new CombatEntity("F2", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 2));
+        friendlies.add(new CombatEntity("F1", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 1, 5));
+        friendlies.add(new CombatEntity("F2", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 2, 5));
 
-        enemies.add(new CombatEntity("E1", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 3));
-        enemies.add(new CombatEntity("E2", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 4));
+        enemies.add(new CombatEntity("E1", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 3, 5));
+        enemies.add(new CombatEntity("E2", "", "", 1, new Inventory(), new AbilityManager(), new CombatResourceManager(), 4, 50));
 
         CombatEngine engine = new CombatEngine(friendlies, enemies);
 

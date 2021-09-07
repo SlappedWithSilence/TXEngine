@@ -15,8 +15,8 @@ public class Inventory {
 	private static final int MAX_CAPACITY = 50;
 
 	// Variables
-	private static int capacity = 16;
-	private static int usage    = 0;
+	private int capacity = 16;
+	private int usage    = 0;
 	private ArrayList<String>     itemNames;
 	private ArrayList<Integer>    itemIDs;
 	private ArrayList<Integer>    itemQuantities;
@@ -31,7 +31,7 @@ public class Inventory {
 
 	// Capacity constructor. Initializes the inventory with capacity passed in param 0;
 	public Inventory(int capacity) {
-		Inventory.capacity = capacity;
+		this.capacity = capacity;
 		itemNames     = new ArrayList<>();
 		itemIDs       = new ArrayList<>();
 		itemQuantities = new ArrayList<>();
@@ -43,6 +43,8 @@ public class Inventory {
 
 	// Add an item to the inventory. This function should only ever be called after ensuring there is space in the inventory.
 	public void addItem(Item i) {
+		if (i == null) LogUtils.error("tried to add a null item");
+
 		if (usage >= capacity) {
 			LogUtils.error("Tried to add an item when the inventory was full! This is an error, please report it on https://github.com/TopperMcKek/TheAlley");
 		}
@@ -88,7 +90,6 @@ public class Inventory {
 				}
 			break;
 		}
-
 	}
 
 	// An overload for addItem() that allows the programmer to specify a quantity to add to the inventory
@@ -157,7 +158,7 @@ public class Inventory {
 	// Prints the inventory in a vertical numbered list
 	public void display() {
 		LogUtils.header("Inventory");
-		for (int i = 0; i < getUsage(); i++ ) {
+		for (int i = 0; i < getUsage() - 1; i++ ) {
 			System.out.println("[" + i + "] " + itemNames.get(i) + "\t" + Colors.CYAN_BOLD + itemQuantities.get(i) + Colors.RESET);
 		}
 

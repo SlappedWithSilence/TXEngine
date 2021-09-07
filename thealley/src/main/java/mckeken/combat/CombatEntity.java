@@ -23,6 +23,7 @@ public class CombatEntity implements CombatAgency {
     CombatResourceManager resourceManager;
     AbilityManager abilityManager;
     int speed; // Determines turn order
+    int level;
 
     HashMap<CombatEngine.CombatPhase, List<CombatEffect>> combatEffects;
 
@@ -41,6 +42,7 @@ public class CombatEntity implements CombatAgency {
 
         speed = 0;
         combatEffects = getPhaseMap();
+        level = 1;
     }
 
     public CombatEntity(String name, String openingDialog, String closingDialog, int inventorySize) {
@@ -54,6 +56,7 @@ public class CombatEntity implements CombatAgency {
         this.resourceManager = new CombatResourceManager();
         speed = 0;
         combatEffects = getPhaseMap();
+        level = 1;
     }
 
     public CombatEntity(String name, String openingDialog, String closingDialog, int inventorySize, Inventory inventory) {
@@ -68,10 +71,11 @@ public class CombatEntity implements CombatAgency {
         this.resourceManager = new CombatResourceManager();
         speed = 0;
         combatEffects = getPhaseMap();
+        level = 1;
     }
 
     // Full constructor. All inputs necessary to instantiate a full-fledged combatEntity are required for this constructor.
-    public CombatEntity(String name, String openingDialog, String closingDialog, int inventorySize, Inventory inventory, AbilityManager abilityManager, CombatResourceManager resourceManager, int speed) {
+    public CombatEntity(String name, String openingDialog, String closingDialog, int inventorySize, Inventory inventory, AbilityManager abilityManager, CombatResourceManager resourceManager, int speed, int level) {
         this.name = name;
         this.openingDialog = openingDialog;
         this.closingDialog = closingDialog;
@@ -82,6 +86,8 @@ public class CombatEntity implements CombatAgency {
         this.resourceManager = resourceManager;
         this.speed = speed;
         combatEffects = getPhaseMap();
+
+        this.level = level;
     }
 
     /************************
@@ -98,7 +104,7 @@ public class CombatEntity implements CombatAgency {
             ArrayList<Integer> healingItems = CombatEntityLogic.getHealingItems(this.getInventory());
 
             // If the entity possesses healing items in its inventory, use a random one
-            if (healingItems.size() > 0) return new AbstractMap.SimpleEntry<>(null, Manager.itemList.get(healingItems.get(new Random().nextInt(healingItems.size() - 1)))); // TODO: Verify that this won't go out of bounds
+            if (healingItems.size() > 0) return new AbstractMap.SimpleEntry<>(null, Manager.itemList.get(healingItems.get(new Random().nextInt(healingItems.size())))); // TODO: Verify that this won't go out of bounds
 
             ArrayList<Ability> healingAbilities = CombatEntityLogic.getHealingAbilities(this.abilityManager);
 
@@ -235,5 +241,13 @@ public class CombatEntity implements CombatAgency {
 
     public void setCombatEffects(HashMap<CombatEngine.CombatPhase, List<CombatEffect>> combatEffects) {
         this.combatEffects = combatEffects;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 }
