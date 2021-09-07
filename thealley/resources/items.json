@@ -70,6 +70,24 @@
                "properties": ["Stamina", "0.5"]
             }
          ]
+      },
+      {
+         "type"      :  "consumable",
+         "name"      :  "Scroll of Debugging",
+         "description": "A magical scroll said to contain knowledge of the creator.",
+         "id"        :  6,
+         "value"     :  0,
+         "maxStacks" :  1,
+         "effects"   :  [
+            {
+               "className" : "TeachAbilityEffect",
+               "properties": ["Smack"]
+            },
+            {
+               "className" : "TeachAbilityEffect",
+               "properties": ["Blast"]
+            }
+         ]
       }
    ]
 }

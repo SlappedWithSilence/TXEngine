@@ -98,6 +98,8 @@ public class Player extends CombatEntity {
 						}
 
 						return new AbstractMap.SimpleEntry<>(ab, null);
+					} else if (abilityChoice == -1) {
+						break;
 					}
 
 					if (!abilityManager.isSatisfied(abilityManager.getAbilityList().get(abilityChoice))) System.out.println("You don't have the resources to use that ability!");

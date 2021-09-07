@@ -3,6 +3,7 @@ package mckeken.combat.ability;
 import mckeken.color.Colors;
 import mckeken.combat.CombatEntity;
 import mckeken.io.LogUtils;
+import mckeken.main.Manager;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -41,6 +42,16 @@ public class AbilityManager {
             System.out.println("\t"+resourceCostsAsString(abilityList.get(i))); // Print individual resource costs of the current item
 
         }
+    }
+
+    // Teach the combat entity a new Ability by name reference
+    public void learn(String abilityName) {
+        abilityList.add(Manager.abilityList.get(abilityName));
+    }
+
+    // Teach the combat entity a new Ability by direct reference
+    public void learn(Ability ability) {
+        abilityList.add(ability);
     }
 
     // Returns a list of booleans whose index corresponds to the Ability objects in abilityList

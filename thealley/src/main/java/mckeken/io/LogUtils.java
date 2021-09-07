@@ -163,6 +163,9 @@ public class LogUtils {
 
 
 	public static String parallelVerticalTab(List<String> left, List<String> right) {
+		ArrayList<String> leftInternal = new ArrayList<>(left);
+		ArrayList<String> rightInternal = new ArrayList<>(right);
+
 		StringBuilder sb = new StringBuilder();
 
 		String topBar = "-".repeat(HEADER_LENGTH/2);
@@ -176,25 +179,25 @@ public class LogUtils {
 		if (left.size() < right.size())  mode = 2; // right tab is longer
 
 		if (mode == 1) { // Normalize the tab sizes by inserting empty lines into the right tab
-			for (int i = 0; i < left.size() - right.size(); i++) right.add("");
+			for (int i = 0; i < left.size() - right.size(); i++) rightInternal.add("");
 		}
 		if (mode == 2) { // Normalize the tab sizes by inserting empty lines into the left tab
-			for (int i = 0; i < right.size() - left.size(); i++) right.add("");
+			for (int i = 0; i < right.size() - left.size(); i++) leftInternal.add("");
 		}
 
 		sb.append(topBar + "   " + topBar).append('\n');
 
 		int leftSpaceOffset = 0;
 
-		for (int i = 0; i < right.size(); i++) {
-			sb.append(SIDE_WALL).append(centerString(left.get(i), (HEADER_LENGTH-2)/2)).append(SIDE_WALL); // Print the text for the r
+		for (int i = 0; i < Math.max(rightInternal.size(), leftInternal.size()); i++) {
+			sb.append(SIDE_WALL).append(centerString(leftInternal.get(i), (HEADER_LENGTH-2)/2)).append(SIDE_WALL); // Print the text for the r
 
 			if (HEADER_LENGTH % 2 != 0) {
 				sb.append(" ");
 				leftSpaceOffset = 2;
 			}
 
-			sb.append(SIDE_WALL).append(centerString(right.get(i), (HEADER_LENGTH-2)/2)).append(SIDE_WALL);
+			sb.append(SIDE_WALL).append(centerString(rightInternal.get(i), (HEADER_LENGTH-2)/2)).append(SIDE_WALL);
 			sb.append('\n');
 		}
 

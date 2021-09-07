@@ -11,7 +11,7 @@
           "menuName"    : "Visit the Debug Store",
           "text"        : "Welcome to the Debug Store! Nothing's free, and everything sucks. What can I help you with?",
           "enabled"     : false,
-          "properties"  : ["1", "1", "2", "50", "3", "5", "4", "15", "5", "101"],
+          "properties"  : ["1", "1", "2", "50", "3", "5", "4", "15", "5", "101", "6", "0"],
           "unlockedIndex" : -1
         },
         {
@@ -52,6 +52,14 @@
           "text"      : "",
           "enabled"   : true,
           "properties" : [],
+          "unlockedIndex" : -1
+        },
+        {
+          "className" : "CombatAction",
+          "menuName"  : "Fight Some Weirdos",
+          "text"      : "",
+          "enabled"   : true,
+          "properties" : ["{FRIENDLY}","-1","-2","{HOSTILE}", "-1","-1"],
           "unlockedIndex" : -1
         }
       ]

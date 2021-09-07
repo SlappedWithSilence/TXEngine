@@ -24,8 +24,9 @@ public class CombatEntityLogic {
 
     // Check if the given ability
     public static boolean isHealingAbility(Ability a) {
-        return a.getEffects().stream().anyMatch(effectEntry ->  effectEntry.getKey().getProperties()[0].equals(Manager.primaryResource) &&
-                Integer.parseInt(effectEntry.getKey().getProperties()[1]) > 0);
+        return a.getEffects().stream().anyMatch(effectEntry ->  effectEntry.getKey().getProperties()[0].equals(Manager.primaryResource)
+                                                                &&
+                                                                Integer.parseInt(effectEntry.getKey().getProperties()[1]) > 0);
     }
 
     // Returns a list of indexes that point to items that will heal you when used
