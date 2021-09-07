@@ -88,8 +88,6 @@ public class AbilityLoader {
             String cleanupMessage = (String) rawEffect.get("cleanup_message");
             String[] properties = getStringArray((JSONArray) rawEffect.get("properties"));
 
-            System.out.println("Properties[0] = " + properties[0]);
-
             CombatEffect ce = CombatEffectFactory.build(className, duration, triggerMessage, cleanupMessage, properties);
 
             arr.add(new AbstractMap.SimpleEntry<>(ce, CombatEngine.CombatPhase.valueOf(triggerPhase)));

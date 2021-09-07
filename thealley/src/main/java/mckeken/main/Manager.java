@@ -112,6 +112,7 @@ public class Manager {
         player.getAbilityManager().learn("Smack");
         player.getAbilityManager().learn("Love Tap");
         player.getAbilityManager().learn("Spit");
+        player.getAbilityManager().learn("Bomb-Threat");
     }
 
 }

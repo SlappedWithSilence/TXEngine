@@ -66,6 +66,7 @@ public class Player extends CombatEntity {
 		LogUtils.header("Combat - Make a Choice");
 
 		ArrayList<String> data = new ArrayList<>();
+		data.add(name);
 		data.add("Lvl: " + Manager.player.level);
 		data.add(Manager.primaryResource + ": " + Manager.player.getResourceManager().getResourceQuantity(Manager.primaryResource));
 
@@ -73,7 +74,7 @@ public class Player extends CombatEntity {
 
 		LogUtils.subHeader(data);
 
-		List<List<String>> friendlyData = engine.getEntities(CombatEngine.EntityType.FRIENDLY).stream().map(CombatEntity::getData).toList();
+		List<List<String>> friendlyData = engine.getEntities(CombatEngine.EntityType.FRIENDLY).stream().filter(combatEntity -> !(combatEntity instanceof Player)).map(CombatEntity::getData).toList();
 		List<List<String>> hostileData = engine.getEntities(CombatEngine.EntityType.HOSTILE).stream().map(CombatEntity::getData).toList();
 
 		LogUtils.parallelVerticalTabList(friendlyData, hostileData, "Friendly", "Hostile");

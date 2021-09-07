@@ -79,6 +79,33 @@
       "damage" : 1,
       "effects" : [],
       "resource_cost" : []
+    },
+    {
+      "target_mode" : "SINGLE_ENEMY",
+      "name" : "Dupe",
+      "description" : "Tricks the target into giving the user some of their Health",
+      "use_text" : "{CASTER} deceives {TARGET}, stealing Health in the process.",
+      "damage" : 50,
+      "effects" : [],
+      "resource_cost" : ["Health", -50]
+    },
+    {
+      "target_mode" : "ALL_FRIENDLY",
+      "name" : "Bomb-Threat",
+      "description" : "Makes a bomb-threat, delaying all friendly entities from acting. Restores Health and Stamina.",
+      "use_text" : "{CASTER} makes a bomb-threat, delaying all friendly entities and restoring resources.",
+      "damage" : 0,
+      "effects" : [
+        {
+          "class_name" : "RemovePhaseEffect",
+          "duration"  : 1,
+          "trigger_phase" : "POST_ACTION",
+          "trigger_message" : "{OWNER} was delayed by the bomb threat!.",
+          "cleanup_message" : "{OWNER} figured out it was a ruse!",
+          "properties": ["ACTION"]
+        }
+      ],
+      "resource_cost" : ["Stamina", -100, "Health", -100]
     }
   ]
 }

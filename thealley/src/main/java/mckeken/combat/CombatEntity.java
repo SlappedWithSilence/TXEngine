@@ -180,12 +180,13 @@ public class CombatEntity implements CombatAgency {
 
     public List<String> getData() {
         String nameText = name;
+        String levelText = "lvl: " + level;
         String pResourceText = Manager.primaryResource + ": [" + getResourceManager().getResources().get(Manager.primaryResource)[1]
                 + "/"
                 + getResourceManager().getResources().get(Manager.primaryResource)[0]
                 + "]";
 
-        return List.of(new String[]{nameText, pResourceText});
+        return List.of(new String[]{nameText, levelText, pResourceText});
     }
 
 
