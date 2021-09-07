@@ -1,19 +1,15 @@
 package mckeken.inventory;
 
 import mckeken.main.Manager;
-import org.junit.Before;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class InventoryTest {
 
-    @Before
+    @BeforeAll
     public void setup() {
         Manager.main(new String[] {"-D"});
-
-
-
     }
 
     @Test
