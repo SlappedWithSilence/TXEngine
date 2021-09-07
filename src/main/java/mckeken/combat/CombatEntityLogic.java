@@ -53,7 +53,7 @@ public class CombatEntityLogic {
         if (!(Manager.itemList.get(i) instanceof Usable)) return false;
 
         return ((Usable) Manager.itemList.get(i)).getEffects().stream().anyMatch(effect -> effect.getProperties()[0].equals(Manager.primaryResource) &&
-                Integer.parseInt(effect.getProperties()[1]) > 0);
+                Double.parseDouble(effect.getProperties()[1]) > 0);
     }
 
 }
