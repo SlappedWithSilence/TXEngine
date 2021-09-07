@@ -146,6 +146,7 @@ public class CombatEntity implements CombatAgency {
     // Removes any effects with a duration of zero from all phases
     public void cleanupEffects() {
         for (CombatEngine.CombatPhase phase : CombatEngine.CombatPhase.values()) {
+            combatEffects.get(phase).stream().filter(n -> n.getDuration() == 0).forEach(combatEffect -> System.out.println(combatEffect.getCleanupMessage().replace("{OWNER}", name)));
             combatEffects.get(phase).removeIf(n -> n.getDuration() == 0);
         }
     }

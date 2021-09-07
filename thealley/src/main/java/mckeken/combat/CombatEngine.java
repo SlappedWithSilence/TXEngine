@@ -292,6 +292,8 @@ public class CombatEngine {
 
     // Take a turn for a single entity
     private void turn(EntityType turnType, int index) {
+        System.out.println();
+
         currentTurnType = turnType; // Set the global variable so that other functions can tell what turn type it is
 
         ArrayList<CombatPhase> phaseOrder = PHASE_ORDER; // Establish initial phase order from master list
@@ -388,6 +390,9 @@ public class CombatEngine {
 
                 if (combatEffect.getDuration() > 0) combatEffect.setDuration(combatEffect.getDuration() - 1); // Decrement the duration if the duration is greater than 0.
 
+                if (!combatEffect.getTriggerMessage().equals("")) {
+                    System.out.println(combatEffect.getTriggerMessage().replace(OWNER_NAME_PLACEHOLDER, lookUpEntity(turnType, index).getName()));
+                }
             }
 
             if (endConditionReached() != null) { // If combat needs to end
