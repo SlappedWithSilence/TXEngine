@@ -300,7 +300,8 @@ public class CombatEngine {
         for (int i = 0; i < phaseOrder.size(); i++) { // Iterate through the phase order by index. This is to allow for phases to be added or removed.
 
             // If the current phase is the ACTION phase, then run the get-action logic
-            if (phaseOrder.get(i) == CombatPhase.ACTION) {
+            if (phaseOrder.get(i) == CombatPhase.ACTION &&  !lookUpEntity(turnType, index).isDead()) {
+
                 AbstractMap.SimpleEntry<Ability, Item> combatAction = lookUpEntity(turnType, index).makeChoice(this);
 
                 if (combatAction.getKey() != null) { // If the entity chose to use an ability
@@ -344,7 +345,10 @@ public class CombatEngine {
                 }
 
                 if (combatAction.getValue() != null) { // If the user wants to use an item, use it.
-                    if (combatAction.getValue() instanceof Usable) ((Usable) combatAction.getValue()).use(lookUpEntity(turnType, index));
+                    if (combatAction.getValue() instanceof Usable){
+                        ((Usable) combatAction.getValue()).use(lookUpEntity(turnType, index));
+                        System.out.println(lookUpEntity(turnType, index).getName() + " used " + combatAction.getValue().getName() + ".");
+                    }
                     else System.out.println("You tried to use " + combatAction.getValue().getName() + " but it did nothing."); // If the entity selected an Item that can't be used, say so
                 }
 
