@@ -153,6 +153,7 @@ public class CombatEngine {
             turnCycle();
         }
 
+        PostCombatCleanup();
 
         if (endState == EndCondition.gameState.WIN) return true;
         else if (endState == EndCondition.gameState.LOSS) return false;
@@ -286,6 +287,8 @@ public class CombatEngine {
                 turn(currentEntity.getKey(), currentEntity.getValue()); // Take the turn
             }
 
+            if (endState != null) return;
+
         }
 
     }
@@ -405,6 +408,15 @@ public class CombatEngine {
         }
     }
 
+    // Clean up any left-over effects
+    private void PostCombatCleanup() {
+        entities.get(EntityType.FRIENDLY).forEach(entity -> entity.getCombatEffects().forEach( (p, list) -> list.clear()));
+        entities.get(EntityType.HOSTILE).forEach(entity -> entity.getCombatEffects().forEach( (p, list) -> list.clear()));
 
+        if (Manager.player.getResourceManager().getResourceQuantity(Manager.primaryResource) < 1) {
+            LogUtils.error("Player is dead, reviving at 1 " + Manager.primaryResource);
+            Manager.player.getResourceManager().setResource(Manager.primaryResource, 1);
+        }
+    }
 
 }

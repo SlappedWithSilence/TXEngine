@@ -85,9 +85,9 @@
       "name" : "Dupe",
       "description" : "Tricks the target into giving the user some of their Health",
       "use_text" : "{CASTER} deceives {TARGET}, stealing Health in the process.",
-      "damage" : 50,
+      "damage" : 20,
       "effects" : [],
-      "resource_cost" : ["Health", -50]
+      "resource_cost" : ["Health", -10]
     },
     {
       "target_mode" : "ALL_FRIENDLY",
