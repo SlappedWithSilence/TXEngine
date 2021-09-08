@@ -166,7 +166,7 @@ public class Inventory {
 	// Prints the inventory in a vertical numbered list
 	public void display() {
 		LogUtils.header("Inventory");
-		for (int i = 0; i < getUsage() - 1; i++ ) {
+		for (int i = 0; i < getUsage(); i++ ) {
 			System.out.println("[" + i + "] " + itemNames.get(i) + "\t" + Colors.CYAN_BOLD + itemQuantities.get(i) + Colors.RESET);
 		}
 
