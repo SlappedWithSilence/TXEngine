@@ -341,7 +341,6 @@ public class CombatEngine {
                             break;
                         default:
                     }
-
                 }
 
                 if (combatAction.getValue() != null) { // If the user wants to use an item, use it.

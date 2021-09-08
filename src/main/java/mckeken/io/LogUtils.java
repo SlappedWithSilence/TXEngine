@@ -97,18 +97,6 @@ public class LogUtils {
 	public static void numberedList(String[] list) {
 		numberedList(new ArrayList<>(List.of(list)));
 	}
-	// Format: | [0]: Done | [1]: Next | [2]: Back |
-	/*public static void numberedBar(ArrayList<String> list) {
-		String bar = "|";
-
-		for (int i = 0; i < list.size(); i++) {
-			String s = "";
-			s = s + " [" + i + "]: " + list.get(i) + " |";
-			bar = bar + s;
-		}
-
-		System.out.println(bar);
-	}*/
 
 	// Format: | [0]: Done | [1]: Next | [2]: Back |
 	public static void numberedBar(String[] list) {

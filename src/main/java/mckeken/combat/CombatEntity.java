@@ -125,7 +125,45 @@ public class CombatEntity implements CombatAgency {
             if (healingAbilities.size() > 0) return new AbstractMap.SimpleEntry<>(healingAbilities.get(new Random().nextInt(healingAbilities.size() - 1)), null);
         }
 
+        List<Ability> offensiveAbilities = CombatEntityLogic.getOffensiveAbilities(abilityManager);
 
+        // Try and select an offensive ability to use
+        for (Ability ab : offensiveAbilities) { // Iterate through all offensive abilities
+
+            List<CombatEntity> killable = CombatEntityLogic.getKillableEntities(ab, engine.getValidTargets(ab)); // Get all entities that can be killed via the current ability
+
+            if (killable.size() > 0) { // If there is at least one target that can be killed
+                int randomIndex = new Random().nextInt(killable.size()); // Randomly select a target
+
+                ab.setTarget(killable.get(randomIndex)); // Set it
+
+                return new AbstractMap.SimpleEntry<Ability, Item>(ab, null); // Return the ability with its target already set
+            }
+        }
+
+        // If we can't kill anything, use a random offensive ability with a random target
+        if (offensiveAbilities.size() > 0) {
+            int randomAbilityIndex = new Random().nextInt(offensiveAbilities.size());
+
+            int randomTargetIndex = new Random().nextInt(engine.getValidTargets(offensiveAbilities.get(randomAbilityIndex)).size());
+
+            Ability ability = offensiveAbilities.get(randomAbilityIndex);
+            ability.setTarget(engine.getValidTargets(ability).get(randomAbilityIndex));
+
+            return new AbstractMap.SimpleEntry<Ability, Item>(ability, null);
+        }
+
+
+        // If we can't kill anything and have no offensive abilities, use a random ability
+        if (abilityManager.getSatisfiedAbilities().size() > 0) {
+            Ability ability = abilityManager.getSatisfiedAbilities().get(new Random().nextInt(abilityManager.getSatisfiedAbilities().size()));
+
+            ability.setTarget(engine.getValidTargets(ability).get(new Random().nextInt(engine.getValidTargets(ability).size())));
+
+            return new AbstractMap.SimpleEntry<>(ability, null);
+        }
+
+        // If we can't do any of the above, do nothing
         return new AbstractMap.SimpleEntry<>(null, null);
     }
 
