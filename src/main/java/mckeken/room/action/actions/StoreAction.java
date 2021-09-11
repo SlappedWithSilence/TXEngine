@@ -5,6 +5,7 @@ import mckeken.io.LogUtils;
 import mckeken.main.Manager;
 import mckeken.combat.Player;
 import mckeken.room.action.Action;
+import mckeken.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,20 +59,16 @@ public class StoreAction extends Action {
 	@Override
 	// Performs the action
 	public int perform() {
-
-		Iterator<String> propIterator = Arrays.stream(super.properties).iterator();
-
 		// Iterate through the shop's properties to build a side-by-side pair of arrays that contain the IDs of the items offered and their respective costs
 		inventoryIDs = new ArrayList<Integer>();
 		costs = new ArrayList<Integer>();
 
-		while(propIterator.hasNext()) {
-			Integer id = Integer.parseInt(propIterator.next());
-			Integer cost = Integer.parseInt(propIterator.next());
-
-			inventoryIDs.add(id);
-			costs.add(cost);
+		for (String s : properties) {
+			int[] vals = Utils.parseInts(s, ",");
+			inventoryIDs.add(vals[0]);
+			costs.add(vals[1]);
 		}
+
 
 		if (!checkConfig()) {
 			return -1;
