@@ -2,7 +2,7 @@ package txengine.systems.combat.combatEffect;
 
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.CombatEntity;
-import txengine.item.effect.Effect;
+import txengine.systems.item.effect.Effect;
 
 public abstract class CombatEffect extends Effect {
 

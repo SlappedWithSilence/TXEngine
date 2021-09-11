@@ -10,7 +10,7 @@
           "className"   : "StoreAction",
           "menuName"    : "Visit the Debug Store",
           "text"        : "Welcome to the Debug Store! Nothing's free, and everything sucks. What can I help you with?",
-          "enabled"     : false,
+          "hidden"     : true,
           "properties"  : ["1,1", "2,50", "3,5", "4,15", "5,101", "6,0"],
           "unlockedIndex" : -1
         },
@@ -18,7 +18,7 @@
           "className"   : "InventoryAction",
           "menuName"    : "Check your inventory",
           "text"        : "You decide to check the contents of your pack.",
-          "enabled"     : true,
+          "hidden"     : false,
           "properties"  : [],
           "unlockedIndex" : -1
         },
@@ -26,7 +26,7 @@
           "className" : "DialogueAction",
           "menuName"  : "Speak with shady Frei",
           "text"      : "You approach the Frei.",
-          "enabled"   : true,
+          "hidden"   : false,
           "properties" : ["Hey, I know a guy... He's got the stuff. You want in?"],
           "unlockedIndex" : 0
         },
@@ -34,7 +34,7 @@
           "className" : "ConversationAction",
           "menuName"  : "Converse with the local doomsayer",
           "text"      : "You approach the doomsayer.",
-          "enabled"   : true,
+          "hidden"   : false,
           "properties" : ["0"],
           "unlockedIndex" : -1
         },
@@ -42,7 +42,7 @@
           "className" : "SummaryAction",
           "menuName"  : "Check yo-self",
           "text"      : "",
-          "enabled"   : true,
+          "hidden"   : false,
           "properties" : [],
           "unlockedIndex" : -1
         },
@@ -50,7 +50,7 @@
           "className" : "AbilitySummaryAction",
           "menuName"  : "Inspect Abilities",
           "text"      : "",
-          "enabled"   : true,
+          "hidden"   : false,
           "properties" : [],
           "unlockedIndex" : -1
         },
@@ -58,7 +58,7 @@
           "className" : "CombatAction",
           "menuName"  : "Fight Some Weirdos",
           "text"      : "",
-          "enabled"   : true,
+          "hidden"   : false,
           "properties" : ["{FRIENDLY}","{HOSTILE}", "-1","1", "0", "{LOOT}", "1,1", "4,2"],
           "unlockedIndex" : -1
         }

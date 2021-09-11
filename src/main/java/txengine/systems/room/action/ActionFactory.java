@@ -4,7 +4,7 @@ import txengine.io.LogUtils;
 
 public class ActionFactory {
 
-        final private static String ACTIONS_PACKAGE = "mckeken.systems.room.action.actions."; // The fully-qualified package name where Effects are found
+        final private static String ACTIONS_PACKAGE = "txengine.systems.room.action.actions."; // The fully-qualified package name where Effects are found
 
         public ActionFactory() {
 
@@ -18,8 +18,8 @@ public class ActionFactory {
                 a.setProperties(properties); // Sets the Effect's internal properties to the values passed in the parameters
                 a.setMenuName(menuName);
                 a.setText(text);
-                a.setEnabled(enabled);
-                a.setUnlockIndex(unlockedIndex);
+                a.setHidden(enabled);
+                a.setUnhideIndex(unlockedIndex);
                 return a;	// Returns the effect
 
             } catch (InstantiationException e) {

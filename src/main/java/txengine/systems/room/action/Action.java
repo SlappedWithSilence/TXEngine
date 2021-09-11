@@ -1,37 +1,40 @@
 package txengine.systems.room.action;
 
 import txengine.color.*;
+import txengine.integration.Requirement;
+
+import java.util.List;
 
 public abstract class Action {
 	protected String[] properties; // A raw list of config values. This is the array that stores values read from the JSON config files. These strings may need to be cast to other types in order to be used.
 	protected String menuName; // The name of the Action. This is displayed in the main prompt of the room that holds the action
 	protected String text; // The text that is printed when action is selected
-	protected boolean enabled = true; // Whether or not the user is able to use this action.
+	protected List<Requirement> requirements;
+	protected boolean hidden;
 	protected int numProperties = 3; // The expected number of properties
-	protected int unlockIndex = -1;	 // The other Action in the room this Action is in that should be unlocked if this Action succeeds
+	protected int unhideIndex = -1;	 // The other Action in the room this Action is in that should be un-hidden if this Action succeeds
 
 	/* Constructors */
 	public Action() {
 
 	}
 
-	public Action(String menuName, String text, String[] properties, boolean enabled, int unlockIndex) {
+	public Action(String menuName, String text, String[] properties, boolean enabled, int unhideIndex) {
 		this.menuName = menuName;
-		this.enabled = enabled;
+		this.hidden = enabled;
 		this.properties = properties;
 		this.text = text;
-		this.unlockIndex = unlockIndex;
+		this.unhideIndex = unhideIndex;
 	}
 
-	public Action(String menuName, String text, String[] properties, boolean enabled, int unlockIndex, int numProperties) {
+	public Action(String menuName, String text, String[] properties, boolean enabled, int unhideIndex, int numProperties) {
 		this.menuName = menuName;
-		this.enabled = enabled;
+		this.hidden = enabled;
 		this.properties = properties;
 		this.text = text;
 		this.numProperties = numProperties;
-		this.unlockIndex = unlockIndex;
+		this.unhideIndex = unhideIndex;
 	}
-
 
 	/* Abstract Member Functions */
 	// Performs the action. In MOST CASES, properties should only be accessed in this function. Manipulating properties in the constructors wastes memory.
@@ -43,17 +46,17 @@ public abstract class Action {
 
 	// Returns the index of the Action that should be enabled if this action succeeds.
 	public int enableOnComplete() {
-		return unlockIndex;
+		return unhideIndex;
 	}
 
-	// Determines whether or not the Action can be executed. Each action should override this function as needed.
-	public boolean isEnabled() {
-		return enabled;
+	// Determines whether the Action can be executed. Each action should override this function as needed.
+	public boolean isHidden() {
+		return hidden;
 	}
 
 	public boolean print() {
-		if (isEnabled()) ColorConsole.d(menuName + "\n", false);
-		return isEnabled();
+		if (!isHidden()) ColorConsole.d(menuName + "\n", false);
+		return isHidden();
 	}
 
 	public String[] getProperties() {
@@ -80,15 +83,15 @@ public abstract class Action {
 		this.text = text;
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
 	}
 
-	public int getUnlockIndex() {
-		return unlockIndex;
+	public int getUnhideIndex() {
+		return unhideIndex;
 	}
 
-	public void setUnlockIndex(int unlockIndex) {
-		this.unlockIndex = unlockIndex;
+	public void setUnhideIndex(int unhideIndex) {
+		this.unhideIndex = unhideIndex;
 	}
 }

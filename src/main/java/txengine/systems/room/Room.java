@@ -30,7 +30,7 @@ public class Room {
 	public void printActions() {
 		for (int i = 0; i < roomActions.size(); i++) {
 
-			if (roomActions.get(i).isEnabled() ) System.out.print("[" + i + "] ");
+			if (!roomActions.get(i).isHidden() ) System.out.print("[" + i + "] ");
 			roomActions.get(i).print();
 
 		}
@@ -45,14 +45,13 @@ public class Room {
 			for(Action a : onFirstEnterActions) a.perform(); // Perform all the first-time-only actions
 		}
 
-
 		// Loop until the user performs a MoveAction
 		while (stay) {
 			printActions();
 			int userSelection = LogUtils.getNumber(0, roomActions.size()-1);
 
-			int enableNext = roomActions.get(userSelection).perform();
-			if (enableNext >= 0) roomActions.get(enableNext).setEnabled(true); // Enable the Action that was passed through the last performed Action.
+			int unhide = roomActions.get(userSelection).perform();
+			if (unhide >= 0) roomActions.get(unhide).setHidden(false); // Enable the Action that was passed through the last performed Action.
 
 			if (roomActions.get(userSelection) instanceof MoveAction) break;
 		}

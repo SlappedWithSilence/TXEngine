@@ -57,7 +57,7 @@ public class StoreAction extends Action {
 	// Performs the action
 	public int perform() {
 		if (!checkConfig()) {
-			return unlockIndex;
+			return unhideIndex;
 		}
 
 		// Iterate through the shop's properties to build a side-by-side pair of arrays that contain the IDs of the items offered and their respective costs

@@ -80,7 +80,7 @@ public class CombatAction extends Action {
         }
         else System.out.println("You failed to conquer your foes and lie defeated.");
 
-        return unlockIndex;
+        return unhideIndex;
     }
 
     private void printLoot() {

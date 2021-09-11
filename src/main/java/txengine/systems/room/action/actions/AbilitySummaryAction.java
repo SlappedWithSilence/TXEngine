@@ -34,6 +34,6 @@ public class AbilitySummaryAction extends Action {
         }
 
 
-        return unlockIndex;
+        return unhideIndex;
     }
 }

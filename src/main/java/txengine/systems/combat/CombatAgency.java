@@ -1,7 +1,7 @@
 package txengine.systems.combat;
 
 import txengine.systems.ability.Ability;
-import txengine.item.Item;
+import txengine.systems.item.Item;
 
 import java.util.AbstractMap;
 

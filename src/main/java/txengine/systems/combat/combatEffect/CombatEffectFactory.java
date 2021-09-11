@@ -4,7 +4,7 @@ import txengine.io.LogUtils;
 
 public class CombatEffectFactory {
 
-    final private static String COMBAT_EFFECTS_PACKAGE = "mckeken.systems.combat.combatEffect.combatEffects."; // The fully-qualified package name where Effects are found
+    final private static String COMBAT_EFFECTS_PACKAGE = "txengine.systems.combat.combatEffect.combatEffects."; // The fully-qualified package name where Effects are found
 
     public CombatEffectFactory() {
 

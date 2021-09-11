@@ -79,7 +79,7 @@ public class RoomLoader implements Loader{
             String className = 	(String) rawAction.get("className");
             String menuName = 	(String) rawAction.get("menuName");
             String text =		(String) rawAction.get("text");
-            boolean enabled = 	(Boolean) rawAction.get("enabled");
+            boolean hidden = 	(Boolean) rawAction.get("hidden");
             int unlockIndex = 	((Long) rawAction.get("unlockedIndex")).intValue();
 
             JSONArray propertiesArray = (JSONArray) rawAction.get("properties");	// Get a sub-array of property string values for the current action
@@ -90,7 +90,7 @@ public class RoomLoader implements Loader{
                 actionProperties[i] = prop;											// Store it in the array
             }
 
-            Action a = ActionFactory.build(className, menuName, text, enabled, unlockIndex, actionProperties);
+            Action a = ActionFactory.build(className, menuName, text, hidden, unlockIndex, actionProperties);
             actions.add(a);
         }
 
