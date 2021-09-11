@@ -17,6 +17,11 @@ public class LevelRequirement extends Requirement {
     }
 
     @Override
+    public String toString() {
+        return "You must be at least level " + properties[0] +".";
+    }
+
+    @Override
     public boolean met() {
         return Manager.player.getLevel() >= Integer.parseInt(properties[0]);
     }

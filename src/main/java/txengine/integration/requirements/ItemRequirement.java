@@ -20,6 +20,19 @@ public class ItemRequirement extends Requirement {
     }
 
     @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("You must have ");
+
+        for (int id : Utils.toInts(List.of(properties))) sb.append(Manager.itemList.get(id)).append(",");
+        sb.replace(sb.length()-1, sb.length()-1, " ");
+        sb.append("in your inventory.");
+
+        return sb.toString();
+    }
+
+    @Override
     public boolean met() {
         return Manager.player.getInventory().getItemIDs().containsAll(Utils.toInts(List.of(properties)));
     }

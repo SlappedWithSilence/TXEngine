@@ -44,4 +44,9 @@ public class FlagRequirement extends Requirement {
     public boolean met() {
         return Arrays.stream(properties).allMatch(flagName -> Manager.flagManager.hasFlag(flagName) && Manager.flagManager.getFlag(flagName));
     }
+
+    @Override
+    public String toString() {
+        return "";
+    }
 }
