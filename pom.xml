@@ -96,7 +96,7 @@
             </execution>
           </executions>
           <configuration>
-            <mainClass>mckeken.main.Manager</mainClass>
+            <mainClass>txengine.main.Manager</mainClass>
             <arguments>
               <argument>foo</argument>
               <argument>bar</argument>
