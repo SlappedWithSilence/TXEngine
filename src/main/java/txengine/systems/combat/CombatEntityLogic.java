@@ -4,8 +4,8 @@ import txengine.systems.ability.Ability;
 import txengine.systems.ability.AbilityManager;
 import txengine.systems.combat.combatEffect.CombatEffect;
 import txengine.systems.inventory.Inventory;
-import txengine.item.Item;
-import txengine.item.Usable;
+import txengine.systems.item.Item;
+import txengine.systems.item.Usable;
 import txengine.main.Manager;
 
 import java.util.AbstractMap;

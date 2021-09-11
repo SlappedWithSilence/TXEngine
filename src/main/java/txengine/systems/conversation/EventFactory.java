@@ -4,7 +4,7 @@ import txengine.io.LogUtils;
 
 public class EventFactory {
 
-    final private static String EVENTS_PACKAGE = "mckeken.systems.conversation.events."; // The fully-qualified package name where Effects are found
+    final private static String EVENTS_PACKAGE = "txengine.systems.conversation.events."; // The fully-qualified package name where Effects are found
 
     public EventFactory() {
 

@@ -1,4 +1,4 @@
-package txengine.item.effect;
+package txengine.systems.item.effect;
 
 import java.lang.InstantiationException;
 import java.lang.ClassNotFoundException;
@@ -7,7 +7,7 @@ import txengine.io.LogUtils;
 
 public class EffectFactory {
 
-	final private static String EFFECTS_PACKAGE = "mckeken.item.effect.effects."; // The fully-qualified package name where Effects are found
+	final private static String EFFECTS_PACKAGE = "txengine.systems.item.effect.effects."; // The fully-qualified package name where Effects are found
 
 	public EffectFactory() {
 

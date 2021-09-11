@@ -1,6 +1,6 @@
-package txengine.item;
+package txengine.systems.item;
 
-import txengine.item.effect.Effect;
+import txengine.systems.item.effect.Effect;
 
 import java.util.ArrayList;
 

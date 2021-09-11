@@ -7,7 +7,7 @@ import java.util.List;
 import txengine.main.Manager;
 import txengine.color.*;
 import txengine.io.LogUtils;
-import txengine.item.Item;
+import txengine.systems.item.Item;
 import txengine.util.Utils;
 
 public class Inventory {

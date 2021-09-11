@@ -2,7 +2,7 @@ package txengine.systems.combat;
 
 import txengine.systems.ability.Ability;
 import txengine.io.LogUtils;
-import txengine.item.Item;
+import txengine.systems.item.Item;
 import txengine.main.Manager;
 import txengine.systems.inventory.Inventory;
 

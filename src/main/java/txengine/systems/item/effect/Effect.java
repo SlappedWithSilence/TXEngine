@@ -1,4 +1,4 @@
-package txengine.item.effect;
+package txengine.systems.item.effect;
 
 import txengine.systems.combat.CombatEntity;
 import txengine.io.LogUtils;

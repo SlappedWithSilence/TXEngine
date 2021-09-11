@@ -6,8 +6,8 @@ import txengine.systems.combat.combatEffect.combatEffects.AddPhaseEffect;
 import txengine.systems.combat.combatEffect.combatEffects.DispelCombatEffect;
 import txengine.systems.combat.combatEffect.combatEffects.RemovePhaseEffect;
 import txengine.io.LogUtils;
-import txengine.item.Item;
-import txengine.item.Usable;
+import txengine.systems.item.Item;
+import txengine.systems.item.Usable;
 import txengine.main.Manager;
 
 import java.util.*;
@@ -168,6 +168,10 @@ public class CombatEngine {
     /*********************
      * Private Functions *
      *********************/
+
+    private void preCombatSetup() {
+
+    }
 
     // Returns a default EndCondition that checks for two things:
     // - The player's death (loss)

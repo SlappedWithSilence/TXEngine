@@ -1,4 +1,4 @@
-package txengine.item;
+package txengine.systems.item;
 
 public class Item {
 
@@ -21,6 +21,14 @@ public class Item {
 		this.id = id;
 		this.value = value;
 		this.maxStacks = maxStacks;
+	}
+
+	public Item(Item item) {
+		name = item.name;
+		description = item.description;
+		id = item.id;
+		value = item.value;
+		maxStacks = item.maxStacks;
 	}
 
 	// DEBUGGING FUNCTION

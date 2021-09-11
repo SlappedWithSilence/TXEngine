@@ -1,9 +1,9 @@
 package txengine.io;
 
-import txengine.item.Consumable;
-import txengine.item.Item;
-import txengine.item.effect.Effect;
-import txengine.item.effect.EffectFactory;
+import txengine.systems.item.Consumable;
+import txengine.systems.item.Item;
+import txengine.systems.item.effect.Effect;
+import txengine.systems.item.effect.EffectFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

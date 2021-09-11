@@ -1,9 +1,9 @@
 package txengine.systems.room.action.actions;
 
 import txengine.io.*;
-import txengine.item.Consumable;
-import txengine.item.Item;
-import txengine.item.Usable;
+import txengine.systems.item.Consumable;
+import txengine.systems.item.Item;
+import txengine.systems.item.Usable;
 import txengine.main.Manager;
 import txengine.systems.room.action.Action;
 

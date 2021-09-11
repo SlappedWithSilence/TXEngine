@@ -21,6 +21,6 @@ public class ConversationAction extends Action {
 
         Manager.conversationList.get(conversationID).converse();
 
-        return super.unlockIndex;
+        return super.unhideIndex;
     }
 }

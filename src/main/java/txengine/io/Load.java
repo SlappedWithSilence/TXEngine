@@ -1,6 +1,6 @@
 package txengine.io;
 
-import txengine.item.effect.EffectFactory;
+import txengine.systems.item.effect.EffectFactory;
 import txengine.systems.room.Room;
 import txengine.systems.room.action.Action;
 import txengine.systems.room.action.ActionFactory;
@@ -13,10 +13,10 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import java.lang.Long;	
 
-import txengine.item.effect.Effect;
+import txengine.systems.item.effect.Effect;
 import txengine.main.Manager;
 import txengine.systems.combat.Player;
-import txengine.item.*;
+import txengine.systems.item.*;
 
 public class Load {
 

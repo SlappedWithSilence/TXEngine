@@ -6,6 +6,9 @@ import txengine.main.Manager;
 import java.util.Arrays;
 import java.util.Collection;
 
+// A FlagRequirement is met when all the flags inside its properties array
+// - exist
+// - are set to true
 public class FlagRequirement extends Requirement {
 
     public FlagRequirement() {

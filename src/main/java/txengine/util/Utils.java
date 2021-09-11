@@ -1,6 +1,8 @@
 package txengine.util;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class Utils {
 
@@ -30,5 +32,9 @@ public class Utils {
 		for (int i = 0; i < rawValues.length; i++) values[i] = Double.parseDouble(rawValues[i]);
 
 		return values;
+	}
+
+	public static List<Integer> toInts(Collection<String> collection) {
+		return collection.stream().map(Integer::parseInt).toList();
 	}
 }

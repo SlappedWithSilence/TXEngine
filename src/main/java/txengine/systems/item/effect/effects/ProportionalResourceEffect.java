@@ -1,7 +1,7 @@
-package txengine.item.effect.effects;
+package txengine.systems.item.effect.effects;
 
 import txengine.systems.combat.CombatEntity;
-import txengine.item.effect.Effect;
+import txengine.systems.item.effect.Effect;
 
 // Modifies a resource by a percent of the resource's max quantity.
 // Ex: Reduce Health by 25%

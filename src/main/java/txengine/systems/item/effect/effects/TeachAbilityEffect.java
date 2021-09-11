@@ -1,8 +1,8 @@
-package txengine.item.effect.effects;
+package txengine.systems.item.effect.effects;
 
 import txengine.systems.combat.CombatEntity;
 import txengine.io.LogUtils;
-import txengine.item.effect.Effect;
+import txengine.systems.item.effect.Effect;
 
 public class TeachAbilityEffect extends Effect {
 

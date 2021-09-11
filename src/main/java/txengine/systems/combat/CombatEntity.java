@@ -5,7 +5,8 @@ import txengine.systems.ability.Ability;
 import txengine.systems.ability.AbilityManager;
 import txengine.systems.combat.combatEffect.CombatEffect;
 import txengine.systems.inventory.Inventory;
-import txengine.item.Item;
+import txengine.systems.item.Equipment;
+import txengine.systems.item.Item;
 import txengine.main.Manager;
 
 import java.util.*;
@@ -22,6 +23,7 @@ public class CombatEntity implements CombatAgency {
     Inventory inventory;
     CombatResourceManager resourceManager;
     AbilityManager abilityManager;
+    HashMap<String, Equipment> equipmentMap;
     int speed; // Determines turn order
     int level;
 

@@ -12,7 +12,7 @@ import txengine.systems.combat.Player;
 
 import java.util.*;
 
-import txengine.item.Item;
+import txengine.systems.item.Item;
 import txengine.systems.room.Room;
 import txengine.systems.conversation.Conversation;
 import txengine.systems.room.RoomManager;
