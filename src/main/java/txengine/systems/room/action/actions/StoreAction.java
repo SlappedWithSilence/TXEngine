@@ -87,6 +87,7 @@ public class StoreAction extends Action {
 			} else {
 				int itemChoiceID = inventoryIDs.get(choice);
 				LogUtils.header("Purchase Item");
+				LogUtils.subHeader(List.of("Money: " + Manager.player.getMoney()));
 
 				if (Manager.player.getMoney() >= costs.get(choice)) {
 					ColorConsole.d("Are you sure you want to purchase " + Manager.itemList.get(itemChoiceID).getName() + "? ", false);
@@ -111,6 +112,7 @@ public class StoreAction extends Action {
 
 	private void displayInventory() {
 		LogUtils.header("Shop Inventory");
+		LogUtils.subHeader(List.of("Money: " + Manager.player.getMoney()));
 		ColorConsole.d(CHOICE_PROMPT+"\n", false);
 		for (int i = 0; i < inventoryIDs.size(); i++ ) {
 			System.out.println("[" + i + "] " +
@@ -128,7 +130,5 @@ public class StoreAction extends Action {
 
 		return true;
 	}
-
-
 
 }
