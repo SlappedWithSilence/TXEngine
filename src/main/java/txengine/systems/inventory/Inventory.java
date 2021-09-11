@@ -165,6 +165,46 @@ public class Inventory {
 		}
 	}
 
+	// There are three cases:
+	// - Case 0: Inventory contains no stacks of the item
+	// - Case 1: Inventory contains one stack of the item
+	// - Case 2: Inventory contains multiple stacks of the item
+	public int getItemQuantity(int itemID) {
+
+		// Case 0:
+		if (!itemIDs.contains(itemID)) return 0;
+
+		// Case 1 & 2
+		ArrayList<Integer> instanceIndexes = Utils.getAllInstances(itemIDs, itemID);
+		int quantitySum = 0;
+		for (int i : instanceIndexes) quantitySum+=itemQuantities.get(i);
+
+		return quantitySum;
+	}
+
+	// Removes 'quantity' of the item with id='itemID' from any stack in the inventory
+	// Returns true if successful, false, otherwise
+	public boolean consumeQuantity(int itemID, int quantity) {
+		if (getItemQuantity(itemID) < quantity) return false;
+
+		int remaining = quantity; // Amount of the item that needs to be removed
+
+		while (remaining > 0) {
+			ArrayList<Integer> stackIndexes = Utils.getAllInstances(itemIDs, itemID);
+
+			// If the first stack is smaller than the amount of items left to remove, remove the stack and decrement 'remaining'
+			if (itemQuantities.get(stackIndexes.get(0)) <= remaining) {
+				quantity = quantity - itemQuantities.get(stackIndexes.get(0)); // Decrement the remaining counter
+				removeItem(itemQuantities.get(stackIndexes.get(0)));           // Remove the item
+				stackIndexes.remove(0);
+			} else {
+				itemQuantities.set( stackIndexes.get(0), itemQuantities.get(stackIndexes.get(0)) - quantity );
+			}
+		}
+
+		return true;
+	}
+
 	public void setCapacity(int i) {
 		capacity = i;
 	}

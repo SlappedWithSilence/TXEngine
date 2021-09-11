@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Utils {
 
-	// Gets all occurences of a number in an arraylist
+	// Gets all occurrences of a number in an arraylist
 	public static ArrayList<Integer> getAllInstances(ArrayList list, int value) {
 		ArrayList<Integer> indexes = new ArrayList<Integer>();
 
