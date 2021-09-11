@@ -2,6 +2,7 @@ package mckeken.inventory;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import mckeken.main.Manager;
 import mckeken.color.*;
@@ -35,6 +36,23 @@ public class Inventory {
 		itemNames     = new ArrayList<>();
 		itemIDs       = new ArrayList<>();
 		itemQuantities = new ArrayList<>();
+	}
+
+	// List constructor. Builds an inventory from a pair of lists
+	public Inventory(List<Integer> itemIds, List<Integer> itemQuantities) {
+		this.itemNames     = new ArrayList<>();
+		this.itemIDs       = new ArrayList<>();
+		this.itemQuantities = new ArrayList<>();
+
+		if (itemIds.size() != itemQuantities.size()) {
+			LogUtils.error("Something went wrong building an Inventory. itemIDs and itemQuantities are not equal in length!\n");
+			return;
+		}
+
+		for (int i = 0; i < itemIds.size(); i++) {
+			addItem(itemIds.get(i), itemQuantities.get(i));
+		}
+
 	}
 
 	public Inventory(Inventory inventory) {
@@ -166,6 +184,10 @@ public class Inventory {
 	// Prints the inventory in a vertical numbered list
 	public void display() {
 		LogUtils.header("Inventory");
+		printItems();
+	}
+
+	public void printItems() {
 		for (int i = 0; i < getUsage(); i++ ) {
 			System.out.println("[" + i + "] " + itemNames.get(i) + "\t" + Colors.CYAN_BOLD + itemQuantities.get(i) + Colors.RESET);
 		}

@@ -3,6 +3,7 @@ package mckeken.room.action.actions;
 import com.rits.cloning.Cloner;
 import mckeken.combat.CombatEngine;
 import mckeken.combat.CombatEntity;
+import mckeken.inventory.Inventory;
 import mckeken.io.LogUtils;
 import mckeken.main.Manager;
 import mckeken.room.action.Action;
@@ -12,33 +13,63 @@ import java.util.List;
 
 public class CombatAction extends Action {
     CombatEngine combatEngine;
-    CombatEngine.EntityType loadType;
+    LoadType loadType;
 
     private final static String FRIENDLY_ENTITY_PROP_MARKER = "{FRIENDLY}";
     private final static String HOSTILE_ENTITY_PROP_MARKER  = "{HOSTILE}";
+    private final static String LOOT_DATA_MARKER = "{LOOT}";
+    private final static String ITEM_SEPARATER = ",";
 
     private ArrayList<Integer> lootIds;        // The ids of the items to give to the player when they win
     private ArrayList<Integer> lootQuantities; // The quantities of each item to give to the player
+
+    private enum LoadType {
+        HOSTILE,
+        FRIENDLY,
+        LOOT
+    }
 
     @Override
     public int perform() {
         Cloner cloner = new Cloner();
         ArrayList<CombatEntity> friendlies = new ArrayList<>();
         ArrayList<CombatEntity> hostiles = new ArrayList<>();
+        lootIds = new ArrayList<>();
+        lootQuantities = new ArrayList<>();
 
         for (String s:
              properties) {
+
+            // Set load type to friendly when encountering a friendly entity marker in the properties
             if (loadType == null || s.equals(FRIENDLY_ENTITY_PROP_MARKER)) {
-                loadType = CombatEngine.EntityType.FRIENDLY;
+                loadType = LoadType.FRIENDLY;
             }
+            // Set the load type to loot when encountering a loot entity marker in the properties
+            else if (s.equals(LOOT_DATA_MARKER)) {
+                loadType = LoadType.LOOT;
+            }
+            // Set the load type to hostile when encountering a hostile entity marker in the properties
             else if (s.equals(HOSTILE_ENTITY_PROP_MARKER)) {
-                loadType = CombatEngine.EntityType.HOSTILE;
+                loadType = LoadType.HOSTILE;
             }
-            else if (loadType == CombatEngine.EntityType.FRIENDLY) {
+            // If load type is set to friendly, add the entity with id value 's' to the friendly array
+            else if (loadType == LoadType.FRIENDLY) {
                 friendlies.add(cloner.deepClone(Manager.combatEntityList.get(Integer.parseInt(s))));
             }
-            else if (loadType == CombatEngine.EntityType.HOSTILE) {
+            // If load type is set to hostile, add the entity with id value 's' to the hostile array
+            else if (loadType == LoadType.HOSTILE) {
                 hostiles.add(new CombatEntity(Manager.combatEntityList.get(Integer.parseInt(s))));
+            // If the load type is set to Loot, process 's' as a pair of ints and add them to the loot arrays
+            } else if (loadType == LoadType.LOOT) {
+                if (s.contains(ITEM_SEPARATER)) { // Make sure that the value pair is formatted correctly
+                    String[] prop = s.split(ITEM_SEPARATER); // Split the values
+                    int itemID = Integer.parseInt(prop[0]); // Get the loot item's id
+                    int itemQuantity = Integer.parseInt(prop[1]); // Get the loot item's quantity
+
+                    // Add the item id and its quantity to their respective arrays
+                    lootIds.add(itemID);
+                    lootQuantities.add(itemQuantity);
+                }
             }
         }
 
@@ -46,7 +77,7 @@ public class CombatAction extends Action {
 
         if (combatEngine.startCombat() ) {
             System.out.println("You emerge victorious from combat!");
-            getLootData(lootIds, lootQuantities, List.of(properties));
+            printLoot();
             giveLoot(lootIds, lootQuantities);
         }
         else System.out.println("You failed to conquer your foes and lie defeated.");
@@ -54,17 +85,15 @@ public class CombatAction extends Action {
         return unlockIndex;
     }
 
-    private void getLootData(ArrayList<Integer> ids, ArrayList<Integer> quantities, final List<String> rawData) {
-        if (rawData.size()%2 != 0) {
-            LogUtils.error("Something went wrong while loading item data for a combat event!\n");
-            return;
-        }
+    private void printLoot() {
+        Inventory i = new Inventory(lootIds, lootQuantities);
 
-        for (int i = 0; i < rawData.size(); i+=2) {
-            ids.add(Integer.parseInt(rawData.get(i)));
-            quantities.add(Integer.parseInt(rawData.get(i+1)));
-        }
+        LogUtils.header("Loot");
+        System.out.println("You notice some objects left behind on the battlefield and collect them.");
+        i.printItems();
+        LogUtils.getAnyKey();
     }
+
 
     private void giveLoot(ArrayList<Integer> ids, ArrayList<Integer> quantities) {
         if (ids.size() != quantities.size()) {

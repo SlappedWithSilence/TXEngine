@@ -10,6 +10,28 @@ public class LogUtils {
 
 	public final static int HEADER_LENGTH = 105;
 	public final static int HEADER_SPACES = 3;
+
+	public final static long READING_DELAY_SECONDS = 1;
+
+	// Delay execution for 'n' seconds. This is intended to be used to let the user read new information as it is printed
+	public static void readingDelay(long seconds) {
+		try {
+			Thread.sleep(seconds * 1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// Call readingDelay using a default value as the delay
+	public static void readingDelay() {
+		readingDelay(READING_DELAY_SECONDS);
+	}
+
+	//Wait for the user to press any key
+	public static void getAnyKey() {
+		System.out.println("Press the enter key to continue...");
+		new Scanner(System.in).nextLine();
+	}
 	
 	// Gets a yes or no answer from the user
 	public static boolean getAffirmative() {

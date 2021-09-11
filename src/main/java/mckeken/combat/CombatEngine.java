@@ -285,6 +285,7 @@ public class CombatEngine {
 
             if (lookUpEntity(currentEntity.getKey(), currentEntity.getValue()).resourceManager.getResourceQuantity(primaryResourceName) >= 0) { // If the entity isn't dead
                 turn(currentEntity.getKey(), currentEntity.getValue()); // Take the turn
+                LogUtils.readingDelay();
             }
 
             if (endState != null) return;
