@@ -30,7 +30,7 @@ public abstract class Requirement implements Configurable {
 
 
     /* Static Methods */
-    public boolean allMet(Collection<Requirement> requirements) {
+    public static boolean allMet(Collection<Requirement> requirements) {
         return requirements.stream().allMatch(Requirement::met);
     }
 
