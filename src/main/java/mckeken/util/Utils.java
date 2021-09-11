@@ -13,4 +13,22 @@ public class Utils {
 
 		return indexes;
 	}
+
+	public static int[] parseInts(String separatedValues, String sep) {
+		String[] rawValues = separatedValues.split(sep);
+		int[] values = new int[rawValues.length];
+
+		for (int i = 0; i < rawValues.length; i++) values[i] = Integer.parseInt(rawValues[i]);
+
+		return values;
+	}
+
+	public static double[] parseDoubles(String separatedValues, String sep) {
+		String[] rawValues = separatedValues.split(sep);
+		double[] values = new double[rawValues.length];
+
+		for (int i = 0; i < rawValues.length; i++) values[i] = Double.parseDouble(rawValues[i]);
+
+		return values;
+	}
 }

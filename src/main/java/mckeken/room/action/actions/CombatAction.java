@@ -7,6 +7,7 @@ import mckeken.inventory.Inventory;
 import mckeken.io.LogUtils;
 import mckeken.main.Manager;
 import mckeken.room.action.Action;
+import mckeken.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,13 +63,11 @@ public class CombatAction extends Action {
             // If the load type is set to Loot, process 's' as a pair of ints and add them to the loot arrays
             } else if (loadType == LoadType.LOOT) {
                 if (s.contains(ITEM_SEPARATER)) { // Make sure that the value pair is formatted correctly
-                    String[] prop = s.split(ITEM_SEPARATER); // Split the values
-                    int itemID = Integer.parseInt(prop[0]); // Get the loot item's id
-                    int itemQuantity = Integer.parseInt(prop[1]); // Get the loot item's quantity
+                   int[] lootProperties = Utils.parseInts(s, ITEM_SEPARATER);
 
                     // Add the item id and its quantity to their respective arrays
-                    lootIds.add(itemID);
-                    lootQuantities.add(itemQuantity);
+                    lootIds.add(lootProperties[0]);
+                    lootQuantities.add(lootProperties[1]);
                 }
             }
         }
