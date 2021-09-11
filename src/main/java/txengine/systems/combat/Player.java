@@ -174,4 +174,32 @@ public class Player extends CombatEntity {
 	public void setMoney(int money) {
 		this.money = money;
 	}
+
+	public int getLevelXP() {
+		return levelXP;
+	}
+
+	public void setLevelXP(int levelXP) {
+		this.levelXP = levelXP;
+	}
+
+	public int getLevelXPMax() {
+		return levelXPMax;
+	}
+
+	public void setLevelXPMax(int levelXPMax) {
+		this.levelXPMax = levelXPMax;
+	}
+
+	public int getNextLevelXPModifier() {
+		return nextLevelXPModifier;
+	}
+
+	public void setNextLevelXPModifier(int nextLevelXPModifier) {
+		this.nextLevelXPModifier = nextLevelXPModifier;
+	}
+
+	public void setLocation(int location) {
+		this.location = location;
+	}
 }

@@ -19,27 +19,28 @@ public abstract class Action {
 
 	}
 
-	public Action(String menuName, String text, String[] properties, boolean enabled, int unhideIndex) {
+	public Action(String menuName, String text, String[] properties, boolean enabled, int unhideIndex, List<Requirement> requirements) {
 		this.menuName = menuName;
 		this.hidden = enabled;
 		this.properties = properties;
 		this.text = text;
 		this.unhideIndex = unhideIndex;
+		this.requirements = requirements;
 	}
 
-	public Action(String menuName, String text, String[] properties, boolean enabled, int unhideIndex, int numProperties) {
+	public Action(String menuName, String text, String[] properties, boolean enabled, int unhideIndex, int numProperties, List<Requirement> requirements) {
 		this.menuName = menuName;
 		this.hidden = enabled;
 		this.properties = properties;
 		this.text = text;
 		this.numProperties = numProperties;
 		this.unhideIndex = unhideIndex;
+		this.requirements = requirements;
 	}
 
 	/* Abstract Member Functions */
 	// Performs the action. In MOST CASES, properties should only be accessed in this function. Manipulating properties in the constructors wastes memory.
 	public abstract int perform();
-
 
 
 	/* Concrete Member Functions */
@@ -58,6 +59,8 @@ public abstract class Action {
 		if (!isHidden()) ColorConsole.d(menuName + "\n", false);
 		return isHidden();
 	}
+
+
 
 	public String[] getProperties() {
 		return properties;
@@ -93,5 +96,13 @@ public abstract class Action {
 
 	public void setUnhideIndex(int unhideIndex) {
 		this.unhideIndex = unhideIndex;
+	}
+
+	public List<Requirement> getRequirements() {
+		return requirements;
+	}
+
+	public void setRequirements(List<Requirement> requirements) {
+		this.requirements = requirements;
 	}
 }

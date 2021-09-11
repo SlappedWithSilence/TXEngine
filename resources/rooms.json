@@ -61,8 +61,49 @@
           "hidden"   : false,
           "properties" : ["{FRIENDLY}","{HOSTILE}", "-1","1", "0", "{LOOT}", "1,1", "4,2"],
           "unlockedIndex" : -1
+        },
+        {
+          "className" : "MoveAction",
+          "menuName"  : "Go to Paddie's",
+          "text"      : "You slink away into the night, seeking out Paddie's Irish Bar.",
+          "hidden"   : false,
+          "properties" : ["1"],
+          "unlockedIndex" : -1
         }
       ]
+    },
+    {
+      "name"        : "Paddie's Irish Pub",
+      "id"          : 1,
+      "text"        : "...",
+      "onFirstEnterActions" : [],
+      "actions"  :
+        [
+          {
+            "className" : "SummaryAction",
+            "menuName"  : "Check yo-self",
+            "text"      : "",
+            "hidden"   : false,
+            "properties" : [],
+            "unlockedIndex" : -1
+          },
+          {
+            "className" : "AbilitySummaryAction",
+            "menuName"  : "Inspect Abilities",
+            "text"      : "",
+            "hidden"   : false,
+            "properties" : [],
+            "unlockedIndex" : -1
+          },
+          {
+            "className"   : "InventoryAction",
+            "menuName"    : "Check your inventory",
+            "text"        : "You decide to check the contents of your pack.",
+            "hidden"     : false,
+            "properties"  : [],
+            "unlockedIndex" : -1
+          }
+        ]
     }
   ]
 }

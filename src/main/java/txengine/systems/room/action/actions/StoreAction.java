@@ -1,6 +1,7 @@
 package txengine.systems.room.action.actions;
 
 import txengine.color.*;
+import txengine.integration.Requirement;
 import txengine.io.LogUtils;
 import txengine.main.Manager;
 import txengine.systems.room.action.Action;
@@ -8,6 +9,7 @@ import txengine.util.Utils;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 
 // This action emulates the player entering a store
 public class StoreAction extends Action {
@@ -31,8 +33,8 @@ public class StoreAction extends Action {
 		storeMode = StoreMode.DEMAND;
 	}
 
-	public StoreAction(String menuName, String text, String[] properties, boolean enabled, int unlockIndex) {
-		super(menuName, text, properties, enabled, unlockIndex);
+	public StoreAction(String menuName, String text, String[] properties, boolean enabled, int unlockIndex, List<Requirement> requirements) {
+		super(menuName, text, properties, enabled, unlockIndex, requirements);
 	}
 
 	private int purchase(int index) {

@@ -1,5 +1,6 @@
 package txengine.util;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -36,5 +37,26 @@ public class Utils {
 
 	public static List<Integer> toInts(Collection<String> collection) {
 		return collection.stream().map(Integer::parseInt).toList();
+	}
+
+	// Parses a pair of string-int values into a list of pairs. pair values are stored in a single string with
+	// the following format:
+	// "<String><sep><Int>"
+	// Ex: sep = "," | "Health,40"
+	// Ex: sep = " " | "Health 40"
+	public static List<AbstractMap.SimpleEntry<String, Integer>> parseStringIntPairs(Collection<String> rawPairs, String sep, boolean invert) {
+		if (!invert) return rawPairs.stream().map(pair -> {
+			String[] sArr = pair.split(sep);
+			return new AbstractMap.SimpleEntry<>(sArr[0], Integer.parseInt(sArr[1]));
+		}).toList();
+
+		else return rawPairs.stream().map(pair -> {
+			String[] sArr = pair.split(sep);
+			return new AbstractMap.SimpleEntry<>(sArr[1], Integer.parseInt(sArr[0]));
+		}).toList();
+	}
+
+	public static List<AbstractMap.SimpleEntry<String, Integer>> parseStringIntPairs(Collection<String> rawPairs) {
+		return parseStringIntPairs(rawPairs, ",", false);
 	}
 }

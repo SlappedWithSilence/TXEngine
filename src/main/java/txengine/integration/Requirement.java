@@ -1,5 +1,7 @@
 package txengine.integration;
 
+import java.util.Collection;
+
 // A Requirement is a configurable class that returns a true or false value
 // through an arbitrary calculation using one or more configuration values
 // stored in the properties array. Requirements are used in a variety of ways by the
@@ -25,6 +27,12 @@ public abstract class Requirement implements Configurable {
     }
 
     /* Member Methods */
+
+
+    /* Static Methods */
+    public boolean allMet(Collection<Requirement> requirements) {
+        return requirements.stream().allMatch(Requirement::met);
+    }
 
     public abstract boolean met();
 
