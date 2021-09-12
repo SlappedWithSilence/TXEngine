@@ -43,28 +43,6 @@ public class EquipmentManager {
         return effects;
     }
 
-    /* Helper Methods */
-
-    private void initialize() {
-        equipmentMap = new HashMap<>();
-        Arrays.stream(Equipment.EquipmentType.values()).forEach(equipmentType -> equipmentMap.put(equipmentType, null));
-    }
-
-    /* Accessor Methods */
-    public void setSlot(Equipment.EquipmentType slot, int equipmentID) {
-        if (((Equipment) Manager.itemHashMap.get(equipmentID)).getType() != slot) {
-            LogUtils.error("Cannot assign a " + ((Equipment) Manager.itemHashMap.get(equipmentID)).getType().toString() + " to the " + slot.toString() + " slot!");
-            return;
-        }
-
-        equipmentMap.put(slot, equipmentID);
-    }
-
-    // Returns an item instance of the equipment in the given slot
-    public Equipment getSlot(Equipment.EquipmentType type) {
-        return (Equipment) Manager.itemHashMap.get( equipmentMap.get(type) );
-    }
-
     public boolean equip(int id) {
         Item i = Manager.itemHashMap.get(id);
 
@@ -86,6 +64,38 @@ public class EquipmentManager {
     public void unequip(Equipment.EquipmentType slot) {
         Manager.player.getInventory().addItem(equipmentMap.get(slot));
         setSlot(slot, -1);
+    }
+
+    // Returns the sum of all damage buffs
+    public int getDamageBuff() {
+        return equipmentMap.values().stream().reduce(0, (subtotal, e) -> subtotal + ((Equipment) Manager.itemHashMap.get(e)).getDamageBuff() , Integer::sum);
+    }
+
+    // Returns the sum of all damage resistance
+    public int getDamageResistance() {
+        return equipmentMap.values().stream().reduce(0, (subtotal, e) -> subtotal + ((Equipment) Manager.itemHashMap.get(e)).getDamageResistance() , Integer::sum);
+    }
+
+    /* Helper Methods */
+
+    private void initialize() {
+        equipmentMap = new HashMap<>();
+        Arrays.stream(Equipment.EquipmentType.values()).forEach(equipmentType -> equipmentMap.put(equipmentType, null));
+    }
+
+    /* Accessor Methods */
+    public void setSlot(Equipment.EquipmentType slot, int equipmentID) {
+        if (((Equipment) Manager.itemHashMap.get(equipmentID)).getType() != slot) {
+            LogUtils.error("Cannot assign a " + ((Equipment) Manager.itemHashMap.get(equipmentID)).getType().toString() + " to the " + slot.toString() + " slot!");
+            return;
+        }
+
+        equipmentMap.put(slot, equipmentID);
+    }
+
+    // Returns an item instance of the equipment in the given slot
+    public Equipment getSlot(Equipment.EquipmentType type) {
+        return (Equipment) Manager.itemHashMap.get( equipmentMap.get(type) );
     }
 
     public int getSlotID(Equipment.EquipmentType type) {

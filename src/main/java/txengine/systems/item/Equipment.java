@@ -99,4 +99,20 @@ public class Equipment extends Item {
     public void setTagResistances(List<AbstractMap.SimpleEntry<String, Float>> tagResistances) {
         this.tagResistances = tagResistances;
     }
+
+    public int getDamageBuff() {
+        return damageBuff;
+    }
+
+    public void setDamageBuff(int damageBuff) {
+        this.damageBuff = damageBuff;
+    }
+
+    public int getDamageResistance() {
+        return damageResistance;
+    }
+
+    public void setDamageResistance(int damageResistance) {
+        this.damageResistance = damageResistance;
+    }
 }
