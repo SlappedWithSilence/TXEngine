@@ -79,6 +79,10 @@
             {
               "className" : "LevelRequirement",
               "properties" : ["2"]
+            },
+            {
+              "className" : "ResourceRequirement",
+              "properties" : ["Health,50","Stamina,101"]
             }
           ],
           "unlockedIndex" : -1
