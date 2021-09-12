@@ -108,7 +108,7 @@ public class LogUtils {
 		ColorConsole.e(text, false);
 	}
 
-	public static void numberedList(ArrayList<String> list) {
+	public static void numberedList(List<String> list) {
 		System.out.println("-".repeat(HEADER_LENGTH));
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println("[" + i + "] " + list.get(i));

@@ -29,12 +29,9 @@ public class Room {
 	}
 
 	public void printActions() {
-		for (int i = 0; i < roomActions.size(); i++) {
 
-			if (!roomActions.get(i).isHidden() ) System.out.print("[" + i + "] ");
-			roomActions.get(i).print();
+			LogUtils.numberedList(roomActions.stream().filter(action -> !action.isHidden()).map(Action::toString).toList());
 
-		}
 	}
 
 	public void enter() {
@@ -49,13 +46,13 @@ public class Room {
 		// Loop until the user performs a MoveAction
 		while (stay) {
 			printActions();
-			int userSelection = LogUtils.getNumber(0, roomActions.size()-1);
+			int userSelection = LogUtils.getNumber(0, roomActions.stream().filter(action -> !action.isHidden()).toList().size()-1);
 
-			if (Requirement.allMet(roomActions.get(userSelection).getRequirements())) {
-				int unhide = roomActions.get(userSelection).perform();
+			if (Requirement.allMet(roomActions.stream().filter(action -> !action.isHidden()).toList().get(userSelection).getRequirements())) {
+				int unhide = roomActions.stream().filter(action -> !action.isHidden()).toList().get(userSelection).perform();
 				if (unhide >= 0) roomActions.get(unhide).setHidden(false); // Enable the Action that was passed through the last performed Action.
 
-				if (roomActions.get(userSelection) instanceof MoveAction) break;
+				if (roomActions.stream().filter(action -> !action.isHidden()).toList().get(userSelection) instanceof MoveAction) break;
 			} else {
 				System.out.println("You can't do that right now!");
 				roomActions.get(userSelection).getRequirements().forEach(r -> System.out.println(r.toString()));

@@ -61,6 +61,10 @@ public abstract class Action {
 	}
 
 
+	@Override
+	public String toString() {
+		return menuName;
+	}
 
 	public String[] getProperties() {
 		return properties;
