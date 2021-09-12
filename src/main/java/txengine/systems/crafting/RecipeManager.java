@@ -1,8 +1,11 @@
 package txengine.systems.crafting;
 
 import txengine.color.Colors;
+import txengine.integration.Requirement;
+import txengine.io.LogUtils;
 import txengine.main.Manager;
 import txengine.systems.combat.CombatEntity;
+import txengine.systems.inventory.Inventory;
 
 import java.util.*;
 
@@ -53,6 +56,37 @@ public class RecipeManager {
         }
 
         return formattedIngredients;
+    }
+
+    // Attempt to craft. Return false and print a warning to the user if it can't be done.
+    public boolean craft(Recipe recipe, Inventory inventory) {
+
+        if (!Requirement.allMet(recipe.getRequirements())) {
+            System.out.println("You haven't met all the requirements to craft!");
+            Requirement.asStrings(recipe.getRequirements()).forEach(System.out::println);
+            return false;
+        }
+
+        if (!recipe.hasIngredients(inventory)) {
+            System.out.println("You don't have the right ingredients to craft!");
+            ingredientsAsStrings(recipe).forEach(System.out::println);
+            return false;
+        }
+
+        if (inventory.getUsage() - recipe.getIngredients().size() > inventory.getCapacity() - recipe.getProducts().size()) {
+            System.out.println("You don't have enough space to craft! You need " + (inventory.getUsage() - recipe.getIngredients().size() - inventory.getCapacity() - recipe.getProducts().size()) + " spaces.");
+            return false;
+        }
+
+        for (AbstractMap.SimpleEntry<Integer, Integer> pair : recipe.getIngredients()) {
+            inventory.consumeQuantity(pair.getKey(), pair.getValue());
+        }
+
+        for (AbstractMap.SimpleEntry<Integer, Integer> pair : recipe.getProducts()) {
+            inventory.addItem(pair.getKey(), pair.getValue());
+        }
+
+        return true;
     }
 
 

@@ -2,6 +2,7 @@ package txengine.systems.combat;
 
 import txengine.systems.ability.Ability;
 import txengine.io.LogUtils;
+import txengine.systems.crafting.RecipeManager;
 import txengine.systems.item.Item;
 import txengine.main.Manager;
 import txengine.systems.inventory.Inventory;
@@ -25,9 +26,9 @@ public class Player extends CombatEntity {
 	private int nextLevelXPModifier;
 
 	private int money;
+	private int location; // The room that the player is currently in. This value must always be a valid room id.
 
-	// The room that the player is currently in. This value must always be a valid room id.
-	private int location;
+	private RecipeManager recipeManager;
 
 	//*** Constructors ***//
 
@@ -40,10 +41,12 @@ public class Player extends CombatEntity {
 		inventory = new Inventory();
 		money = 0;
 		location = 0;
+
+		recipeManager = new RecipeManager();
 	}
 
 	// Specific constructor
-	public Player(String name, int level, Inventory inventory, int location, int money) {
+	public Player(String name, int level, Inventory inventory, int location, int money, RecipeManager recipeManager) {
 		this.name = name;
 
 		this.level = level;
@@ -55,9 +58,12 @@ public class Player extends CombatEntity {
 		this.location = location;
 
 		resourceManager = new CombatResourceManager(Manager.playerResourceMap);
+
+		this.recipeManager = recipeManager;
 	}
 
-	// Member functions
+	/* Member Methods */
+
 	@Override
 	public AbstractMap.SimpleEntry<Ability, Item> makeChoice(CombatEngine engine) {
 		AbstractMap.SimpleEntry<Ability, Item> choice = null;
@@ -125,6 +131,8 @@ public class Player extends CombatEntity {
 
 	}
 
+	/* Helper Methods */
+
 	private static CombatEntity chooseTarget(List<CombatEntity> entityArrayList) {
 		if (entityArrayList == null) return null;
 
@@ -133,6 +141,16 @@ public class Player extends CombatEntity {
 		LogUtils.verticalTabList(entityArrayList.stream().map(CombatEntity::getData).toList());
 
 		return entityArrayList.get(LogUtils.getNumber(0,entityArrayList.size()-1));
+	}
+
+	/* Accessor Methods */
+
+	public RecipeManager getRecipeManager() {
+		return recipeManager;
+	}
+
+	public void setRecipeManager(RecipeManager recipeManager) {
+		this.recipeManager = recipeManager;
 	}
 
 	public static boolean isPlayer(CombatEntity entity) {
