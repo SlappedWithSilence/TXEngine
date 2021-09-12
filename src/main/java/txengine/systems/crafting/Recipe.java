@@ -1,6 +1,7 @@
 package txengine.systems.crafting;
 
 import txengine.integration.Requirement;
+import txengine.main.Manager;
 import txengine.systems.inventory.Inventory;
 
 import java.util.*;
@@ -50,6 +51,17 @@ public class Recipe {
         }
 
         return true;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        for (AbstractMap.SimpleEntry<Integer, Integer> pair : ingredients) sb.append("[" + Manager.itemHashMap.get(pair.getKey()).getName() + ": " + pair.getValue() + "]");
+        sb.append(" -> ");
+        for (AbstractMap.SimpleEntry<Integer, Integer> pair : products) sb.append("[" + Manager.itemHashMap.get(pair.getKey()).getName() + ": " + pair.getValue() + "]");
+
+        return sb.toString();
     }
 
     public List<AbstractMap.SimpleEntry<Integer, Integer>> getIngredients() {

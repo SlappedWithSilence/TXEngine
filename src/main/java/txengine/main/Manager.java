@@ -37,6 +37,7 @@ public class Manager {
     private static final String PLAYER_RESOURCE_FILE = "combat_resources.json";
     private static final String ABILITY_RESOURCE_FILE = "abilities.json";
     private static final String COMBAT_ENTITY_RESOURCE_FILE = "combat_entities.json";
+    private static final String RECIPES_RESOURCE_FILE = "recipes.json";
 
     // *** Variables *** //
     private static boolean saveExists = false;
@@ -104,6 +105,7 @@ public class Manager {
         playerResourceMap = new CombatResourceLoader().load(Resources.getResourceAsFile(PLAYER_RESOURCE_FILE));
         abilityHashMap = AbilityLoader.load(Resources.getResourceAsFile(ABILITY_RESOURCE_FILE));
         combatEntityHashMap = new CombatEntityLoader().load(Resources.getResourceAsFile(COMBAT_ENTITY_RESOURCE_FILE));
+        recipeHashMap = RecipeLoader.load(Resources.getResourceAsFile(RECIPES_RESOURCE_FILE));
 
         flagManager = new FlagManager();
     }
@@ -120,6 +122,8 @@ public class Manager {
         player.getAbilityManager().learn("Spit");
         player.getAbilityManager().learn("Bomb-Threat");
         player.getAbilityManager().learn("Blast");
+
+        for (int key : recipeHashMap.keySet()) System.out.println(recipeHashMap.get(key).toString());
     }
 
 }

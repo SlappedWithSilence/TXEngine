@@ -88,6 +88,70 @@
                "properties": ["Blast"]
             }
          ]
+      },
+      {
+         "type"      :  "item",
+         "name"      :  "Rough Uncut Emerald",
+         "description": "A small, cloudy emerald, pulled straight from the earth. It sparkles with untapped potential.",
+         "id"        :  7,
+         "value"     :  300,
+         "maxStacks" :  25
+      },
+      {
+         "type"      :  "item",
+         "name"      :  "Rough Uncut Sapphire",
+         "description": "A small, cloudy sapphire, pulled straight from the earth. It sparkles with untapped potential.",
+         "id"        :  8,
+         "value"     :  300,
+         "maxStacks" :  25
+      },
+      {
+         "type"      :  "item",
+         "name"      :  "Rough Uncut Ruby",
+         "description": "A small, cloudy ruby, pulled straight from the earth. It sparkles with untapped potential.",
+         "id"        :  9,
+         "value"     :  300,
+         "maxStacks" :  25
+      },
+      {
+         "type"      :  "item",
+         "name"      :  "Rough Uncut Diamond",
+         "description": "A small, cloudy diamond, pulled straight from the earth. It sparkles with untapped potential.",
+         "id"        :  10,
+         "value"     :  300,
+         "maxStacks" :  25
+      },
+      {
+         "type"      :  "item",
+         "name"      :  "Rough Emerald",
+         "description": "A small emerald cut by a careful hand. Its flaws are apparent at the right angle",
+         "id"        :  11,
+         "value"     :  550,
+         "maxStacks" :  25
+      },
+      {
+         "type"      :  "item",
+         "name"      :  "Rough Sapphire",
+         "description": "A small sapphire cut by a careful hand. Its flaws are apparent at the right angle",
+         "id"        :  12,
+         "value"     :  550,
+         "maxStacks" :  25
+      },
+      {
+         "type"      :  "item",
+         "name"      :  "Rough Ruby",
+         "description": "A small ruby cut by a careful hand. Its flaws are apparent at the right angle",
+         "id"        :  13,
+         "value"     :  550,
+         "maxStacks" :  25
+      },
+      {
+         "type"      :  "item",
+         "name"      :  "Rough Diamond",
+         "description": "A small diamond cut by a careful hand. Its flaws are apparent at the right angle",
+         "id"        :  14,
+         "value"     :  550,
+         "maxStacks" :  25
       }
    ]
 }

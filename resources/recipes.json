@@ -1,0 +1,28 @@
+{
+  "recipes" : [
+    {
+      "id" : 0,
+      "requirements" : [],
+      "ingredients" : ["7,1"],
+      "products" : ["11,1"]
+    },
+    {
+      "id" : 1,
+      "requirements" : [],
+      "ingredients" : ["8,1"],
+      "products" : ["12,1"]
+    },
+    {
+      "id" : 2,
+      "requirements" : [],
+      "ingredients" : ["9,1"],
+      "products" : ["13,1"]
+    },
+    {
+      "id" : 3,
+      "requirements" : [],
+      "ingredients" : ["10,1"],
+      "products" : ["14,1"]
+    }
+  ]
+}
