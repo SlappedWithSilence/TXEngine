@@ -1,6 +1,9 @@
 package txengine.systems.room.action;
 
+import txengine.integration.Requirement;
 import txengine.io.LogUtils;
+
+import java.util.List;
 
 public class ActionFactory {
 
@@ -11,7 +14,7 @@ public class ActionFactory {
         }
 
         // Returns an instance of an Effect that has the properties passed in the paramter
-        public static Action build(String className, String menuName, String text, boolean enabled, int unlockedIndex, String[] properties) {
+        public static Action build(String className, String menuName, String text, boolean enabled, int unlockedIndex, String[] properties, List<Requirement> requirements) {
             try {
                 Class clasz = Class.forName(ACTIONS_PACKAGE + className); // Looks up the class name passed in
                 Action a = (Action)clasz.newInstance(); // Generates an instance of it cast to an Effect
@@ -20,6 +23,7 @@ public class ActionFactory {
                 a.setText(text);
                 a.setHidden(enabled);
                 a.setUnhideIndex(unlockedIndex);
+                a.setRequirements(requirements);
                 return a;	// Returns the effect
 
             } catch (InstantiationException e) {

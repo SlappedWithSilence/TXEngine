@@ -1,5 +1,6 @@
 package txengine.systems.room;
 
+import txengine.integration.Requirement;
 import txengine.io.LogUtils;
 import txengine.systems.room.action.Action;
 import txengine.systems.room.action.actions.MoveAction;
@@ -50,10 +51,16 @@ public class Room {
 			printActions();
 			int userSelection = LogUtils.getNumber(0, roomActions.size()-1);
 
-			int unhide = roomActions.get(userSelection).perform();
-			if (unhide >= 0) roomActions.get(unhide).setHidden(false); // Enable the Action that was passed through the last performed Action.
+			if (Requirement.allMet(roomActions.get(userSelection).getRequirements())) {
+				int unhide = roomActions.get(userSelection).perform();
+				if (unhide >= 0) roomActions.get(unhide).setHidden(false); // Enable the Action that was passed through the last performed Action.
 
-			if (roomActions.get(userSelection) instanceof MoveAction) break;
+				if (roomActions.get(userSelection) instanceof MoveAction) break;
+			} else {
+				System.out.println("You can't do that right now!");
+				roomActions.get(userSelection).getRequirements().forEach(r -> System.out.println(r.toString()));
+			}
+
 		}
 	}
 

@@ -22,7 +22,7 @@ public class ConversationAction extends Action {
     public int perform() {
         conversationID = Integer.parseInt(super.properties[0]);
 
-        Manager.conversationList.get(conversationID).converse();
+        Manager.conversationHashMap.get(conversationID).converse();
 
         return super.unhideIndex;
     }

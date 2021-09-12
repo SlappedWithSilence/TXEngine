@@ -28,9 +28,9 @@ public class CombatResourceManager {
     }
 
     public CombatResourceManager() {
-        if (Manager.playerResourceList != null) {
+        if (Manager.playerResourceMap != null) {
             Cloner cloner = new Cloner();
-            resources = new TreeMap<>(cloner.deepClone(Manager.playerResourceList));
+            resources = new TreeMap<>(cloner.deepClone(Manager.playerResourceMap));
         } else {
             resources = new TreeMap<>();
         }

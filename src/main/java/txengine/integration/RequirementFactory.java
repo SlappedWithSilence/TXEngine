@@ -1,4 +1,4 @@
-package txengine.integration.requirements;
+package txengine.integration;
 
 import txengine.integration.Requirement;
 import txengine.io.LogUtils;

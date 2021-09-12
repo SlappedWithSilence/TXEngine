@@ -1,5 +1,6 @@
 package txengine.io;
 
+import txengine.integration.Requirement;
 import txengine.systems.room.Room;
 import txengine.systems.room.action.Action;
 import txengine.systems.room.action.ActionFactory;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 public class RoomLoader implements Loader{
 
@@ -82,6 +84,8 @@ public class RoomLoader implements Loader{
             boolean hidden = 	(Boolean) rawAction.get("hidden");
             int unlockIndex = 	((Long) rawAction.get("unlockedIndex")).intValue();
 
+            List<Requirement> requirements = LoadUtils.parseRequirements((JSONArray) rawAction.get("requirements"));
+
             JSONArray propertiesArray = (JSONArray) rawAction.get("properties");	// Get a sub-array of property string values for the current action
 
             String[] actionProperties = new String[ propertiesArray.size()];		// Create a java-array to store the action's property values
@@ -90,7 +94,7 @@ public class RoomLoader implements Loader{
                 actionProperties[i] = prop;											// Store it in the array
             }
 
-            Action a = ActionFactory.build(className, menuName, text, hidden, unlockIndex, actionProperties);
+            Action a = ActionFactory.build(className, menuName, text, hidden, unlockIndex, actionProperties, requirements);
             actions.add(a);
         }
 

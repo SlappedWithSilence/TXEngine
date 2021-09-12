@@ -25,7 +25,7 @@ public class ItemRequirement extends Requirement {
 
         sb.append("You must have ");
 
-        for (int id : Utils.toInts(List.of(properties))) sb.append(Manager.itemList.get(id)).append(",");
+        for (int id : Utils.toInts(List.of(properties))) sb.append(Manager.itemHashMap.get(id)).append(",");
         sb.replace(sb.length()-1, sb.length()-1, " ");
         sb.append("in your inventory.");
 

@@ -1,7 +1,6 @@
 package txengine.systems.crafting;
 
 import txengine.color.Colors;
-import txengine.io.LogUtils;
 import txengine.main.Manager;
 import txengine.systems.combat.CombatEntity;
 
@@ -40,7 +39,7 @@ public class RecipeManager {
         for (AbstractMap.SimpleEntry<Integer, Integer> pair : recipe.getIngredients()) {
             StringBuilder sb = new StringBuilder();
 
-            sb.append(Manager.itemList.get(pair.getKey())).append(": ");
+            sb.append(Manager.itemHashMap.get(pair.getKey())).append(": ");
 
             // Make the item quantity green if it is satisfied, red otherwise
             if (Manager.player.getInventory().getItemQuantity(pair.getKey()) < pair.getValue()) {

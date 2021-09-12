@@ -51,7 +51,7 @@ public class AbilityManager {
 
     // Teach the combat entity a new Ability by name reference
     public void learn(String abilityName) {
-        abilityList.add(Manager.abilityList.get(abilityName));
+        abilityList.add(Manager.abilityHashMap.get(abilityName));
     }
 
     // Teach the combat entity a new Ability by direct reference

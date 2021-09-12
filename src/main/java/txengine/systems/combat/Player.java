@@ -34,7 +34,7 @@ public class Player extends CombatEntity {
 	// Default constructor
 	public Player() {
 		name = DEFAULT_PLAYER_NAME;
-		resourceManager = new CombatResourceManager(Manager.playerResourceList);
+		resourceManager = new CombatResourceManager(Manager.playerResourceMap);
 		level = 1;
 
 		inventory = new Inventory();
@@ -54,7 +54,7 @@ public class Player extends CombatEntity {
 
 		this.location = location;
 
-		resourceManager = new CombatResourceManager(Manager.playerResourceList);
+		resourceManager = new CombatResourceManager(Manager.playerResourceMap);
 	}
 
 	// Member functions
@@ -113,7 +113,7 @@ public class Player extends CombatEntity {
 					int itemChoice = LogUtils.getNumber(-1, inventory.getUsage());
 
 					if (itemChoice > -1) {
-						return new AbstractMap.SimpleEntry<>(null, Manager.itemList.get(itemChoice));
+						return new AbstractMap.SimpleEntry<>(null, Manager.itemHashMap.get(itemChoice));
 					}
 
 					break;

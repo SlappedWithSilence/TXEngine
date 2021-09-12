@@ -5,6 +5,7 @@ import txengine.systems.combat.CombatEntity;
 import txengine.systems.combat.CombatResourceManager;
 import txengine.systems.ability.Ability;
 import txengine.systems.ability.AbilityManager;
+import txengine.systems.crafting.Recipe;
 import txengine.systems.flag.FlagManager;
 import txengine.systems.inventory.Inventory;
 import txengine.io.*;
@@ -43,12 +44,13 @@ public class Manager {
 
     public static Player player;
 
-    public static HashMap<Integer, Item> itemList;
-    public static HashMap<Integer, Room> roomList;
-    public static HashMap<Integer, Conversation> conversationList;
-    public static HashMap<String, Integer[]> playerResourceList;
-    public static HashMap<String, Ability> abilityList;
-    public static HashMap<Integer, CombatEntity> combatEntityList;
+    public static HashMap<Integer, Item> itemHashMap;
+    public static HashMap<Integer, Room> roomHashMap;
+    public static HashMap<Integer, Conversation> conversationHashMap;
+    public static HashMap<String, Integer[]> playerResourceMap;
+    public static HashMap<String, Ability> abilityHashMap;
+    public static HashMap<Integer, CombatEntity> combatEntityHashMap;
+    public static HashMap<Integer, Recipe> recipeHashMap;
 
     public static String primaryResource = "Health";
 
@@ -96,22 +98,22 @@ public class Manager {
     private static void initialize() {
 
         // Load resource files
-        itemList = new ItemLoader().load(Resources.getResourceAsFile(ITEM_RESOURCE_FILE));
-        roomList = new RoomLoader().load(Resources.getResourceAsFile(ROOM_RESOURCE_FILE));
-        conversationList = new ConversationLoader().load(Resources.getResourceAsFile(CONVERSATION_RESOURCE_FILE));
-        playerResourceList = new CombatResourceLoader().load(Resources.getResourceAsFile(PLAYER_RESOURCE_FILE));
-        abilityList = AbilityLoader.load(Resources.getResourceAsFile(ABILITY_RESOURCE_FILE));
-        combatEntityList = new CombatEntityLoader().load(Resources.getResourceAsFile(COMBAT_ENTITY_RESOURCE_FILE));
+        itemHashMap = new ItemLoader().load(Resources.getResourceAsFile(ITEM_RESOURCE_FILE));
+        roomHashMap = new RoomLoader().load(Resources.getResourceAsFile(ROOM_RESOURCE_FILE));
+        conversationHashMap = new ConversationLoader().load(Resources.getResourceAsFile(CONVERSATION_RESOURCE_FILE));
+        playerResourceMap = new CombatResourceLoader().load(Resources.getResourceAsFile(PLAYER_RESOURCE_FILE));
+        abilityHashMap = AbilityLoader.load(Resources.getResourceAsFile(ABILITY_RESOURCE_FILE));
+        combatEntityHashMap = new CombatEntityLoader().load(Resources.getResourceAsFile(COMBAT_ENTITY_RESOURCE_FILE));
 
         flagManager = new FlagManager();
     }
 
     private static void initDebug() {
-        if (combatEntityList == null) combatEntityList = new HashMap<>();
+        if (combatEntityHashMap == null) combatEntityHashMap = new HashMap<>();
 
         // name,  openingDialog,  closingDialog, int inventorySize, inventory,  abilityManager,  resourceManager, int speed, int level)
-        combatEntityList.put(-1, new CombatEntity("Grunt", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), 2, 1));
-        combatEntityList.put(-2, new CombatEntity("Smokey the Bear", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), 5, 25));
+        combatEntityHashMap.put(-1, new CombatEntity("Grunt", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), 2, 1));
+        combatEntityHashMap.put(-2, new CombatEntity("Smokey the Bear", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), 5, 25));
 
         player.getAbilityManager().learn("Smack");
         player.getAbilityManager().learn("Love Tap");

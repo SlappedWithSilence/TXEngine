@@ -12,6 +12,7 @@
           "text"        : "Welcome to the Debug Store! Nothing's free, and everything sucks. What can I help you with?",
           "hidden"     : true,
           "properties"  : ["1,1", "2,50", "3,5", "4,15", "5,101", "6,0"],
+          "requirements" : [],
           "unlockedIndex" : -1
         },
         {
@@ -20,6 +21,7 @@
           "text"        : "You decide to check the contents of your pack.",
           "hidden"     : false,
           "properties"  : [],
+          "requirements" : [],
           "unlockedIndex" : -1
         },
         {
@@ -28,6 +30,7 @@
           "text"      : "You approach the Frei.",
           "hidden"   : false,
           "properties" : ["Hey, I know a guy... He's got the stuff. You want in?"],
+          "requirements" : [],
           "unlockedIndex" : 0
         },
         {
@@ -36,6 +39,7 @@
           "text"      : "You approach the doomsayer.",
           "hidden"   : false,
           "properties" : ["0"],
+          "requirements" : [],
           "unlockedIndex" : -1
         },
         {
@@ -44,6 +48,7 @@
           "text"      : "",
           "hidden"   : false,
           "properties" : [],
+          "requirements" : [],
           "unlockedIndex" : -1
         },
         {
@@ -52,6 +57,7 @@
           "text"      : "",
           "hidden"   : false,
           "properties" : [],
+          "requirements" : [],
           "unlockedIndex" : -1
         },
         {
@@ -60,6 +66,7 @@
           "text"      : "",
           "hidden"   : false,
           "properties" : ["{FRIENDLY}","{HOSTILE}", "-1","1", "0", "{LOOT}", "1,1", "4,2"],
+          "requirements" : [],
           "unlockedIndex" : -1
         },
         {
@@ -68,6 +75,12 @@
           "text"      : "You slink away into the night, seeking out Paddie's Irish Bar.",
           "hidden"   : false,
           "properties" : ["1"],
+          "requirements" : [
+            {
+              "className" : "LevelRequirement",
+              "properties" : ["2"]
+            }
+          ],
           "unlockedIndex" : -1
         }
       ]
@@ -85,6 +98,7 @@
             "text"      : "",
             "hidden"   : false,
             "properties" : [],
+            "requirements" : [],
             "unlockedIndex" : -1
           },
           {
@@ -93,6 +107,7 @@
             "text"      : "",
             "hidden"   : false,
             "properties" : [],
+            "requirements" : [],
             "unlockedIndex" : -1
           },
           {
@@ -101,6 +116,7 @@
             "text"        : "You decide to check the contents of your pack.",
             "hidden"     : false,
             "properties"  : [],
+            "requirements" : [],
             "unlockedIndex" : -1
           }
         ]

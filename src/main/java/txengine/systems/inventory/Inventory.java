@@ -127,7 +127,7 @@ public class Inventory {
 
 	// An overload for addItem() that allows the programmer to specify the item ID instead of a literal object
 	public void addItem(int id) {
-		addItem(Manager.itemList.get(id));
+		addItem(Manager.itemHashMap.get(id));
 	}
 
 	// An overload for addItem() that allows the programmer to specify the item ID instead of a literal object as well as quantity
@@ -239,7 +239,7 @@ public class Inventory {
 
 	// Returns an instance of the item class associated with the ID located at 'index' in the inventory
 	public Item getItemInstance(int index) {
-		return Manager.itemList.get( itemIDs.get(index) );
+		return Manager.itemHashMap.get( itemIDs.get(index) );
 	}
 
 }
