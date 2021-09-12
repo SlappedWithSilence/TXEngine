@@ -192,13 +192,18 @@ public class Inventory {
 		while (remaining > 0) {
 			ArrayList<Integer> stackIndexes = Utils.getAllInstances(itemIDs, itemID);
 
-			// If the first stack is smaller than the amount of items left to remove, remove the stack and decrement 'remaining'
-			if (itemQuantities.get(stackIndexes.get(0)) <= remaining) {
-				quantity = quantity - itemQuantities.get(stackIndexes.get(0)); // Decrement the remaining counter
-				removeItem(itemQuantities.get(stackIndexes.get(0)));           // Remove the item
-				stackIndexes.remove(0);
+			int stackSize = itemQuantities.get( stackIndexes.get(0));
+
+			// If the stack at the index has more than the remaining quantity of items, decrement the stack by 'remaining'.
+			if (stackSize > remaining) {
+				remaining = 0; // Update remaining
+				itemQuantities.set(stackIndexes.get(0), stackSize -remaining); // Update stack
+			} else if (stackSize == remaining) {
+				remaining = 0; // Update remaining
+				removeItem(stackIndexes.get(0)); // Remove stack
 			} else {
-				itemQuantities.set( stackIndexes.get(0), itemQuantities.get(stackIndexes.get(0)) - quantity );
+				remaining = remaining - stackSize; // Update remaining
+				removeItem(stackIndexes.get(0)); // Remove stack
 			}
 		}
 

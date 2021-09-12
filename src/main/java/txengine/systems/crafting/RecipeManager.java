@@ -89,6 +89,9 @@ public class RecipeManager {
         return true;
     }
 
+    public void learn(Recipe r) {
+        recipeList.add(r);
+    }
 
     /* Accessor Functions */
 

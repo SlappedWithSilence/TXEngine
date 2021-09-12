@@ -58,9 +58,6 @@ public class StoreAction extends Action {
 	@Override
 	// Performs the action
 	public int perform() {
-		if (!checkConfig()) {
-			return unhideIndex;
-		}
 
 		// Iterate through the shop's properties to build a side-by-side pair of arrays that contain the IDs of the items offered and their respective costs
 		inventoryIDs = new ArrayList<Integer>();
@@ -120,15 +117,6 @@ public class StoreAction extends Action {
 							+ "\t" + Colors.CYAN_BOLD + costs.get(i) + Colors.RESET);
 		}
 		System.out.println("-".repeat(LogUtils.HEADER_LENGTH));
-	}
-
-	private boolean checkConfig() {
-		if (super.properties.length % 2 != 0 ) {
-			LogUtils.error("A StoreAction had a mismatching inventory and cost array! Rooms.json may be corrupted!\n");
-			throw new InputMismatchException();
-		}
-
-		return true;
 	}
 
 }

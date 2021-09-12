@@ -123,7 +123,7 @@ public class Manager {
         player.getAbilityManager().learn("Bomb-Threat");
         player.getAbilityManager().learn("Blast");
 
-        for (int key : recipeHashMap.keySet()) System.out.println(recipeHashMap.get(key).toString());
+        for (Recipe r : recipeHashMap.values()) player.getRecipeManager().learn(r);
     }
 
 }
