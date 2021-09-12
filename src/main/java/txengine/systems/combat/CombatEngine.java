@@ -148,6 +148,8 @@ public class CombatEngine {
         entities.get(EntityType.FRIENDLY).add(Manager.player);
         TURN_ORDER = getTurnOrder();
 
+        preCombatSetup();
+
         LogUtils.error("Starting combat\n"); //TODO: Remove
         while (endState == null) {
             turnCycle();
@@ -171,6 +173,14 @@ public class CombatEngine {
 
     private void preCombatSetup() {
 
+        // Add all effects from equipment to each entity
+        for (CombatEntity ce : entities.get(EntityType.FRIENDLY)) {
+            List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects = ce.getEquipmentManager().getAllEffects();
+
+            // Add all the effects on the equipment to their correct phases
+            for (AbstractMap.SimpleEntry<CombatEffect, CombatPhase> pair : effects) ce.getCombatEffects().get(pair.getValue()).add(pair.getKey());
+
+        }
     }
 
     // Returns a default EndCondition that checks for two things:

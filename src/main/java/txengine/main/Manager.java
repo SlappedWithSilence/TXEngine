@@ -5,6 +5,7 @@ import txengine.systems.combat.CombatEntity;
 import txengine.systems.combat.CombatResourceManager;
 import txengine.systems.ability.Ability;
 import txengine.systems.ability.AbilityManager;
+import txengine.systems.combat.EquipmentManager;
 import txengine.systems.crafting.Recipe;
 import txengine.systems.flag.FlagManager;
 import txengine.systems.inventory.Inventory;
@@ -114,8 +115,8 @@ public class Manager {
         if (combatEntityHashMap == null) combatEntityHashMap = new HashMap<>();
 
         // name,  openingDialog,  closingDialog, int inventorySize, inventory,  abilityManager,  resourceManager, int speed, int level)
-        combatEntityHashMap.put(-1, new CombatEntity("Grunt", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), 2, 1));
-        combatEntityHashMap.put(-2, new CombatEntity("Smokey the Bear", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), 5, 25));
+        combatEntityHashMap.put(-1, new CombatEntity("Grunt", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), new EquipmentManager() ,2, 1));
+        combatEntityHashMap.put(-2, new CombatEntity("Smokey the Bear", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), new EquipmentManager(), 5, 25));
 
         player.getAbilityManager().learn("Smack");
         player.getAbilityManager().learn("Love Tap");
@@ -124,6 +125,8 @@ public class Manager {
         player.getAbilityManager().learn("Blast");
 
         for (Recipe r : recipeHashMap.values()) player.getRecipeManager().learn(r);
+
+        player.getInventory().addItem(15);
     }
 
 }

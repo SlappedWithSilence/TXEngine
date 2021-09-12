@@ -59,6 +59,16 @@ public class LoadUtils {
         return array;
     }
 
+    public static int[] getIntArray(JSONArray intArray) {
+        int[] array = new int[intArray.size()];
+
+        for (int i = 0; i < intArray.size(); i++) {
+            array[i] = ((Long) intArray.get(i)).intValue();
+        }
+
+        return array;
+    }
+
     public static ArrayList<AbstractMap.SimpleEntry<String, Integer>> parseResourceCosts(JSONArray obj) {
         ArrayList<AbstractMap.SimpleEntry<String, Integer>> arr = new ArrayList<>();
 
@@ -70,6 +80,18 @@ public class LoadUtils {
 
             arr.add(new AbstractMap.SimpleEntry<>(resourceName, resourceQuantity)); // add the string-int pair to the arraylist
 
+        }
+
+        return arr;
+    }
+
+    public static List<AbstractMap.SimpleEntry<String, Float>> parseStringFloatPairs(JSONArray obj) {
+        List<AbstractMap.SimpleEntry<String, Float>> arr = new ArrayList<>();
+
+        for (Object o : obj) {
+            String[] values = ((String) o).split(",");
+
+            arr.add(new AbstractMap.SimpleEntry<>(values[0], Float.parseFloat(values[1])));
         }
 
         return arr;

@@ -2,6 +2,7 @@ package txengine.systems.room.action.actions;
 
 import txengine.io.*;
 import txengine.systems.item.Consumable;
+import txengine.systems.item.Equipment;
 import txengine.systems.item.Item;
 import txengine.systems.item.Usable;
 import txengine.main.Manager;
@@ -17,11 +18,13 @@ public class InventoryAction extends Action {
 	public InventoryAction() {
 		itemOptions.add("Inspect");
 		itemOptions.add("Use");
+		itemOptions.add("Equip");
 		itemOptions.add("Drop");
 	}
 
 	@Override
 	// Performs the action
+	// TODO: Improve option-scanning (use only shows up for usable, equip only shows up for Equipment, etc)
 	public int perform() {
 
 		while (true) {
@@ -40,7 +43,7 @@ public class InventoryAction extends Action {
 			Item i = Manager.player.getInventory().getItemInstance(input);
 			switch (itemOptionChoice) {
 				case 0: // The case for inspection.
-					System.out.println(i.getDescription());
+					System.out.println(i.inspect());
 					break;
 				case 1: // The case for Use
 					if (i instanceof Usable) {
@@ -50,7 +53,15 @@ public class InventoryAction extends Action {
 						System.out.println("It appears that " + i.getName() + " can't be used.");
 					}
 					break;
-				case 2: // The case for drop
+				case 2:
+					if (Manager.player.getEquipmentManager().equip(i.getId())) {
+						System.out.println("You equip yourself with " + i.getName());
+					} else {
+						System.out.println("You weren't able to equip " + i.getName());
+					}
+
+					break;
+				case 3: // The case for drop
 					Manager.player.getInventory().decrementItem(input);
 					break;
 				default:

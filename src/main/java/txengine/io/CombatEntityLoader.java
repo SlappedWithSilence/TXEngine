@@ -3,6 +3,7 @@ package txengine.io;
 import txengine.systems.combat.CombatEntity;
 import txengine.systems.combat.CombatResourceManager;
 import txengine.systems.ability.AbilityManager;
+import txengine.systems.combat.EquipmentManager;
 import txengine.systems.inventory.Inventory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -59,7 +60,11 @@ public class CombatEntityLoader implements Loader {
 
             int id = ((Long) rawEntity.get("id")).intValue();
 
-            CombatEntity combatEntity = new CombatEntity(name, openingDialog, closingDialog, 100, inventory,abilityManager, resourceManager, speed, level);
+            EquipmentManager equipmentManager = new EquipmentManager(); // Make a new equipment manager
+
+            for (int i : LoadUtils.getIntArray((JSONArray) rawEntity.get("equipment_ids"))) equipmentManager.equip(i); // For each item in the equipment ids array, attempt to equip it
+
+            CombatEntity combatEntity = new CombatEntity(name, openingDialog, closingDialog, 100, inventory,abilityManager, resourceManager, equipmentManager,speed, level);
 
             entityList.put(id, combatEntity);
         }

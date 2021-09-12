@@ -23,7 +23,7 @@ public class CombatEntity implements CombatAgency {
     Inventory inventory;
     CombatResourceManager resourceManager;
     AbilityManager abilityManager;
-    HashMap<String, Equipment> equipmentMap;
+    EquipmentManager equipmentManager;
     int speed; // Determines turn order
     int level;
 
@@ -41,6 +41,7 @@ public class CombatEntity implements CombatAgency {
         resourceManager = new CombatResourceManager();
         abilityManager = new AbilityManager();
         abilityManager.setOwner(this);
+        equipmentManager = new EquipmentManager();
 
         speed = 0;
         combatEffects = getPhaseMap();
@@ -55,10 +56,12 @@ public class CombatEntity implements CombatAgency {
         resourceManager = new CombatResourceManager(clone.resourceManager);
         abilityManager = new AbilityManager(clone.abilityManager);
         abilityManager.setOwner(this);
+        equipmentManager = clone.equipmentManager;
 
         speed = clone.speed;
         combatEffects = getPhaseMap();
         level = clone.level;
+        equipmentManager = new EquipmentManager(clone.equipmentManager);
     }
 
     public CombatEntity(String name, String openingDialog, String closingDialog, int inventorySize) {
@@ -68,6 +71,7 @@ public class CombatEntity implements CombatAgency {
         this.inventory = new Inventory(inventorySize);
         this.abilityManager = new AbilityManager();
         abilityManager.setOwner(this);
+        equipmentManager = new EquipmentManager();
 
         this.resourceManager = new CombatResourceManager();
         speed = 0;
@@ -85,16 +89,19 @@ public class CombatEntity implements CombatAgency {
         abilityManager.setOwner(this);
 
         this.resourceManager = new CombatResourceManager();
+        this.equipmentManager = new EquipmentManager();
         speed = 0;
         combatEffects = getPhaseMap();
         level = 1;
     }
 
     // Full constructor. All inputs necessary to instantiate a full-fledged combatEntity are required for this constructor.
-    public CombatEntity(String name, String openingDialog, String closingDialog, int inventorySize, Inventory inventory, AbilityManager abilityManager, CombatResourceManager resourceManager, int speed, int level) {
+    public CombatEntity(String name, String openingDialog, String closingDialog, int inventorySize, Inventory inventory, AbilityManager abilityManager, CombatResourceManager resourceManager, EquipmentManager equipmentManager, int speed, int level) {
         this.name = name;
         this.openingDialog = openingDialog;
         this.closingDialog = closingDialog;
+
+        this.equipmentManager = equipmentManager;
 
         this.inventory = Objects.requireNonNullElseGet(inventory, () -> new Inventory(inventorySize));
         this.abilityManager = abilityManager;
@@ -183,7 +190,7 @@ public class CombatEntity implements CombatAgency {
         }
     }
 
-    // Removes any effects with a duration of zero from all phases
+    // Removes any effects with a duration of zero from all phases. An effect with duration of -1 should last forever, so it is ignored.
     public void cleanupEffects() {
         for (CombatEngine.CombatPhase phase : CombatEngine.CombatPhase.values()) {
             combatEffects.get(phase).stream().filter(n -> n.getDuration() == 0).forEach(combatEffect -> System.out.println(combatEffect.getCleanupMessage().replace("{OWNER}", name)));
@@ -233,6 +240,14 @@ public class CombatEntity implements CombatAgency {
     /***************************
      *   Getters and Setters   *
      ***************************/
+
+    public EquipmentManager getEquipmentManager() {
+        return equipmentManager;
+    }
+
+    public void setEquipmentManager(EquipmentManager equipmentManager) {
+        this.equipmentManager = equipmentManager;
+    }
 
     public String getName() {
         return name;

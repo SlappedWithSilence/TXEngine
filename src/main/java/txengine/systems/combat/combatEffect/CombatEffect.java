@@ -12,6 +12,8 @@ public abstract class CombatEffect extends Effect {
     String triggerMessage; // A message that gets printed when the ability triggers
     String cleanupMessage; // A message that gets printed when the ability is cleaned up
 
+    String[] tags;
+
     // Constructors
     public CombatEffect() {
         super();
@@ -21,11 +23,19 @@ public abstract class CombatEffect extends Effect {
 
     public CombatEffect(String[] properties) {
         super(properties);
+        tags = new String[0];
     }
 
     public CombatEffect(String[] properties, int duration) {
         super(properties);
         this.duration = duration;
+        tags = new String[0];
+    }
+
+    public CombatEffect(String[] properties, int duration, String[] tags) {
+        super(properties);
+        this.duration = duration;
+        tags = new String[0];
     }
 
 
@@ -63,5 +73,13 @@ public abstract class CombatEffect extends Effect {
 
     public void setCleanupMessage(String cleanupMessage) {
         this.cleanupMessage = cleanupMessage;
+    }
+
+    public String[] getTags() {
+        return tags;
+    }
+
+    public void setTags(String[] tags) {
+        this.tags = tags;
     }
 }

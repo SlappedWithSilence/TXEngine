@@ -1,6 +1,6 @@
 package txengine.systems.item;
 
-public class Item {
+public class Item implements Inspectable {
 
 	private String name;
 	private String description;
@@ -31,9 +31,8 @@ public class Item {
 		maxStacks = item.maxStacks;
 	}
 
-	// DEBUGGING FUNCTION
-	public void print() {
-		System.out.println(name + " | " + id + " | " + value + " | " + maxStacks);
+	public String inspect() {
+		return description;
 	}
 
 	public String summary() {
