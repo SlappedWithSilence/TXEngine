@@ -1,10 +1,13 @@
 package txengine.systems.crafting;
 
+import txengine.color.Colors;
 import txengine.integration.Requirement;
 import txengine.main.Manager;
 import txengine.systems.inventory.Inventory;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class Recipe {
 
@@ -60,6 +63,23 @@ public class Recipe {
         for (AbstractMap.SimpleEntry<Integer, Integer> pair : ingredients) sb.append("[" + Manager.itemHashMap.get(pair.getKey()).getName() + ": " + pair.getValue() + "]");
         sb.append(" -> ");
         for (AbstractMap.SimpleEntry<Integer, Integer> pair : products) sb.append("[" + Manager.itemHashMap.get(pair.getKey()).getName() + ": " + pair.getValue() + "]");
+
+        return sb.toString();
+    }
+
+    public String toFormattedString() {
+        StringBuilder sb = new StringBuilder();
+
+        for (AbstractMap.SimpleEntry<Integer, Integer> pair : ingredients){
+            String color;
+
+            if (Manager.player.getInventory().getItemQuantity(pair.getKey()) >= pair.getValue()) color = Colors.GREEN;
+            else color = Colors.RED;
+
+            sb.append("[").append(Manager.itemHashMap.get(pair.getKey()).getName()).append(": ").append(color).append(pair.getValue()).append(Colors.RESET).append("]");
+        }
+        sb.append(" -> ");
+        for (AbstractMap.SimpleEntry<Integer, Integer> pair : products) sb.append("[").append(Manager.itemHashMap.get(pair.getKey()).getName()).append(": ").append(pair.getValue()).append("]");
 
         return sb.toString();
     }

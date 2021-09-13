@@ -29,7 +29,7 @@ public class SimpleCraftingAction extends Action {
             }
             case 1 -> {
                 LogUtils.header("All Learned Recipes");
-                LogUtils.numberedList(Manager.player.getRecipeManager().getRecipeList().stream().map(Recipe::toString).toList());
+                LogUtils.numberedList(Manager.player.getRecipeManager().getRecipeList().stream().map(Recipe::toFormattedString).toList());
             }
         }
 
