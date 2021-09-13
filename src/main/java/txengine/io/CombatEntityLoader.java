@@ -1,5 +1,6 @@
 package txengine.io;
 
+import txengine.main.Manager;
 import txengine.systems.combat.CombatEntity;
 import txengine.systems.combat.CombatResourceManager;
 import txengine.systems.ability.AbilityManager;
@@ -9,6 +10,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import txengine.systems.item.Equipment;
+import txengine.systems.item.Item;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -62,7 +65,17 @@ public class CombatEntityLoader implements Loader {
 
             EquipmentManager equipmentManager = new EquipmentManager(); // Make a new equipment manager
 
-            for (int i : LoadUtils.getIntArray((JSONArray) rawEntity.get("equipment_ids"))) equipmentManager.equip(i); // For each item in the equipment ids array, attempt to equip it
+            for (int i : LoadUtils.getIntArray((JSONArray) rawEntity.get("equipment_ids"))) {
+                Item item = Manager.itemHashMap.get(i);
+
+                if (!(item instanceof Equipment)) {
+                    LogUtils.error("Error loading entity with id: " + id + "! A non-equipment item was found in the equipment_ids array!");
+                } else {
+                    Equipment.EquipmentType type = ((Equipment) item).getType();
+
+                    equipmentManager.setSlot(type, i);
+                }
+            }
 
             CombatEntity combatEntity = new CombatEntity(name, openingDialog, closingDialog, 100, inventory,abilityManager, resourceManager, equipmentManager,speed, level);
 

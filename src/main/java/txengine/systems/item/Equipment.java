@@ -60,7 +60,7 @@ public class Equipment extends Item {
 
         Cloner cloner = new Cloner();
 
-        this.preCombatEffects = cloner.deepClone(equipment.preCombatEffects);
+        this.preCombatEffects = new ArrayList<>(equipment.preCombatEffects);
         this.type = equipment.type;
         this.damageResistance = equipment.damageResistance;
         this.damageBuff = equipment.damageBuff;
