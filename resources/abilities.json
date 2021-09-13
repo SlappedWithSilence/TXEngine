@@ -38,7 +38,7 @@
           "class_name" : "FlatResourceEffect",
           "duration"  : 3,
           "trigger_phase" : "POST_ACTION",
-          "trigger_message" : "{OWNER} suffered from being love-tapped.",
+          "trigger_message" : "{OWNER} suffered from being love-tapped. (Health - 5)",
           "cleanup_message" : "{OWNER} is no longer suffering from being love-tapped.",
           "properties": ["Health", "-5"]
         },

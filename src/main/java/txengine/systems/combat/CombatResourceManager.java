@@ -94,30 +94,21 @@ public class CombatResourceManager {
         }
 
         Integer[] vals = resources.get(resourceName);
-        vals[1] = resourceQuantity;
+        vals[1] = Math.min(Math.max(0,resourceQuantity),getResourceMax(resourceName));
 
         resources.put(resourceName, vals);
     }
 
     // Increments the value of an existing resource up to the resource's max
-    public int incrementResource(String resourceName, int increment) {
+    public void incrementResource(String resourceName, int increment) {
         if (!resources.containsKey(resourceName)) {
             LogUtils.error("Resource " + resourceName + " does not exist!");
-            return -1;
+            return;
         }
 
-        Integer[] vals = resources.get(resourceName);
+        // Set change the value of the resource specified by 'increment'. The resource is bounded between 0 and its max value.
+        setResource(resourceName, Math.max(0,Math.min(getResourceQuantity(resourceName) + increment, getResourceMax(resourceName))));
 
-        if (vals[1] + increment > vals[0]) { // if increment + current_resource_value > max_value
-            vals[1] = vals[0]; // current_resource_value = max_value
-            int amount_healed = vals[0] -vals[1]; //amounted_healed = max_value - current_value
-            resources.put(resourceName, vals); // commit changes to resources
-            return amount_healed;
-        } else {
-            vals[1] = vals[1] + increment;
-            resources.put(resourceName, vals); // commit changes to resources
-            return increment;
-        }
     }
 
     // Decrements the value of an existing resource down to at least zero.
@@ -127,7 +118,7 @@ public class CombatResourceManager {
             return;
         }
 
-        resources.get(resourceName)[1] = Math.max(0, getResourceQuantity(resourceName) - decrement);
+        resources.get(resourceName)[1] = Math.min(Math.max(0, getResourceQuantity(resourceName) - decrement), getResourceMax(resourceName));
     }
 
     // Simulates consuming exactly X of a resource. If there is not enough of the resource, none will be consumed and the function will return false.
@@ -154,6 +145,14 @@ public class CombatResourceManager {
         }
 
         return resources.get(resourceName)[1];
+    }
+
+    public int getResourceMax(String resourceName) {
+        if (!resources.containsKey(resourceName)) {
+            LogUtils.error("Resource " + resourceName + " does not exist!");
+            return -1;
+        }
+        return resources.get(resourceName)[0];
     }
 
     public int numberOfResources() {
