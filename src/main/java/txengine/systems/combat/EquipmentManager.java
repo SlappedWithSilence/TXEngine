@@ -1,6 +1,7 @@
 package txengine.systems.combat;
 
 import com.rits.cloning.Cloner;
+import txengine.integration.Requirement;
 import txengine.io.LogUtils;
 import txengine.main.Manager;
 import txengine.systems.combat.combatEffect.CombatEffect;
@@ -48,6 +49,11 @@ public class EquipmentManager {
 
         if (!(i instanceof Equipment)) {
             LogUtils.error("Thats not an equipment\n");
+            return false;
+        }
+
+        if (!Requirement.allMet(((Equipment) i).getEquipRequirements())) {
+            LogUtils.error("Requirements not met!\n");
             return false;
         }
 

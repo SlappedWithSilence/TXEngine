@@ -164,6 +164,12 @@
          "damage"    : 0,
          "defense"   : 10,
          "tag_resistances" : ["fire,0.5"],
+         "requirements"    : [
+            {
+               "className" : "LevelRequirement",
+               "properties" : ["2"]
+            }
+         ],
          "combat_effects" :
          [
             {

@@ -1,6 +1,7 @@
 package txengine.systems.item;
 
 import com.rits.cloning.Cloner;
+import txengine.integration.Requirement;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.combatEffect.CombatEffect;
 
@@ -27,6 +28,7 @@ public class Equipment extends Item {
     private List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> preCombatEffects;
     private EquipmentType type;
     private List<AbstractMap.SimpleEntry<String, Float>> tagResistances;
+    private List<Requirement> equipRequirements;
     private int damageBuff;
     private int damageResistance;
 
@@ -37,22 +39,24 @@ public class Equipment extends Item {
         tagResistances = new ArrayList<>();
     }
 
-    // Value constructor, no effects or resistances
+    // Value constructor, no effects or resistances, or requirements
     public Equipment(String name, String description, int id, int value, int maxStacks, EquipmentType type) {
         super(name, description, id, value, maxStacks);
         preCombatEffects = new ArrayList<>();
         this.type = type;
         tagResistances = new ArrayList<>();
+        equipRequirements = new ArrayList<>();
     }
 
     // Value constructor, effects
-    public Equipment(String name, String description, int id, int value, int maxStacks, List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> preCombatEffects,  List<AbstractMap.SimpleEntry<String, Float>> tagResistances, EquipmentType type, int damage, int defense) {
+    public Equipment(String name, String description, int id, int value, int maxStacks, List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> preCombatEffects,  List<AbstractMap.SimpleEntry<String, Float>> tagResistances, List<Requirement> equipRequirements, EquipmentType type, int damage, int defense) {
         super(name, description, id, value, maxStacks);
         setPreCombatEffects(preCombatEffects);
         this.tagResistances = tagResistances;
         this.type = type;
         this.damageBuff = damage;
         this.damageResistance = defense;
+        this.equipRequirements = equipRequirements;
     }
 
     public Equipment(Equipment equipment) {
@@ -64,7 +68,8 @@ public class Equipment extends Item {
         this.type = equipment.type;
         this.damageResistance = equipment.damageResistance;
         this.damageBuff = equipment.damageBuff;
-        this.tagResistances = equipment.tagResistances;
+        this.tagResistances = new ArrayList<>(equipment.tagResistances);
+        this.equipRequirements = new ArrayList<>(equipment.equipRequirements);
     }
     /* Member Functions*/
     @Override
@@ -114,5 +119,13 @@ public class Equipment extends Item {
 
     public void setDamageResistance(int damageResistance) {
         this.damageResistance = damageResistance;
+    }
+
+    public List<Requirement> getEquipRequirements() {
+        return equipRequirements;
+    }
+
+    public void setEquipRequirements(List<Requirement> equipRequirements) {
+        this.equipRequirements = equipRequirements;
     }
 }

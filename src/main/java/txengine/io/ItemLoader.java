@@ -1,5 +1,6 @@
 package txengine.io;
 
+import txengine.integration.Requirement;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.combatEffect.CombatEffect;
 import txengine.systems.item.Consumable;
@@ -152,6 +153,9 @@ public class ItemLoader implements Loader {
         // Load tags
         List<AbstractMap.SimpleEntry<String, Float>> tagResistances = LoadUtils.parseStringFloatPairs((JSONArray) rawItem.get("tag_resistances"));
 
-        return new Equipment(name, desc, id, value, maxStacks, effects, tagResistances, type, damage, defense);
+        // Load Requirements
+        List<Requirement> requirements = LoadUtils.parseRequirements((JSONArray) rawItem.get("requirements"));
+
+        return new Equipment(name, desc, id, value, maxStacks, effects, tagResistances, requirements, type, damage, defense);
     }
 }
