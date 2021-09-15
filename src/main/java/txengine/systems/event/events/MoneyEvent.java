@@ -17,7 +17,7 @@ public class MoneyEvent extends Event {
 
     @Override
     public String print() {
-        if (quantity > 0) return Colors.RED_BOLD + "You lost " + quantity + " " + Manager.primaryCurrency + Colors.RESET;
+        if (quantity < 0) return Colors.RED_BOLD + "You lost " + quantity + " " + Manager.primaryCurrency + Colors.RESET;
         else return Colors.GREEN_BOLD + "You gained " + quantity + " " + Manager.primaryCurrency + Colors.RESET;
     }
 }
