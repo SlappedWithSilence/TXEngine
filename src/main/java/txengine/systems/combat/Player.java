@@ -2,7 +2,7 @@ package txengine.systems.combat;
 
 import txengine.systems.ability.Ability;
 import txengine.ui.component.Components;
-import txengine.ui.component.LogUtils;
+import txengine.ui.LogUtils;
 import txengine.systems.crafting.RecipeManager;
 import txengine.systems.item.Item;
 import txengine.main.Manager;
@@ -80,8 +80,8 @@ public class Player extends CombatEntity {
 
 		Components.subHeader(data);
 
-		List<List<String>> friendlyData = engine.getEntities(CombatEngine.EntityType.FRIENDLY).stream().filter(combatEntity -> !(combatEntity instanceof Player)).map(CombatEntity::getData).toList();
-		List<List<String>> hostileData = engine.getEntities(CombatEngine.EntityType.HOSTILE).stream().map(CombatEntity::getData).toList();
+		List<List<String>> friendlyData = engine.getEntities(CombatEngine.EntityType.FRIENDLY).stream().filter(combatEntity -> !(combatEntity instanceof Player)).map(CombatEntity::getTabData).toList();
+		List<List<String>> hostileData = engine.getEntities(CombatEngine.EntityType.HOSTILE).stream().map(CombatEntity::getTabData).toList();
 
 		Components.parallelVerticalTabList(friendlyData, hostileData, "Friendly", "Hostile");
 
@@ -139,7 +139,7 @@ public class Player extends CombatEntity {
 
 		System.out.println("What is your target?");
 
-		Components.verticalTabList(entityArrayList.stream().map(CombatEntity::getData).toList());
+		Components.verticalTabList(entityArrayList.stream().map(CombatEntity::getTabData).toList());
 
 		return entityArrayList.get(LogUtils.getNumber(0,entityArrayList.size()-1));
 	}

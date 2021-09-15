@@ -2,7 +2,7 @@ package txengine.systems.ability;
 
 import txengine.ui.color.Colors;
 import txengine.systems.combat.CombatEntity;
-import txengine.ui.component.LogUtils;
+import txengine.ui.LogUtils;
 import txengine.main.Manager;
 
 import java.util.AbstractMap;

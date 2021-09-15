@@ -1,7 +1,7 @@
 package txengine.systems.item;
 
 import txengine.systems.combat.CombatEntity;
-import txengine.ui.component.LogUtils;
+import txengine.ui.LogUtils;
 import txengine.systems.item.effect.*;
 
 import java.util.ArrayList;

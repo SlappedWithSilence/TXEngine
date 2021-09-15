@@ -1,6 +1,6 @@
 package txengine.systems.integration;
 
-import txengine.ui.component.LogUtils;
+import txengine.ui.LogUtils;
 
 public class RequirementFactory {
 

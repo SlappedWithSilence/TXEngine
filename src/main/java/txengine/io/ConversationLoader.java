@@ -7,7 +7,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import txengine.systems.event.Event;
 import txengine.systems.event.EventFactory;
-import txengine.ui.component.LogUtils;
+import txengine.ui.LogUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;

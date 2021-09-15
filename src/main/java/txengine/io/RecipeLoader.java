@@ -7,7 +7,7 @@ import org.json.simple.parser.ParseException;
 import txengine.systems.integration.Requirement;
 import txengine.systems.crafting.Recipe;
 import txengine.systems.crafting.RecipeFactory;
-import txengine.ui.component.LogUtils;
+import txengine.ui.LogUtils;
 import txengine.util.Utils;
 
 import java.io.File;

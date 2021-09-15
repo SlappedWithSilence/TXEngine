@@ -20,7 +20,7 @@ import txengine.systems.conversation.Conversation;
 import txengine.systems.room.RoomManager;
 import txengine.systems.skill.Skill;
 import txengine.systems.skill.SkillManager;
-import txengine.ui.component.LogUtils;
+import txengine.ui.LogUtils;
 
 public class Manager {
 
@@ -135,11 +135,6 @@ public class Manager {
         player.getAbilityManager().learn("Blast");
 
         for (Recipe r : recipeHashMap.values()) player.getRecipeManager().learn(r);
-
-        player.getInventory().addItem(15);
-
-        for (Skill s : skillHashMap.values()) System.out.println(s.getName());
-
     }
 
 }

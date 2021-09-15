@@ -1,12 +1,13 @@
 package txengine.ui.component;
 
+import txengine.ui.LogUtils;
 import txengine.ui.color.Colors;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static txengine.ui.component.LogUtils.centerString;
+import static txengine.ui.LogUtils.centerString;
 
 // A collection of static UI components
 public class Components {
@@ -159,6 +160,15 @@ public class Components {
      * Tab Components *
      ******************/
 
+    public interface Tabable {
+        Collection<String> getTabData();
+    }
+
+    // returns a single tab with its text aligned vertically
+    public static String verticalTab(Tabable element) {
+        return verticalTab(element.getTabData());
+    }
+
     public static String verticalTab(Collection<String> strings) {
         String topBar = "-".repeat(HEADER_LENGTH);
         final char SIDE_WALL = '|';
@@ -185,6 +195,7 @@ public class Components {
         return sb.toString();
     }
 
+    // returns two horizontally-adjacent VerticalTabs
     public static String parallelVerticalTab(List<String> left, List<String> right) {
         ArrayList<String> leftInternal = new ArrayList<>(left);
         ArrayList<String> rightInternal = new ArrayList<>(right);
@@ -228,12 +239,18 @@ public class Components {
         return sb.toString();
     }
 
+    // returns a vertical list of VerticalTabs
     public static void verticalTabList(List<List<String>> strings) {
         for (List<String> arr : strings) {
             System.out.println(verticalTab(arr));
         }
     }
 
+    public static void verticalTabList(Collection<Tabable> elements) {
+        for (Tabable element : elements)  System.out.println(verticalTab(element));
+    }
+
+    // returns a vertical list of horizontal VerticalTab pairs
     public static void parallelVerticalTabList(List<List<String>> left, List<List<String>> right, int length, String lefTitle, String rightTitle) {
         List<List<String>> leftInternal = new ArrayList<>(left);
         List<List<String>> rightInternal = new ArrayList<>(right);
@@ -266,6 +283,38 @@ public class Components {
         }
     }
 
+   /* public static void parallelVerticalTabList(List<Tabable> left, List<Tabable> right, String lefTitle, String rightTitle) {
+        List<Tabable> leftInternal = new ArrayList<>(left);
+        List<Tabable> rightInternal = new ArrayList<>(right);
+
+        int mode = 0;
+
+        if (left.size() == right.size()) mode = 0; // The tab lengths are the same
+        if (left.size() > right.size())  mode = 1; // left tab is longer
+        if (left.size() < right.size())  mode = 2; // right tab is longer
+
+        if (mode == 1) { // Normalize the tab sizes by inserting empty lines into the right tab
+            for (int i = 0; i < left.size() - right.size(); i++) rightInternal.add(ArrayList::new);
+        }
+        if (mode == 2) { // Normalize the tab sizes by inserting empty lines into the left tab
+            for (int i = 0; i < right.size() - left.size(); i++) leftInternal.add(ArrayList::new);
+        }
+
+        if (lefTitle != null && rightTitle != null && !rightTitle.equals("") && !lefTitle.equals("")) { // Print headers
+            StringBuilder sb = new StringBuilder();
+
+            String topBar = "-".repeat(HEADER_LENGTH/2);
+            sb.append(topBar).append("   ").append(topBar).append('\n');
+            sb.append('|').append(centerString(lefTitle, HEADER_LENGTH/2 - 2)).append("|").append("   ").append("|").append(centerString(rightTitle, HEADER_LENGTH/2 - 2)).append("|");
+
+            System.out.println(sb);
+        }
+
+        for (int i = 0; i < Math.max(leftInternal.size(), rightInternal.size()); i++) {
+            System.out.println(LogUtils.combineBlocks(verticalTab(leftInternal.get(i)), verticalTab(rightInternal.get(i)), true));
+        }
+    }*/
+
     public static void parallelVerticalTabList(List<List<String>> left, List<List<String>> right, String leftTitle, String rightTitle) {
         parallelVerticalTabList(left, right, HEADER_LENGTH, leftTitle, rightTitle);
     }
@@ -273,7 +322,5 @@ public class Components {
     public static void parallelVerticalTabList(List<List<String>> left, List<List<String>> right) {
         parallelVerticalTabList(left, right, HEADER_LENGTH, null, null);
     }
-
-
 
 }

@@ -3,7 +3,7 @@ package txengine.systems.item.effect;
 import java.lang.InstantiationException;
 import java.lang.ClassNotFoundException;
 
-import txengine.ui.component.LogUtils;
+import txengine.ui.LogUtils;
 
 public class EffectFactory {
 

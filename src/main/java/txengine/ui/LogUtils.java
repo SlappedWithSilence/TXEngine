@@ -1,4 +1,4 @@
-package txengine.ui.component;
+package txengine.ui;
 
 import txengine.ui.color.ColorConsole;
 import txengine.ui.color.Colors;
@@ -119,9 +119,65 @@ public class LogUtils {
 		return spacer + s + spacer;											  // Default
 	}
 
+	public static String lpad(String s, int length) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(s).append(" ".repeat(length-s.length()));
+
+		return sb.toString();
+	}
+
+	public static void padList(List<String> arr1, List<String> arr2) {
+		int max = Math.max(arr1.size(), arr2.size());
+
+		while(arr1.size() < max) {
+			arr1.add("");
+		}
+		while(arr2.size() < max) {
+			arr2.add("");
+		}
+	}
+
 	public static void clearScreen() {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
+	}
+
+	public static int maxLength(Collection<String> strings) {
+		return strings.stream().max(Comparator.comparing(String::length)).get().length();
+	}
+
+	public static String combineBlocks(String s1, String s2, boolean separateWithSpace) {
+		int maxLength = 0;
+
+		List<String> lines1 = new ArrayList<>(List.of(s1.split("\n")));
+		List<String> lines2 = new ArrayList<>(List.of(s2.split("\n")));
+
+		padList(lines1, lines2);
+
+		maxLength = maxLength(lines1);
+		for (int i = 0; i <lines1.size(); i++)
+			lines1.set(i, lpad(lines1.get(i), maxLength));
+
+		maxLength = maxLength(lines2);
+		for (int i = 0; i <lines2.size(); i++)
+			lines2.set(i, lpad(lines2.get(i), maxLength));
+
+		StringBuilder sb = new StringBuilder();
+
+		if (lines1.size() != lines2.size()) {
+			LogUtils.error("Cannot combine text blocks, they have different lengths!\n");
+			return null;
+		}
+
+		for (int i = 0; i < lines1.size(); i++) {
+			sb.append(lines1.get(i));
+			if (separateWithSpace) sb.append(" ");
+			sb.append(lines2.get(i));
+			sb.append("\n");
+		}
+
+		return sb.toString();
 	}
 
 

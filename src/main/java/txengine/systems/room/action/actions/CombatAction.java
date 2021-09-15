@@ -5,7 +5,7 @@ import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.CombatEntity;
 import txengine.systems.inventory.Inventory;
 import txengine.ui.component.Components;
-import txengine.ui.component.LogUtils;
+import txengine.ui.LogUtils;
 import txengine.main.Manager;
 import txengine.systems.room.action.Action;
 import txengine.util.Utils;

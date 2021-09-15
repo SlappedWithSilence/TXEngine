@@ -1,6 +1,6 @@
 package txengine.systems.event.events;
 
-import txengine.ui.component.LogUtils;
+import txengine.ui.LogUtils;
 import txengine.systems.event.Event;
 
 public class FlagEvent extends Event {

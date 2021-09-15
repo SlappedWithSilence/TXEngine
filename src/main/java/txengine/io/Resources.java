@@ -1,6 +1,6 @@
 package txengine.io;
 
-import txengine.ui.component.LogUtils;
+import txengine.ui.LogUtils;
 
 import java.io.*;
 

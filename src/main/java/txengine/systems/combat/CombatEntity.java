@@ -8,10 +8,11 @@ import txengine.systems.inventory.Inventory;
 import txengine.systems.item.Equipment;
 import txengine.systems.item.Item;
 import txengine.main.Manager;
+import txengine.ui.component.Components;
 
 import java.util.*;
 
-public class CombatEntity implements CombatAgency {
+public class CombatEntity implements CombatAgency, Components.Tabable {
 
     /************************
      *   Member Variables   *
@@ -231,7 +232,8 @@ public class CombatEntity implements CombatAgency {
         return sb.toString();
     }
 
-    public List<String> getData() {
+    @Override
+    public List<String> getTabData() {
         String nameText = name;
         String levelText = "lvl: " + level;
         String pResourceText = Manager.primaryResource + ": [" + getResourceManager().getResources().get(Manager.primaryResource)[1]

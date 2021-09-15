@@ -7,7 +7,7 @@ import java.util.List;
 import txengine.main.Manager;
 import txengine.ui.color.*;
 import txengine.ui.component.Components;
-import txengine.ui.component.LogUtils;
+import txengine.ui.LogUtils;
 import txengine.systems.item.Item;
 import txengine.util.Utils;
 

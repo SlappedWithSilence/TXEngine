@@ -1,7 +1,7 @@
 package txengine.systems.conversation;
 
 import txengine.ui.component.Components;
-import txengine.ui.component.LogUtils;
+import txengine.ui.LogUtils;
 import txengine.systems.event.Event;
 
 public class ConversationModule {
