@@ -159,4 +159,11 @@ public class CombatResourceManager {
         return resources.size();
     }
 
+    public int getPrimaryResourceQuantity() {
+        return getResourceQuantity(Manager.primaryResource);
+    }
+
+    public int getPrimaryResourceMax() {
+        return getResourceMax(Manager.primaryResource);
+    }
 }

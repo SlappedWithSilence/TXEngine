@@ -4,7 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import txengine.integration.Requirement;
+import txengine.systems.integration.Requirement;
 import txengine.systems.crafting.Recipe;
 import txengine.systems.crafting.RecipeFactory;
 import txengine.util.Utils;

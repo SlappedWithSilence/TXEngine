@@ -1,6 +1,6 @@
 package txengine.systems.room.action;
 
-import txengine.integration.Requirement;
+import txengine.systems.integration.Requirement;
 import txengine.io.LogUtils;
 
 import java.util.List;

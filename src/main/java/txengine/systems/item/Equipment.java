@@ -1,7 +1,7 @@
 package txengine.systems.item;
 
 import com.rits.cloning.Cloner;
-import txengine.integration.Requirement;
+import txengine.systems.integration.Requirement;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.combatEffect.CombatEffect;
 

@@ -1,6 +1,6 @@
 package txengine.systems.crafting;
 
-import txengine.integration.Requirement;
+import txengine.systems.integration.Requirement;
 
 import java.util.AbstractMap;
 import java.util.List;

@@ -2,8 +2,8 @@ package txengine.io;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import txengine.integration.Requirement;
-import txengine.integration.RequirementFactory;
+import txengine.systems.integration.Requirement;
+import txengine.systems.integration.RequirementFactory;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.combatEffect.CombatEffect;
 import txengine.systems.combat.combatEffect.CombatEffectFactory;

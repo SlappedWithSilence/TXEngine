@@ -1,6 +1,6 @@
 package txengine.systems.room;
 
-import txengine.integration.Requirement;
+import txengine.systems.integration.Requirement;
 import txengine.io.LogUtils;
 import txengine.systems.room.action.Action;
 import txengine.systems.room.action.actions.MoveAction;

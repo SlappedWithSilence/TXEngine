@@ -1,6 +1,6 @@
 package txengine.io;
 
-import txengine.integration.Requirement;
+import txengine.systems.integration.Requirement;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.combatEffect.CombatEffect;
 import txengine.systems.item.Consumable;

@@ -1,4 +1,4 @@
-package txengine.integration;
+package txengine.systems.integration;
 
 public interface Configurable {
 

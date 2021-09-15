@@ -1,6 +1,7 @@
 package txengine.systems.skill;
 
 import com.sun.source.tree.Tree;
+import txengine.color.Colors;
 import txengine.systems.event.Event;
 
 import java.util.List;
@@ -47,12 +48,12 @@ public class Skill {
     /* Member Methods */
 
     // Distribute the given XP, leveling up as many times as necessary before the XP runs out.
-    public void gainXP(int xp) {
-        int remainingXP = xp;
+    public void gainXP(int xpGained) {
+        int remainingXP = xpGained;
 
         while (remainingXP > 0) {
-            if (levelUpXP - xp <= remainingXP) {
-                remainingXP = remainingXP - (levelUpXP - xp);
+            if (remainingXP >= levelUpXP - xp) { // If the amount of xp you've gained is more than the xp needed to level up
+                remainingXP = remainingXP - (levelUpXP - xp); // Subtract the remaining xp needed to level up from the remaining xp gained
                 levelUp();
             } else {
                 this.xp = this.xp + remainingXP;
@@ -73,6 +74,7 @@ public class Skill {
             levelUpEvents.get(level).forEach(Event::perform);
         }
 
+        System.out.println(Colors.GREEN_BOLD + "Your " + name + " skill went up to " + level + "!" + Colors.RESET);
     }
 
     /* Accessor Methods */

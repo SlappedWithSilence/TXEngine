@@ -1,8 +1,7 @@
 package txengine.systems.crafting;
 
 import txengine.color.Colors;
-import txengine.integration.Requirement;
-import txengine.io.LogUtils;
+import txengine.systems.integration.Requirement;
 import txengine.main.Manager;
 import txengine.systems.combat.CombatEntity;
 import txengine.systems.inventory.Inventory;

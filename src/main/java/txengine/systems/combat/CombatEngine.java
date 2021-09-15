@@ -157,7 +157,11 @@ public class CombatEngine {
 
         PostCombatCleanup();
 
-        if (endState == EndCondition.gameState.WIN) return true;
+        if (endState == EndCondition.gameState.WIN) {
+            System.out.println("You gained a total of " + getXpReward() + " " + Manager.skillHashMap.get(Manager.primarySkill).getName() + " experience.");
+            Manager.skillHashMap.get(Manager.primarySkill).gainXP(getXpReward());
+            return true;
+        }
         else if (endState == EndCondition.gameState.LOSS) return false;
 
         return false;
@@ -170,6 +174,12 @@ public class CombatEngine {
     /*********************
      * Private Functions *
      *********************/
+
+    private int getXpReward() {
+        int sum = 0;
+        for (CombatEntity ce : entities.get(EntityType.HOSTILE)) sum = sum + ce.getXpYield();
+        return sum;
+    }
 
     private void preCombatSetup() {
 

@@ -132,6 +132,9 @@ public class Manager {
         for (Recipe r : recipeHashMap.values()) player.getRecipeManager().learn(r);
 
         player.getInventory().addItem(15);
+
+        for (Skill s : skillHashMap.values()) System.out.println(s.getName());
+
     }
 
 }

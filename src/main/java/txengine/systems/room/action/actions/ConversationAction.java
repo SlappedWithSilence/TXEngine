@@ -1,6 +1,6 @@
 package txengine.systems.room.action.actions;
 
-import txengine.integration.Requirement;
+import txengine.systems.integration.Requirement;
 import txengine.main.Manager;
 import txengine.systems.room.action.Action;
 

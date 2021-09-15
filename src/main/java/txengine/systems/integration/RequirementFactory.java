@@ -1,11 +1,10 @@
-package txengine.integration;
+package txengine.systems.integration;
 
-import txengine.integration.Requirement;
 import txengine.io.LogUtils;
 
 public class RequirementFactory {
 
-    final private static String REQUIREMENTS_PACKAGE = "txengine.integration.requirements."; // The fully-qualified package name where Effects are found
+    final private static String REQUIREMENTS_PACKAGE = "txengine.systems.integration.requirements."; // The fully-qualified package name where Effects are found
 
     public RequirementFactory() {
 

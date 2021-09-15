@@ -91,7 +91,7 @@
             },
             {
               "class_name" : "ResourceRequirement",
-              "properties" : ["Health,50","Stamina,101"]
+              "properties" : ["Health,50"]
             }
           ],
           "unlocked_index" : -1

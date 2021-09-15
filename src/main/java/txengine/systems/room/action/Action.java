@@ -1,7 +1,7 @@
 package txengine.systems.room.action;
 
 import txengine.color.*;
-import txengine.integration.Requirement;
+import txengine.systems.integration.Requirement;
 
 import java.util.List;
 

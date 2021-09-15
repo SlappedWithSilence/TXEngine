@@ -19,7 +19,6 @@ import java.util.TreeMap;
 
 public class SkillLoader implements Loader {
 
-
     @Override
     public HashMap<String, Skill> load(File file) {
         HashMap<String, Skill> skills = new HashMap<>();

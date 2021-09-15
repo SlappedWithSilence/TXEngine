@@ -1,11 +1,10 @@
 package txengine.systems.crafting;
 
 import txengine.color.Colors;
-import txengine.integration.Requirement;
+import txengine.systems.integration.Requirement;
 import txengine.main.Manager;
 import txengine.systems.inventory.Inventory;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 

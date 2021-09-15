@@ -1,6 +1,6 @@
-package txengine.integration.requirements;
+package txengine.systems.integration.requirements;
 
-import txengine.integration.Requirement;
+import txengine.systems.integration.Requirement;
 import txengine.main.Manager;
 
 // A LevelRequirement is met when the player's level is greater-than or equal-to the integer is properties[0]

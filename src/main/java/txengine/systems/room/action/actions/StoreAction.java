@@ -1,14 +1,13 @@
 package txengine.systems.room.action.actions;
 
 import txengine.color.*;
-import txengine.integration.Requirement;
+import txengine.systems.integration.Requirement;
 import txengine.io.LogUtils;
 import txengine.main.Manager;
 import txengine.systems.room.action.Action;
 import txengine.util.Utils;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 
 // This action emulates the player entering a store
