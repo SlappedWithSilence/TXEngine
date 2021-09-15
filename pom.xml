@@ -9,8 +9,8 @@
   <version>0.0.1</version>
 
   <name>TXEngine</name>
-  <!-- FIXME change it to the project's website -->
-  <url>https://github.com/TopperMcKek/TheAlley</url>
+
+  <url>https://github.com/SlappedWithSilence/TXEngine</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -55,10 +55,6 @@
           <version>3.0.2</version>
         </plugin>
         <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
-        </plugin>
-        <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.1</version>
         </plugin>
@@ -98,12 +94,12 @@
           <configuration>
             <mainClass>txengine.main.Manager</mainClass>
             <arguments>
-              <argument>foo</argument>
-              <argument>bar</argument>
             </arguments>
           </configuration>
         </plugin>
+
         <plugin>
+          <version>3.8.0</version>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <configuration>
