@@ -196,8 +196,8 @@ public class Inventory {
 
 			// If the stack at the index has more than the remaining quantity of items, decrement the stack by 'remaining'.
 			if (stackSize > remaining) {
+				itemQuantities.set(stackIndexes.get(0), stackSize - remaining); // Update stack
 				remaining = 0; // Update remaining
-				itemQuantities.set(stackIndexes.get(0), stackSize -remaining); // Update stack
 			} else if (stackSize == remaining) {
 				remaining = 0; // Update remaining
 				removeItem(stackIndexes.get(0)); // Remove stack
