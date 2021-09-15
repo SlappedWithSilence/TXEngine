@@ -1,6 +1,7 @@
 package txengine.systems.room.action.actions;
 
-import txengine.io.LogUtils;
+import txengine.ui.component.Components;
+import txengine.ui.component.LogUtils;
 import txengine.main.Manager;
 import txengine.systems.room.action.Action;
 
@@ -36,12 +37,12 @@ public class SummaryAction extends Action {
         }
 
         for (int i = startIndex; i <= finalIndex; i++) {
-            Map.Entry<String, Integer[]> p = new AbstractMap.SimpleEntry<String, Integer[]>((String) keys[i], Manager.player.getResourceManager().getResources().get((String) keys[i])); // generate a key-value pair
+            Map.Entry<String, Integer[]> p = new AbstractMap.SimpleEntry<>((String) keys[i], Manager.player.getResourceManager().getResources().get((String) keys[i])); // generate a key-value pair
             System.out.println(formatPlayerResource(p));    // print the key-value pair
         }
         System.out.println(); // generate an empty line for aesthetic purposes
 
-        LogUtils.numberedBar(barOptions);   // generate a bottom bar
+        Components.numberedBar(barOptions);   // generate a bottom bar
     }
 
     public void printLevelBox() {
@@ -51,25 +52,25 @@ public class SummaryAction extends Action {
         String levelText = Manager.primarySkill + ":  "   + Manager.skillManager.getPrimaryLevel();
         String moneyText = "Currency: " + Manager.player.getMoney();
 
-        line1.append(" ").append("_".repeat(LogUtils.HEADER_LENGTH-2));
-        line1.append("\n|").append(" ".repeat(LogUtils.HEADER_LENGTH-2)).append("|"); // Long bar top
+        line1.append(" ").append("_".repeat(Components.HEADER_LENGTH-2));
+        line1.append("\n|").append(" ".repeat(Components.HEADER_LENGTH-2)).append("|"); // Long bar top
         // The Player's name row
         line1.append("\n| ");
         line1.append(nameText);
-        line1.append(" ".repeat(LogUtils.HEADER_LENGTH - nameText.length() - 3));
+        line1.append(" ".repeat(Components.HEADER_LENGTH - nameText.length() - 3));
         line1.append('|').append('\n');
         // Player's level row
         line1.append("| ");
         line1.append(levelText);
-        line1.append(" ".repeat(LogUtils.HEADER_LENGTH - levelText.length()- 3));
+        line1.append(" ".repeat(Components.HEADER_LENGTH - levelText.length()- 3));
         line1.append('|').append('\n');
         // Player's money row
         line1.append("| ");
         line1.append(moneyText);
-        line1.append(" ".repeat(LogUtils.HEADER_LENGTH - moneyText.length() - 3));
+        line1.append(" ".repeat(Components.HEADER_LENGTH - moneyText.length() - 3));
         line1.append('|').append('\n');
 
-        line1.append("|").append("_".repeat(LogUtils.HEADER_LENGTH-2)).append("|"); // Long bar bottom
+        line1.append("|").append("_".repeat(Components.HEADER_LENGTH-2)).append("|"); // Long bar bottom
 
         System.out.println(line1);
     }
@@ -81,8 +82,8 @@ public class SummaryAction extends Action {
         boolean done = false; // Tracks if the user wants to exit the page loop
 
         while (!done) {
-            LogUtils.header("Summary");
-            LogUtils.subHeader(List.of(new String[]{"Name:     " + Manager.player.getName(),
+            Components.header("Summary");
+            Components.subHeader(List.of(new String[]{"Name:     " + Manager.player.getName(),
                                                     "Level:    " + Manager.player.getLevel(),
                                                     "Currency: " + Manager.player.getMoney()}));
 

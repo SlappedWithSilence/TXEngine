@@ -1,6 +1,6 @@
 package txengine.systems.crafting;
 
-import txengine.color.Colors;
+import txengine.ui.color.Colors;
 import txengine.systems.integration.Requirement;
 import txengine.main.Manager;
 import txengine.systems.inventory.Inventory;
@@ -59,9 +59,9 @@ public class Recipe {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        for (AbstractMap.SimpleEntry<Integer, Integer> pair : ingredients) sb.append("[" + Manager.itemHashMap.get(pair.getKey()).getName() + ": " + pair.getValue() + "]");
+        for (AbstractMap.SimpleEntry<Integer, Integer> pair : ingredients) sb.append("[").append(Manager.itemHashMap.get(pair.getKey()).getName()).append(": ").append(pair.getValue()).append("]");
         sb.append(" -> ");
-        for (AbstractMap.SimpleEntry<Integer, Integer> pair : products) sb.append("[" + Manager.itemHashMap.get(pair.getKey()).getName() + ": " + pair.getValue() + "]");
+        for (AbstractMap.SimpleEntry<Integer, Integer> pair : products) sb.append("[").append(Manager.itemHashMap.get(pair.getKey()).getName()).append(": ").append(pair.getValue()).append("]");
 
         return sb.toString();
     }

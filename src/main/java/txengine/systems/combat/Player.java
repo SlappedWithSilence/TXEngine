@@ -1,7 +1,8 @@
 package txengine.systems.combat;
 
 import txengine.systems.ability.Ability;
-import txengine.io.LogUtils;
+import txengine.ui.component.Components;
+import txengine.ui.component.LogUtils;
 import txengine.systems.crafting.RecipeManager;
 import txengine.systems.item.Item;
 import txengine.main.Manager;
@@ -68,7 +69,7 @@ public class Player extends CombatEntity {
 	public AbstractMap.SimpleEntry<Ability, Item> makeChoice(CombatEngine engine) {
 		AbstractMap.SimpleEntry<Ability, Item> choice = null;
 
-		LogUtils.header("Combat - Make a Choice");
+		Components.header("Combat - Make a Choice");
 
 		ArrayList<String> data = new ArrayList<>();
 		data.add(name);
@@ -77,21 +78,21 @@ public class Player extends CombatEntity {
 
 		String[] options = {"Use an Ability", "Use an Item", "Inspect an Entity"};
 
-		LogUtils.subHeader(data);
+		Components.subHeader(data);
 
 		List<List<String>> friendlyData = engine.getEntities(CombatEngine.EntityType.FRIENDLY).stream().filter(combatEntity -> !(combatEntity instanceof Player)).map(CombatEntity::getData).toList();
 		List<List<String>> hostileData = engine.getEntities(CombatEngine.EntityType.HOSTILE).stream().map(CombatEntity::getData).toList();
 
-		LogUtils.parallelVerticalTabList(friendlyData, hostileData, "Friendly", "Hostile");
+		Components.parallelVerticalTabList(friendlyData, hostileData, "Friendly", "Hostile");
 
 		while (true) {
 			System.out.println("What would you like to do?");
-			LogUtils.numberedList(options);
+			Components.numberedList(options);
 			int userChoice = LogUtils.getNumber(0, options.length);
 
 			switch(userChoice) {
 				case 0:
-					LogUtils.header("Choose an Ability");
+					Components.header("Choose an Ability");
 					System.out.println("What ability do you want to use? (-1 to exit)");
 					abilityManager.printAbilities();
 					int abilityChoice = LogUtils.getNumber(-1, abilityManager.getAbilityQuantity()-1);
@@ -112,7 +113,7 @@ public class Player extends CombatEntity {
 
 					break;
 				case 1:
-					LogUtils.header("Choose an Item");
+					Components.header("Choose an Item");
 					System.out.println("What item would you like to use? (-1 to exit)");
 
 					inventory.display();
@@ -138,7 +139,7 @@ public class Player extends CombatEntity {
 
 		System.out.println("What is your target?");
 
-		LogUtils.verticalTabList(entityArrayList.stream().map(CombatEntity::getData).toList());
+		Components.verticalTabList(entityArrayList.stream().map(CombatEntity::getData).toList());
 
 		return entityArrayList.get(LogUtils.getNumber(0,entityArrayList.size()-1));
 	}

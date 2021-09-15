@@ -1,6 +1,6 @@
 // From: https://code-examples.net/en/q/57edbb
 
-package txengine.color;
+package txengine.ui.color;
 
 import java.util.HashMap;
 import java.util.Locale;

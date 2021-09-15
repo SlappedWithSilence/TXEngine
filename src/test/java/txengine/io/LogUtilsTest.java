@@ -1,6 +1,7 @@
 package txengine.io;
 
 import org.junit.jupiter.api.Test;
+import txengine.ui.component.LogUtils;
 
 public class LogUtilsTest {
 

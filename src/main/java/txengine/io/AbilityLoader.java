@@ -4,11 +4,11 @@ import txengine.systems.combat.CombatEngine;
 import txengine.systems.ability.Ability;
 import txengine.systems.ability.AbilityFactory;
 import txengine.systems.combat.combatEffect.CombatEffect;
-import txengine.systems.combat.combatEffect.CombatEffectFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import txengine.ui.component.LogUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;

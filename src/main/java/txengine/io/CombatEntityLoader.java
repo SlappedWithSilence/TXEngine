@@ -12,6 +12,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import txengine.systems.item.Equipment;
 import txengine.systems.item.Item;
+import txengine.ui.component.LogUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,8 +1,9 @@
 package txengine.systems.room.action.actions;
 
-import txengine.color.*;
+import txengine.ui.color.*;
 import txengine.systems.integration.Requirement;
-import txengine.io.LogUtils;
+import txengine.ui.component.Components;
+import txengine.ui.component.LogUtils;
 import txengine.main.Manager;
 import txengine.systems.room.action.Action;
 import txengine.util.Utils;
@@ -59,8 +60,8 @@ public class StoreAction extends Action {
 	public int perform() {
 
 		// Iterate through the shop's properties to build a side-by-side pair of arrays that contain the IDs of the items offered and their respective costs
-		inventoryIDs = new ArrayList<Integer>();
-		costs = new ArrayList<Integer>();
+		inventoryIDs = new ArrayList<>();
+		costs = new ArrayList<>();
 
 		// Load the id-cost value pairs and insert them into the arraylists
 		for (String s : properties) {
@@ -82,8 +83,8 @@ public class StoreAction extends Action {
 				break;
 			} else {
 				int itemChoiceID = inventoryIDs.get(choice);
-				LogUtils.header("Purchase Item");
-				LogUtils.subHeader(List.of("Money: " + Manager.player.getMoney()));
+				Components.header("Purchase Item");
+				Components.subHeader(List.of("Money: " + Manager.player.getMoney()));
 
 				if (Manager.player.getMoney() >= costs.get(choice)) {
 					ColorConsole.d("Are you sure you want to purchase " + Manager.itemHashMap.get(itemChoiceID).getName() + "? ", false);
@@ -107,15 +108,15 @@ public class StoreAction extends Action {
 	}
 
 	private void displayInventory() {
-		LogUtils.header("Shop Inventory");
-		LogUtils.subHeader(List.of("Money: " + Manager.player.getMoney()));
+		Components.header("Shop Inventory");
+		Components.subHeader(List.of("Money: " + Manager.player.getMoney()));
 		ColorConsole.d(CHOICE_PROMPT+"\n", false);
 		for (int i = 0; i < inventoryIDs.size(); i++ ) {
 			System.out.println("[" + i + "] " +
 					Manager.itemHashMap.get(inventoryIDs.get(i)).getName()
 							+ "\t" + Colors.CYAN_BOLD + costs.get(i) + Colors.RESET);
 		}
-		System.out.println("-".repeat(LogUtils.HEADER_LENGTH));
+		Components.bar();
 	}
 
 }

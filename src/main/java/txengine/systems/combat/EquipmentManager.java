@@ -2,7 +2,7 @@ package txengine.systems.combat;
 
 import com.rits.cloning.Cloner;
 import txengine.systems.integration.Requirement;
-import txengine.io.LogUtils;
+import txengine.ui.component.LogUtils;
 import txengine.main.Manager;
 import txengine.systems.combat.combatEffect.CombatEffect;
 import txengine.systems.item.Equipment;

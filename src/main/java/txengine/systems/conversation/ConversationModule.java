@@ -1,6 +1,7 @@
 package txengine.systems.conversation;
 
-import txengine.io.LogUtils;
+import txengine.ui.component.Components;
+import txengine.ui.component.LogUtils;
 import txengine.systems.event.Event;
 
 public class ConversationModule {
@@ -23,7 +24,7 @@ public class ConversationModule {
 
     public int perform() {
         System.out.println(getNPCText()); // Print the npc's text
-        LogUtils.numberedList(options);   // Print the user's repsonses
+        Components.numberedList(options);   // Print the user's repsonses
         int userChoice = LogUtils.getNumber(0, options.length); // Get the user's choice
         for (Event e : events[userChoice])
             e.perform();                   // Perform any game events related to the choice

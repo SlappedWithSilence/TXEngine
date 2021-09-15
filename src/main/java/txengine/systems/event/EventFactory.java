@@ -1,6 +1,6 @@
 package txengine.systems.event;
 
-import txengine.io.LogUtils;
+import txengine.ui.component.LogUtils;
 
 public class EventFactory {
 

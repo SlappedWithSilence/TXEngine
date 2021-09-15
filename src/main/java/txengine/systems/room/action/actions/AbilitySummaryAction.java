@@ -1,6 +1,7 @@
 package txengine.systems.room.action.actions;
 
-import txengine.io.LogUtils;
+import txengine.ui.component.Components;
+import txengine.ui.component.LogUtils;
 import txengine.main.Manager;
 import txengine.systems.room.action.Action;
 
@@ -14,22 +15,22 @@ public class AbilitySummaryAction extends Action {
         while (true) {
             Manager.player.getAbilityManager().setOwner(Manager.player);
 
-            LogUtils.header("Abilities");
+            Components.header("Abilities");
 
             System.out.println(prompt);
 
             Manager.player.getAbilityManager().printAbilities();
-            LogUtils.bar();
+            Components.bar();
             int userChoice = LogUtils.getNumber(-1, Manager.player.getAbilityManager().getAbilityQuantity()-1);
 
             if (userChoice == -1) break;
 
-            LogUtils.header("Ability Description");
+            Components.header("Ability Description");
             System.out.println(Manager.player.getAbilityManager().getAbilityList().get(userChoice).getDescription()); // Print Ability desc
             System.out.println("Damage: " + Manager.player.getAbilityManager().getAbilityList().get(userChoice).getDamage());
             System.out.println("Resource Costs: " + Manager.player.getAbilityManager().resourceCostsAsString(Manager.player.getAbilityManager().getAbilityList().get(userChoice))); // Print ability costs
 
-            LogUtils.bar();
+            Components.bar();
             System.out.println();
         }
 

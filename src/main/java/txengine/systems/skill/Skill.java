@@ -1,7 +1,6 @@
 package txengine.systems.skill;
 
-import com.sun.source.tree.Tree;
-import txengine.color.Colors;
+import txengine.ui.color.Colors;
 import txengine.systems.event.Event;
 
 import java.util.List;

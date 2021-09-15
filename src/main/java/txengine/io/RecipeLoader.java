@@ -7,6 +7,7 @@ import org.json.simple.parser.ParseException;
 import txengine.systems.integration.Requirement;
 import txengine.systems.crafting.Recipe;
 import txengine.systems.crafting.RecipeFactory;
+import txengine.ui.component.LogUtils;
 import txengine.util.Utils;
 
 import java.io.File;
@@ -55,10 +56,10 @@ public class RecipeLoader {
             int id = ((Long) rawRecipe.get("id")).intValue();
 
             List<AbstractMap.SimpleEntry<Integer, Integer>> ingredients = Arrays.stream(rawIngredients).map(s -> { int[] vals = Utils.parseInts(s,",");
-                                                                                                                    return new AbstractMap.SimpleEntry<Integer, Integer>(vals[0], vals[1]);
+                                                                                                                    return new AbstractMap.SimpleEntry<>(vals[0], vals[1]);
                                                                                                                  }).toList();
             List<AbstractMap.SimpleEntry<Integer, Integer>> products = Arrays.stream(rawProducts).map(s -> { int[] vals = Utils.parseInts(s,",");
-                return new AbstractMap.SimpleEntry<Integer, Integer>(vals[0], vals[1]);
+                return new AbstractMap.SimpleEntry<>(vals[0], vals[1]);
             }).toList();
 
             recipeHashMap.put(id, RecipeFactory.build(ingredients, products, requirementList));

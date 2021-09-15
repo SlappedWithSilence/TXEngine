@@ -1,19 +1,19 @@
 package txengine.systems.room.action.actions;
 
-import txengine.io.*;
 import txengine.systems.item.Consumable;
-import txengine.systems.item.Equipment;
 import txengine.systems.item.Item;
 import txengine.systems.item.Usable;
 import txengine.main.Manager;
 import txengine.systems.room.action.Action;
+import txengine.ui.component.Components;
+import txengine.ui.component.LogUtils;
 
 import java.util.ArrayList;
 
 // This action emulates the player entering a store
 public class InventoryAction extends Action {
 
-	private ArrayList<String> itemOptions = new ArrayList<String>(3);
+	private ArrayList<String> itemOptions = new ArrayList<>(3);
 
 	public InventoryAction() {
 		itemOptions.add("Inspect");
@@ -36,7 +36,7 @@ public class InventoryAction extends Action {
 			if (input == -1) return enableOnComplete();
 
 			System.out.println("What would you like to do with " + Manager.player.getInventory().getItemInstance(input).getName() + "?");
-			LogUtils.numberedList(itemOptions);
+			Components.numberedList(itemOptions);
 
 			int itemOptionChoice = LogUtils.getNumber(0, itemOptions.size()-1);
 

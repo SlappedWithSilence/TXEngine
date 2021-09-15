@@ -1,6 +1,6 @@
 package txengine.systems.event.events;
 
-import txengine.color.Colors;
+import txengine.ui.color.Colors;
 import txengine.main.Manager;
 import txengine.systems.event.Event;
 

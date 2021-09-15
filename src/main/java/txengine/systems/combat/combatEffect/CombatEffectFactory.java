@@ -1,6 +1,6 @@
 package txengine.systems.combat.combatEffect;
 
-import txengine.io.LogUtils;
+import txengine.ui.component.LogUtils;
 
 public class CombatEffectFactory {
 

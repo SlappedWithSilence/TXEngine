@@ -12,6 +12,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import txengine.ui.component.LogUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,7 +24,7 @@ public class ItemLoader implements Loader {
 
     @Override
     public HashMap<Integer, Item> load(File file) {
-        HashMap<Integer, Item> itemList = new HashMap<Integer, Item>();  // Store the item instances mapped to their IDs. Requires a collision checker
+        HashMap<Integer, Item> itemList = new HashMap<>();  // Store the item instances mapped to their IDs. Requires a collision checker
 
         // Read the JSON storage file
         JSONParser parser = new JSONParser();
@@ -103,7 +104,7 @@ public class ItemLoader implements Loader {
         int maxStacks = ((Long) rawItem.get("maxStacks")).intValue();
 
         // Begin loading effects
-        ArrayList<Effect> effects = new ArrayList<Effect>();            // The list that will hold the effects
+        ArrayList<Effect> effects = new ArrayList<>();            // The list that will hold the effects
         JSONArray jsonEffects = (JSONArray) rawItem.get("effects");        // Grab the JSON array of effects
         Iterator<JSONObject> effectsIterator = jsonEffects.iterator();    // Generate an iterator for the JSONArray that holds the effect data
 

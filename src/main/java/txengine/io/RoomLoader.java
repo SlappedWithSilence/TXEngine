@@ -8,6 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import txengine.ui.component.LogUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,7 +24,7 @@ public class RoomLoader implements Loader{
 
     @Override
     public HashMap<Integer, Room> load(File file) {
-        HashMap<Integer, Room> roomList = new HashMap<Integer, Room>();
+        HashMap<Integer, Room> roomList = new HashMap<>();
 
         // Read the JSON storage file
         JSONParser parser = new JSONParser();
@@ -71,7 +72,7 @@ public class RoomLoader implements Loader{
     }
 
     private static ArrayList<Action> getActions(JSONArray JSONActions) {
-        ArrayList<Action> actions = new ArrayList<Action>();
+        ArrayList<Action> actions = new ArrayList<>();
 
         Iterator<JSONObject> iterator = JSONActions.iterator();
 

@@ -1,7 +1,7 @@
 package txengine.systems.combat;
 
 import com.rits.cloning.Cloner;
-import txengine.io.LogUtils;
+import txengine.ui.component.LogUtils;
 import txengine.main.Manager;
 
 import java.util.AbstractMap;

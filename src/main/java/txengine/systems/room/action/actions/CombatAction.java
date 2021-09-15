@@ -4,7 +4,8 @@ import com.rits.cloning.Cloner;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.CombatEntity;
 import txengine.systems.inventory.Inventory;
-import txengine.io.LogUtils;
+import txengine.ui.component.Components;
+import txengine.ui.component.LogUtils;
 import txengine.main.Manager;
 import txengine.systems.room.action.Action;
 import txengine.util.Utils;
@@ -86,7 +87,7 @@ public class CombatAction extends Action {
     private void printLoot() {
         Inventory i = new Inventory(lootIds, lootQuantities);
 
-        LogUtils.header("Loot");
+        Components.header("Loot");
         System.out.println("You notice some objects left behind on the battlefield and collect them.");
         i.printItems();
         LogUtils.getAnyKey();

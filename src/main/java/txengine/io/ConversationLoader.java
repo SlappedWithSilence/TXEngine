@@ -7,6 +7,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import txengine.systems.event.Event;
 import txengine.systems.event.EventFactory;
+import txengine.ui.component.LogUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,7 +22,7 @@ public class ConversationLoader implements Loader{
 
     @Override
     public HashMap<Integer, Conversation> load(File file) {
-        HashMap<Integer, Conversation> conversationList = new HashMap<Integer, Conversation>();
+        HashMap<Integer, Conversation> conversationList = new HashMap<>();
 
         // Read the JSON storage file
         JSONParser parser = new JSONParser();
@@ -60,9 +61,9 @@ public class ConversationLoader implements Loader{
 
             Iterator<JSONObject> rawLayerIterator = rawLayerArray.iterator();
 
-            ArrayList<ConversationLayer> layers = new ArrayList<ConversationLayer>();
+            ArrayList<ConversationLayer> layers = new ArrayList<>();
             while (rawLayerIterator.hasNext()) {
-                ArrayList<ConversationLayer> conversationLayers = new ArrayList<ConversationLayer>();
+                ArrayList<ConversationLayer> conversationLayers = new ArrayList<>();
 
                 JSONObject rawLayer = rawLayerIterator.next();
                 JSONArray rawModulesArray = (JSONArray) rawLayer.get("modules");

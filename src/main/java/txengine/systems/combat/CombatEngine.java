@@ -5,7 +5,7 @@ import txengine.systems.combat.combatEffect.CombatEffect;
 import txengine.systems.combat.combatEffect.combatEffects.AddPhaseEffect;
 import txengine.systems.combat.combatEffect.combatEffects.DispelCombatEffect;
 import txengine.systems.combat.combatEffect.combatEffects.RemovePhaseEffect;
-import txengine.io.LogUtils;
+import txengine.ui.component.LogUtils;
 import txengine.systems.item.Item;
 import txengine.systems.item.Usable;
 import txengine.main.Manager;

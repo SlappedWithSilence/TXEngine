@@ -1,7 +1,8 @@
 package txengine.systems.room;
 
 import txengine.systems.integration.Requirement;
-import txengine.io.LogUtils;
+import txengine.ui.component.Components;
+import txengine.ui.component.LogUtils;
 import txengine.systems.room.action.Action;
 import txengine.systems.room.action.actions.MoveAction;
 
@@ -13,8 +14,8 @@ public class Room {
 	int id;      // The room's id. This is used to track which room the user is in as well as to map the user into new rooms. All IDs must be unique.
 	String name; // The room's name. Used for visual prompting.
 	String text; // The text that is printed when you enter the room
-	ArrayList<Action> onFirstEnterActions = new ArrayList<Action>(); // A list of actions to be performed series the first time a user enters a room
-	ArrayList<Action> roomActions = new ArrayList<Action>(); // A list of things the user can do in the room
+	ArrayList<Action> onFirstEnterActions = new ArrayList<>(); // A list of actions to be performed series the first time a user enters a room
+	ArrayList<Action> roomActions = new ArrayList<>(); // A list of things the user can do in the room
 
 	String introPrompt; // The string that is printed when the user first enters the room
 
@@ -30,12 +31,11 @@ public class Room {
 
 	public void printActions() {
 
-			LogUtils.numberedList(roomActions.stream().filter(action -> !action.isHidden()).map(Action::toString).toList());
+		Components.numberedList(roomActions.stream().filter(action -> !action.isHidden()).map(Action::toString).toList());
 
 	}
 
 	public void enter() {
-		boolean stay = true;
 
 		System.out.println(text);
 
@@ -44,7 +44,7 @@ public class Room {
 		}
 
 		// Loop until the user performs a MoveAction
-		while (stay) {
+		while (true) {
 			printActions();
 			int userSelection = LogUtils.getNumber(0, roomActions.stream().filter(action -> !action.isHidden()).toList().size()-1);
 

@@ -1,7 +1,7 @@
 package txengine.systems.item;
 
 import txengine.systems.combat.CombatEntity;
-import txengine.io.LogUtils;
+import txengine.ui.component.LogUtils;
 import txengine.systems.item.effect.*;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class Usable extends Item {
 	ArrayList<Effect> effects;
 
 	public Usable() {
-		effects = new ArrayList<Effect>();
+		effects = new ArrayList<>();
 	}
 
 	public Usable(String name, String description, int id, int value, int maxStacks, ArrayList<Effect> effects) {

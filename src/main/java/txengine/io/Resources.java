@@ -1,5 +1,7 @@
 package txengine.io;
 
+import txengine.ui.component.LogUtils;
+
 import java.io.*;
 
 public class Resources {

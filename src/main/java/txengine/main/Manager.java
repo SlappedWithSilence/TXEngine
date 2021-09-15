@@ -1,6 +1,6 @@
 package txengine.main;
 
-import txengine.color.*;
+import txengine.ui.color.*;
 import txengine.systems.combat.CombatEntity;
 import txengine.systems.combat.CombatResourceManager;
 import txengine.systems.ability.Ability;
@@ -20,6 +20,7 @@ import txengine.systems.conversation.Conversation;
 import txengine.systems.room.RoomManager;
 import txengine.systems.skill.Skill;
 import txengine.systems.skill.SkillManager;
+import txengine.ui.component.LogUtils;
 
 public class Manager {
 

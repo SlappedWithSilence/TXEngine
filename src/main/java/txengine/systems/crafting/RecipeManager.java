@@ -1,6 +1,6 @@
 package txengine.systems.crafting;
 
-import txengine.color.Colors;
+import txengine.ui.color.Colors;
 import txengine.systems.integration.Requirement;
 import txengine.main.Manager;
 import txengine.systems.combat.CombatEntity;

@@ -5,8 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 import txengine.main.Manager;
-import txengine.color.*;
-import txengine.io.LogUtils;
+import txengine.ui.color.*;
+import txengine.ui.component.Components;
+import txengine.ui.component.LogUtils;
 import txengine.systems.item.Item;
 import txengine.util.Utils;
 
@@ -228,7 +229,7 @@ public class Inventory {
 
 	// Prints the inventory in a vertical numbered list
 	public void display() {
-		LogUtils.header("Inventory");
+		Components.header("Inventory");
 		printItems();
 	}
 
@@ -239,7 +240,7 @@ public class Inventory {
 
 		if(getUsage() == 0) System.out.println("Your inventory is empty");
 
-		System.out.println("-".repeat(LogUtils.HEADER_LENGTH));
+		Components.bar();
 	}
 
 	// Returns an instance of the item class associated with the ID located at 'index' in the inventory

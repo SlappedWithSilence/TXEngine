@@ -1,7 +1,7 @@
 package txengine.systems.item.effect;
 
 import txengine.systems.combat.CombatEntity;
-import txengine.io.LogUtils;
+import txengine.ui.component.LogUtils;
 
 public abstract class Effect {
 
