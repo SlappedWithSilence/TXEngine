@@ -28,6 +28,24 @@
       "resource_cost" : ["Mana", 50]
     },
     {
+      "target_mode" : "SINGLE",
+      "name" : "Optical Pat-Down",
+      "description" : "Asses the enemy with rough-shod accuracy.",
+      "use_text" : "{CASTER} visually assesses {TARGET}... with questionable accuracy.",
+      "damage" : 30,
+      "effects" : [
+        {
+          "class_name" : "ProportionalResourceEffect",
+          "duration"  : 1,
+          "trigger_phase" : "PRE_ACTION",
+          "trigger_message" : "{OWNER} gains the energy to act after being audibly misjudged. (Stamina +10)",
+          "cleanup_message" : "",
+          "properties": ["Stamina", ".10"]
+        }
+      ],
+      "resource_cost" : ["Stamina", 10]
+    },
+    {
       "target_mode" : "SINGLE_ENEMY",
       "name" : "Love Tap",
       "description" : "I didn't hit you, that was a love tap.",

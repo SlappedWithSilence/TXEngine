@@ -109,7 +109,7 @@ public class ItemLoader implements Loader {
 
         while (effectsIterator.hasNext()) {                                // Iterate through the JSONArray that holds the effect data
             JSONObject rawEffect = effectsIterator.next();
-            String effectName = (String) rawEffect.get("className");    // Get the class name of the effect we're instantiating
+            String effectName = (String) rawEffect.get("class_name");    // Get the class name of the effect we're instantiating
             JSONArray propertiesArray = (JSONArray) rawEffect.get("properties");    // Get a sub-array of property integer values for the current effect
 
             String[] effectProperties = new String[propertiesArray.size()];        // Create a java-array to store the effect's property values
@@ -156,6 +156,8 @@ public class ItemLoader implements Loader {
         // Load Requirements
         List<Requirement> requirements = LoadUtils.parseRequirements((JSONArray) rawItem.get("requirements"));
 
-        return new Equipment(name, desc, id, value, maxStacks, effects, tagResistances, requirements, type, damage, defense);
+        List<String> abilityNames = List.of(LoadUtils.getStringArray((JSONArray) rawItem.get("abilities")));
+
+        return new Equipment(name, desc, id, value, maxStacks, effects, tagResistances, requirements, abilityNames, type, damage, defense);
     }
 }

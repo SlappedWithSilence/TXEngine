@@ -18,6 +18,7 @@ import txengine.systems.item.Item;
 import txengine.systems.room.Room;
 import txengine.systems.conversation.Conversation;
 import txengine.systems.room.RoomManager;
+import txengine.systems.skill.Skill;
 
 public class Manager {
 
@@ -39,6 +40,7 @@ public class Manager {
     private static final String ABILITY_RESOURCE_FILE = "abilities.json";
     private static final String COMBAT_ENTITY_RESOURCE_FILE = "combat_entities.json";
     private static final String RECIPES_RESOURCE_FILE = "recipes.json";
+    private static final String SKILLS_RESOURCE_FILE = "skills.json";
 
     // *** Variables *** //
     private static boolean saveExists = false;
@@ -53,8 +55,10 @@ public class Manager {
     public static HashMap<String, Ability> abilityHashMap;
     public static HashMap<Integer, CombatEntity> combatEntityHashMap;
     public static HashMap<Integer, Recipe> recipeHashMap;
+    public static HashMap<String, Skill> skillHashMap;
 
     public static String primaryResource = "Health";
+    public static String primarySkill = "Combat";
 
     public static FlagManager flagManager;
 
@@ -107,6 +111,7 @@ public class Manager {
         abilityHashMap = AbilityLoader.load(Resources.getResourceAsFile(ABILITY_RESOURCE_FILE));
         combatEntityHashMap = new CombatEntityLoader().load(Resources.getResourceAsFile(COMBAT_ENTITY_RESOURCE_FILE));
         recipeHashMap = RecipeLoader.load(Resources.getResourceAsFile(RECIPES_RESOURCE_FILE));
+        skillHashMap = new SkillLoader().load(Resources.getResourceAsFile(SKILLS_RESOURCE_FILE));
 
         flagManager = new FlagManager();
     }
@@ -115,8 +120,8 @@ public class Manager {
         if (combatEntityHashMap == null) combatEntityHashMap = new HashMap<>();
 
         // name,  openingDialog,  closingDialog, int inventorySize, inventory,  abilityManager,  resourceManager, int speed, int level)
-        combatEntityHashMap.put(-1, new CombatEntity("Grunt", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), new EquipmentManager() ,2, 1));
-        combatEntityHashMap.put(-2, new CombatEntity("Smokey the Bear", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), new EquipmentManager(), 5, 25));
+        combatEntityHashMap.put(-1, new CombatEntity("Grunt", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), new EquipmentManager() ,2, 1, 15));
+        combatEntityHashMap.put(-2, new CombatEntity("Smokey the Bear", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), new EquipmentManager(), 5, 25, 15));
 
         player.getAbilityManager().learn("Smack");
         player.getAbilityManager().learn("Love Tap");

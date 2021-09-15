@@ -7,6 +7,8 @@ import txengine.integration.RequirementFactory;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.combatEffect.CombatEffect;
 import txengine.systems.combat.combatEffect.CombatEffectFactory;
+import txengine.systems.event.Event;
+import txengine.systems.event.EventFactory;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -14,12 +16,29 @@ import java.util.List;
 
 public class LoadUtils {
 
+    public static List<Event> parseEvents(JSONArray object) {
+        List<Event> events = new ArrayList<>();
+        for (Object o : object) {
+            events.add(parseEvent((JSONObject) o));
+        }
+
+        return events;
+    }
+
+    public static Event parseEvent(JSONObject rawEvent) {
+        String className = (String) rawEvent.get("class_name");
+        JSONArray rawProperties = (JSONArray) rawEvent.get("properties");
+        String[] properties = getStringArray(rawProperties);
+
+        return EventFactory.build(className, properties);
+    }
+
     public static List<Requirement> parseRequirements(JSONArray rawRequirementArray) {
         List<Requirement> requirements = new ArrayList<>();
 
         for (int i = 0; i < rawRequirementArray.size(); i++) {
             JSONObject rawRequirement = (JSONObject) rawRequirementArray.get(i);
-            String className = (String) rawRequirement.get("className");
+            String className = (String) rawRequirement.get("class_name");
             String[] properties = getStringArray((JSONArray) rawRequirement.get("properties"));
 
             requirements.add(RequirementFactory.build(className, properties));

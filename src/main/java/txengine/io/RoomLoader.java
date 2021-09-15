@@ -78,11 +78,11 @@ public class RoomLoader implements Loader{
         while (iterator.hasNext()) {
             JSONObject rawAction = iterator.next();
 
-            String className = 	(String) rawAction.get("className");
-            String menuName = 	(String) rawAction.get("menuName");
+            String className = 	(String) rawAction.get("class_name");
+            String menuName = 	(String) rawAction.get("menu_name");
             String text =		(String) rawAction.get("text");
             boolean hidden = 	(Boolean) rawAction.get("hidden");
-            int unlockIndex = 	((Long) rawAction.get("unlockedIndex")).intValue();
+            int unlockIndex = 	((Long) rawAction.get("unlocked_index")).intValue();
 
             List<Requirement> requirements = LoadUtils.parseRequirements((JSONArray) rawAction.get("requirements"));
 

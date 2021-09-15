@@ -2,10 +2,11 @@ package txengine.io;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 public interface Loader {
 
-    public HashMap load(File file);
+    public Map load(File file);
 
 
 }

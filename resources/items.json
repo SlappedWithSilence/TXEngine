@@ -28,7 +28,7 @@
          "maxStacks" :  16,
          "effects"   :  [
             {
-               "className" : "FlatResourceEffect",
+               "class_name" : "FlatResourceEffect",
                "properties": ["Health", "16"]
             }
          ]
@@ -43,11 +43,11 @@
          "maxStacks" :  20,
          "effects"   :  [
             {
-               "className" : "FlatResourceEffect",
+               "class_name" : "FlatResourceEffect",
                "properties": ["Health","-5"]
             },
             {
-               "className": "FlatResourceEffect",
+               "class_name": "FlatResourceEffect",
                "properties": ["Stamina", "16"]
             }
          ]
@@ -62,11 +62,11 @@
          "maxStacks" :  33,
          "effects"   :  [
             {
-               "className" : "ProportionalResourceEffect",
+               "class_name" : "ProportionalResourceEffect",
                "properties": ["Health","0.5"]
             },
             {
-               "className" : "ProportionalResourceEffect",
+               "class_name" : "ProportionalResourceEffect",
                "properties": ["Stamina", "0.5"]
             }
          ]
@@ -80,11 +80,11 @@
          "maxStacks" :  1,
          "effects"   :  [
             {
-               "className" : "TeachAbilityEffect",
+               "class_name" : "TeachAbilityEffect",
                "properties": ["Smack"]
             },
             {
-               "className" : "TeachAbilityEffect",
+               "class_name" : "TeachAbilityEffect",
                "properties": ["Blast"]
             }
          ]
@@ -164,10 +164,11 @@
          "damage"    : 0,
          "defense"   : 10,
          "tag_resistances" : ["fire,0.5"],
+         "abilities" : ["Optical Pat-Down"],
          "requirements"    : [
             {
-               "className" : "LevelRequirement",
-               "properties" : ["2"]
+               "class_name" : "LevelRequirement",
+               "properties" : ["1"]
             }
          ],
          "combat_effects" :

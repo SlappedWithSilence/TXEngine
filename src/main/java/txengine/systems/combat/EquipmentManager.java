@@ -47,6 +47,7 @@ public class EquipmentManager {
     public boolean equip(int id) {
         Item i = Manager.itemHashMap.get(id);
 
+        // Verify if the equipment can actually be equipped.
         if (!(i instanceof Equipment)) {
             LogUtils.error("Thats not an equipment\n");
             return false;
@@ -57,18 +58,23 @@ public class EquipmentManager {
             return false;
         }
 
+        // Equip the equipment to the right slot
         Equipment.EquipmentType type = ((Equipment) i).getType();
+        if (equipmentMap.get(type) != null) unequip(type); // Unequip the item already in that slot
+        setSlot(type, id);                                 // Set the item in that slot to the new item
+        Manager.player.getInventory().consumeQuantity(id, 1); // Remove the item from the player's inventory
 
-        if (equipmentMap.get(type) != null) unequip(type);
-
-        setSlot(type, id);
-        Manager.player.getInventory().consumeQuantity(id, 1);
+        // Register the abilities to the player
+        ((Equipment) Manager.itemHashMap.get(id)).getAbilityNames().forEach(abName -> Manager.player.abilityManager.learn(abName));
 
         return true;
     }
 
     public void unequip(Equipment.EquipmentType slot) {
-        Manager.player.getInventory().addItem(equipmentMap.get(slot));
+        if (equipmentMap.get(slot) > 0) {
+            Manager.player.getInventory().addItem(equipmentMap.get(slot));
+            ((Equipment) Manager.itemHashMap.get(equipmentMap.get(slot))).getAbilityNames().forEach(abName -> Manager.player.abilityManager.unlearn(abName));
+        }
         setSlot(slot, -1);
     }
 

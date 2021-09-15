@@ -26,6 +26,7 @@ public class CombatEntity implements CombatAgency {
     EquipmentManager equipmentManager;
     int speed; // Determines turn order
     int level;
+    int xpYield;
 
     HashMap<CombatEngine.CombatPhase, List<CombatEffect>> combatEffects;
 
@@ -46,6 +47,7 @@ public class CombatEntity implements CombatAgency {
         speed = 0;
         combatEffects = getPhaseMap();
         level = 1;
+        xpYield = 10;
     }
 
     public CombatEntity(CombatEntity clone) {
@@ -62,6 +64,7 @@ public class CombatEntity implements CombatAgency {
         combatEffects = getPhaseMap();
         level = clone.level;
         equipmentManager = new EquipmentManager(clone.equipmentManager);
+        xpYield = clone.xpYield;
     }
 
     public CombatEntity(String name, String openingDialog, String closingDialog, int inventorySize) {
@@ -77,6 +80,7 @@ public class CombatEntity implements CombatAgency {
         speed = 0;
         combatEffects = getPhaseMap();
         level = 1;
+        xpYield = 10;
     }
 
     public CombatEntity(String name, String openingDialog, String closingDialog, int inventorySize, Inventory inventory) {
@@ -93,10 +97,11 @@ public class CombatEntity implements CombatAgency {
         speed = 0;
         combatEffects = getPhaseMap();
         level = 1;
+        xpYield = 10;
     }
 
     // Full constructor. All inputs necessary to instantiate a full-fledged combatEntity are required for this constructor.
-    public CombatEntity(String name, String openingDialog, String closingDialog, int inventorySize, Inventory inventory, AbilityManager abilityManager, CombatResourceManager resourceManager, EquipmentManager equipmentManager, int speed, int level) {
+    public CombatEntity(String name, String openingDialog, String closingDialog, int inventorySize, Inventory inventory, AbilityManager abilityManager, CombatResourceManager resourceManager, EquipmentManager equipmentManager, int speed, int level, int xpYield) {
         this.name = name;
         this.openingDialog = openingDialog;
         this.closingDialog = closingDialog;
@@ -111,6 +116,7 @@ public class CombatEntity implements CombatAgency {
         combatEffects = getPhaseMap();
 
         this.level = level;
+        this.xpYield = xpYield;
     }
 
     /************************
@@ -319,5 +325,13 @@ public class CombatEntity implements CombatAgency {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public int getXpYield() {
+        return xpYield;
+    }
+
+    public void setXpYield(int xpYield) {
+        this.xpYield = xpYield;
     }
 }

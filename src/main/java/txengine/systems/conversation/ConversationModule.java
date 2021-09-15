@@ -1,6 +1,7 @@
 package txengine.systems.conversation;
 
 import txengine.io.LogUtils;
+import txengine.systems.event.Event;
 
 public class ConversationModule {
     String NPCText;

@@ -48,7 +48,7 @@ public class SummaryAction extends Action {
         StringBuilder line1 = new StringBuilder();
 
         String nameText =  "Name:     " + Manager.player.getName();
-        String levelText = "Level:    " + Manager.player.getLevel();
+        String levelText = Manager.skillHashMap.get(Manager.primarySkill).getName() + ":  "   + Manager.skillHashMap.get(Manager.primarySkill).getLevel();
         String moneyText = "Currency: " + Manager.player.getMoney();
 
         line1.append(" ").append("_".repeat(LogUtils.HEADER_LENGTH-2));

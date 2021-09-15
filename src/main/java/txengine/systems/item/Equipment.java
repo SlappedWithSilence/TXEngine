@@ -29,6 +29,7 @@ public class Equipment extends Item {
     private EquipmentType type;
     private List<AbstractMap.SimpleEntry<String, Float>> tagResistances;
     private List<Requirement> equipRequirements;
+    private List<String> abilityNames;
     private int damageBuff;
     private int damageResistance;
 
@@ -37,6 +38,7 @@ public class Equipment extends Item {
         super();
         preCombatEffects = new ArrayList<>();
         tagResistances = new ArrayList<>();
+        abilityNames = new ArrayList<>();
     }
 
     // Value constructor, no effects or resistances, or requirements
@@ -46,10 +48,11 @@ public class Equipment extends Item {
         this.type = type;
         tagResistances = new ArrayList<>();
         equipRequirements = new ArrayList<>();
+        abilityNames = new ArrayList<>();
     }
 
     // Value constructor, effects
-    public Equipment(String name, String description, int id, int value, int maxStacks, List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> preCombatEffects,  List<AbstractMap.SimpleEntry<String, Float>> tagResistances, List<Requirement> equipRequirements, EquipmentType type, int damage, int defense) {
+    public Equipment(String name, String description, int id, int value, int maxStacks, List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> preCombatEffects,  List<AbstractMap.SimpleEntry<String, Float>> tagResistances, List<Requirement> equipRequirements, List<String> abilityNames, EquipmentType type, int damage, int defense) {
         super(name, description, id, value, maxStacks);
         setPreCombatEffects(preCombatEffects);
         this.tagResistances = tagResistances;
@@ -57,6 +60,7 @@ public class Equipment extends Item {
         this.damageBuff = damage;
         this.damageResistance = defense;
         this.equipRequirements = equipRequirements;
+        this.abilityNames = abilityNames;
     }
 
     public Equipment(Equipment equipment) {
@@ -70,6 +74,7 @@ public class Equipment extends Item {
         this.damageBuff = equipment.damageBuff;
         this.tagResistances = new ArrayList<>(equipment.tagResistances);
         this.equipRequirements = new ArrayList<>(equipment.equipRequirements);
+        this.abilityNames = new ArrayList<>(equipment.abilityNames);
     }
     /* Member Functions*/
     @Override
@@ -80,6 +85,14 @@ public class Equipment extends Item {
     }
 
     /* Accessor Methods */
+
+    public List<String> getAbilityNames() {
+        return abilityNames;
+    }
+
+    public void setAbilityNames(List<String> abilityNames) {
+        this.abilityNames = abilityNames;
+    }
 
     public final List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> getPreCombatEffects() {
         return preCombatEffects;

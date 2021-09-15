@@ -61,6 +61,8 @@ public class CombatEntityLoader implements Loader {
             int speed = ((Long) rawEntity.get("speed")).intValue();
             int level = ((Long) rawEntity.get("level")).intValue();
 
+            int xpYield = ((Long) rawEntity.get("combat_xp_yield")).intValue();
+
             int id = ((Long) rawEntity.get("id")).intValue();
 
             EquipmentManager equipmentManager = new EquipmentManager(); // Make a new equipment manager
@@ -77,7 +79,7 @@ public class CombatEntityLoader implements Loader {
                 }
             }
 
-            CombatEntity combatEntity = new CombatEntity(name, openingDialog, closingDialog, 100, inventory,abilityManager, resourceManager, equipmentManager,speed, level);
+            CombatEntity combatEntity = new CombatEntity(name, openingDialog, closingDialog, 100, inventory,abilityManager, resourceManager, equipmentManager,speed, level, xpYield);
 
             entityList.put(id, combatEntity);
         }

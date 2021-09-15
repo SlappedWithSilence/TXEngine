@@ -51,7 +51,14 @@ public class AbilityManager {
 
     // Teach the combat entity a new Ability by name reference
     public void learn(String abilityName) {
-        abilityList.add(Manager.abilityHashMap.get(abilityName));
+        if (abilityList.stream().noneMatch(ability -> ability.getName().equals(abilityName))) {
+            abilityList.add(Manager.abilityHashMap.get(abilityName));
+        }
+    }
+
+    // "Unlearn" any abilities with a matching name as 'abilityName'.
+    public void unlearn(String abilityName) {
+        abilityList.removeIf(a -> a.getName().equals(abilityName));
     }
 
     // Teach the combat entity a new Ability by direct reference
