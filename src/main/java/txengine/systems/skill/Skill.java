@@ -66,6 +66,7 @@ public class Skill {
     // Increase the level of the skill and adjusts the skills maxXP
     // Executes any events
     public void levelUp() {
+        System.out.println(Colors.GREEN_BOLD + "Your " + name + " skill went up to " + level + "!" + Colors.RESET);
         level = level + 1;
         xp = 0;
         levelUpXP = (int)(levelUpXP * levelRatio);
@@ -73,8 +74,6 @@ public class Skill {
         if (levelUpEvents.containsKey(level)) {
             levelUpEvents.get(level).forEach(Event::perform);
         }
-
-        System.out.println(Colors.GREEN_BOLD + "Your " + name + " skill went up to " + level + "!" + Colors.RESET);
     }
 
     /* Accessor Methods */

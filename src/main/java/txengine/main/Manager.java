@@ -19,6 +19,7 @@ import txengine.systems.room.Room;
 import txengine.systems.conversation.Conversation;
 import txengine.systems.room.RoomManager;
 import txengine.systems.skill.Skill;
+import txengine.systems.skill.SkillManager;
 
 public class Manager {
 
@@ -55,12 +56,14 @@ public class Manager {
     public static HashMap<String, Ability> abilityHashMap;
     public static HashMap<Integer, CombatEntity> combatEntityHashMap;
     public static HashMap<Integer, Recipe> recipeHashMap;
-    public static HashMap<String, Skill> skillHashMap;
+    private static HashMap<String, Skill> skillHashMap;
 
     public static String primaryResource = "Health";
     public static String primarySkill = "Combat";
+    public static String primaryCurrency = "Kirea";
 
     public static FlagManager flagManager;
+    public static SkillManager skillManager;
 
     // The class that handles the main menu, then launches the game.
     public static void main( String[] args )
@@ -114,6 +117,7 @@ public class Manager {
         skillHashMap = new SkillLoader().load(Resources.getResourceAsFile(SKILLS_RESOURCE_FILE));
 
         flagManager = new FlagManager();
+        skillManager = new SkillManager(skillHashMap);
     }
 
     private static void initDebug() {

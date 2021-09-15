@@ -23,10 +23,15 @@ public class FlagEvent extends Event {
     }
 
     @Override
-    public void perform() {
+    public void execute() {
         flagName = super.getProperties()[0];
         flagValue = Boolean.parseBoolean(super.getProperties()[1]);
-        LogUtils.error("Setting flag " + flagName + " to " + flagValue.toString() + "\n" );
+        LogUtils.error("Setting flag " + flagName + " to " + flagValue.toString() + "\n" ); // TODO: Remove debug
+    }
+
+    @Override
+    public String print() {
+        return null;
     }
 
 }

@@ -72,7 +72,7 @@ public class Player extends CombatEntity {
 
 		ArrayList<String> data = new ArrayList<>();
 		data.add(name);
-		data.add("Lvl: " + Manager.skillHashMap.get(Manager.primarySkill).getLevel());
+		data.add("Lvl: " + Manager.skillManager.getPrimaryLevel());
 		data.add(Manager.primaryResource + ": " + Manager.player.getResourceManager().getResourceQuantity(Manager.primaryResource));
 
 		String[] options = {"Use an Ability", "Use an Item", "Inspect an Entity"};
@@ -166,7 +166,7 @@ public class Player extends CombatEntity {
 	}
 
 	public int getLevel() {
-		return Manager.skillHashMap.get(Manager.primarySkill).getLevel();
+		return Manager.skillManager.getPrimaryLevel();
 	}
 
 	public void setLevel(int level) {
