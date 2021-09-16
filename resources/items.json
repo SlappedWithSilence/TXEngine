@@ -168,7 +168,7 @@
          "requirements"    : [
             {
                "class_name" : "LevelRequirement",
-               "properties" : ["1"]
+               "properties" : ["3"]
             }
          ],
          "combat_effects" :
@@ -191,6 +191,28 @@
                "cleanup_message" : "",
                "properties": ["Health", "0.5"]
             }
+         ]
+      },
+      {
+         "type"      :  "equipment",
+         "name"      :  "Iron Scimitar",
+         "description": "A sharp iron scimitar. It is worn and rusted, but still plenty capable.",
+         "equipment_type" : "WEAPON",
+         "id"        :  16,
+         "value"     :  10,
+         "maxStacks" :  2,
+         "damage"    : 3,
+         "defense"   : 0,
+         "tag_resistances" : [],
+         "abilities" : [],
+         "requirements"    : [
+            {
+               "class_name" : "LevelRequirement",
+               "properties" : ["1"]
+            }
+         ],
+         "combat_effects" :
+         [
          ]
       }
    ]

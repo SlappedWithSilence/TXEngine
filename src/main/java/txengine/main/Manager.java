@@ -136,6 +136,7 @@ public class Manager {
 
         for (Recipe r : recipeHashMap.values()) player.getRecipeManager().learn(r);
 
+        player.getInventory().addItem(16);
     }
 
 }

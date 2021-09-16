@@ -3,11 +3,10 @@ package txengine.systems.room.action.actions;
 import txengine.main.Manager;
 import txengine.systems.item.Equipment;
 import txengine.systems.room.action.Action;
+import txengine.ui.LogUtils;
 import txengine.ui.component.Components;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 public class EquipmentAction extends Action {
@@ -42,8 +41,24 @@ public class EquipmentAction extends Action {
         Components.parallelVerticalTabList(first, second, null, null, 0);
 
         System.out.println("Which slot do you want to interact with?");
-
-
+        Equipment.EquipmentType type = Equipment.EquipmentType.valueOf(LogUtils.getEnumValue(Equipment.EquipmentType.class));
+        if (Manager.player.getEquipmentManager().getSlot(type) == null) System.out.println("There is nothing in that slot.");
+        else {
+            Components.header("Equipment");
+            String[] options = new String[] {"Inspect", "Unequip"};
+            System.out.println("What do you want to do?");
+            Components.numberedList(options);
+            int choice = LogUtils.getNumber(-1, options.length-1);
+            switch(choice){
+                case -1 -> { return unhideIndex; }
+                case 0  -> {
+                    System.out.println(Manager.player.getEquipmentManager().getSlot(type).inspect());
+                }
+                case 1 -> {
+                    Manager.player.getEquipmentManager().unequip(type);
+                }
+            }
+        }
 
         return unhideIndex;
     }

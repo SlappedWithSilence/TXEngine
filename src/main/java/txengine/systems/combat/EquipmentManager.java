@@ -85,7 +85,7 @@ public class EquipmentManager {
 
     // Returns the sum of all damage resistance
     public int getDamageResistance() {
-        return equipmentMap.values().stream().filter(Objects::nonNull).reduce(0, (subtotal, e) -> subtotal + ((Equipment) Manager.itemHashMap.get(e)).getDamageResistance() , Integer::sum);
+        return equipmentMap.values().stream().filter(Objects::nonNull).filter(integer -> integer != -1).reduce(0, (subtotal, e) -> subtotal + ((Equipment) Manager.itemHashMap.get(e)).getDamageResistance() , Integer::sum);
     }
 
     /* Helper Methods */
@@ -97,7 +97,7 @@ public class EquipmentManager {
 
     /* Accessor Methods */
     public void setSlot(Equipment.EquipmentType slot, int equipmentID) {
-        if (((Equipment) Manager.itemHashMap.get(equipmentID)).getType() != slot) {
+        if (equipmentID  != -1 && ((Equipment) Manager.itemHashMap.get(equipmentID)).getType() != slot) {
             LogUtils.error("Cannot assign a " + ((Equipment) Manager.itemHashMap.get(equipmentID)).getType().toString() + " to the " + slot.toString() + " slot!");
             return;
         }
