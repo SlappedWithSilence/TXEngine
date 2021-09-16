@@ -97,6 +97,20 @@ public class LogUtils {
 		} while (true);
 	}
 
+	// Get the user input
+	public static String getEnumValue(Class<?> anEnum) {
+		List<String> valuesAsStrings = Arrays.stream(anEnum.getEnumConstants()).map(Object::toString).toList();
+
+		while(true) {
+			System.out.println("Please enter " + valuesAsStrings.stream().reduce("", (part, str) -> part + ", " + str));
+			Scanner scan = new Scanner(System.in);
+			String userInput = scan.nextLine();
+
+			if (valuesAsStrings.stream().anyMatch(valuesAsStrings::contains)) return userInput;
+
+		}
+	}
+
 	// Get text from the user
 	public static String getText() {
 		Scanner scan = new Scanner(System.in);
