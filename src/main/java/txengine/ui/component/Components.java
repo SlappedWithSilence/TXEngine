@@ -197,7 +197,7 @@ public class Components {
     }
 
     // returns two horizontally-adjacent VerticalTabs
-    public static String parallelVerticalTab(List<String> left, List<String> right) {
+    public static String parallelVerticalTab(Collection<String> left, Collection<String> right) {
         ArrayList<String> leftInternal = new ArrayList<>(left);
         ArrayList<String> rightInternal = new ArrayList<>(right);
 
@@ -283,6 +283,39 @@ public class Components {
             System.out.println(parallelVerticalTab(leftInternal.get(i), rightInternal.get(i)));
         }
     }
+
+    public static void parallelVerticalTabList(List<Tabable> left, List<Tabable> right, String lefTitle, String rightTitle, int spaces) {
+        List<Tabable> leftInternal = new ArrayList<>(left);
+        List<Tabable> rightInternal = new ArrayList<>(right);
+
+        int mode = 0;
+
+        if (left.size() == right.size()) mode = 0; // The tab lengths are the same
+        if (left.size() > right.size())  mode = 1; // left tab is longer
+        if (left.size() < right.size())  mode = 2; // right tab is longer
+
+        if (mode == 1) { // Normalize the tab sizes by inserting empty lines into the right tab
+            for (int i = 0; i < left.size() - right.size(); i++) rightInternal.add(ArrayList::new);
+        }
+        if (mode == 2) { // Normalize the tab sizes by inserting empty lines into the left tab
+            for (int i = 0; i < right.size() - left.size(); i++) leftInternal.add(ArrayList::new);
+        }
+
+        if (lefTitle != null && rightTitle != null && !rightTitle.equals("") && !lefTitle.equals("")) { // Print headers
+            StringBuilder sb = new StringBuilder();
+
+            String topBar = "-".repeat(HEADER_LENGTH/2);
+            sb.append(topBar).append("   ").append(topBar).append('\n');
+            sb.append('|').append(centerString(lefTitle, HEADER_LENGTH/2 - 2)).append("|").append("   ").append("|").append(centerString(rightTitle, HEADER_LENGTH/2 - 2)).append("|");
+
+            System.out.println(sb);
+        }
+
+        for (int i = 0; i < right.size(); i++) {
+            System.out.println(parallelVerticalTab(leftInternal.get(i).getTabData(), rightInternal.get(i).getTabData()));
+        }
+    }
+
 
    /* public static void parallelVerticalTabList(List<Tabable> left, List<Tabable> right, String lefTitle, String rightTitle) {
         List<Tabable> leftInternal = new ArrayList<>(left);

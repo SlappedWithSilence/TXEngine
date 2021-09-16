@@ -34,8 +34,16 @@ public class EquipmentAction extends Action {
            });
            else data.add(tabable);
        }
+        int size = data.size();
+        List<Components.Tabable> first = new ArrayList<>(data.subList(0, (size) / 2));
+        List<Components.Tabable> second = new ArrayList<>(data.subList((size) / 2, size));
 
-       Components.verticalTabList(data);
+       //Components.verticalTabList(data);
+        Components.parallelVerticalTabList(first, second, null, null, 0);
+
+        System.out.println("Which slot do you want to interact with?");
+
+
 
         return unhideIndex;
     }
