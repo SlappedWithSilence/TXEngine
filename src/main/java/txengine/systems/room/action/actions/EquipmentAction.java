@@ -12,7 +12,6 @@ import java.util.List;
 
 public class EquipmentAction extends Action {
 
-
     @Override
     public int perform() {
         int totalDef = Manager.player.getEquipmentManager().getDamageResistance();
@@ -25,20 +24,15 @@ public class EquipmentAction extends Action {
 
        for (Equipment.EquipmentType type : Equipment.EquipmentType.values()) {
            Components.Tabable tabable = Manager.player.getEquipmentManager().getSlot(type);
-           if (tabable == null) data.add(new Components.Tabable() {
-               @Override
-               public Collection<String> getTabData() {
-                   List<String> ls = new ArrayList<>();
+           if (tabable == null) data.add(() -> {
+               List<String> ls = new ArrayList<>();
 
-                   ls.add("Type: " + type.toString());
-                   ls.add(" [Empty]");
+               ls.add("Type: " + type.toString());
+               ls.add(" [Empty]");
 
-                   return  ls;
-               }
+               return  ls;
            });
-
-           data.add(tabable);
-
+           else data.add(tabable);
        }
 
        Components.verticalTabList(data);

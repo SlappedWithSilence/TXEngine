@@ -62,10 +62,10 @@
         },
         {
           "class_name" : "CombatAction",
-          "menu_name"  : "Fight Some Weirdos",
+          "menu_name"  : "Practice Fighting",
           "text"      : "",
           "hidden"   : false,
-          "properties" : ["{FRIENDLY}","{HOSTILE}", "-1","1", "0", "{LOOT}", "1,1", "4,2"],
+          "properties" : ["{FRIENDLY}","2","{HOSTILE}", "-1","2","3", "{LOOT}", "1,1", "4,2"],
           "requirements" : [],
           "unlocked_index" : -1
         },

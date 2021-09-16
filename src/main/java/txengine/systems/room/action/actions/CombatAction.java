@@ -55,7 +55,7 @@ public class CombatAction extends Action {
             }
             // If load type is set to friendly, add the entity with id value 's' to the friendly array
             else if (loadType == LoadType.FRIENDLY) {
-                friendlies.add(cloner.deepClone(Manager.combatEntityHashMap.get(Integer.parseInt(s))));
+                friendlies.add(new CombatEntity(Manager.combatEntityHashMap.get(Integer.parseInt(s))));
             }
             // If load type is set to hostile, add the entity with id value 's' to the hostile array
             else if (loadType == LoadType.HOSTILE) {

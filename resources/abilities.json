@@ -124,6 +124,24 @@
         }
       ],
       "resource_cost" : ["Stamina", -100, "Health", -100]
+    },
+    {
+      "target_mode" : "SINGLE_ENEMY",
+      "name" : "Bounce",
+      "description" : "The user flings its mass at the enemy, hoping to deal some damage.",
+      "use_text" : "{CASTER} slams into {TARGET}, hurting {TARGET} a little.",
+      "damage" : 8,
+      "effects" : [],
+      "resource_cost" : []
+    },
+    {
+      "target_mode" : "SINGLE_ENEMY",
+      "name" : "Water Shot",
+      "description" : "The user shoots a powerful stream of water at the target.",
+      "use_text" : "{CASTER} shoots a powerful jet of water at {TARGET}.",
+      "damage" : 7,
+      "effects" : [],
+      "resource_cost" : ["Mana", 2]
     }
   ]
 }

@@ -12,7 +12,7 @@
       "resources" : ["Health", 100, 100, "Stamina", 100, 100, "Mana", 100, 100],
       "abilities" : ["Love Tap", "Kidnap"],
       "speed" : 5,
-      "level" : 9001
+      "level" : 40
     },
     {
       "id" : 1,
@@ -22,11 +22,39 @@
       "inventory_ids"        : [1, 2, 3, 4, 5],
       "inventory_quantities" : [1, 2, 3, 4, 5],
       "combat_xp_yield" : 69,
-      "equipment_ids"        : [15],
+      "equipment_ids"        : [],
       "resources" : ["Health", 55, 55, "Stamina", 30, 30, "Mana", 200, 200],
       "abilities" : ["Dupe", "Bomb-Threat"],
       "speed" : 2,
-      "level" : 71
+      "level" : 30
+    },
+    {
+      "id" : 2,
+      "name" : "Small Blue Slime",
+      "opening_dialog" : "*plop*",
+      "closing_dialog" : "",
+      "inventory_ids"        : [],
+      "inventory_quantities" : [],
+      "equipment_ids"        : [],
+      "combat_xp_yield"  : 10,
+      "resources" : ["Health", 30, 30, "Stamina", 30, 30, "Mana", 5, 5],
+      "abilities" : ["Bounce", "Water Shot"],
+      "speed" : 2,
+      "level" : 1
+    },
+    {
+      "id" : 3,
+      "name" : "Large Blue Slime",
+      "opening_dialog" : "*plop*",
+      "closing_dialog" : "",
+      "inventory_ids"        : [],
+      "inventory_quantities" : [],
+      "equipment_ids"        : [],
+      "combat_xp_yield"  : 10,
+      "resources" : ["Health", 55, 55, "Stamina", 30, 30, "Mana", 5, 5],
+      "abilities" : ["Bounce", "Water Shot"],
+      "speed" : 3,
+      "level" : 5
     }
   ]
 }

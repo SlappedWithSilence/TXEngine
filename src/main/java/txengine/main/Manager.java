@@ -135,6 +135,7 @@ public class Manager {
         player.getAbilityManager().learn("Blast");
 
         for (Recipe r : recipeHashMap.values()) player.getRecipeManager().learn(r);
+
     }
 
 }
