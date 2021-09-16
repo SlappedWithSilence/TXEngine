@@ -80,12 +80,12 @@ public class EquipmentManager {
 
     // Returns the sum of all damage buffs
     public int getDamageBuff() {
-        return equipmentMap.values().stream().reduce(0, (subtotal, e) -> subtotal + ((Equipment) Manager.itemHashMap.get(e)).getDamageBuff() , Integer::sum);
+        return equipmentMap.values().stream().filter(Objects::nonNull).reduce(0, (subtotal, e) -> subtotal + ((Equipment) Manager.itemHashMap.get(e)).getDamageBuff() , Integer::sum);
     }
 
     // Returns the sum of all damage resistance
     public int getDamageResistance() {
-        return equipmentMap.values().stream().reduce(0, (subtotal, e) -> subtotal + ((Equipment) Manager.itemHashMap.get(e)).getDamageResistance() , Integer::sum);
+        return equipmentMap.values().stream().filter(Objects::nonNull).reduce(0, (subtotal, e) -> subtotal + ((Equipment) Manager.itemHashMap.get(e)).getDamageResistance() , Integer::sum);
     }
 
     /* Helper Methods */
@@ -107,6 +107,7 @@ public class EquipmentManager {
 
     // Returns an item instance of the equipment in the given slot
     public Equipment getSlot(Equipment.EquipmentType type) {
+        if (equipmentMap.get(type) == null || equipmentMap.get(type) < 0) return null;
         return (Equipment) Manager.itemHashMap.get( equipmentMap.get(type) );
     }
 

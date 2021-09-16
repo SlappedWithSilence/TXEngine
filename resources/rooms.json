@@ -79,6 +79,15 @@
           "unlocked_index" : -1
         },
         {
+          "class_name" : "EquipmentAction",
+          "menu_name"  : "Manage your equipment",
+          "text"      : "",
+          "hidden"   : false,
+          "properties" : [""],
+          "requirements" : [],
+          "unlocked_index" : -1
+        },
+        {
           "class_name" : "MoveAction",
           "menu_name"  : "Go to Paddie's",
           "text"      : "You slink away into the night, seeking out Paddie's Irish Bar.",

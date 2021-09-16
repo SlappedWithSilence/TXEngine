@@ -166,6 +166,7 @@ public class Components {
 
     // returns a single tab with its text aligned vertically
     public static String verticalTab(Tabable element) {
+        if (element == null) return verticalTab(new ArrayList<>());
         return verticalTab(element.getTabData());
     }
 

@@ -4,12 +4,14 @@ import com.rits.cloning.Cloner;
 import txengine.systems.integration.Requirement;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.combatEffect.CombatEffect;
+import txengine.ui.component.Components;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class Equipment extends Item {
+public class Equipment extends Item implements Components.Tabable {
 
     public enum EquipmentType {
         WEAPON,
@@ -84,7 +86,21 @@ public class Equipment extends Item {
                 "[Damage: +" + damageBuff + "]" + " [Defense: +" + damageResistance + "]";
     }
 
-    /* Accessor Methods */
+    @Override
+    public Collection<String> getTabData() {
+        List<String> data = new ArrayList<>();
+
+        data.add(getName());
+        data.add("Type: " + type.toString());
+        data.add(getDescription());
+        data.add("Attack: " + damageBuff);
+        data.add("Defense: " + damageResistance);
+        data.add("Abilities: " + abilityNames.stream().reduce("", (partialString, name) -> partialString + name));
+
+        return data;
+    }
+
+        /* Accessor Methods */
 
     public List<String> getAbilityNames() {
         return abilityNames;
