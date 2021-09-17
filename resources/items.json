@@ -212,8 +212,28 @@
             }
          ],
          "combat_effects" :
-         [
-         ]
+         []
+      },
+      {
+         "type"      :  "equipment",
+         "name"      :  "Viridian Shade's Longbow",
+         "description": "A powerful longbow, imbued with caustic energy.",
+         "equipment_type" : "WEAPON",
+         "id"        :  17,
+         "value"     :  100,
+         "maxStacks" :  3,
+         "damage"    : 10,
+         "defense"   : 0,
+         "tag_resistances" : [],
+         "abilities" : [],
+         "requirements"    : [
+            {
+               "class_name" : "LevelRequirement",
+               "properties" : ["2"]
+            }
+         ],
+         "combat_effects" :
+         []
       }
    ]
 }

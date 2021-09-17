@@ -244,8 +244,11 @@ public class Inventory {
 	}
 
 	// Returns an instance of the item class associated with the ID located at 'index' in the inventory
-	public Item getItemInstance(int index) {
+	public Item getItemInstance(Integer index) {
 		return Manager.itemHashMap.get( itemIDs.get(index) );
 	}
 
+	public List<Item> getItemInstances() {
+		return itemIDs.stream().map(integer -> Manager.itemHashMap.get(integer)).toList();
+	}
 }
