@@ -22,6 +22,10 @@ public class FlagManager {
         return null;
     }
 
+    public void setFlag(String key, boolean value) {
+        flagMap.put(key, value);
+    }
+
     public boolean hasFlag(String key) {
         return flagMap.containsKey(key);
     }

@@ -70,7 +70,6 @@ public class Manager {
     public static void main( String[] args )
     {
 
-
         initialize();
 
         saveExists = Load.hasSave(); // Check for a saved game
