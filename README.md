@@ -28,6 +28,8 @@ It is highly-recommended to develop TXEngine using an IDE with Maven integration
 
 At this point, the project should be set up and ready to run!
 
+To find out more about how TXEngine works, [visit the wiki](https://github.com/SlappedWithSilence/TXEngine/wiki)!
+
 ## Limitations
 
 TXEngine relies on embedded color codes. These codes do not work on CMD in Windows, and as such, can't be run through it (with colors). A solution for launching TXEngine through Powershell is under development. Until then, you can run TXEngine on Windows by using either Cygwin or WSL Ubuntu, or any native Linux distribution.
