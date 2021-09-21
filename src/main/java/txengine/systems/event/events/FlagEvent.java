@@ -1,6 +1,7 @@
 package txengine.systems.event.events;
 
 import txengine.main.Manager;
+import txengine.systems.flag.FlagManager;
 import txengine.ui.LogUtils;
 import txengine.systems.event.Event;
 
@@ -28,7 +29,7 @@ public class FlagEvent extends Event {
         flagName = super.getProperties()[0];
         flagValue = Boolean.parseBoolean(super.getProperties()[1]);
         LogUtils.error("Setting flag " + flagName + " to " + flagValue + "\n" ); // TODO: Remove debug
-        Manager.flagManager.setFlag(flagName, flagValue);
+        FlagManager.setFlag(flagName,flagValue);
     }
 
     @Override

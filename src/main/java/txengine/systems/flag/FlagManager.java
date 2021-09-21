@@ -23,7 +23,7 @@ public class FlagManager {
     }
 
     public void setFlag(String key, boolean value) {
-        flagMap.put(key,value);
+        flagMap.put(key, value);
     }
 
     public boolean hasFlag(String key) {
