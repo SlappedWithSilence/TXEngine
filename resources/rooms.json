@@ -104,6 +104,20 @@
             }
           ],
           "unlocked_index" : -1
+        },
+        {
+          "class_name" : "CombatAction",
+          "menu_name"  : "Piss off the Aussie",
+          "text"      : "U WUT MATE",
+          "hidden"   : false,
+          "properties" : ["{FRIENDLY}","2","{HOSTILE}", "-1","2","3", "{LOOT}", "1,1", "4,2"],
+          "requirements" : [
+            {
+              "class_name" : "FlagRequirement",
+              "properties" : ["AUSSIE"]
+            }
+          ],
+          "unlocked_index" : -1
         }
       ]
     },

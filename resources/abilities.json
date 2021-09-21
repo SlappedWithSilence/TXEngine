@@ -19,6 +19,30 @@
       "resource_cost" : ["Stamina", 1]
     },
     {
+      "target_mode" : "SELF",
+      "name" : "Meditate",
+      "description" : "Derive energy from the world, gain health and stamina.",
+      "use_text" : "{CASTER} sits and breathes calmly",
+      "damage" : 0,
+      "effects" : [
+        {
+          "class_name" : "ProportionalResourceEffect",
+          "duration"  : 1,
+          "trigger_phase" : "POST_ACTION",
+          "trigger_message" : "{OWNER} and feels refreshed. (Health +10) (Stamina +10)",
+          "cleanup_message" : "",
+          "properties": ["Health", "0.10", "Stamina", "0.10"]
+        }
+      ],
+      "requirements" : [
+        {
+          "class_name": "LevelRequirement",
+          "properties": ["2"]
+        }
+      ],
+      "resource_cost" : ["Stamina", 1]
+    },
+    {
       "target_mode" : "ALL_ENEMY",
       "name" : "Blast",
       "description" : "EXPLOOOOOOSION!",
