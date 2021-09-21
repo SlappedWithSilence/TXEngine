@@ -109,9 +109,9 @@ public class Skill implements Components.Tabable {
         List<String> data = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
 
-        sb.append(name).append("\n");
-        sb.append("Level: ").append(level).append("\n");
-        sb.append("XP: ").append(xp).append("/").append(levelUpXP);
+        data.add(name);
+        data.add("Level: "+level);
+        data.add("XP: "+xp+"/"+levelUpXP);
 
         return data;
     }
