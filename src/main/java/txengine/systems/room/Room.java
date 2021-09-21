@@ -55,7 +55,7 @@ public class Room {
 				if (roomActions.stream().filter(action -> !action.isHidden()).toList().get(userSelection) instanceof MoveAction) break;
 			} else {
 				System.out.println("You can't do that right now!");
-				roomActions.get(userSelection).getRequirements().forEach(r -> System.out.println(r.toString()));
+				roomActions.stream().filter(action -> !action.isHidden()).toList().get(userSelection).getRequirements().forEach(r -> System.out.println(r.toString()));
 			}
 
 		}

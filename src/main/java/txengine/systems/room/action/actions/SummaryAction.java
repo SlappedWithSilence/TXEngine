@@ -106,6 +106,6 @@ public class SummaryAction extends Action {
         }
 
 
-        return 0;
+        return unhideIndex;
     }
 }

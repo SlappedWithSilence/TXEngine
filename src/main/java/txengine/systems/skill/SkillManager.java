@@ -1,6 +1,7 @@
 package txengine.systems.skill;
 
 import txengine.main.Manager;
+import txengine.ui.component.Components;
 
 import java.util.HashMap;
 
@@ -24,6 +25,11 @@ public class SkillManager {
 
     public void incrementLevel(String skillName, int quantity) {
         skills.get(skillName).levelUp();
+    }
+
+    public void printSkills() {
+        Components.header("Skills");
+        Components.verticalTabList(skills.values().stream().map(s -> (Components.Tabable) s).toList());
     }
 
     /* Accessor Methods */

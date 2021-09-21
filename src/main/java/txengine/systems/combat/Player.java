@@ -100,7 +100,7 @@ public class Player extends CombatEntity {
 					if (abilityChoice > -1 && abilityManager.isSatisfied(abilityManager.getAbilityList().get(abilityChoice))) {
 						Ability ab = abilityManager.getAbilityList().get(abilityChoice);
 
-						if (ab.getTargetMode() == CombatEngine.TargetMode.SINGLE || ab.getTargetMode() == CombatEngine.TargetMode.SINGLE_ENEMY || ab.getTargetMode() == CombatEngine.TargetMode.SINGLE_FRIENDLY) {
+						if (ab.getTargetMode() == CombatEngine.TargetMode.SINGLE || ab.getTargetMode() == CombatEngine.TargetMode.SINGLE_HOSTILE || ab.getTargetMode() == CombatEngine.TargetMode.SINGLE_FRIENDLY) {
 							ab.setTarget(chooseTarget(engine.getValidTargets(ab)));
 						}
 
@@ -119,9 +119,7 @@ public class Player extends CombatEntity {
 					inventory.display();
 					int itemChoice = LogUtils.getNumber(-1, inventory.getUsage());
 
-					if (itemChoice > -1) {
-						return new AbstractMap.SimpleEntry<>(null, Manager.itemHashMap.get(itemChoice));
-					}
+					if (itemChoice > -1)  return new AbstractMap.SimpleEntry<>(null, inventory.getItemInstance(itemChoice));
 
 					break;
 				case 2:

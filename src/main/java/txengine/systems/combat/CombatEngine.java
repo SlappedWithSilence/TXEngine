@@ -54,11 +54,11 @@ public class CombatEngine {
 
     public enum TargetMode {
         SINGLE,
-        SINGLE_ENEMY,
+        SINGLE_HOSTILE,
         SINGLE_FRIENDLY,
         ALL,
         ALL_FRIENDLY,
-        ALL_ENEMY,
+        ALL_HOSTILE,
         SELF
     }
 
@@ -286,7 +286,7 @@ public class CombatEngine {
                 ArrayList<CombatEntity> arr = new ArrayList<>(entities.get(EntityType.FRIENDLY));
                 arr.addAll(entities.get(EntityType.HOSTILE).stream().filter(entity -> !entity.isDead()).toList());
                 return arr;
-            case SINGLE_ENEMY:
+            case SINGLE_HOSTILE:
                 if (currentTurnType == EntityType.HOSTILE) return entities.get(EntityType.FRIENDLY).stream().filter(entity -> !entity.isDead()).toList();
                 if (currentTurnType == EntityType.FRIENDLY) return entities.get(EntityType.HOSTILE).stream().filter(entity -> !entity.isDead()).toList();
                 break;
@@ -324,7 +324,7 @@ public class CombatEngine {
 
         currentTurnType = turnType; // Set the global variable so that other functions can tell what turn type it is
 
-        ArrayList<CombatPhase> phaseOrder = PHASE_ORDER; // Establish initial phase order from master list
+        ArrayList<CombatPhase> phaseOrder = new ArrayList<>(PHASE_ORDER); // Establish initial phase order from master list
         for (int i = 0; i < phaseOrder.size(); i++) { // Iterate through the phase order by index. This is to allow for phases to be added or removed.
 
             // If the current phase is the ACTION phase, then run the get-action logic
@@ -349,13 +349,13 @@ public class CombatEngine {
                             System.out.println(combatAction.getKey().getUseText().replace(CASTER_NAME_PLACEHOLDER, lookUpEntity(turnType, index).getName()));
                             break;
                         case SINGLE: // Apply the ability to the target
-                        case SINGLE_ENEMY: // Apply the ability to the target
+                        case SINGLE_HOSTILE: // Apply the ability to the target
                         case SINGLE_FRIENDLY: // Apply the ability to the target
                             combatAction.getKey().getTarget().handleAbility(combatAction.getKey());
 
                             System.out.println(combatAction.getKey().getUseText().replace(CASTER_NAME_PLACEHOLDER, lookUpEntity(turnType, index).getName()).replace(TARGET_NAME_PLACEHOLDER, combatAction.getKey().getTarget().getName()));
                             break;
-                        case ALL_ENEMY: // Apply the ability to all enemies, relative to the current entity's type. A hostile entity (relative to the player) would apply this type of ability to all friendly entities (relative to the player)
+                        case ALL_HOSTILE: // Apply the ability to all enemies, relative to the current entity's type. A hostile entity (relative to the player) would apply this type of ability to all friendly entities (relative to the player)
                             if (turnType == EntityType.FRIENDLY) for (CombatEntity e : entities.get(EntityType.HOSTILE))  e.handleAbility(combatAction.getKey());
                             else                                 for (CombatEntity e : entities.get(EntityType.FRIENDLY)) e.handleAbility(combatAction.getKey());
 
