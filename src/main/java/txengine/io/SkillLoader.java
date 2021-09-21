@@ -63,6 +63,7 @@ public class SkillLoader implements Loader {
             Skill s = new Skill(name, desc, level, xp, levelUpXP, levelRatio, levelEvents);
 
             skills.put(name, s);
+            LogUtils.error("Skill added: " + s.getName() + "\n");
         }
 
         return skills;
