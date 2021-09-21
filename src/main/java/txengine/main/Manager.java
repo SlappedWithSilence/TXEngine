@@ -128,7 +128,7 @@ public class Manager {
         combatEntityHashMap.put(-2, new CombatEntity("Smokey the Bear", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), new EquipmentManager(), 5, 25, 15));
 
         player.getAbilityManager().learn("Smack");
-        player.getAbilityManager().learn("Love Tap");
+        player.getAbilityManager().learn("Kidnap");
         player.getAbilityManager().learn("Spit");
         player.getAbilityManager().learn("Bomb-Threat");
         player.getAbilityManager().learn("Blast");

@@ -116,4 +116,28 @@ public class LoadUtils {
         return arr;
     }
 
+    public static List<AbstractMap.SimpleEntry<String, Integer>> parseStringIntPairs(JSONArray obj) {
+        List<AbstractMap.SimpleEntry<String, Integer>> arr = new ArrayList<>();
+
+        for (Object o : obj) {
+            String[] values = ((String) o).split(",");
+
+            arr.add(new AbstractMap.SimpleEntry<>(values[0], Integer.parseInt(values[1])));
+        }
+
+        return arr;
+    }
+
+    public static List<AbstractMap.SimpleEntry<Integer, Integer>> parseIntPairs(JSONArray obj) {
+        List<AbstractMap.SimpleEntry<Integer, Integer>> arr = new ArrayList<>();
+
+        for (Object o : obj) {
+            String[] values = ((String) o).split(",");
+
+            arr.add(new AbstractMap.SimpleEntry<>(Integer.parseInt(values[0]), Integer.parseInt(values[1])));
+        }
+
+        return arr;
+    }
+
 }
