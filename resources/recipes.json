@@ -4,25 +4,52 @@
       "id" : 0,
       "requirements" : [],
       "ingredients" : ["7,1"],
-      "products" : ["11,1"]
+      "products" : ["11,1"],
+      "events" : [
+        {
+          "class_name" : "SkillXPEvent",
+          "properties" : ["Stone Cutting", "20"]
+        }
+      ]
     },
     {
       "id" : 1,
       "requirements" : [],
       "ingredients" : ["8,1"],
-      "products" : ["12,1"]
+      "products" : ["12,1"],
+      "events" :
+      [
+        {
+          "class_name" : "SkillXPEvent",
+          "properties" : ["Stone Cutting", "20"]
+        }
+      ]
     },
     {
       "id" : 2,
       "requirements" : [],
       "ingredients" : ["9,1"],
-      "products" : ["13,1"]
+      "products" : ["13,1"],
+      "events" :
+      [
+        {
+          "class_name" : "SkillXPEvent",
+          "properties" : ["Stone Cutting", "20"]
+        }
+      ]
     },
     {
       "id" : 3,
       "requirements" : [],
       "ingredients" : ["10,1"],
-      "products" : ["14,1"]
+      "products" : ["14,1"],
+      "events" :
+      [
+        {
+          "class_name" : "SkillXPEvent",
+          "properties" : ["Stone Cutting", "20"]
+        }
+      ]
     }
   ]
 }

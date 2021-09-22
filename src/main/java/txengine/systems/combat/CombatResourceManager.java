@@ -68,16 +68,11 @@ public class CombatResourceManager {
     }
 
     // Register a new resource into the manager
-    public boolean registerResource(String resourceName, Integer resourceMax, Integer resourceStartValue) {
+    public void registerResource(String resourceName, Integer resourceMax, Integer resourceStartValue) {
         Integer[] vals = {resourceMax, resourceStartValue};
 
-        if (resources.containsKey(resourceName)) {
-            LogUtils.error("Resource already registered!\n");
-            return false;
-        }
-
         resources.put(resourceName, vals);
-        return true;
+        return;
 
     }
 

@@ -4,6 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import txengine.systems.event.Event;
 import txengine.systems.integration.Requirement;
 import txengine.systems.crafting.Recipe;
 import txengine.systems.crafting.RecipeFactory;
@@ -62,7 +63,9 @@ public class RecipeLoader {
                 return new AbstractMap.SimpleEntry<>(vals[0], vals[1]);
             }).toList();
 
-            recipeHashMap.put(id, RecipeFactory.build(ingredients, products, requirementList));
+            List<Event> events = LoadUtils.parseEvents((JSONArray) rawRecipe.get("events"));
+
+            recipeHashMap.put(id, RecipeFactory.build(ingredients, products, requirementList, events));
         }
 
         return recipeHashMap;

@@ -18,8 +18,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 public class CombatEntityLoader implements Loader {
 
@@ -54,8 +56,7 @@ public class CombatEntityLoader implements Loader {
             String name = ((String) rawEntity.get("name"));
             String openingDialog = ((String) rawEntity.get("opening_dialog"));
             String closingDialog = ((String) rawEntity.get("closing_dialog"));
-            Inventory inventory = buildInventory((JSONArray) rawEntity.get("inventory_ids"),
-                                                 (JSONArray) rawEntity.get("inventory_quantities"));
+            Inventory inventory = buildInventory((JSONArray) rawEntity.get("inventory"));
 
             CombatResourceManager resourceManager = buildResourceManager((JSONArray) rawEntity.get("resources"));
             AbilityManager abilityManager = buildAbilityManager((JSONArray) rawEntity.get("abilities"));
@@ -99,18 +100,12 @@ public class CombatEntityLoader implements Loader {
     }
 
     // Process the inventory ID and quantity arrays and produce a new inventory accordingly
-    private Inventory buildInventory(JSONArray rawIDs, JSONArray rawQuantities) {
+    private Inventory buildInventory(JSONArray rawItemPair) {
         Inventory inventory = new Inventory();
 
-        Iterator<JSONObject> idIterator = rawIDs.iterator();
-        Iterator<JSONObject> quantityIterator = rawQuantities.iterator();
+       List<AbstractMap.SimpleEntry<Integer, Integer>> arr = LoadUtils.parseIntPairs(rawItemPair);
 
-        for (int i = 0; i < rawIDs.size(); i++) {
-            int id = ((Long) rawIDs.get(i)).intValue();
-            int quantity = ((Long) rawQuantities.get(i)).intValue();
-
-            inventory.addItem(id, quantity);
-        }
+        for (AbstractMap.SimpleEntry<Integer, Integer> pair : arr) inventory.addItem(pair.getKey(), pair.getValue());
 
         return inventory;
     }
@@ -119,15 +114,9 @@ public class CombatEntityLoader implements Loader {
     private CombatResourceManager buildResourceManager(JSONArray rawResource) {
         CombatResourceManager resourceManager = new CombatResourceManager();
 
-        for (int i = 0; i < rawResource.size(); i++) {
-            String resourceName = ((String) rawResource.get(i));
-            i++;
-            int maxValue =  ((Long) rawResource.get(i)).intValue();
-            i++;
-            int currentValue = ((Long) rawResource.get(i)).intValue();
+        List<AbstractMap.SimpleEntry<String, Integer>> pairs = LoadUtils.parseStringIntPairs(rawResource);
 
-            resourceManager.getResources().put(resourceName, new Integer[]{maxValue, currentValue});
-        }
+        for (AbstractMap.SimpleEntry<String, Integer> pair : pairs) resourceManager.registerResource(pair.getKey(), pair.getValue(), pair.getValue());
 
         return resourceManager;
     }

@@ -57,7 +57,7 @@ public class AbilityLoader {
         String name;
         String description;
         String useText;
-        Integer damage;
+        int damage;
         List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects = new ArrayList<>();
         ArrayList<AbstractMap.SimpleEntry<String, Integer>> resourceCosts = new ArrayList<>();
 
