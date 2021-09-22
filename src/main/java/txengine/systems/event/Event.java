@@ -13,8 +13,8 @@ public abstract class Event {
         if (print() != null && !print().equals("")) System.out.println(print()); // Print out optional user prompting
     }
 
-    public abstract void execute();
-    public abstract String print();
+    protected abstract void execute();
+    protected abstract String print();
 
 
     public String[] getProperties() {

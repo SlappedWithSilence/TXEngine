@@ -1,5 +1,6 @@
 package txengine.systems.crafting;
 
+import txengine.systems.event.Event;
 import txengine.ui.color.Colors;
 import txengine.systems.integration.Requirement;
 import txengine.main.Manager;
@@ -85,12 +86,16 @@ public class RecipeManager {
             inventory.addItem(pair.getKey(), pair.getValue());
         }
 
+        for (Event e : recipe.getEvents()) e.perform();
+
         return true;
     }
 
     public void learn(Recipe r) {
         recipeList.add(r);
     }
+
+    public void learn(int id) { recipeList.add(Manager.recipeHashMap.get(id));}
 
     /* Accessor Functions */
 

@@ -1,5 +1,6 @@
 package txengine.systems.crafting;
 
+import txengine.systems.event.Event;
 import txengine.ui.color.Colors;
 import txengine.systems.integration.Requirement;
 import txengine.main.Manager;
@@ -15,29 +16,34 @@ public class Recipe {
     private List<AbstractMap.SimpleEntry<Integer, Integer>> ingredients;
     private List<AbstractMap.SimpleEntry<Integer, Integer>> products;
     private List<Requirement> requirements;
+    private List<Event> events;
 
     public Recipe() {
         ingredients = new ArrayList<>();
         products = new ArrayList<>();
         requirements = new ArrayList<>();
+        events = new ArrayList<>();
     }
 
     public Recipe(List<AbstractMap.SimpleEntry<Integer, Integer>> ingredients, List<AbstractMap.SimpleEntry<Integer, Integer>> products) {
         this.ingredients = ingredients;
         this.products = products;
         requirements = new ArrayList<>();
+        events = new ArrayList<>();
     }
 
-    public Recipe(List<AbstractMap.SimpleEntry<Integer, Integer>> ingredients, List<AbstractMap.SimpleEntry<Integer, Integer>> products, List<Requirement> requirements) {
+    public Recipe(List<AbstractMap.SimpleEntry<Integer, Integer>> ingredients, List<AbstractMap.SimpleEntry<Integer, Integer>> products, List<Requirement> requirements, List<Event> events) {
         this.ingredients = ingredients;
         this.products = products;
         this.requirements = requirements;
+        this.events = events;
     }
 
     public Recipe(Recipe recipe) {
         ingredients = recipe.ingredients;
         products = recipe.products;
         requirements = recipe.requirements; // It's ok that this is a reference
+        events = new ArrayList<>(recipe.events);
     }
 
 
@@ -105,5 +111,13 @@ public class Recipe {
 
     public void setRequirements(List<Requirement> requirements) {
         this.requirements = requirements;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 }
