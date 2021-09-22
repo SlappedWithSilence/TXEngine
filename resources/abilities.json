@@ -27,7 +27,12 @@
       "use_text" : "{CASTER} annihilates all enemies with explosion magic, devastating the enemies.",
       "damage" : 100,
       "effects" : [],
-      "requirements" : [],
+      "requirements" : [
+        {
+        "class_name" : "ItemRequirement",
+        "properties" : ["5"]
+        }
+      ],
       "resource_cost" : ["Mana", 50]
     },
     {
@@ -48,6 +53,52 @@
       ],
       "requirements" : [],
       "resource_cost" : ["Stamina", 10]
+    },
+    {
+      "target_mode" : "SELF",
+      "name" : "Meditate",
+      "description" : "Breathe deeply to recover Health and Mana.",
+      "use_text" : "{CASTER} concentrates on his breathing for a few seconds",
+      "damage" : 0,
+      "effects" : [
+        {
+          "class_name" : "FlatResourceEffect",
+          "duration"  : 2,
+          "trigger_phase" : "POST_ACTION",
+          "trigger_message" : "{OWNER}'s body is invigorated from mediation. (Health + 10) (Mana + 10)",
+          "cleanup_message" : "{OWNER} finishes meditation",
+          "properties": ["Health", "10","Mana", "10"]
+        },
+        {
+          "class_name" : "RemovePhaseEffect",
+          "duration"  : 1,
+          "trigger_phase" : "TURN_START",
+          "trigger_message" : "",
+          "cleanup_message" : "",
+          "properties": ["ACTION"]
+        }
+      ],
+      "requirements" : [],
+      "resource_cost" : ["Stamina", 10]
+    },
+    {
+      "target_mode" : "SELF",
+      "name" : "Accelerate",
+      "description" : "Take two actions next turn.",
+      "use_text" : "{CASTER} breathes quickly and gains adrenaline",
+      "damage" : 0,
+      "effects" : [
+        {
+          "class_name" : "AddPhaseEffect",
+          "duration"  : 1,
+          "trigger_phase" : "TURN_START",
+          "trigger_message" : "{OWNER} gains the energy to act again",
+          "cleanup_message" : "",
+          "properties": ["ACTION"]
+        }
+      ],
+      "requirements" : [],
+      "resource_cost" : []
     },
     {
       "target_mode" : "SINGLE_HOSTILE",
