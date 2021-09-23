@@ -47,7 +47,7 @@
       "inventory" : [],
       "equipment_ids"        : [],
       "combat_xp_yield"  : 35,
-      "resources" : ["Health,55","Stamina,30", "Mana,5"],
+      "resources" : ["Health,112","Stamina,30", "Mana,5"],
       "abilities" : ["Bounce", "Water Shot"],
       "speed" : 3,
       "level" : 5
