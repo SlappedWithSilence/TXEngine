@@ -24,15 +24,6 @@ import txengine.ui.LogUtils;
 
 public class Manager {
 
-    // *** Constants *** //
-    private static final String INTRO_TEXT =
-                                        "\t********************************************\n" +
-                                        "\t*****            " + Colors.PURPLE_UNDERLINED + "The Alley" + Colors.RESET + "             *****\n" +
-                                        "\t********************************************\n" +
-                                        "\n\nWelcome to The Alley. This is a fantasy text-based game. All features and functions of this game " +
-                                        "and its story are\noriginal and fictional. Please do not modify or re-host this software without "   +
-                                        "asking first.\n";
-
     private static final String LOAD_GAME_TEXT = "\nWould you like to resume from your saved game? (Y/N)\n";
 
     private static final String ITEM_RESOURCE_FILE = "items.json";
@@ -92,7 +83,7 @@ public class Manager {
     // **** Prompt functions ****
     private static void intro() {
         //System.out.print(INTRO_TEXT);
-        ColorConsole.d(INTRO_TEXT, false);
+
     }
 
     // Prompts the user if they want to resume their saved game
@@ -121,21 +112,6 @@ public class Manager {
     }
 
     private static void initDebug() {
-        if (combatEntityHashMap == null) combatEntityHashMap = new HashMap<>();
-
-        combatEntityHashMap.put(-1, new CombatEntity("Grunt", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), new EquipmentManager() ,2, 1, 15));
-        combatEntityHashMap.put(-2, new CombatEntity("Smokey the Bear", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), new EquipmentManager(), 5, 25, 15));
-
-        player.getAbilityManager().learn("Smack");
-        player.getAbilityManager().learn("Kidnap");
-        player.getAbilityManager().learn("Spit");
-        player.getAbilityManager().learn("Bomb-Threat");
-        player.getAbilityManager().learn("Blast");
-
-        for (Recipe r : recipeHashMap.values()) player.getRecipeManager().learn(r);
-
-        player.getInventory().addItem(16);
-        player.getInventory().addItem(17);
     }
 
 }

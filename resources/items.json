@@ -211,8 +211,7 @@
                "properties" : ["1"]
             }
          ],
-         "combat_effects" :
-         []
+         "combat_effects" : []
       },
       {
          "type"      :  "equipment",
@@ -232,8 +231,58 @@
                "properties" : ["2"]
             }
          ],
-         "combat_effects" :
-         []
+         "combat_effects" : []
+      },
+      {
+         "type"      :  "equipment",
+         "name"      :  "Guard's Leather Tunic",
+         "description": "A simple leather tunic. It offers some protection for the chest.",
+         "equipment_type" : "CHEST",
+         "id"        :  18,
+         "value"     :  15,
+         "maxStacks" :  3,
+         "damage"    : 0,
+         "defense"   : 3,
+         "tag_resistances" : [],
+         "abilities" : [],
+         "requirements"    : [],
+         "combat_effects" : []
+      },
+      {
+         "type"      :  "equipment",
+         "name"      :  "Guard's Leather Leggings",
+         "description": "A simple pair of leggings, crafted from leather. It offers some protection for the legs.",
+         "equipment_type" : "LEGS",
+         "id"        :  19,
+         "value"     :  15,
+         "maxStacks" :  3,
+         "damage"    : 0,
+         "defense"   : 1,
+         "tag_resistances" : [],
+         "abilities" : [],
+         "requirements"    : [],
+         "combat_effects" : []
+      },
+      {
+         "type"      :  "equipment",
+         "name"      :  "Wooden Baton",
+         "description": "A weighty baton fashioned from a hard wood.",
+         "equipment_type" : "WEAPON",
+         "id"        :  20,
+         "value"     :  10,
+         "maxStacks" :  5,
+         "damage"    : 2,
+         "defense"   : 0,
+         "tag_resistances" : [],
+         "abilities" : ["Blunt Hit"],
+         "requirements"    : [
+            {
+               "class_name" : "LevelRequirement",
+               "properties" : ["1"]
+            }
+         ],
+         "combat_effects" : []
       }
+
    ]
 }

@@ -1,44 +1,18 @@
 {
   "Rooms" : [
     {
-      "name"        : "Debug Room",
-      "id"          : 0,
-      "text"        : "Welcome to the Debug Room! How did you get in here, anyways?",
+      "name"        : "Prison Cellar",
+      "id"          : 1,
+      "text"        : "You awake to the sound of approaching footsteps.",
       "onFirstEnterActions" : [],
       "actions"  : [
-        {
-          "class_name"   : "StoreAction",
-          "menu_name"    : "Visit the Debug Store",
-          "text"        : "Welcome to the Debug Store! Nothing's free, and everything sucks. What can I help you with?",
-          "hidden"     : true,
-          "properties"  : ["1,1", "2,50", "3,5", "4,15", "5,101", "6,0","7,1","8,1","9,1"],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
         {
           "class_name"   : "InventoryAction",
           "menu_name"    : "Check your inventory",
           "text"        : "You decide to check the contents of your pack.",
           "hidden"     : false,
+          "hide_after_use" : false,
           "properties"  : [],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
-          "class_name" : "DialogueAction",
-          "menu_name"  : "Speak with shady Frei",
-          "text"      : "You approach the Frei.",
-          "hidden"   : false,
-          "properties" : ["Hey, I know a guy... He's got the stuff. You want in?"],
-          "requirements" : [],
-          "unlocked_index" : 0
-        },
-        {
-          "class_name" : "ConversationAction",
-          "menu_name"  : "Converse with the local doomsayer",
-          "text"      : "You approach the doomsayer.",
-          "hidden"   : false,
-          "properties" : ["0"],
           "requirements" : [],
           "unlocked_index" : -1
         },
@@ -47,6 +21,7 @@
           "menu_name"  : "Check yo-self",
           "text"      : "",
           "hidden"   : false,
+          "hide_after_use" : false,
           "properties" : [],
           "requirements" : [],
           "unlocked_index" : -1
@@ -56,26 +31,9 @@
           "menu_name"  : "Inspect Abilities",
           "text"      : "",
           "hidden"   : false,
+          "hide_after_use" : false,
           "properties" : [],
           "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
-          "class_name" : "CombatAction",
-          "menu_name"  : "Practice Fighting",
-          "text"      : "",
-          "hidden"   : false,
-          "properties" : ["{FRIENDLY}","2","{HOSTILE}", "-1","2","3", "{LOOT}", "1,1", "4,2"],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
-          "class_name": "SimpleCraftingAction",
-          "menu_name": "Craft Something",
-          "text": "You consult your inventory, seeking to create something new.",
-          "hidden": false,
-          "properties": [],
-          "requirements": [],
           "unlocked_index" : -1
         },
         {
@@ -83,26 +41,9 @@
           "menu_name"  : "Manage your equipment",
           "text"      : "",
           "hidden"   : false,
+          "hide_after_use" : false,
           "properties" : [""],
           "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
-          "class_name" : "MoveAction",
-          "menu_name"  : "Go to Paddie's",
-          "text"      : "You slink away into the night, seeking out Paddie's Irish Bar.",
-          "hidden"   : false,
-          "properties" : ["1"],
-          "requirements" : [
-            {
-              "class_name" : "LevelRequirement",
-              "properties" : ["2"]
-            },
-            {
-              "class_name" : "ResourceRequirement",
-              "properties" : ["Health,50"]
-            }
-          ],
           "unlocked_index" : -1
         },
         {
@@ -110,47 +51,31 @@
           "menu_name"  : "View Skills",
           "text"      : "",
           "hidden"   : false,
+          "hide_after_use" : false,
           "properties" : [""],
+          "requirements" : [],
+          "unlocked_index" : -1
+        },
+        {
+          "class_name" : "DialogueAction",
+          "menu_name"  : "Listen closely",
+          "text"      : "",
+          "hidden"   : false,
+          "hide_after_use" : true,
+          "properties" : ["Remaining on the cold stone floor, you listen closer to the sound of the footsteps. They sound heavy and pronounced, even on the damp and dirt-spewn stone.\nThe footsteps reach your cell door, and from beyond the bars you see the unmistakable silhouette of a human guard."],
+          "requirements" : [],
+          "unlocked_index" : 6
+        },
+        {
+          "class_name" : "ConversationAction",
+          "menu_name"  : "Speak to the guard",
+          "text"      : "You motion to silent guard, beckoning him to come closer to your cell door.",
+          "hidden"   : true,
+          "properties" : ["0"],
           "requirements" : [],
           "unlocked_index" : -1
         }
       ]
-    },
-    {
-      "name"        : "Paddie's Irish Pub",
-      "id"          : 1,
-      "text"        : "...",
-      "onFirstEnterActions" : [],
-      "actions"  :
-        [
-          {
-            "class_name" : "SummaryAction",
-            "menu_name"  : "Check yo-self",
-            "text"      : "",
-            "hidden"   : false,
-            "properties" : [],
-            "requirements" : [],
-            "unlocked_index" : -1
-          },
-          {
-            "class_name" : "AbilitySummaryAction",
-            "menu_name"  : "Inspect Abilities",
-            "text"      : "",
-            "hidden"   : false,
-            "properties" : [],
-            "requirements" : [],
-            "unlocked_index" : -1
-          },
-          {
-            "class_name"   : "InventoryAction",
-            "menu_name"    : "Check your inventory",
-            "text"        : "You decide to check the contents of your pack.",
-            "hidden"     : false,
-            "properties"  : [],
-            "requirements" : [],
-            "unlocked_index" : -1
-          }
-        ]
     }
   ]
 }
