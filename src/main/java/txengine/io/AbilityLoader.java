@@ -59,7 +59,7 @@ public class AbilityLoader {
         String useText;
         int damage;
         List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects = new ArrayList<>();
-        ArrayList<AbstractMap.SimpleEntry<String, Integer>> resourceCosts = new ArrayList<>();
+        List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts = new ArrayList<>();
 
         while (iterator.hasNext()) {
             JSONObject rawAbility = iterator.next();
