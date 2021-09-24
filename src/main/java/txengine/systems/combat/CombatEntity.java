@@ -164,7 +164,7 @@ public class CombatEntity implements CombatAgency, Components.Tabable {
             int randomTargetIndex = new Random().nextInt(engine.getValidTargets(offensiveAbilities.get(randomAbilityIndex)).size());
 
             Ability ability = offensiveAbilities.get(randomAbilityIndex);
-            ability.setTarget(engine.getValidTargets(ability).get(randomAbilityIndex));
+            ability.setTarget(engine.getValidTargets(ability).get(randomTargetIndex));
 
             return new AbstractMap.SimpleEntry<Ability, Item>(ability, null);
         }

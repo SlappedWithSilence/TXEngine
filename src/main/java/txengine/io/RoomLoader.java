@@ -21,7 +21,6 @@ import java.util.List;
 
 public class RoomLoader implements Loader{
 
-
     @Override
     public HashMap<Integer, Room> load(File file) {
         HashMap<Integer, Room> roomList = new HashMap<>();
