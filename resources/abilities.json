@@ -1,7 +1,7 @@
 {
   "Abilities" : [
     {
-      "target_mode" : "SINGLE_ENEMY",
+      "target_mode" : "SINGLE_HOSTILE",
       "name" : "Blunt Hit",
       "description" : "The user slams a blunt weapon into the target.",
       "use_text" : "{CASTER} slams {TARGET} with a blunt weapon.",
@@ -11,7 +11,7 @@
       "resource_cost" : []
     },
     {
-      "target_mode" : "SINGLE_ENEMY",
+      "target_mode" : "SINGLE_HOSTILE",
       "name" : "Sear",
       "description" : "The caster burns the enemy with energized mana.",
       "use_text" : "{CASTER} flings energized mana at {TARGET}, rending a painful burn.",
@@ -30,7 +30,7 @@
       "resource_cost" : ["Mana,5"]
     },
     {
-      "target_mode" : "SINGLE_ENEMY",
+      "target_mode" : "SINGLE_HOSTILE",
       "name" : "Shock",
       "description" : "The caster electrolyzes the air between it and the target, dealing a severe shock.",
       "use_text" : "{CASTER} shocks {TARGET} with a bolt of electricity.",

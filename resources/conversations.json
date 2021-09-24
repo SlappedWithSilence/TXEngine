@@ -33,7 +33,7 @@
             },
             {
               "__comment__" : "This is module 1. It contains one option.",
-              "npcText" : "The guard turns to tend to a nearby torch. \"Yes. Yes I do, that's why I you're here, locked up\".",
+              "npcText" : "The, now facing away from you, tends to a nearby torch. \"Yes. Yes I do, that's why I you're here, locked up\".",
               "options" :["*spit at the guard*"],
               "events"  :
               [
@@ -49,7 +49,7 @@
           [
             {
               "__comment__" : "This is the first module.",
-              "npcText" : "The guard's back stiffens, his face reddened with rage. \"It seems you have yet to learn your manners, filth. I'll help you learn them!\"\nSpinning around to face you, the guard grabs your worn-out shirt and pulls you into the bars of the cell door, slamming your head into them.\nThe collission turns your vision white. For a brief second, you see cities engulfed in flame, dark siloghetes trapped beneath rubble, and all manner of creatures, intelligent and animal alike, dying of illness.\nThese are not your memories, and you know not of the people you saw in this vision.\nSuddenly, knowledge beyond your being floods your mind.",
+              "npcText" : "The guard's back stiffens, his face reddened with rage. \"It seems you have yet to learn your manners, filth. Today, I will be your teacher!\"\nSpinning around to face you, the guard grabs your worn-out shirt and pulls you into the bars of the cell door, slamming your head into them.\nThe collision turns your vision white. For a brief second, you see cities engulfed in flame, dark silhouettes trapped beneath rubble, and all manner of creatures, intelligent and animal alike, dying of illness.\nThese are not your memories, and you know not of the people you saw in this vision.\nSuddenly, knowledge beyond your being floods your mind.",
 
               "options" :["RETALIATE"],
               "events"  :
