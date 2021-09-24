@@ -31,6 +31,10 @@
                   {
                     "className" : "FlagEvent",
                     "properties" : ["AUSSIE", "true"]
+                  },
+                  {
+                    "className" : "AbilityEvent",
+                    "properties" : ["Smack"]
                   }
                 ]
               ],
