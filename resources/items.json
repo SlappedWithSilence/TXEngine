@@ -180,7 +180,7 @@
                "trigger_phase" : "PRE_ACTION",
                "trigger_message" : "The duster energizes {OWNER}.",
                "cleanup_message" : "",
-               "properties": ["Stamina", "0.5"]
+               "properties": ["Stamina", "0.05"]
             },
             {
                "class_name" : "ProportionalResourceEffect",
@@ -189,7 +189,7 @@
                "trigger_phase" : "PRE_ACTION",
                "trigger_message" : "The duster heals {OWNER}.",
                "cleanup_message" : "",
-               "properties": ["Health", "0.5"]
+               "properties": ["Health", "0.05"]
             }
          ]
       },

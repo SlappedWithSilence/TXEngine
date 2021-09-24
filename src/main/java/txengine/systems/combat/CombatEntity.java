@@ -189,12 +189,19 @@ public class CombatEntity implements CombatAgency, Components.Tabable {
 
     // Add all the effects in a given ability to the entity's effects
     public void handleAbility(Ability ability) {
-        resourceManager.decrementResource(Manager.primaryResource, ability.getDamage()); // Damage this entity's primary resource by the ability's quantity
 
         Cloner cloner = new Cloner();
         for (AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase> ce : ability.getEffects()) { // Iterate through each effect in the ability
             combatEffects.get(ce.getValue()).add(cloner.deepClone(ce.getKey())); // Add a deep clone of effect to this entity's effect map
         }
+    }
+
+    public int takeDamage(int damage) {
+        equipmentManager.getDamageResistance();
+
+        resourceManager.decrementResource(Manager.primaryResource, Math.max(0,damage - equipmentManager.getDamageResistance())); // Damage this entity's primary resource by the ability's quantity
+
+        return Math.max(0,damage - equipmentManager.getDamageResistance());
     }
 
     // Removes any effects with a duration of zero from all phases. An effect with duration of -1 should last forever, so it is ignored.

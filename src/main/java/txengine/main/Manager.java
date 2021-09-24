@@ -123,7 +123,6 @@ public class Manager {
     private static void initDebug() {
         if (combatEntityHashMap == null) combatEntityHashMap = new HashMap<>();
 
-        // name,  openingDialog,  closingDialog, int inventorySize, inventory,  abilityManager,  resourceManager, int speed, int level)
         combatEntityHashMap.put(-1, new CombatEntity("Grunt", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), new EquipmentManager() ,2, 1, 15));
         combatEntityHashMap.put(-2, new CombatEntity("Smokey the Bear", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), new EquipmentManager(), 5, 25, 15));
 

@@ -338,32 +338,77 @@ public class CombatEngine {
 
                     switch (combatAction.getKey().getTargetMode()) { // Handle abilities based on the target type
                         case ALL: // Apply the ability to all entities.
-                            for (CombatEntity e : entities.get(EntityType.FRIENDLY)) e.handleAbility(combatAction.getKey());
-                            for (CombatEntity e : entities.get(EntityType.HOSTILE))  e.handleAbility(combatAction.getKey());
+                            System.out.println(combatAction.getKey().getUseText().replace(CASTER_NAME_PLACEHOLDER, lookUpEntity(turnType, index).getName())); // Prompt user
 
-                            System.out.println(combatAction.getKey().getUseText().replace(CASTER_NAME_PLACEHOLDER, lookUpEntity(turnType, index).getName()));
+                            for (CombatEntity e : entities.get(EntityType.FRIENDLY)) {
+                                e.handleAbility(combatAction.getKey());
+                                int dmg_done = e.takeDamage(combatAction.getKey().getDamage() + lookUpEntity(turnType,index).getEquipmentManager().getDamageBuff());
+
+                                System.out.println(e.getName() + " took " + dmg_done + " damage!");
+                            }
+                            for (CombatEntity e : entities.get(EntityType.HOSTILE)) {
+                                e.handleAbility(combatAction.getKey()); // Give targets the effects
+                                int dmg_done = e.takeDamage(combatAction.getKey().getDamage() + lookUpEntity(turnType,index).getEquipmentManager().getDamageBuff()); // Deal damage to the targets
+
+                                System.out.println(e.getName() + " took " + dmg_done + " damage!");
+                            }
                             break;
                         case SELF: // Apply the ability to the entity whose turn it is
+                            System.out.println(combatAction.getKey().getUseText().replace(CASTER_NAME_PLACEHOLDER, lookUpEntity(turnType, index).getName())); // Prompt user
                             entities.get(turnType).get(index).handleAbility(combatAction.getKey());
+                            int dmg_done = lookUpEntity(turnType,index).takeDamage(combatAction.getKey().getDamage() + lookUpEntity(turnType,index).getEquipmentManager().getDamageBuff());
+                            System.out.println("You took " + dmg_done + " damage!");
 
-                            System.out.println(combatAction.getKey().getUseText().replace(CASTER_NAME_PLACEHOLDER, lookUpEntity(turnType, index).getName()));
                             break;
                         case SINGLE: // Apply the ability to the target
                         case SINGLE_HOSTILE: // Apply the ability to the target
                         case SINGLE_FRIENDLY: // Apply the ability to the target
+                            System.out.println(combatAction.getKey().getUseText().replace(CASTER_NAME_PLACEHOLDER, lookUpEntity(turnType, index).getName()).replace(TARGET_NAME_PLACEHOLDER, combatAction.getKey().getTarget().getName())); // Prompt user
                             combatAction.getKey().getTarget().handleAbility(combatAction.getKey());
+                            dmg_done =  combatAction.getKey().getTarget().takeDamage(combatAction.getKey().getDamage() + lookUpEntity(turnType,index).getEquipmentManager().getDamageBuff()); // Deal damage to the targets
 
-                            System.out.println(combatAction.getKey().getUseText().replace(CASTER_NAME_PLACEHOLDER, lookUpEntity(turnType, index).getName()).replace(TARGET_NAME_PLACEHOLDER, combatAction.getKey().getTarget().getName()));
+                            System.out.println( combatAction.getKey().getTarget().getName() + " took " + dmg_done + " damage!");
+
                             break;
                         case ALL_HOSTILE: // Apply the ability to all enemies, relative to the current entity's type. A hostile entity (relative to the player) would apply this type of ability to all friendly entities (relative to the player)
-                            if (turnType == EntityType.FRIENDLY) for (CombatEntity e : entities.get(EntityType.HOSTILE))  e.handleAbility(combatAction.getKey());
-                            else                                 for (CombatEntity e : entities.get(EntityType.FRIENDLY)) e.handleAbility(combatAction.getKey());
-
                             System.out.println(combatAction.getKey().getUseText().replace(CASTER_NAME_PLACEHOLDER, lookUpEntity(turnType, index).getName()));
+
+                            if (turnType == EntityType.FRIENDLY) {
+                                for (CombatEntity e : entities.get(EntityType.HOSTILE)) {
+                                    e.handleAbility(combatAction.getKey());
+                                    dmg_done = e.takeDamage(combatAction.getKey().getDamage() + lookUpEntity(turnType,index).getEquipmentManager().getDamageBuff());
+
+                                    System.out.println(e.getName() + " took " + dmg_done + " damage!");
+                                }
+                            }
+                            else {
+                                for (CombatEntity e : entities.get(EntityType.FRIENDLY)) {
+                                    e.handleAbility(combatAction.getKey());
+                                    dmg_done = e.takeDamage(combatAction.getKey().getDamage() + lookUpEntity(turnType,index).getEquipmentManager().getDamageBuff());
+
+                                    System.out.println(e.getName() + " took " + dmg_done + " damage!");
+                                }
+                            }
+
+
                             break;
                         case ALL_FRIENDLY:
-                            if (turnType == EntityType.FRIENDLY) for (CombatEntity e : entities.get(EntityType.FRIENDLY)) e.handleAbility(combatAction.getKey());
-                            else                                 for (CombatEntity e : entities.get(EntityType.HOSTILE))  e.handleAbility(combatAction.getKey());
+                            if (turnType == EntityType.FRIENDLY) {
+                                for (CombatEntity e : entities.get(EntityType.FRIENDLY)){
+                                    e.handleAbility(combatAction.getKey());
+                                    dmg_done = e.takeDamage(combatAction.getKey().getDamage() + lookUpEntity(turnType,index).getEquipmentManager().getDamageBuff());
+
+                                    System.out.println(e.getName() + " took " + dmg_done + " damage!");
+                                }
+                            }
+                            else {
+                                for (CombatEntity e : entities.get(EntityType.HOSTILE)) {
+                                    e.handleAbility(combatAction.getKey());
+                                    dmg_done = e.takeDamage(combatAction.getKey().getDamage() + lookUpEntity(turnType,index).getEquipmentManager().getDamageBuff());
+
+                                    System.out.println(e.getName() + " took " + dmg_done + " damage!");
+                                }
+                            }
 
                             System.out.println(combatAction.getKey().getUseText().replace(CASTER_NAME_PLACEHOLDER, lookUpEntity(turnType, index).getName()));
                             break;
