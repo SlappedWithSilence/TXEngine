@@ -105,7 +105,8 @@ public class ConversationLoader implements Loader{
             //for (JSONObject rawEvent : (Iterable<JSONObject>) JSONActions[i]) { // Iterate through the JSON objects of Event Objects
                 JSONObject rawEvent =  (JSONObject) ((JSONArray) JSONActions.get(i)).get(j);
 
-                String className = (String) rawEvent.get("className");
+                String className = (String) rawEvent.get("class_name");
+                if (className == null) LogUtils.error("No class_name found for event!\n");
                 JSONArray rawProperties = (JSONArray) rawEvent.get("properties");
                 String[] properties = getStringArray(rawProperties);
 
