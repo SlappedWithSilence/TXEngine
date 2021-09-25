@@ -88,20 +88,8 @@ public class LoadUtils {
         return array;
     }
 
-    public static ArrayList<AbstractMap.SimpleEntry<String, Integer>> parseResourceCosts(JSONArray obj) {
-        ArrayList<AbstractMap.SimpleEntry<String, Integer>> arr = new ArrayList<>();
-
-        // The array comes in pairs of strings and ints. That means "i" is a string, and "i+1" is an int.
-        for (int i = 0; i < obj.size(); i = i+2) { // Iterate over every even index in the array
-
-            String resourceName = (String) obj.get(i); // Get the resource name as a string
-            int resourceQuantity = ((Long) obj.get(i+1)).intValue(); // Get the related resource quantity as an int
-
-            arr.add(new AbstractMap.SimpleEntry<>(resourceName, resourceQuantity)); // add the string-int pair to the arraylist
-
-        }
-
-        return arr;
+    public static List<AbstractMap.SimpleEntry<String, Integer>> parseResourceCosts(JSONArray obj) {
+        return parseStringIntPairs(obj);
     }
 
     public static List<AbstractMap.SimpleEntry<String, Float>> parseStringFloatPairs(JSONArray obj) {
