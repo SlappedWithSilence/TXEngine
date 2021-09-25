@@ -59,7 +59,9 @@ public class RoomLoader extends Loader {
             int id = ((Long) rawRoom.get("id")).intValue();
             String roomText = (String) rawRoom.get("text");
 
-            ArrayList<Action> onFirstEnterActions = getActions((JSONArray) rawRoom.get("on_first_enter_actions"));
+            //ArrayList<Action> onFirstEnterActions = getActions((JSONArray) rawRoom.get("on_first_enter_actions"));
+            ArrayList<Action> onFirstEnterActions = getActions(LoadUtils.optional(rawRoom,"on_first_enter_actions",JSONArray.class, new JSONArray()));
+
             ArrayList<Action> actions = getActions((JSONArray) rawRoom.get("actions"));
 
             Room room = new Room(id, roomName, roomText);
@@ -84,8 +86,10 @@ public class RoomLoader extends Loader {
             String menuName = 	(String) rawAction.get("menu_name");
             String text =		(String) rawAction.get("text");
             boolean hidden = 	(Boolean) rawAction.get("hidden");
-            boolean hideAfterUse = (Boolean) rawAction.get("hide_after_use");
-            int unlockIndex = 	((Long) rawAction.get("unlocked_index")).intValue();
+
+            // If the action doesn't have a hide_after_use field, supply a false value as a defaut
+            boolean hideAfterUse = LoadUtils.optional(rawAction,"hide_after_use", Boolean.class, false);
+            int unhideIndex = ((Long) rawAction.get("unlocked_index")).intValue();
 
             List<Requirement> requirements = LoadUtils.parseRequirements((JSONArray) rawAction.get("requirements"));
 
@@ -104,7 +108,7 @@ public class RoomLoader extends Loader {
                 actionProperties[i] = prop;											// Store it in the array
             }
 
-            Action a = ActionFactory.build(className, menuName, text, hidden, unlockIndex, actionProperties, requirements);
+            Action a = ActionFactory.build(className, menuName, text, hidden, unhideIndex, hideAfterUse, actionProperties, requirements);
             actions.add(a);
         }
 

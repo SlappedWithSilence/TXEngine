@@ -14,8 +14,8 @@ public class ConversationAction extends Action {
 
     }
 
-    public ConversationAction(String menuName, String text, String[] properties, boolean enabled, int unlockIndex, List<Requirement> requirements) {
-        super(menuName, text, properties, enabled, unlockIndex, requirements);
+    public ConversationAction(String menuName, String text, String[] properties, boolean enabled, int unlockIndex, boolean hideOnUse, List<Requirement> requirements) {
+        super(menuName, text, properties, enabled, unlockIndex, hideOnUse, requirements);
     }
 
     @Override

@@ -8,7 +8,7 @@
       "damage" : 90,
       "effects" : [],
       "requirements" : [],
-      "resource_cost" : ["Health", 90, "Stamina", 10]
+      "resource_cost" : ["Health,90", "Stamina,10"]
     },
     {
       "target_mode" : "SINGLE_HOSTILE",
@@ -18,7 +18,7 @@
       "damage" : 100,
       "effects" : [],
       "requirements" : [],
-      "resource_cost" : ["Stamina", 1]
+      "resource_cost" : ["Stamina,90"]
     },
     {
       "target_mode" : "ALL_HOSTILE",
@@ -28,7 +28,7 @@
       "damage" : 100,
       "effects" : [],
       "requirements" : [],
-      "resource_cost" : ["Mana", 50]
+      "resource_cost" : ["Mana,50"]
     },
     {
       "target_mode" : "SINGLE",
@@ -47,7 +47,7 @@
         }
       ],
       "requirements" : [],
-      "resource_cost" : ["Stamina", 10]
+      "resource_cost" : ["Stamina,10"]
     },
     {
       "target_mode" : "SINGLE_HOSTILE",
@@ -74,7 +74,7 @@
         }
       ],
       "requirements" : [],
-      "resource_cost" : ["Stamina", 3]
+      "resource_cost" : ["Stamina,3"]
     },
     {
       "target_mode" : "SINGLE_HOSTILE",
@@ -93,7 +93,7 @@
         }
       ],
       "requirements" : [],
-      "resource_cost" : ["Stamina", 55, "Health", 20]
+      "resource_cost" : ["Stamina,55", "Health,20"]
     },
     {
       "target_mode" : "SINGLE_HOSTILE",
@@ -113,7 +113,7 @@
       "damage" : 20,
       "effects" : [],
       "requirements" : [],
-      "resource_cost" : ["Health", -10]
+      "resource_cost" : ["Health,-10"]
     },
     {
       "target_mode" : "ALL_FRIENDLY",
@@ -132,7 +132,7 @@
         }
       ],
       "requirements" : [],
-      "resource_cost" : ["Stamina", -100, "Health", -100]
+      "resource_cost" : ["Stamina,-100", "Health,-100"]
     },
     {
       "target_mode" : "SINGLE_HOSTILE",
@@ -152,7 +152,7 @@
       "damage" : 7,
       "effects" : [],
       "requirements" : [],
-      "resource_cost" : ["Mana", 2]
+      "resource_cost" : ["Mana,2"]
     },
     {
       "target_mode" : "SINGLE_HOSTILE",
@@ -167,7 +167,7 @@
           "properties" : ["1"]
         }
       ],
-      "resource_cost" : ["Stamina", 2]
+      "resource_cost" : ["Stamina,2"]
     }
   ]
 }

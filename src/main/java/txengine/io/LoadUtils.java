@@ -110,6 +110,8 @@ public class LoadUtils {
     public static List<AbstractMap.SimpleEntry<String, Integer>> parseStringIntPairs(JSONArray obj) {
         List<AbstractMap.SimpleEntry<String, Integer>> arr = new ArrayList<>();
 
+        if (obj.isEmpty()) return arr;
+
         for (Object o : obj) {
             String[] values = ((String) o).split(",");
 
@@ -207,5 +209,19 @@ public class LoadUtils {
         if (d == null) LogUtils.error("No field " + key + " found!");
 
         return d;
+    }
+
+    public static <T> T optional(final JSONObject obj, final String key, Class<T> tClass, T defaultValue) {
+        T value = null;
+        try {
+            value = (T) obj.get(key);
+        }  catch (Exception e) {
+            LogUtils.warn("Defaulting to value " + defaultValue);
+        }
+
+        if (value != null) return value;
+
+        LogUtils.warn("Defaulting to value " + defaultValue);
+        return defaultValue;
     }
 }
