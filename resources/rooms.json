@@ -73,6 +73,22 @@
           "hidden"   : true,
           "properties" : ["0"],
           "requirements" : [],
+          "unlocked_index" : 7
+        },
+        {
+          "class_name" : "CombatAction",
+          "menu_name"  : "Attack the guard",
+          "text"      : "",
+          "hidden"   : true,
+          "properties" : ["{FRIENDLY}",
+                          "{HOSTILE}", "1",
+                          "{LOOT}", "1,1", "4,2","18,1","19,1","20,1"],
+          "requirements" : [
+            {
+              "class_name" : "FlagRequirement",
+              "properties": ["ch0_anger_guard"]
+            }
+          ],
           "unlocked_index" : -1
         }
       ]

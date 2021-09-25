@@ -57,7 +57,7 @@
                 [
                   {
                     "class_name" : "FlagEvent",
-                    "properties" : ["anger_guard_ch0","true"]
+                    "properties" : ["ch0_anger_guard","true"]
                   },
                   {
                     "class_name" : "AbilityEvent",
