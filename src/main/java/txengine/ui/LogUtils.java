@@ -118,7 +118,11 @@ public class LogUtils {
 	}
 
 	public static void error(String text) {
-		ColorConsole.e(text, false);
+		ColorConsole.e("[Error]" + text + "\n", false);
+	}
+
+	public static void warn(String text) {
+		ColorConsole.i("[Warning]" + text + "\n", false);
 	}
 
 	public static String centerString(String s, int length) {

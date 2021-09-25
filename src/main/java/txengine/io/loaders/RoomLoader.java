@@ -1,5 +1,7 @@
-package txengine.io;
+package txengine.io.loaders;
 
+import txengine.io.LoadUtils;
+import txengine.io.Loader;
 import txengine.systems.integration.Requirement;
 import txengine.systems.room.Room;
 import txengine.systems.room.action.Action;
@@ -19,7 +21,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-public class RoomLoader implements Loader{
+public class RoomLoader extends Loader {
 
     @Override
     public HashMap<Integer, Room> load(File file) {
@@ -57,7 +59,7 @@ public class RoomLoader implements Loader{
             int id = ((Long) rawRoom.get("id")).intValue();
             String roomText = (String) rawRoom.get("text");
 
-            ArrayList<Action> onFirstEnterActions = getActions((JSONArray) rawRoom.get("onFirstEnterActions"));
+            ArrayList<Action> onFirstEnterActions = getActions((JSONArray) rawRoom.get("on_first_enter_actions"));
             ArrayList<Action> actions = getActions((JSONArray) rawRoom.get("actions"));
 
             Room room = new Room(id, roomName, roomText);
@@ -82,11 +84,19 @@ public class RoomLoader implements Loader{
             String menuName = 	(String) rawAction.get("menu_name");
             String text =		(String) rawAction.get("text");
             boolean hidden = 	(Boolean) rawAction.get("hidden");
+            boolean hideAfterUse = (Boolean) rawAction.get("hide_after_use");
             int unlockIndex = 	((Long) rawAction.get("unlocked_index")).intValue();
 
             List<Requirement> requirements = LoadUtils.parseRequirements((JSONArray) rawAction.get("requirements"));
 
             JSONArray propertiesArray = (JSONArray) rawAction.get("properties");	// Get a sub-array of property string values for the current action
+
+            // Catch missing optional values and supply defaults to them
+            if (text == null) text = "";
+
+            // Catch missing required values and print error messages
+            if (className == null) LogUtils.error("Missing required field from Activity: class_name\n");
+            if (menuName == null) LogUtils.error("Missing required field from Activity: menu_name\n");
 
             String[] actionProperties = new String[ propertiesArray.size()];		// Create a java-array to store the action's property values
             for (int i = 0; i < propertiesArray.size(); i++) {						// Iterate through the JSONArray that stores the property values

@@ -13,13 +13,14 @@ public abstract class Action {
 	protected boolean hidden;
 	protected int numProperties = 3; // The expected number of properties
 	protected int unhideIndex = -1;	 // The other Action in the room this Action is in that should be un-hidden if this Action succeeds
+	protected boolean hideAfterUse;
 
 	/* Constructors */
 	public Action() {
 
 	}
 
-	public Action(String menuName, String text, String[] properties, boolean enabled, int unhideIndex, List<Requirement> requirements) {
+	public Action(String menuName, String text, String[] properties, boolean enabled, int unhideIndex, boolean hideAfterUse, List<Requirement> requirements) {
 		this.menuName = menuName;
 		this.hidden = enabled;
 		this.properties = properties;
@@ -28,7 +29,7 @@ public abstract class Action {
 		this.requirements = requirements;
 	}
 
-	public Action(String menuName, String text, String[] properties, boolean enabled, int unhideIndex, int numProperties, List<Requirement> requirements) {
+	public Action(String menuName, String text, String[] properties, boolean enabled, int unhideIndex, boolean hideAfterUse, int numProperties, List<Requirement> requirements) {
 		this.menuName = menuName;
 		this.hidden = enabled;
 		this.properties = properties;
@@ -108,5 +109,21 @@ public abstract class Action {
 
 	public void setRequirements(List<Requirement> requirements) {
 		this.requirements = requirements;
+	}
+
+	public int getNumProperties() {
+		return numProperties;
+	}
+
+	public void setNumProperties(int numProperties) {
+		this.numProperties = numProperties;
+	}
+
+	public boolean isHideAfterUse() {
+		return hideAfterUse;
+	}
+
+	public void setHideAfterUse(boolean hideAfterUse) {
+		this.hideAfterUse = hideAfterUse;
 	}
 }

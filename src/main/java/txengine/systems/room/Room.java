@@ -52,6 +52,7 @@ public class Room {
 				int unhide = roomActions.stream().filter(action -> !action.isHidden()).toList().get(userSelection).perform();
 				if (unhide >= 0) roomActions.get(unhide).setHidden(false); // Enable the Action that was passed through the last performed Action.
 
+				if (roomActions.stream().filter(action -> !action.isHidden()).toList().get(userSelection).isHideAfterUse()) roomActions.stream().filter(action -> !action.isHidden()).toList().get(userSelection).setHidden(true);
 				if (roomActions.stream().filter(action -> !action.isHidden()).toList().get(userSelection) instanceof MoveAction) break;
 			} else {
 				System.out.println("You can't do that right now!");

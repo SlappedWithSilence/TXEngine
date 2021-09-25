@@ -1,5 +1,6 @@
-package txengine.io;
+package txengine.io.loaders;
 
+import txengine.io.Loader;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.ability.Ability;
 import txengine.systems.ability.AbilityFactory;
@@ -19,13 +20,13 @@ import java.util.*;
 import static txengine.io.LoadUtils.parseCombatEffects;
 import static txengine.io.LoadUtils.parseResourceCosts;
 
-public class AbilityLoader {
+public class AbilityLoader extends Loader {
 
-    AbilityLoader() {
+    public AbilityLoader() {
 
     }
 
-    public static HashMap<String, Ability> load(File file) {
+    public HashMap<String, Ability> load(File file) {
 
         HashMap<String, Ability> abilityHashMap = new HashMap<>();
 

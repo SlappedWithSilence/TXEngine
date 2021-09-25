@@ -1,5 +1,7 @@
-package txengine.io;
+package txengine.io.loaders;
 
+import txengine.io.LoadUtils;
+import txengine.io.Loader;
 import txengine.systems.integration.Requirement;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.combatEffect.CombatEffect;
@@ -20,7 +22,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class ItemLoader implements Loader {
+public class ItemLoader extends Loader {
 
     @Override
     public HashMap<Integer, Item> load(File file) {
