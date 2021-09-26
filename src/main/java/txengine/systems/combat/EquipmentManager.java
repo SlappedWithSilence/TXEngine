@@ -92,7 +92,7 @@ public class EquipmentManager {
 
     private void initialize() {
         equipmentMap = new HashMap<>();
-        Arrays.stream(Equipment.EquipmentType.values()).forEach(equipmentType -> equipmentMap.put(equipmentType, null));
+        Arrays.stream(Equipment.EquipmentType.values()).forEach(equipmentType -> equipmentMap.put(equipmentType, -1));
     }
 
     /* Accessor Methods */
