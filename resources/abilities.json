@@ -62,7 +62,7 @@
           "trigger_phase" : "POST_ACTION",
           "trigger_message" : "{TARGET}'s weapon is replaced with an Iron Scimitar",
           "cleanup_message" : "",
-          "properties": ["16"]
+          "properties": ["16", "WEAPON"]
         },
         {
           "class_name" : "EquipEffect",
@@ -70,7 +70,7 @@
           "trigger_phase" : "POST_ACTION",
           "trigger_message" : "",
           "cleanup_message" : "{TARGET}'s weapon vanishes",
-          "properties": ["17"]
+          "properties": ["0", "WEAPON"]
         }
       ],
       "requirements" : [
@@ -79,7 +79,7 @@
           "properties": ["16"]
         }
       ],
-      "resource_cost" : ["Stamina", 1]
+      "resource_cost" : ["Stamina,1"]
     },
     {
       "target_mode" : "SELF",
@@ -106,7 +106,7 @@
         }
       ],
       "requirements" : [],
-      "resource_cost" : ["Stamina", 10]
+      "resource_cost" : ["Stamina,10"]
     },
     {
       "target_mode" : "SELF",

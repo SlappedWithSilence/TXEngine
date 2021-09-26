@@ -34,7 +34,7 @@ public class EquipEffect extends CombatEffect {
             
             Equipment.EquipmentType slot = Equipment.EquipmentType.valueOf(slotName);
                                                
-            entity.getEquipmentManager.unequip(slot);
+            entity.getEquipmentManager().unequip(slot);
             entity.getEquipmentManager().equip(Integer.parseInt(super.properties[0]));
             /*
             int id = Integer.parseInt(super.properties[0]);
