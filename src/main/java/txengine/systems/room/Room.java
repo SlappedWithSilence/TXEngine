@@ -7,6 +7,7 @@ import txengine.systems.room.action.Action;
 import txengine.systems.room.action.actions.MoveAction;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Room {
 
@@ -46,20 +47,26 @@ public class Room {
 		// Loop until the user performs a MoveAction
 		while (true) {
 			printActions();
-			int userSelection = LogUtils.getNumber(0, roomActions.stream().filter(action -> !action.isHidden()).toList().size()-1);
+			int userSelection = LogUtils.getNumber(0, getVisibleActions().size()-1);
 
-			if (Requirement.allMet(roomActions.stream().filter(action -> !action.isHidden()).toList().get(userSelection).getRequirements())) {
-				int unhide = roomActions.stream().filter(action -> !action.isHidden()).toList().get(userSelection).perform();
+			if (Requirement.allMet(getVisibleActions().get(userSelection).getRequirements())) {
+				int unhide = getVisibleActions().get(userSelection).perform();
 				if (unhide >= 0) roomActions.get(unhide).setHidden(false); // Enable the Action that was passed through the last performed Action.
 
-				if (roomActions.stream().filter(action -> !action.isHidden()).toList().get(userSelection).isHideAfterUse()) roomActions.stream().filter(action -> !action.isHidden()).toList().get(userSelection).setHidden(true);
-				if (roomActions.stream().filter(action -> !action.isHidden()).toList().get(userSelection) instanceof MoveAction) break;
+				if (getVisibleActions().get(userSelection) instanceof MoveAction) break;
+
+				if (getVisibleActions().get(userSelection).isHideAfterUse()) {
+					getVisibleActions().get(userSelection).setHidden(true);
+				}
 			} else {
 				System.out.println("You can't do that right now!");
-				roomActions.stream().filter(action -> !action.isHidden()).toList().get(userSelection).getRequirements().forEach(r -> System.out.println(r.toString()));
+				getVisibleActions().get(userSelection).getRequirements().forEach(r -> System.out.println(r.toString()));
 			}
-
 		}
+	}
+
+	public List<Action> getVisibleActions() {
+		return roomActions.stream().filter(action -> !action.isHidden()).toList();
 	}
 
 	public int getId() {
