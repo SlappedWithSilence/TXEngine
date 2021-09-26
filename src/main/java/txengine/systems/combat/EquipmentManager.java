@@ -71,7 +71,7 @@ public class EquipmentManager {
     }
 
     public void unequip(Equipment.EquipmentType slot) {
-        if (equipmentMap.get(slot) > 0) {
+        if (equipmentMap.get(slot) != null && equipmentMap.get(slot) > 0) {
             Manager.player.getInventory().addItem(equipmentMap.get(slot));
             ((Equipment) Manager.itemHashMap.get(equipmentMap.get(slot))).getAbilityNames().forEach(abName -> Manager.player.abilityManager.unlearn(abName));
         }
