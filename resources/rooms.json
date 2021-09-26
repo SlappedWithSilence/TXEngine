@@ -71,15 +71,17 @@
           "menu_name"  : "Speak to the guard",
           "text"      : "You motion to silent guard, beckoning him to come closer to your cell door.",
           "hidden"   : true,
+          "hide_after_use" : true,
           "properties" : ["0"],
           "requirements" : [],
           "unlocked_index" : 7
         },
         {
           "class_name" : "CombatAction",
-          "menu_name"  : "Attack the guard",
+          "menu_name"  : "RETALIATE",
           "text"      : "",
           "hidden"   : true,
+          "hide_after_use" : true,
           "properties" : ["{FRIENDLY}",
                           "{HOSTILE}", "1",
                           "{LOOT}", "1,1", "4,2","18,1","19,1","20,1"],
