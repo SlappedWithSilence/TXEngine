@@ -142,25 +142,25 @@ public class LoadUtils {
             str = (String) obj.get(key);
 
         } catch (Exception e) {
-            LogUtils.error(key + " is not a String!");
+            LogUtils.error(key + " is not a String!", "Loader");
         }
 
         Pattern p;
         try {
             p = Pattern.compile(pattern);
         } catch (Exception e) {
-            LogUtils.error(pattern + " is not a valid regex!");
+            LogUtils.error(pattern + " is not a valid regex!", "Loader");
             return null;
         }
 
         if (str == null) {
-            LogUtils.error("No field " + key + " found!");
+            LogUtils.error("No field " + key + " found!", "Loader");
             return null;
         }
 
         if (!p.matcher(str).matches()) {
-            LogUtils.error(key + "is not a valid value!");
-            LogUtils.warn(key + " doesn't match " + pattern);
+            LogUtils.error(key + "is not a valid value!", "Loader");
+            LogUtils.warn(key + " doesn't match " + pattern, "Loader");
         }
 
         return str;
@@ -173,10 +173,10 @@ public class LoadUtils {
         try {
              str = (String) obj.get(key);
         } catch (Exception e) {
-            LogUtils.error(key + " is not a String!");
+            LogUtils.error(key + " is not a String!","Loader");
         }
 
-        if (str == null) LogUtils.error("No field " + key + " found!");
+        if (str == null) LogUtils.error("No field " + key + " found!", "Loader");
 
         return str;
     }
@@ -188,10 +188,10 @@ public class LoadUtils {
         try {
             i = ((Long) obj.get(key)).intValue();
         } catch (Exception e) {
-            LogUtils.error(key + " is not an int!");
+            LogUtils.error(key + " is not an int!", "Loader");
         }
 
-        if (i == null) LogUtils.error("No field " + key + " found!");
+        if (i == null) LogUtils.error("No field " + key + " found!", "Loader");
 
         return i;
     }
@@ -203,10 +203,10 @@ public class LoadUtils {
         try {
              d = ((Long) obj.get(key)).doubleValue();
         } catch (Exception e) {
-            LogUtils.error(key + " is not a double!");
+            LogUtils.error(key + " is not a double!", "Loader");
         }
 
-        if (d == null) LogUtils.error("No field " + key + " found!");
+        if (d == null) LogUtils.error("No field " + key + " found!", "Loader");
 
         return d;
     }
@@ -216,12 +216,12 @@ public class LoadUtils {
         try {
             value = (T) obj.get(key);
         }  catch (Exception e) {
-            LogUtils.warn("Defaulting to value " + defaultValue);
+            LogUtils.warn("Defaulting to value " + defaultValue, "Loader");
         }
 
         if (value != null) return value;
 
-        LogUtils.warn("Defaulting to value " + defaultValue);
+        LogUtils.warn("Defaulting to value " + defaultValue, "Loader");
         return defaultValue;
     }
 }
