@@ -14,7 +14,6 @@ public class AddPhaseEffect extends CombatEffect {
 
     public AddPhaseEffect() {
         setDuration(1);
-        phase = CombatEngine.CombatPhase.valueOf(super.properties[0]);
     }
 
 
@@ -31,6 +30,7 @@ public class AddPhaseEffect extends CombatEffect {
 
     @Override
     public void perform(CombatEntity entity) {
+        phase = CombatEngine.CombatPhase.valueOf(super.properties[0]);
 
     }
 

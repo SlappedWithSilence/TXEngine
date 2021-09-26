@@ -63,7 +63,7 @@
       "effects" : [
         {
           "class_name" : "FlatResourceEffect",
-          "duration"  : 2,
+          "duration"  : 3,
           "trigger_phase" : "POST_ACTION",
           "trigger_message" : "{OWNER}'s body is invigorated from mediation. (Health + 10) (Mana + 10)",
           "cleanup_message" : "{OWNER} finishes meditation",
@@ -71,7 +71,7 @@
         },
         {
           "class_name" : "RemovePhaseEffect",
-          "duration"  : 1,
+          "duration"  : 2,
           "trigger_phase" : "TURN_START",
           "trigger_message" : "",
           "cleanup_message" : "",
