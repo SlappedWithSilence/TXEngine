@@ -67,11 +67,11 @@ public class EquipmentAction extends Action {
             }
             case 1  -> { // Choice : Inspect
                 if (Manager.player.getEquipmentManager().getSlot(type) == null) System.out.println("There is nothing in that slot.");
-                System.out.println(Manager.player.getEquipmentManager().getSlot(type).inspect());
+                else System.out.println(Manager.player.getEquipmentManager().getSlot(type).inspect());
             }
             case 2 -> { // Choice Unequip
                 if (Manager.player.getEquipmentManager().getSlot(type) == null) System.out.println("There is nothing in that slot.");
-                Manager.player.getEquipmentManager().unequip(type);
+                else Manager.player.getEquipmentManager().unequip(type);
             }
         }
 

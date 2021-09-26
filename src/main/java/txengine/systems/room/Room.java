@@ -49,13 +49,15 @@ public class Room {
 			printActions();
 			int userSelection = LogUtils.getNumber(0, getVisibleActions().size()-1);
 
+			// Check if the user can actually perform the action, then if they can, execute it.
 			if (Requirement.allMet(getVisibleActions().get(userSelection).getRequirements())) {
-				int unhide = getVisibleActions().get(userSelection).perform();
+				System.out.println(getVisibleActions().get(userSelection).getText());
+				int unhide = getVisibleActions().get(userSelection).perform(); // Calculate the index of the action to unhide (if any)
 				if (unhide >= 0) roomActions.get(unhide).setHidden(false); // Enable the Action that was passed through the last performed Action.
 
-				if (getVisibleActions().get(userSelection) instanceof MoveAction) break;
+				if (getVisibleActions().get(userSelection) instanceof MoveAction) break; // If the user needs to move, do so
 
-				if (getVisibleActions().get(userSelection).isHideAfterUse()) {
+				if (getVisibleActions().get(userSelection).isHideAfterUse()) { // Hide the action after use if necessary
 					getVisibleActions().get(userSelection).setHidden(true);
 				}
 			} else {
