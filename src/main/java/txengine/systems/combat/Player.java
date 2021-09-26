@@ -41,7 +41,7 @@ public class Player extends CombatEntity {
 
 		inventory = new Inventory();
 		money = 0;
-		location = 0;
+		location = 1;
 
 		recipeManager = new RecipeManager();
 	}

@@ -150,7 +150,6 @@ public class CombatEngine {
 
         preCombatSetup();
 
-        LogUtils.error("Starting combat\n"); //TODO: Remove
         while (endState == null) {
             turnCycle();
         }
@@ -307,7 +306,7 @@ public class CombatEngine {
         while (entityIterator.hasNext()) { // While someone hasn't taken their turn yet
             AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer> currentEntity = entityIterator.next(); // Get the next entity
 
-            if (lookUpEntity(currentEntity.getKey(), currentEntity.getValue()).resourceManager.getResourceQuantity(primaryResourceName) >= 0) { // If the entity isn't dead
+            if (lookUpEntity(currentEntity.getKey(), currentEntity.getValue()).resourceManager.getResourceQuantity(primaryResourceName) > 0) { // If the entity isn't dead
                 turn(currentEntity.getKey(), currentEntity.getValue()); // Take the turn
                 LogUtils.readingDelay();
             }
@@ -445,6 +444,7 @@ public class CombatEngine {
                     case "AddPhaseEffect" -> { // Handles the adding of a new phase to the current turn. Any phase may be added, and it is always added after the current phase
 
                         CombatPhase phaseToAdd = ((AddPhaseEffect) combatEffect).getPhase(); // Get the phase we need to add
+                        if (phaseToAdd == null) LogUtils.error("phaseToAdd is null!");
                         if (i + 1 >= phaseOrder.size()) { // Check if we are currently in the last phase
                             phaseOrder.add(phaseToAdd); // Append to list
                         } else { // If we aren't in the last phase

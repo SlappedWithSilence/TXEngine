@@ -9,10 +9,13 @@ import txengine.systems.combat.combatEffect.CombatEffect;
 import txengine.systems.combat.combatEffect.CombatEffectFactory;
 import txengine.systems.event.Event;
 import txengine.systems.event.EventFactory;
+import txengine.ui.LogUtils;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoadUtils {
 
@@ -88,20 +91,8 @@ public class LoadUtils {
         return array;
     }
 
-    public static ArrayList<AbstractMap.SimpleEntry<String, Integer>> parseResourceCosts(JSONArray obj) {
-        ArrayList<AbstractMap.SimpleEntry<String, Integer>> arr = new ArrayList<>();
-
-        // The array comes in pairs of strings and ints. That means "i" is a string, and "i+1" is an int.
-        for (int i = 0; i < obj.size(); i = i+2) { // Iterate over every even index in the array
-
-            String resourceName = (String) obj.get(i); // Get the resource name as a string
-            int resourceQuantity = ((Long) obj.get(i+1)).intValue(); // Get the related resource quantity as an int
-
-            arr.add(new AbstractMap.SimpleEntry<>(resourceName, resourceQuantity)); // add the string-int pair to the arraylist
-
-        }
-
-        return arr;
+    public static List<AbstractMap.SimpleEntry<String, Integer>> parseResourceCosts(JSONArray obj) {
+        return parseStringIntPairs(obj);
     }
 
     public static List<AbstractMap.SimpleEntry<String, Float>> parseStringFloatPairs(JSONArray obj) {
@@ -118,6 +109,8 @@ public class LoadUtils {
 
     public static List<AbstractMap.SimpleEntry<String, Integer>> parseStringIntPairs(JSONArray obj) {
         List<AbstractMap.SimpleEntry<String, Integer>> arr = new ArrayList<>();
+
+        if (obj.isEmpty()) return arr;
 
         for (Object o : obj) {
             String[] values = ((String) o).split(",");
@@ -140,4 +133,95 @@ public class LoadUtils {
         return arr;
     }
 
+    // Get a value from a JSONObject, convert it to a string, and verify that it matches the given regex patter.
+    // If anything goes wrong, return null
+    public static String asString(final JSONObject obj, final String key, final String pattern) {
+        String str = null;
+
+        try {
+            str = (String) obj.get(key);
+
+        } catch (Exception e) {
+            LogUtils.error(key + " is not a String!", "Loader");
+        }
+
+        Pattern p;
+        try {
+            p = Pattern.compile(pattern);
+        } catch (Exception e) {
+            LogUtils.error(pattern + " is not a valid regex!", "Loader");
+            return null;
+        }
+
+        if (str == null) {
+            LogUtils.error("No field " + key + " found!", "Loader");
+            return null;
+        }
+
+        if (!p.matcher(str).matches()) {
+            LogUtils.error(key + "is not a valid value!", "Loader");
+            LogUtils.warn(key + " doesn't match " + pattern, "Loader");
+        }
+
+        return str;
+    }
+
+    // Get a value from a JSONObject, convert it to a string
+    public static String asString(final JSONObject obj, final String key) {
+        String str = null;
+
+        try {
+             str = (String) obj.get(key);
+        } catch (Exception e) {
+            LogUtils.error(key + " is not a String!","Loader");
+        }
+
+        if (str == null) LogUtils.error("No field " + key + " found!", "Loader");
+
+        return str;
+    }
+
+    // Get a value from a JSONObject, convert it to an Integer
+    public static Integer asInt(final JSONObject obj, final String key) {
+        Integer i = null;
+
+        try {
+            i = ((Long) obj.get(key)).intValue();
+        } catch (Exception e) {
+            LogUtils.error(key + " is not an int!", "Loader");
+        }
+
+        if (i == null) LogUtils.error("No field " + key + " found!", "Loader");
+
+        return i;
+    }
+
+    // Get a value from a JSONObject, convert it to a Double
+    public static Double asDouble(final JSONObject obj, final String key) {
+        Double d = null;
+
+        try {
+             d = ((Long) obj.get(key)).doubleValue();
+        } catch (Exception e) {
+            LogUtils.error(key + " is not a double!", "Loader");
+        }
+
+        if (d == null) LogUtils.error("No field " + key + " found!", "Loader");
+
+        return d;
+    }
+
+    public static <T> T optional(final JSONObject obj, final String key, Class<T> tClass, T defaultValue) {
+        T value = null;
+        try {
+            value = (T) obj.get(key);
+        }  catch (Exception e) {
+            LogUtils.warn("Defaulting to value " + defaultValue, "Loader");
+        }
+
+        if (value != null) return value;
+
+        LogUtils.warn("Defaulting to value " + defaultValue, "Loader");
+        return defaultValue;
+    }
 }

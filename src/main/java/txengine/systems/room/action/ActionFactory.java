@@ -14,7 +14,7 @@ public class ActionFactory {
         }
 
         // Returns an instance of an Effect that has the properties passed in the paramter
-        public static Action build(String className, String menuName, String text, boolean enabled, int unlockedIndex, String[] properties, List<Requirement> requirements) {
+        public static Action build(String className, String menuName, String text, boolean enabled, int unlockedIndex, boolean hideOnUse,String[] properties, List<Requirement> requirements) {
             try {
                 Class clasz = Class.forName(ACTIONS_PACKAGE + className); // Looks up the class name passed in
                 Action a = (Action)clasz.newInstance(); // Generates an instance of it cast to an Effect
@@ -24,6 +24,7 @@ public class ActionFactory {
                 a.setHidden(enabled);
                 a.setUnhideIndex(unlockedIndex);
                 a.setRequirements(requirements);
+                a.setHideAfterUse(hideOnUse);
                 return a;	// Returns the effect
 
             } catch (InstantiationException e) {

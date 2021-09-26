@@ -2,9 +2,9 @@
   "Rooms" : [
     {
       "name"        : "Debug Room",
-      "id"          : 0,
+      "id"          : 1,
       "text"        : "Welcome to the Debug Room! How did you get in here, anyways?",
-      "onFirstEnterActions" : [],
+      "on_first_enter_actions" : [],
       "actions"  : [
         {
           "class_name"   : "StoreAction",
@@ -118,7 +118,7 @@
     },
     {
       "name"        : "Paddie's Irish Pub",
-      "id"          : 1,
+      "id"          : 2,
       "text"        : "...",
       "onFirstEnterActions" : [],
       "actions"  :

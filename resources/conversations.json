@@ -11,26 +11,30 @@
               "events"  : [
                 [
                   {
-                    "className" : "ItemEvent",
+                    "class_name" : "ItemEvent",
                     "properties" : ["1", "1"]
                   }
                 ],
                 [
                   {
-                    "className" : "ItemEvent",
+                    "class_name" : "ItemEvent",
                     "properties" : ["4", "2"]
                   }
                 ],
                 [
                   {
-                    "className" : "MoneyEvent",
+                    "class_name" : "MoneyEvent",
                     "properties" : ["100"]
                   }
                 ],
                 [
                   {
-                    "className" : "FlagEvent",
+                    "class_name" : "FlagEvent",
                     "properties" : ["AUSSIE", "true"]
+                  },
+                  {
+                    "class_name" : "AbilityEvent",
+                    "properties" : ["Smack"]
                   }
                 ]
               ],
@@ -48,7 +52,7 @@
               [
                 [
                   {
-                    "className" : "FlagEvent",
+                    "class_name" : "FlagEvent",
                     "properties" : ["TEST_FLAG", "true"]
                   }
                 ]

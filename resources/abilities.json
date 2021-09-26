@@ -8,7 +8,7 @@
       "damage" : 90,
       "effects" : [],
       "requirements" : [],
-      "resource_cost" : ["Health", 90, "Stamina", 10]
+      "resource_cost" : ["Health,90", "Stamina,10"]
     },
     {
       "target_mode" : "SINGLE_HOSTILE",
@@ -18,7 +18,7 @@
       "damage" : 100,
       "effects" : [],
       "requirements" : [],
-      "resource_cost" : ["Stamina", 1]
+      "resource_cost" : ["Stamina,90"]
     },
     {
       "target_mode" : "ALL_HOSTILE",
@@ -27,13 +27,8 @@
       "use_text" : "{CASTER} annihilates all enemies with explosion magic, devastating the enemies.",
       "damage" : 100,
       "effects" : [],
-      "requirements" : [
-        {
-        "class_name" : "ItemRequirement",
-        "properties" : ["5"]
-        }
-      ],
-      "resource_cost" : ["Mana", 50]
+      "requirements" : [],
+      "resource_cost" : ["Mana,50"]
     },
     {
       "target_mode" : "SINGLE",
@@ -52,7 +47,7 @@
         }
       ],
       "requirements" : [],
-      "resource_cost" : ["Stamina", 10]
+      "resource_cost" : ["Stamina,10"]
     },
     {
       "target_mode" : "SINGLE",
@@ -157,7 +152,7 @@
         }
       ],
       "requirements" : [],
-      "resource_cost" : ["Stamina", 3]
+      "resource_cost" : ["Stamina,3"]
     },
     {
       "target_mode" : "SINGLE_HOSTILE",
@@ -176,7 +171,7 @@
         }
       ],
       "requirements" : [],
-      "resource_cost" : ["Stamina", 55, "Health", 20]
+      "resource_cost" : ["Stamina,55", "Health,20"]
     },
     {
       "target_mode" : "SINGLE_HOSTILE",
@@ -196,7 +191,7 @@
       "damage" : 20,
       "effects" : [],
       "requirements" : [],
-      "resource_cost" : ["Health", -10]
+      "resource_cost" : ["Health,-10"]
     },
     {
       "target_mode" : "ALL_FRIENDLY",
@@ -206,7 +201,7 @@
       "damage" : 0,
       "effects" : [
         {
-          "class_name" : "RemovePhaseEffect",
+          "class_name" : "AddPhaseEffect",
           "duration"  : 1,
           "trigger_phase" : "PRE_ACTION",
           "trigger_message" : "{OWNER} was delayed by the bomb threat!.",
@@ -215,7 +210,7 @@
         }
       ],
       "requirements" : [],
-      "resource_cost" : ["Stamina", -100, "Health", -100]
+      "resource_cost" : ["Stamina,-100", "Health,-100"]
     },
     {
       "target_mode" : "SINGLE_HOSTILE",
@@ -235,7 +230,7 @@
       "damage" : 7,
       "effects" : [],
       "requirements" : [],
-      "resource_cost" : ["Mana", 2]
+      "resource_cost" : ["Mana,2"]
     },
     {
       "target_mode" : "SINGLE_HOSTILE",
@@ -250,7 +245,7 @@
           "properties" : ["1"]
         }
       ],
-      "resource_cost" : ["Stamina", 2]
+      "resource_cost" : ["Stamina,2"]
     }
   ]
 }
