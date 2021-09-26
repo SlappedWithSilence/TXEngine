@@ -30,6 +30,11 @@ public class EquipEffect extends CombatEffect {
     @Override
     public void perform(CombatEntity entity) {
         if(super.getDuration() == 1){
+            String slotName = super.properties[1];
+            
+            Equipment.EquipmentType slot = Equipment.EquipmentType.valueOf(slotName);
+                                               
+            entity.getEquipmentManager.unequip(slot);
             entity.getEquipmentManager().equip(Integer.parseInt(super.properties[0]));
             /*
             int id = Integer.parseInt(super.properties[0]);
