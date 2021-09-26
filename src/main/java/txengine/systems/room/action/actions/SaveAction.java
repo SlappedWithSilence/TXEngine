@@ -10,7 +10,7 @@ public class SaveAction extends Action {
     public SaveAction() {
         super("Record your journey in your notebook",
                 "You write down the progress you've made in your journey.",
-                null, true, -1, new ArrayList<>());
+                null, true, -1, false, new ArrayList<>());
     }
 
     @Override

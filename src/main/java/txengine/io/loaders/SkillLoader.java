@@ -1,9 +1,11 @@
-package txengine.io;
+package txengine.io.loaders;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import txengine.io.LoadUtils;
+import txengine.io.Loader;
 import txengine.systems.event.Event;
 import txengine.systems.skill.Skill;
 import txengine.ui.LogUtils;
@@ -17,7 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 
-public class SkillLoader implements Loader {
+public class SkillLoader extends Loader {
 
     @Override
     public HashMap<String, Skill> load(File file) {

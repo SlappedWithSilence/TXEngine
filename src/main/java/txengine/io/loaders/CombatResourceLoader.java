@@ -1,9 +1,10 @@
-package txengine.io;
+package txengine.io.loaders;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import txengine.io.Loader;
 import txengine.ui.LogUtils;
 
 import java.io.File;
@@ -13,7 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class CombatResourceLoader implements Loader{
+public class CombatResourceLoader extends Loader {
 
     public CombatResourceLoader() {
 

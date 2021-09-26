@@ -1,5 +1,7 @@
-package txengine.io;
+package txengine.io.loaders;
 
+import txengine.io.LoadUtils;
+import txengine.io.Loader;
 import txengine.main.Manager;
 import txengine.systems.combat.CombatEntity;
 import txengine.systems.combat.CombatResourceManager;
@@ -23,7 +25,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-public class CombatEntityLoader implements Loader {
+public class CombatEntityLoader extends Loader {
 
     @Override
     public HashMap<Integer, CombatEntity> load(File file) {

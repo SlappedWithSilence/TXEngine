@@ -1,5 +1,6 @@
-package txengine.io;
+package txengine.io.loaders;
 
+import txengine.io.Loader;
 import txengine.systems.conversation.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class ConversationLoader implements Loader{
+public class ConversationLoader extends Loader {
 
 
     @Override
@@ -106,7 +107,6 @@ public class ConversationLoader implements Loader{
                 JSONObject rawEvent =  (JSONObject) ((JSONArray) JSONActions.get(i)).get(j);
 
                 String className = (String) rawEvent.get("class_name");
-                if (className == null) LogUtils.error("No class_name found for event!\n");
                 JSONArray rawProperties = (JSONArray) rawEvent.get("properties");
                 String[] properties = getStringArray(rawProperties);
 

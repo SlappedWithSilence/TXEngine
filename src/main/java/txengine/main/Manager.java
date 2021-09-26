@@ -1,5 +1,6 @@
 package txengine.main;
 
+import txengine.io.loaders.*;
 import txengine.ui.color.*;
 import txengine.systems.combat.CombatEntity;
 import txengine.systems.combat.CombatResourceManager;
@@ -102,11 +103,12 @@ public class Manager {
         roomHashMap = new RoomLoader().load(Resources.getResourceAsFile(ROOM_RESOURCE_FILE));
         conversationHashMap = new ConversationLoader().load(Resources.getResourceAsFile(CONVERSATION_RESOURCE_FILE));
         playerResourceMap = new CombatResourceLoader().load(Resources.getResourceAsFile(PLAYER_RESOURCE_FILE));
-        abilityHashMap = AbilityLoader.load(Resources.getResourceAsFile(ABILITY_RESOURCE_FILE));
+        abilityHashMap = new AbilityLoader().load(Resources.getResourceAsFile(ABILITY_RESOURCE_FILE));
         combatEntityHashMap = new CombatEntityLoader().load(Resources.getResourceAsFile(COMBAT_ENTITY_RESOURCE_FILE));
         recipeHashMap = RecipeLoader.load(Resources.getResourceAsFile(RECIPES_RESOURCE_FILE));
         skillHashMap = new SkillLoader().load(Resources.getResourceAsFile(SKILLS_RESOURCE_FILE));
 
+        // Set up global managers
         flagManager = new FlagManager();
         skillManager = new SkillManager(skillHashMap);
     }

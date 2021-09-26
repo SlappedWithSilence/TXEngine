@@ -9,10 +9,13 @@ import txengine.systems.combat.combatEffect.CombatEffect;
 import txengine.systems.combat.combatEffect.CombatEffectFactory;
 import txengine.systems.event.Event;
 import txengine.systems.event.EventFactory;
+import txengine.ui.LogUtils;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoadUtils {
 
@@ -107,6 +110,8 @@ public class LoadUtils {
     public static List<AbstractMap.SimpleEntry<String, Integer>> parseStringIntPairs(JSONArray obj) {
         List<AbstractMap.SimpleEntry<String, Integer>> arr = new ArrayList<>();
 
+        if (obj.isEmpty()) return arr;
+
         for (Object o : obj) {
             String[] values = ((String) o).split(",");
 
@@ -128,4 +133,95 @@ public class LoadUtils {
         return arr;
     }
 
+    // Get a value from a JSONObject, convert it to a string, and verify that it matches the given regex patter.
+    // If anything goes wrong, return null
+    public static String asString(final JSONObject obj, final String key, final String pattern) {
+        String str = null;
+
+        try {
+            str = (String) obj.get(key);
+
+        } catch (Exception e) {
+            LogUtils.error(key + " is not a String!");
+        }
+
+        Pattern p;
+        try {
+            p = Pattern.compile(pattern);
+        } catch (Exception e) {
+            LogUtils.error(pattern + " is not a valid regex!");
+            return null;
+        }
+
+        if (str == null) {
+            LogUtils.error("No field " + key + " found!");
+            return null;
+        }
+
+        if (!p.matcher(str).matches()) {
+            LogUtils.error(key + "is not a valid value!");
+            LogUtils.warn(key + " doesn't match " + pattern);
+        }
+
+        return str;
+    }
+
+    // Get a value from a JSONObject, convert it to a string
+    public static String asString(final JSONObject obj, final String key) {
+        String str = null;
+
+        try {
+             str = (String) obj.get(key);
+        } catch (Exception e) {
+            LogUtils.error(key + " is not a String!");
+        }
+
+        if (str == null) LogUtils.error("No field " + key + " found!");
+
+        return str;
+    }
+
+    // Get a value from a JSONObject, convert it to an Integer
+    public static Integer asInt(final JSONObject obj, final String key) {
+        Integer i = null;
+
+        try {
+            i = ((Long) obj.get(key)).intValue();
+        } catch (Exception e) {
+            LogUtils.error(key + " is not an int!");
+        }
+
+        if (i == null) LogUtils.error("No field " + key + " found!");
+
+        return i;
+    }
+
+    // Get a value from a JSONObject, convert it to a Double
+    public static Double asDouble(final JSONObject obj, final String key) {
+        Double d = null;
+
+        try {
+             d = ((Long) obj.get(key)).doubleValue();
+        } catch (Exception e) {
+            LogUtils.error(key + " is not a double!");
+        }
+
+        if (d == null) LogUtils.error("No field " + key + " found!");
+
+        return d;
+    }
+
+    public static <T> T optional(final JSONObject obj, final String key, Class<T> tClass, T defaultValue) {
+        T value = null;
+        try {
+            value = (T) obj.get(key);
+        }  catch (Exception e) {
+            LogUtils.warn("Defaulting to value " + defaultValue);
+        }
+
+        if (value != null) return value;
+
+        LogUtils.warn("Defaulting to value " + defaultValue);
+        return defaultValue;
+    }
 }

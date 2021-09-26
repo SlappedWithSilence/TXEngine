@@ -33,8 +33,8 @@ public class StoreAction extends Action {
 		storeMode = StoreMode.DEMAND;
 	}
 
-	public StoreAction(String menuName, String text, String[] properties, boolean enabled, int unlockIndex, List<Requirement> requirements) {
-		super(menuName, text, properties, enabled, unlockIndex, requirements);
+	public StoreAction(String menuName, String text, String[] properties, boolean enabled, int unlockIndex, boolean hideOnUse, List<Requirement> requirements) {
+		super(menuName, text, properties, enabled, unlockIndex, hideOnUse, requirements);
 	}
 
 	private int purchase(int index) {
