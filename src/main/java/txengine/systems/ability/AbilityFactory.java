@@ -2,6 +2,7 @@ package txengine.systems.ability;
 
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.combatEffect.CombatEffect;
+import txengine.systems.integration.Requirement;
 
 import java.util.AbstractMap;
 import java.util.List;

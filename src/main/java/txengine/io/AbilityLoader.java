@@ -8,6 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import txengine.systems.integration.Requirement;
 import txengine.ui.LogUtils;
 
 import java.io.File;
@@ -16,8 +17,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-import static txengine.io.LoadUtils.parseCombatEffects;
-import static txengine.io.LoadUtils.parseResourceCosts;
+import static txengine.io.LoadUtils.*;
 
 public class AbilityLoader {
 
@@ -60,6 +60,7 @@ public class AbilityLoader {
         int damage;
         List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects = new ArrayList<>();
         ArrayList<AbstractMap.SimpleEntry<String, Integer>> resourceCosts = new ArrayList<>();
+        //List<Requirement> requirements = LoadUtils.parseRequirements((JSONArray) rawAction.get("requirements"));
 
         while (iterator.hasNext()) {
             JSONObject rawAbility = iterator.next();
@@ -70,8 +71,9 @@ public class AbilityLoader {
             damage = ((Long) rawAbility.get("damage")).intValue();
             resourceCosts = parseResourceCosts((JSONArray) rawAbility.get("resource_cost"));
             effects = parseCombatEffects((JSONArray) rawAbility.get("effects"));
+            //requirements = parseRequirements((JSONArray) rawAbility.get("requirements"));
 
-            abilityHashMap.put(name, AbilityFactory.build(CombatEngine.TargetMode.valueOf(targetMode), name, description, useText, effects, damage, resourceCosts));
+            abilityHashMap.put(name, AbilityFactory.build(CombatEngine.TargetMode.valueOf(targetMode), name, description, useText, effects, damage, resourceCosts/*, requirements*/));
         }
 
         return abilityHashMap;

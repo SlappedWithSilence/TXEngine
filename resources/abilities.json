@@ -55,6 +55,38 @@
       "resource_cost" : ["Stamina", 10]
     },
     {
+      "target_mode" : "SINGLE",
+      "name" : "Illusory Weapon",
+      "description" : "Change the weapon of the user",
+      "use_text" : "{CASTER} ingests a tonic and breathes mist onto {TARGET}'s weapon.",
+      "damage" : 0,
+      "effects" : [
+        {
+          "class_name" : "EquipEffect",
+          "duration"  : 1,
+          "trigger_phase" : "POST_ACTION",
+          "trigger_message" : "{TARGET}'s weapon is replaced with an Iron Scimitar",
+          "cleanup_message" : "",
+          "properties": ["16"]
+        },
+        {
+          "class_name" : "EquipEffect",
+          "duration"  : 2,
+          "trigger_phase" : "POST_ACTION",
+          "trigger_message" : "",
+          "cleanup_message" : "{TARGET}'s weapon vanishes",
+          "properties": ["17"]
+        }
+      ],
+      "requirements" : [
+        {
+          "class_name": "ItemRequirement",
+          "properties": ["16"]
+        }
+      ],
+      "resource_cost" : ["Stamina", 1]
+    },
+    {
       "target_mode" : "SELF",
       "name" : "Meditate",
       "description" : "Breathe deeply to recover Health and Mana.",
