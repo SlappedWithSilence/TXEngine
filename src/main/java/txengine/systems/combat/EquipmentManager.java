@@ -47,6 +47,10 @@ public class EquipmentManager {
     public boolean equip(int id) {
         Item i = Manager.itemHashMap.get(id);
 
+        if (i == null) {
+            LogUtils.error(id + " is not a valid Item ID!","EquipmentManager");
+            return false;
+        }
         // Verify if the equipment can actually be equipped.
         if (!(i instanceof Equipment)) {
             LogUtils.error("Thats not an equipment\n");

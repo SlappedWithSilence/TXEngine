@@ -40,7 +40,6 @@ public class SkillLoader extends Loader {
             e.printStackTrace();
             return null;
         } catch (ParseException e) {
-            LogUtils.error(file.getName() + " appears to be corrupted. Please re-download it from https://github.com/TopperMcKek/TheAlley/blob/master/thealley/resources/conversations.json\n");
             e.printStackTrace();
             return null;
         }
@@ -65,7 +64,7 @@ public class SkillLoader extends Loader {
             Skill s = new Skill(name, desc, level, xp, levelUpXP, levelRatio, levelEvents);
 
             skills.put(name, s);
-            LogUtils.error("Skill added: " + s.getName() + "\n");
+            LogUtils.info("Skill added: " + s.getName(), null);
         }
 
         return skills;

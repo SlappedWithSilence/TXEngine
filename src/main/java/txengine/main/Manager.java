@@ -61,8 +61,12 @@ public class Manager {
     public static SkillManager skillManager;
 
     // The class that handles the main menu, then launches the game.
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
+
+        // Start the main game loop
+        if (args.length > 0 && args[0].equals("-D")) {
+            debug = true;
+        }
 
         initialize();
 
@@ -77,8 +81,7 @@ public class Manager {
 
 
         // Start the main game loop
-        if (args.length > 0 && args[0].equals("-D")) {
-            debug = true;
+        if (debug) {
             initDebug();
         }
 
