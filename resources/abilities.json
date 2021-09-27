@@ -5,10 +5,15 @@
       "name" : "Inversion",
       "description" : "Converts the user's life force into raw energy, damaging the target.",
       "use_text" : "{CASTER} drains away its life forcing, hurling it at {TARGET}",
-      "damage" : 90,
+      "damage" : 20,
       "effects" : [],
-      "requirements" : [],
-      "resource_cost" : ["Health,90", "Stamina,10"]
+      "requirements" : [
+        {
+          "class_name" : "LevelRequirement",
+          "properties" : ["2"]
+        }
+      ],
+      "resource_cost" : ["Health,20", "Stamina,5"]
     },
     {
       "target_mode" : "SINGLE_HOSTILE",

@@ -1,5 +1,6 @@
 package txengine.systems.ability;
 
+import txengine.systems.integration.Requirement;
 import txengine.ui.color.Colors;
 import txengine.systems.combat.CombatEntity;
 import txengine.ui.LogUtils;
@@ -76,7 +77,9 @@ public class AbilityManager {
     }
 
     public boolean isSatisfied(Ability ability) {
-        return ability.getResourceCosts().stream().allMatch(pair -> owner.getResourceManager().testResource(pair.getKey(), pair.getValue()));
+        return ability.getResourceCosts().stream().allMatch(pair -> owner.getResourceManager().testResource(pair.getKey(), pair.getValue()))
+                &&
+                Requirement.allMet(ability.getRequirements());
     }
 
     // Pay for the resource costs in a given ability

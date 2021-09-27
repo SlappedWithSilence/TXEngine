@@ -38,7 +38,7 @@ public class Manager {
 
     private static final String ITEM_RESOURCE_FILE = "items.json";
     private static final String ROOM_RESOURCE_FILE = "rooms.json";
-    private static final String CONVERSATION_RESOURCE_FILE = "conversations.json";
+    private static final String CONVERSATION_RESOURCE_FILE = "conversations.json.old";
     private static final String PLAYER_RESOURCE_FILE = "combat_resources.json";
     private static final String ABILITY_RESOURCE_FILE = "abilities.json";
     private static final String COMBAT_ENTITY_RESOURCE_FILE = "combat_entities.json";
@@ -128,6 +128,7 @@ public class Manager {
         combatEntityHashMap.put(-1, new CombatEntity("Grunt", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), new EquipmentManager() ,2, 1, 15));
         combatEntityHashMap.put(-2, new CombatEntity("Smokey the Bear", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), new EquipmentManager(), 5, 25, 15));
 
+        player.getAbilityManager().learn("Inversion");
         player.getAbilityManager().learn("Smack");
         player.getAbilityManager().learn("Kidnap");
         player.getAbilityManager().learn("Spit");
