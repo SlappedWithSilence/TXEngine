@@ -109,7 +109,7 @@ public class Player extends CombatEntity {
 						break;
 					}
 
-					if (!abilityManager.isSatisfied(abilityManager.getAbilityList().get(abilityChoice))) System.out.println("You don't have the resources to use that ability!");
+					if (!abilityManager.isSatisfied(abilityManager.getAbilityList().get(abilityChoice))) System.out.println("You can't use that ability!");
 
 					break;
 				case 1:

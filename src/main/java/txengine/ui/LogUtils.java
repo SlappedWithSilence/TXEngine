@@ -1,5 +1,6 @@
 package txengine.ui;
 
+import txengine.main.Manager;
 import txengine.ui.color.ColorConsole;
 import txengine.ui.color.Colors;
 
@@ -7,8 +8,6 @@ import java.util.*;
 
 // A class of static functions designed to stream-line getting typical forms of user input. 
 public class LogUtils {
-
-
 
 	public final static long READING_DELAY_SECONDS = 1;
 
@@ -25,6 +24,8 @@ public class LogUtils {
 	public static void readingDelay() {
 		readingDelay(READING_DELAY_SECONDS);
 	}
+
+	/*** User Input Methods ***/
 
 	//Wait for the user to press any key
 	public static void getAnyKey() {
@@ -117,12 +118,40 @@ public class LogUtils {
 		return scan.next();
 	}
 
-	public static void error(String text) {
-		ColorConsole.e("[Error]" + text + "\n", false);
+	/*** Output Methods ***/
+
+	public static void error(String text, String source) {
+		if (!Manager.debug) return;
+		String sourceText = "";
+		Optional<String> opt = Optional.ofNullable(source);
+
+		if (opt.isPresent()) sourceText = "[" + opt.get() + "]";
+
+		ColorConsole.e("[Error]" + sourceText + " " +text + "\n", false);
 	}
 
-	public static void warn(String text) {
-		ColorConsole.i("[Warning]" + text + "\n", false);
+	public static void error(String text) {
+		error(text, null);
+	}
+
+	public static void warn(String text,  String source) {
+		if (!Manager.debug) return;
+		String sourceText = "";
+
+		Optional<String> opt = Optional.ofNullable(source);
+		if (opt.isPresent()) sourceText = "[" + opt.get() + "]";
+
+		ColorConsole.i("[Warning]" + sourceText + " " + text + "\n", false);
+	}
+
+	public static void info(String text, String source) {
+		if (!Manager.debug) return;
+		String sourceText = "";
+
+		Optional<String> opt = Optional.ofNullable(source);
+		if (opt.isPresent()) sourceText = "[" + opt.get() + "]";
+
+		ColorConsole.i("[Info]" + sourceText + " " + text + "\n", false);
 	}
 
 	public static String centerString(String s, int length) {
@@ -184,7 +213,7 @@ public class LogUtils {
 		StringBuilder sb = new StringBuilder();
 
 		if (lines1.size() != lines2.size()) {
-			LogUtils.error("Cannot combine text blocks, they have different lengths!\n");
+			LogUtils.error("Cannot combine text blocks, they have different lengths!\n", null);
 			return null;
 		}
 

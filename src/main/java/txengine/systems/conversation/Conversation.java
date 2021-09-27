@@ -2,59 +2,52 @@ package txengine.systems.conversation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class Conversation {
-    ArrayList<ConversationLayer> layers;
+    List<ConversationModule> modules;
     int id;
-    int index;
-    Iterator<ConversationLayer> layerIterator;
+    int nextModuleId;
 
     // Constructors
 
     public Conversation() {
         id = 0;
-        index = 0;
-        layers = new ArrayList<ConversationLayer>();
-        layerIterator = layers.iterator();
+        nextModuleId = 0;
+        modules = new ArrayList<>();
     }
 
-    public Conversation(int id, int index, ArrayList<ConversationLayer> layers) {
+    public Conversation(int id, List<ConversationModule> modules) {
         this.id = id;
-        this.index = index;
-        this.layers = layers;
-        layerIterator = layers.iterator();
+        this.nextModuleId = 0;
+        this.modules = modules;
     }
 
     // Methods
 
     public void converse() {
 
-      while (layerIterator.hasNext()) {
-          ConversationLayer layer = layerIterator.next();
-          index = layer.getModules()[index].perform();
-          if (index < 0) break; // End the conversation if the user has reached a branch that doesn't continue
+      while (nextModuleId > -1) {
+          nextModuleId = modules.get(nextModuleId).perform();
       }
 
-      index = 0; // Reset the index. This prevents crashes when the user tries to re-enter a conversation
-      layerIterator = layers.iterator();
     }
 
     // Getters and setters
-
-    private ConversationLayer nextLayer() {
-        return layerIterator.next();
+    public List<ConversationModule> getModules() {
+        return modules;
     }
 
-    private boolean hasNext() {
-        return layerIterator.hasNext();
+    public void setModules(List<ConversationModule> modules) {
+        this.modules = modules;
     }
 
-    public ArrayList<ConversationLayer> getLayers() {
-        return layers;
+    public int getIndex() {
+        return nextModuleId;
     }
 
-    public void setLayers(ArrayList<ConversationLayer> layers) {
-        this.layers = layers;
+    public void setIndex(int nextModuleId) {
+        this.nextModuleId = nextModuleId;
     }
 
     public int getId() {

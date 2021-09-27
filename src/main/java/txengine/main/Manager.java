@@ -25,6 +25,7 @@ import txengine.ui.LogUtils;
 
 public class Manager {
 
+    // *** Constants *** //
     private static final String LOAD_GAME_TEXT = "\nWould you like to resume from your saved game? (Y/N)\n";
 
     private static final String ITEM_RESOURCE_FILE = "items.json";
@@ -39,6 +40,7 @@ public class Manager {
     // *** Variables *** //
     private static boolean saveExists = false;
     private static boolean createNewGame = true;
+    public static boolean debug = false;
 
     public static Player player;
 
@@ -59,8 +61,12 @@ public class Manager {
     public static SkillManager skillManager;
 
     // The class that handles the main menu, then launches the game.
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
+
+        // Start the main game loop
+        if (args.length > 0 && args[0].equals("-D")) {
+            debug = true;
+        }
 
         initialize();
 
@@ -72,20 +78,18 @@ public class Manager {
             Load.initializeNewGame();   // Set up a new game
         }
 
-        initDebug();
+
 
         // Start the main game loop
-        if (args.length > 0 && args[0].equals("-D")) return; //TODO: Remove debugging break
+        if (debug) {
+            initDebug();
+        }
 
         RoomManager.roomLoop();
 
     }
 
     // **** Prompt functions ****
-    private static void intro() {
-        //System.out.print(INTRO_TEXT);
-
-    }
 
     // Prompts the user if they want to resume their saved game
     private static void promptLoadGame() {
@@ -114,6 +118,22 @@ public class Manager {
     }
 
     private static void initDebug() {
+        if (combatEntityHashMap == null) combatEntityHashMap = new HashMap<>();
+
+        combatEntityHashMap.put(-1, new CombatEntity("Grunt", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), new EquipmentManager() ,2, 1, 15));
+        combatEntityHashMap.put(-2, new CombatEntity("Smokey the Bear", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), new EquipmentManager(), 5, 25, 15));
+
+        player.getAbilityManager().learn("Inversion");
+        player.getAbilityManager().learn("Smack");
+        player.getAbilityManager().learn("Kidnap");
+        player.getAbilityManager().learn("Spit");
+        player.getAbilityManager().learn("Bomb-Threat");
+        player.getAbilityManager().learn("Blast");
+
+        for (Recipe r : recipeHashMap.values()) player.getRecipeManager().learn(r);
+
+        player.getInventory().addItem(16);
+        player.getInventory().addItem(17);
     }
 
 }
