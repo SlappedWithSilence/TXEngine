@@ -26,14 +26,6 @@ import txengine.ui.LogUtils;
 public class Manager {
 
     // *** Constants *** //
-    private static final String INTRO_TEXT =
-                                        "\t********************************************\n" +
-                                        "\t*****            " + Colors.PURPLE_UNDERLINED + "The Alley" + Colors.RESET + "             *****\n" +
-                                        "\t********************************************\n" +
-                                        "\n\nWelcome to The Alley. This is a fantasy text-based game. All features and functions of this game " +
-                                        "and its story are\noriginal and fictional. Please do not modify or re-host this software without "   +
-                                        "asking first.\n";
-
     private static final String LOAD_GAME_TEXT = "\nWould you like to resume from your saved game? (Y/N)\n";
 
     private static final String ITEM_RESOURCE_FILE = "items.json";
@@ -48,6 +40,7 @@ public class Manager {
     // *** Variables *** //
     private static boolean saveExists = false;
     private static boolean createNewGame = true;
+    public static boolean debug = false;
 
     public static Player player;
 
@@ -81,20 +74,19 @@ public class Manager {
             Load.initializeNewGame();   // Set up a new game
         }
 
-        initDebug();
+
 
         // Start the main game loop
-        if (args.length > 0 && args[0].equals("-D")) return; //TODO: Remove debugging break
+        if (args.length > 0 && args[0].equals("-D")) {
+            debug = true;
+            initDebug();
+        }
 
         RoomManager.roomLoop();
 
     }
 
     // **** Prompt functions ****
-    private static void intro() {
-        //System.out.print(INTRO_TEXT);
-        ColorConsole.d(INTRO_TEXT, false);
-    }
 
     // Prompts the user if they want to resume their saved game
     private static void promptLoadGame() {
