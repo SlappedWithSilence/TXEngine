@@ -1,79 +1,81 @@
 {
-  "conversations" : [
-    {
-      "id": 0,
-      "layers" : [
-        {
-          "__comment__": " This is the first layer. It contains one module with two options.",
-          "modules": [
-            {
-              "__comment__" : "this is the default module of the top layer (the first module of the first layer)",
-              "npcText" : "The guard turns to you and barks \"What is it, scum?\"",
-              "options" : ["I think you've got the wrong guy.", "Do you think its a good idea to lock me up?"],
-              "events"  : [
-                [],
-                []
-              ],
-              "targets" : [0,1]
-            }
-          ]
-        },
-        {
-          "__comment__" : "This is the second layer. It contains two modules.",
-          "modules" : [
-            {
-              "__comment__" : "This is module 0. It contains one option.",
-              "npcText" : "With a raised eyebrow, the guard replies \"No, I think we got the exact guy we wanted to get. You're here because you deserve it\".",
-              "options" :["You are but a lowly guard, watching over us filth--you must be here because you deserve it too. What, never able to make it to captain?"],
-              "events"  :
-              [
-                []
-              ],
-              "targets" : [0]
-            },
-            {
-              "__comment__" : "This is module 1. It contains one option.",
-              "npcText" : "The, now facing away from you, tends to a nearby torch. \"Yes. Yes I do, that's why I you're here, locked up\".",
-              "options" :["*spit at the guard*"],
-              "events"  :
-              [
-                []
-              ],
-              "targets" : [0]
-            }
-          ]
-        },
-        {
-          "__comment__" : "This is the third layer. It contains one module.",
-          "modules" :
-          [
-            {
-              "__comment__" : "This is the first module.",
-              "npcText" : "The guard's back stiffens, his face reddened with rage. \"It seems you have yet to learn your manners, filth. Today, I will be your teacher!\"\nSpinning around to face you, the guard grabs your worn-out shirt and pulls you into the bars of the cell door, slamming your head into them.\nThe collision turns your vision white. For a brief second, you see cities engulfed in flame, dark silhouettes trapped beneath rubble, and all manner of creatures, intelligent and animal alike, dying of illness.\nThese are not your memories, and you know not of the people you saw in this vision.\nSuddenly, knowledge beyond your being floods your mind.",
 
-              "options" :["*Break free*"],
-              "events"  :
+
+  "conversations" :
+  [
+    {
+      "__comment__" : "first conversations",
+      "id" : 0,
+      "modules" :
               [
-                [
-                  {
-                    "class_name" : "FlagEvent",
-                    "properties" : ["ch0_anger_guard","true"]
-                  },
-                  {
-                    "class_name" : "AbilityEvent",
-                    "properties" : ["Sear"]
-                  },
-                  {
-                    "class_name" : "AbilityEvent",
-                    "properties" : ["Shock"]
-                  }
-                ]
-              ],
-              "targets" : [-1]
-            }
-          ]
-        }
-      ]
+                {
+                  "id" : 0,
+                  "npc_text" : "The guard turns to you and barks \"What is it, scum?\"",
+                  "options" :
+                          [
+                            {
+                              "menu_text" :  "I think you've got the wrong guy.",
+                              "events" : [],
+                              "target" : 1
+                            },
+                            {
+                              "menu_text" :  "Do you think its a good idea to lock me up?",
+                              "events" : [],
+                              "target" : 2
+                            }
+                          ]
+                },
+                {
+                  "id" : 1,
+                  "npc_text" : "With a raised eyebrow, the guard replies \"No, I think we got the exact guy we wanted to get. You're here because you deserve it\".",
+                  "options" :
+                          [
+                            {
+                              "menu_text" : "You are but a lowly guard, watching over us filth--you must be here because you deserve it too. What, never able to make it to captain?",
+                              "events" : [],
+                              "target" : 3
+                            }
+                          ]
+                },
+                {
+                  "id" : 2,
+                  "npc_text" : "The guard, now facing away from you, tends to a nearby torch. \"Yes. Yes I do, that's why you're here, locked up\".",
+                  "options" :
+                          [
+                            {
+                              "menu_text": "*spit at the guard*",
+                              "events" : [],
+                              "target" : 3
+                            }
+                          ]
+                },
+                {
+                  "id" : 3,
+                  "npc_text" : "The guard's back stiffens, his face reddened with rage. \"It seems you have yet to learn your manners, filth. Today, I will be your teacher!\"\nSpinning around to face you, the guard grabs your worn-out shirt and pulls you into the bars of the cell door, slamming your head into them.\nThe collision turns your vision white. For a brief second, you see cities engulfed in flame, dark silhouettes trapped beneath rubble, and all manner of creatures, intelligent and animal alike, dying of illness.\nThese are not your memories, and you know not of the people you saw in this vision.\nSuddenly, knowledge beyond your being floods your mind.",
+                  "options" :
+                  [
+                    {
+                      "menu_text" : "*Break free*",
+                      "events" :
+                      [
+                        {
+                          "class_name" : "FlagEvent",
+                          "properties" : ["ch0_anger_guard","true"]
+                        },
+                        {
+                          "class_name" : "AbilityEvent",
+                          "properties" : ["Sear"]
+                        },
+                        {
+                          "class_name" : "AbilityEvent",
+                          "properties" : ["Shock"]
+                        }
+                      ],
+                      "target" : -1
+                    }
+                  ]
+                }
+              ]
     }
   ]
 }

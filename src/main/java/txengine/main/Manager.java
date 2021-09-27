@@ -119,21 +119,6 @@ public class Manager {
 
     private static void initDebug() {
         if (combatEntityHashMap == null) combatEntityHashMap = new HashMap<>();
-
-        combatEntityHashMap.put(-1, new CombatEntity("Grunt", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), new EquipmentManager() ,2, 1, 15));
-        combatEntityHashMap.put(-2, new CombatEntity("Smokey the Bear", "", "",10,  new Inventory(), new AbilityManager(), new CombatResourceManager(), new EquipmentManager(), 5, 25, 15));
-
-        player.getAbilityManager().learn("Inversion");
-        player.getAbilityManager().learn("Smack");
-        player.getAbilityManager().learn("Kidnap");
-        player.getAbilityManager().learn("Spit");
-        player.getAbilityManager().learn("Bomb-Threat");
-        player.getAbilityManager().learn("Blast");
-
-        for (Recipe r : recipeHashMap.values()) player.getRecipeManager().learn(r);
-
-        player.getInventory().addItem(16);
-        player.getInventory().addItem(17);
     }
 
 }
