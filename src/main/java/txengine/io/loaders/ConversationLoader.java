@@ -1,5 +1,6 @@
 package txengine.io.loaders;
 
+import txengine.io.Load;
 import txengine.io.LoadUtils;
 import txengine.io.Loader;
 import txengine.systems.conversation.*;
@@ -57,32 +58,21 @@ public class ConversationLoader extends Loader {
 
             int id = LoadUtils.asInt(rawConversation, "id");
 
-            List<ConversationLayer> layers = new ArrayList<>();
+            List<ConversationModule> modules = new ArrayList<>();
 
-            for (Object obj2 : (JSONArray) rawConversation.get("layers")) {
-                JSONObject rawLayer = (JSONObject) obj2;
-                layers.add(parseLayer(rawLayer));
+            for (Object obj2 : (JSONArray) rawConversation.get("modules")) {
+                JSONObject rawModule = (JSONObject) obj2;
+                modules.add(parseModule(rawModule));
             }
 
-            conversationList.put(id, new Conversation(id, layers));
+            conversationList.put(id, new Conversation(id, modules));
         }
 
         return conversationList;
     }
 
-    private ConversationLayer parseLayer(JSONObject rawLayer) {
-        List<ConversationModule> modules = new ArrayList<>();
-
-        for (Object obj : (JSONArray) rawLayer.get("modules")) {
-            JSONObject rawModule = (JSONObject) obj;
-
-            modules.add(parseModule(rawModule));
-        }
-
-        return new ConversationLayer(modules.toArray(new ConversationModule[0]));
-    }
-
     private ConversationModule parseModule(JSONObject rawModule) {
+        int id = LoadUtils.asInt(rawModule, "id");
         String npcText = LoadUtils.asString(rawModule, "npc_text");
         int width = ((JSONArray) rawModule.get("options")).size();
         String[] options = new String[width];
@@ -97,6 +87,6 @@ public class ConversationLoader extends Loader {
             targets[i] = LoadUtils.asInt(rawOption, "target");
         }
 
-        return new ConversationModule(npcText, options, events, targets);
+        return new ConversationModule(id, npcText, options, events, targets);
     }
 }
