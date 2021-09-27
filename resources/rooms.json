@@ -119,6 +119,86 @@
           "unlocked_index" : -1
         }
       ]
+    },
+    {
+      "name"        : "Hallway",
+      "id"          : 1,
+      "text"        : "You push against the heavy wooden door. It groans against your weight, slowly opening.\nYou emerge into a long hallway, dotted irregularly with bar-covered windows. Its surprisingly, these windows contain glass. Whoever owns this prison must be wealthy.",
+      "onFirstEnterActions" : [],
+      "actions"  :
+      [
+        {
+          "class_name"   : "InventoryAction",
+          "menu_name"    : "Check your inventory",
+          "text"        : "You decide to check the contents of your pack.",
+          "hidden"     : false,
+          "hide_after_use" : false,
+          "properties"  : [],
+          "requirements" : [],
+          "unlocked_index" : -1
+        },
+        {
+          "class_name" : "SummaryAction",
+          "menu_name"  : "Check yo-self",
+          "text"      : "",
+          "hidden"   : false,
+          "hide_after_use" : false,
+          "properties" : [],
+          "requirements" : [],
+          "unlocked_index" : -1
+        },
+        {
+          "class_name" : "AbilitySummaryAction",
+          "menu_name"  : "Inspect Abilities",
+          "text"      : "",
+          "hidden"   : false,
+          "hide_after_use" : false,
+          "properties" : [],
+          "requirements" : [],
+          "unlocked_index" : -1
+        },
+        {
+          "class_name" : "EquipmentAction",
+          "menu_name"  : "Manage your equipment",
+          "text"      : "",
+          "hidden"   : false,
+          "hide_after_use" : false,
+          "properties" : [""],
+          "requirements" : [],
+          "unlocked_index" : -1
+        },
+        {
+          "class_name" : "SkillSummaryAction",
+          "menu_name"  : "View Skills",
+          "text"      : "",
+          "hidden"   : false,
+          "hide_after_use" : false,
+          "properties" : [""],
+          "requirements" : [],
+          "unlocked_index" : -1
+        },
+        {
+          "class_name" : "DialogAction",
+          "menu_name"  : "Approach the window",
+          "text"      : "You approach the nearest window. From outside the dusty and smudged glass you see a waning sun washing over a golden forest. Shining towers stab into the sky, dotting the skyline.\n\"This is not home\" you mutter to yourself. \"Is this the Kingdom of the Frei? No, I had a human guard, it can't be.",
+          "hidden"   : false,
+          "hide_after_use" : false,
+          "properties" : [""],
+          "requirements" : [],
+          "unlocked_index" : 6
+        },
+        {
+          "class_name" : "DialogAction",
+          "menu_name"  : "Search for a way out",
+          "text"      : "You turn towards the opposite end of the hallway. The windows to your right will not yeild, and you are too high off the ground to jump safely.",
+          "hidden"   : true,
+          "hide_after_use" : false,
+          "properties" : [""],
+          "requirements" : [],
+          "unlocked_index" : -1
+        }
+      ]
+
     }
   ]
 }
