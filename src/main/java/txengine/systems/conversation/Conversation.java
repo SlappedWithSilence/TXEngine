@@ -2,9 +2,10 @@ package txengine.systems.conversation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class Conversation {
-    ArrayList<ConversationLayer> layers;
+    List<ConversationLayer> layers;
     int id;
     int index;
     Iterator<ConversationLayer> layerIterator;
@@ -18,9 +19,9 @@ public class Conversation {
         layerIterator = layers.iterator();
     }
 
-    public Conversation(int id, int index, ArrayList<ConversationLayer> layers) {
+    public Conversation(int id, List<ConversationLayer> layers) {
         this.id = id;
-        this.index = index;
+        this.index = 0;
         this.layers = layers;
         layerIterator = layers.iterator();
     }
@@ -49,7 +50,7 @@ public class Conversation {
         return layerIterator.hasNext();
     }
 
-    public ArrayList<ConversationLayer> getLayers() {
+    public List<ConversationLayer> getLayers() {
         return layers;
     }
 

@@ -38,7 +38,7 @@ public class Manager {
 
     private static final String ITEM_RESOURCE_FILE = "items.json";
     private static final String ROOM_RESOURCE_FILE = "rooms.json";
-    private static final String CONVERSATION_RESOURCE_FILE = "conversations.json.old";
+    private static final String CONVERSATION_RESOURCE_FILE = "conversations.json";
     private static final String PLAYER_RESOURCE_FILE = "combat_resources.json";
     private static final String ABILITY_RESOURCE_FILE = "abilities.json";
     private static final String COMBAT_ENTITY_RESOURCE_FILE = "combat_entities.json";

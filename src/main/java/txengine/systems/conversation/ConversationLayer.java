@@ -11,11 +11,11 @@ public class ConversationLayer {
 
     }
 
-    /* Member methods */
     public ConversationLayer(ConversationModule[] modules) {
         this.modules = modules;
     }
 
+    /* Member methods */
     public ConversationModule[] getModules() {
         return modules;
     }
