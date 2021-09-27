@@ -1,5 +1,6 @@
 package txengine.systems.room.action.actions;
 
+import txengine.systems.integration.Requirement;
 import txengine.ui.component.Components;
 import txengine.ui.LogUtils;
 import txengine.main.Manager;
@@ -29,6 +30,8 @@ public class AbilitySummaryAction extends Action {
             System.out.println(Manager.player.getAbilityManager().getAbilityList().get(userChoice).getDescription()); // Print Ability desc
             System.out.println("Damage: " + Manager.player.getAbilityManager().getAbilityList().get(userChoice).getDamage());
             System.out.println("Resource Costs: " + Manager.player.getAbilityManager().resourceCostsAsString(Manager.player.getAbilityManager().getAbilityList().get(userChoice))); // Print ability costs
+            System.out.println("Requirements: ");
+            for (String s : Requirement.asStrings(Manager.player.getAbilityManager().getAbilityList().get(userChoice).getRequirements())) System.out.println(s);
 
             Components.bar();
             System.out.println();

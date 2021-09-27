@@ -39,7 +39,7 @@ public class EquipmentManager {
     public List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> getAllEffects() {
         List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects = new ArrayList<>();
 
-        equipmentMap.values().stream().filter(Objects::nonNull).forEach(equipmentID -> effects.addAll(new Equipment((Equipment) Manager.itemHashMap.get(equipmentID)).getPreCombatEffects()));
+        equipmentMap.values().stream().filter(Objects::nonNull).filter(i -> i > 0).forEach(equipmentID -> effects.addAll(new Equipment((Equipment) Manager.itemHashMap.get(equipmentID)).getPreCombatEffects()));
 
         return effects;
     }
@@ -80,19 +80,19 @@ public class EquipmentManager {
 
     // Returns the sum of all damage buffs
     public int getDamageBuff() {
-        return equipmentMap.values().stream().filter(Objects::nonNull).reduce(0, (subtotal, e) -> subtotal + ((Equipment) Manager.itemHashMap.get(e)).getDamageBuff() , Integer::sum);
+        return equipmentMap.values().stream().filter(i -> (i != null && i != -1)).reduce(0, (subtotal, e) -> subtotal + ((Equipment) Manager.itemHashMap.get(e)).getDamageBuff() , Integer::sum);
     }
 
     // Returns the sum of all damage resistance
     public int getDamageResistance() {
-        return equipmentMap.values().stream().filter(Objects::nonNull).filter(integer -> integer != -1).reduce(0, (subtotal, e) -> subtotal + ((Equipment) Manager.itemHashMap.get(e)).getDamageResistance() , Integer::sum);
+        return equipmentMap.values().stream().filter( i -> (i != null && i != -1)).reduce(0, (subtotal, e) -> subtotal + ((Equipment) Manager.itemHashMap.get(e)).getDamageResistance() , Integer::sum);
     }
 
     /* Helper Methods */
 
     private void initialize() {
         equipmentMap = new HashMap<>();
-        Arrays.stream(Equipment.EquipmentType.values()).forEach(equipmentType -> equipmentMap.put(equipmentType, null));
+        Arrays.stream(Equipment.EquipmentType.values()).forEach(equipmentType -> equipmentMap.put(equipmentType, -1));
     }
 
     /* Accessor Methods */
