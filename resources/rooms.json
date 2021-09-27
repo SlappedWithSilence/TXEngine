@@ -58,13 +58,23 @@
         },
         {
           "class_name" : "DialogueAction",
+          "menu_name"  : "Look around",
+          "text"      : "",
+          "hidden"   : false,
+          "hide_after_use" : false,
+          "properties" : ["You look down. Your clothes are heavily worn, likely to fall apart at any moment. Your tunic is more loose-string than cloth. The cold stone floor easily saps the warmth from your legs through your burlap trousers. \nEnclosed on all four sides, the only light in the cell trickles in weakly from the between the bars of the sealed iron door."],
+          "requirements" : [],
+          "unlocked_index" : -1
+        },
+        {
+          "class_name" : "DialogueAction",
           "menu_name"  : "Listen closely",
           "text"      : "",
           "hidden"   : false,
           "hide_after_use" : true,
           "properties" : ["Remaining on the cold stone floor, you listen closer to the sound of the footsteps. They sound heavy and pronounced, even on the damp and dirt-spewn stone.\nThe footsteps reach your cell door, and from beyond the bars you see the unmistakable silhouette of a human guard."],
           "requirements" : [],
-          "unlocked_index" : 6
+          "unlocked_index" : 7
         },
         {
           "class_name" : "ConversationAction",
@@ -74,7 +84,7 @@
           "hide_after_use" : true,
           "properties" : ["0"],
           "requirements" : [],
-          "unlocked_index" : 7
+          "unlocked_index" : 8
         },
         {
           "class_name" : "CombatAction",
@@ -85,6 +95,21 @@
           "properties" : ["{FRIENDLY}",
                           "{HOSTILE}", "1",
                           "{LOOT}", "1,1", "4,2","18,1","19,1","20,1"],
+          "requirements" : [
+            {
+              "class_name" : "FlagRequirement",
+              "properties": ["ch0_anger_guard"]
+            }
+          ],
+          "unlocked_index" : 9
+        },
+        {
+          "class_name" : "MoveAction",
+          "menu_name"  : "Escape from your jail cell",
+          "text"      : "You retrieve the keys to your cell from the now-fallen guard. The heavy iron door to your cell swings open, shedding rust as you push it. The guard's clothing was damaged during the fight, but it is far superior to what you are wearing now.\nYou peek your head out from your cell and see no one. The sound of your fight should have gotten someone's attention, but for now the coast seems clear.\nYou duck out into the dim corridor and hurry towards a wooden door in the distance, keeping your head low as you move.",
+          "hidden"   : true,
+          "hide_after_use" : false,
+          "properties" : ["2"],
           "requirements" : [
             {
               "class_name" : "FlagRequirement",

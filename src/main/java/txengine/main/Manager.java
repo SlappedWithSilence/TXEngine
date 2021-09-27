@@ -118,7 +118,7 @@ public class Manager {
     }
 
     private static void initDebug() {
-        if (combatEntityHashMap == null) combatEntityHashMap = new HashMap<>();
+
     }
 
 }
