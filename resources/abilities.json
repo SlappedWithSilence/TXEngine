@@ -70,7 +70,7 @@
           "trigger_phase" : "POST_ACTION",
           "trigger_message" : "",
           "cleanup_message" : "{TARGET}'s weapon vanishes",
-          "properties": ["0", "WEAPON"]
+          "properties": ["17", "WEAPON"]
         }
       ],
       "requirements" : [
