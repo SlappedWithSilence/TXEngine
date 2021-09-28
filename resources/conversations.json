@@ -1,4 +1,131 @@
 {
   "conversations": [
+    {
+      "__comment__" : "This is the first conversation",
+      "id" : 0,
+      "modules" :
+      [
+        {
+          "__comment__" : "This is the default module",
+          "id" : 0,
+          "npc_text" : "Hello. Welcome to my conversation.",
+          "options" :
+          [
+            {
+              "__comment__" : "This is the first option.",
+              "menu_text" : "I'd like an item.",
+              "events" :
+                      [
+                        {
+                          "class_name" : "ItemEvent",
+                          "properties" : ["1", "1"]
+                        }
+                      ],
+              "target" : 1
+            },
+            {
+              "__comment__" : "This is the second option.",
+              "menu_text" : "I'd like money.",
+              "events" :
+              [
+                {
+                  "class_name" : "MoneyEvent",
+                  "properties" : ["100"]
+                }
+              ],
+              "target" : 1
+            }
+          ]
+        },
+        {
+          "__comment__" : "This is the second module",
+          "id" : 1,
+          "npc_text" : "Ok, sure thing. Anything else?",
+          "options" :
+          [
+            {
+              "__comment__" : "This is the first option.",
+              "menu_text" : "I'd like another item.",
+              "events" :
+              [
+                {
+                  "class_name" : "ItemEvent",
+                  "properties" : ["4", "2"]
+                }
+              ],
+              "target" : -1
+            },
+            {
+              "__comment__" : "This is the second option.",
+              "menu_text" : "I'd like more money..",
+              "events" :
+              [
+                {
+                  "class_name" : "MoneyEvent",
+                  "properties" : ["100"]
+                }
+              ],
+              "target" : 1
+            },
+            {
+              "__comment__" : "This is the second option.",
+              "menu_text" : "Actually, yeah.",
+              "events" :
+              [
+              ],
+              "target" : 2
+            },
+            {
+              "__comment__" : "This is the third option.",
+              "menu_text" : "I'm good.",
+              "events" :
+              [
+              ],
+              "target" : -1
+            }
+          ]
+        },
+        {
+          "__comment__" : "This is the third module",
+          "id" : 2,
+          "npc_text" : "Yeah, fine.",
+          "options" :
+          [
+            {
+              "__comment__" : "This is the first option.",
+              "menu_text" : "I'd to set a flag",
+              "events" :
+              [
+                {
+                  "class_name" : "FlagEvent",
+                  "properties" : ["CONVERSATION_FLAG_0", "true"]
+                }
+              ],
+              "target" : -1
+            },
+            {
+              "__comment__" : "This is the second option.",
+              "menu_text" : "I'd like to learn a new Ability.",
+              "events" :
+              [
+                {
+                  "class_name" : "AbilityEvent",
+                  "properties" : ["Rock Shot"]
+                }
+              ],
+              "target" : -1
+            },
+            {
+              "__comment__" : "This is the second option.",
+              "menu_text" : "Go back to the start.",
+              "events" :
+              [
+              ],
+              "target" : 0
+            }
+          ]
+        }
+      ]
+    }
   ]
 }
