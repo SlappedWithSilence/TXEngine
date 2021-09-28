@@ -1,5 +1,7 @@
 package txengine.io.loaders;
 
+import txengine.io.Load;
+import txengine.io.LoadUtils;
 import txengine.io.Loader;
 import txengine.systems.conversation.*;
 import org.json.simple.JSONArray;
@@ -17,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 public class ConversationLoader extends Loader {
 
@@ -28,10 +31,10 @@ public class ConversationLoader extends Loader {
         // Read the JSON storage file
         JSONParser parser = new JSONParser();
 
-        JSONObject obj;
+        JSONObject root;
 
         try {
-            obj = (JSONObject) parser.parse(new FileReader(file));
+            root = (JSONObject) parser.parse(new FileReader(file));
         } catch (FileNotFoundException e) {
             LogUtils.error("Attempted to load from file: " + file.getAbsolutePath());
             e.printStackTrace();
@@ -46,98 +49,44 @@ public class ConversationLoader extends Loader {
         }
 
 
+        // Get the JSON array that contains all the conversations
+        JSONArray rawConversations = (JSONArray) root.get("conversations");
 
-        // Get the JSON array that contains all the items
-        JSONArray items = (JSONArray) obj.get("conversations");
-        Iterator<JSONObject> iterator = items.iterator(); // Create an iterator over the list of items
+        // Iterate through each conversation
+        for (Object obj : rawConversations) {
+            JSONObject rawConversation = (JSONObject) obj;
 
-        // Loop through the conversation JSON objects
-        while (iterator.hasNext()) {
-            Conversation conversation;
+            int id = LoadUtils.asInt(rawConversation, "id");
 
-            JSONObject rawConversation = iterator.next();
-            Integer id = ((Long) rawConversation.get("id")).intValue();
+            List<ConversationModule> modules = new ArrayList<>();
 
-            JSONArray rawLayerArray = (JSONArray) rawConversation.get("layers");
-
-            Iterator<JSONObject> rawLayerIterator = rawLayerArray.iterator();
-
-            ArrayList<ConversationLayer> layers = new ArrayList<>();
-            while (rawLayerIterator.hasNext()) {
-                ArrayList<ConversationLayer> conversationLayers = new ArrayList<>();
-
-                JSONObject rawLayer = rawLayerIterator.next();
-                JSONArray rawModulesArray = (JSONArray) rawLayer.get("modules");
-
-                Iterator<JSONObject> modulesIterator = rawModulesArray.iterator();
-
-                ConversationLayer layer;
-                ConversationModule[] modules = new ConversationModule[rawModulesArray.size()];
-                for (int i = 0; i < rawModulesArray.size(); i++) {
-
-                    JSONObject rawModule = (JSONObject) rawModulesArray.get(i);
-                    String npcText = (String) rawModule.get("npcText");
-                    String[] options = getStringArray((JSONArray) rawModule.get("options"));
-                    Event[][] events = getEvents((JSONArray) rawModule.get("events"));
-                    Integer[] targets = getIntArray((JSONArray) rawModule.get("targets"));
-
-                    ConversationModule module = new ConversationModule(npcText, options, events, targets);
-                    modules[i] = module;
-                }
-
-                layer = new ConversationLayer(modules);
-                layers.add(layer);
+            for (Object obj2 : (JSONArray) rawConversation.get("modules")) {
+                JSONObject rawModule = (JSONObject) obj2;
+                modules.add(parseModule(rawModule));
             }
-            conversation = new Conversation(id, 0, layers);
-            conversationList.put(id, conversation);
+
+            conversationList.put(id, new Conversation(id, modules));
         }
 
         return conversationList;
     }
 
-    private static Event[][] getEvents(JSONArray JSONActions) {
-        Event[][] events = new Event[JSONActions.size()][];
+    private ConversationModule parseModule(JSONObject rawModule) {
+        int id = LoadUtils.asInt(rawModule, "id");
+        String npcText = LoadUtils.asString(rawModule, "npc_text");
+        int width = ((JSONArray) rawModule.get("options")).size();
+        String[] options = new String[width];
+        Event[][] events = new Event[width][];
+        Integer[] targets = new Integer[width];
 
-        for (int i = 0; i < JSONActions.size(); i++) {
-        //for (JSONArray jsonAction : (Iterable<JSONArray>) JSONActions) { //  Get the array of events and iterate through it
-            Event[] eventArray = new Event[((JSONArray) JSONActions.get(i)).size()];
-
-            for (int j = 0; j < ((JSONArray) JSONActions.get(i)).size(); j++) {
-            //for (JSONObject rawEvent : (Iterable<JSONObject>) JSONActions[i]) { // Iterate through the JSON objects of Event Objects
-                JSONObject rawEvent =  (JSONObject) ((JSONArray) JSONActions.get(i)).get(j);
-
-                String className = (String) rawEvent.get("class_name");
-                JSONArray rawProperties = (JSONArray) rawEvent.get("properties");
-                String[] properties = getStringArray(rawProperties);
-
-                Event e = EventFactory.build(className, properties);
-                eventArray[j] = e;
-            }
-
-            events[i] = eventArray;
-
+        for (int i = 0; i < width; i++) {
+            JSONObject rawOption = (JSONObject) ((JSONArray) rawModule.get("options")).get(i);
+            options[i] = LoadUtils.asString(rawOption, "menu_text");
+            events[i] = new Event[((JSONArray) rawOption.get("events")).size()];
+            events[i] = LoadUtils.parseEvents((JSONArray) rawOption.get("events")).toArray(new Event[0]);
+            targets[i] = LoadUtils.asInt(rawOption, "target");
         }
 
-        return events;
-    }
-
-    private static String[] getStringArray(JSONArray stringArray) {
-        String[] array = new String[stringArray.size()];
-
-        for (int i = 0; i < stringArray.size(); i++) {
-            array[i] = (String) stringArray.get(i);
-        }
-
-        return array;
-    }
-
-    private static Integer[] getIntArray(JSONArray IntArray) {
-        Integer[] array = new Integer[IntArray.size()];
-
-        for (int i = 0; i < IntArray.size(); i++) {
-            array[i] = ((Long) IntArray.get(i)).intValue();
-        }
-
-        return array;
+        return new ConversationModule(id, npcText, options, events, targets);
     }
 }

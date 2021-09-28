@@ -1,5 +1,6 @@
 package txengine.ui;
 
+import txengine.main.Manager;
 import txengine.ui.color.ColorConsole;
 import txengine.ui.color.Colors;
 
@@ -120,6 +121,7 @@ public class LogUtils {
 	/*** Output Methods ***/
 
 	public static void error(String text, String source) {
+		if (!Manager.debug) return;
 		String sourceText = "";
 		Optional<String> opt = Optional.ofNullable(source);
 
@@ -133,6 +135,7 @@ public class LogUtils {
 	}
 
 	public static void warn(String text,  String source) {
+		if (!Manager.debug) return;
 		String sourceText = "";
 
 		Optional<String> opt = Optional.ofNullable(source);
@@ -142,6 +145,7 @@ public class LogUtils {
 	}
 
 	public static void info(String text, String source) {
+		if (!Manager.debug) return;
 		String sourceText = "";
 
 		Optional<String> opt = Optional.ofNullable(source);

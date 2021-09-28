@@ -26,19 +26,11 @@ import txengine.ui.LogUtils;
 public class Manager {
 
     // *** Constants *** //
-    private static final String INTRO_TEXT =
-                                        "\t********************************************\n" +
-                                        "\t*****            " + Colors.PURPLE_UNDERLINED + "The Alley" + Colors.RESET + "             *****\n" +
-                                        "\t********************************************\n" +
-                                        "\n\nWelcome to The Alley. This is a fantasy text-based game. All features and functions of this game " +
-                                        "and its story are\noriginal and fictional. Please do not modify or re-host this software without "   +
-                                        "asking first.\n";
-
     private static final String LOAD_GAME_TEXT = "\nWould you like to resume from your saved game? (Y/N)\n";
 
     private static final String ITEM_RESOURCE_FILE = "items.json";
     private static final String ROOM_RESOURCE_FILE = "rooms.json";
-    private static final String CONVERSATION_RESOURCE_FILE = "conversations.json.old";
+    private static final String CONVERSATION_RESOURCE_FILE = "conversations.json";
     private static final String PLAYER_RESOURCE_FILE = "combat_resources.json";
     private static final String ABILITY_RESOURCE_FILE = "abilities.json";
     private static final String COMBAT_ENTITY_RESOURCE_FILE = "combat_entities.json";
@@ -48,6 +40,7 @@ public class Manager {
     // *** Variables *** //
     private static boolean saveExists = false;
     private static boolean createNewGame = true;
+    public static boolean debug = false;
 
     public static Player player;
 
@@ -68,8 +61,12 @@ public class Manager {
     public static SkillManager skillManager;
 
     // The class that handles the main menu, then launches the game.
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
+
+        // Start the main game loop
+        if (args.length > 0 && args[0].equals("-D")) {
+            debug = true;
+        }
 
         initialize();
 
@@ -81,20 +78,18 @@ public class Manager {
             Load.initializeNewGame();   // Set up a new game
         }
 
-        initDebug();
+
 
         // Start the main game loop
-        if (args.length > 0 && args[0].equals("-D")) return; //TODO: Remove debugging break
+        if (debug) {
+            initDebug();
+        }
 
         RoomManager.roomLoop();
 
     }
 
     // **** Prompt functions ****
-    private static void intro() {
-        //System.out.print(INTRO_TEXT);
-        ColorConsole.d(INTRO_TEXT, false);
-    }
 
     // Prompts the user if they want to resume their saved game
     private static void promptLoadGame() {
