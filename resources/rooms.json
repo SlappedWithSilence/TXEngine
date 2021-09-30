@@ -62,7 +62,7 @@
           "text"      : "",
           "hidden"   : false,
           "hide_after_use" : false,
-          "properties" : ["You look down. Your clothes are heavily worn, likely to fall apart at any moment. Your tunic is more loose-string than cloth. The cold stone floor easily saps the warmth from your legs through your burlap trousers. \nEnclosed on all four sides, the only light in the cell trickles in weakly from the between the bars of the sealed iron door."],
+          "properties" : ["You look down. Your clothes are heavily worn, likely to fall apart at any moment. Your tunic is more loose-string than cloth. The cold stone floor easily saps the warmth from your legs through your burlap trousers. \nEnclosed on all four sides by solemn brick walls, the only light in the cell trickles in weakly from the between the bars of the sealed iron door in front of you.\nScars run along your torso, stretching and winding down from your neck to your hips like the aching branches of Yggdrasil.\n\"These are new\" you murmur to yourself. As to how exactly you could acquire such a collection of scars without knowing of their cause is beyond you, but you hardly have the clarity of mind to ponder further."],
           "requirements" : [],
           "unlocked_index" : -1
         },
@@ -106,7 +106,7 @@
         {
           "class_name" : "MoveAction",
           "menu_name"  : "Escape from your jail cell",
-          "text"      : "You retrieve the keys to your cell from the now-fallen guard. The heavy iron door to your cell swings open, shedding rust as you push it. The guard's clothing was damaged during the fight, but it is far superior to what you are wearing now.\nYou peek your head out from your cell and see no one. The sound of your fight should have gotten someone's attention, but for now the coast seems clear.\nYou duck out into the dim corridor and hurry towards a wooden door in the distance, keeping your head low as you move.",
+          "text"      : "You retrieve the keys to your cell from the now-fallen guard. The heavy iron door to your cell swings open, shedding rust from its burdened hinges as you push against it. The guard's clothing was damaged during the fight, but it is far superior to what you are wearing now.\nYou peek your head out from your cell and see no one. The sound of your fight should have gotten someone's attention, but for now the coast seems clear.\nYou duck out into the dim corridor and hurry towards a wooden door in the distance, keeping your head low as you move.",
           "hidden"   : true,
           "hide_after_use" : false,
           "properties" : ["2"],
@@ -123,7 +123,7 @@
     {
       "name"        : "Hallway",
       "id"          : 2,
-      "text"        : "You push against the heavy wooden door. It groans against your weight, slowly opening.\nYou emerge into a long hallway, dotted irregularly with bar-covered windows. Its surprisingly, these windows contain glass. Whoever owns this prison must be wealthy.",
+      "text"        : "You push against the heavy wooden door. It groans against your weight, slowly opening.\nYou emerge into a long hallway with bar-covered windows. Light streams in from them, blinding you as your eyes adjust.\nMuch like the room your cell was in, the walls are built from square stone bricks. Their cold gray stature contrasts starkly with the polished and carefully-cleaned floors.",
       "onFirstEnterActions" : [],
       "actions"  :
       [
@@ -190,10 +190,20 @@
         {
           "class_name" : "DialogAction",
           "menu_name"  : "Search for a way out",
-          "text"      : "You turn towards the opposite end of the hallway. The windows to your right will not yield, and you are too high off the ground to jump safely.",
+          "text"      : "You turn towards the opposite end of the hallway. The windows to your right will not yield, and you are too high off the ground to jump safely. About thirty feet down the hall you see a half-open door. It appears someone left it in open in their haste.",
           "hidden"   : true,
           "hide_after_use" : false,
           "properties" : [""],
+          "requirements" : [],
+          "unlocked_index" : 7
+        },
+        {
+          "class_name" : "MoveAction",
+          "menu_name" : "Go to door left ajar",
+          "text" : "You move swiftly to the door. Getting caught now would be bad, so time is of the essence. Whatever magic you used earlier may not work again.\n\"Best not rely on it\" you think. \"A power acquired so suddenly will likely be fickle\".",
+          "hidden" : true,
+          "hide_after_use" : false,
+          "properties" : ["3"],
           "requirements" : [],
           "unlocked_index" : -1
         }
@@ -208,12 +218,44 @@
         {
           "class_name" : "DialogAction",
           "menu_name"  : "Inspect the bodies",
-          "text"      : "You approach one of the bodies laying on a nearby cot.\n",
+          "text"      : "You approach one of the bodies laying on a nearby cot.\nOn it lay a middle-aged man, roughly five years older than you. He was devoid of clothing, wearing only a simple loincloth. A thick layer of grime and oxidized blood seemingly separated his cold white skin from the rusted iron cot.\nYou lean in to take a look at his torso. Closer inspection reveals a series of of roguish cuts and stitches. The incisions and subsequent repair left horrible, bubbling scars, but for them to exist at all implied that this man survived that particular procedure, at least for a time.\nYou back away from the body, shocked by how similar these scars are to yours.",
           "hidden"   : false,
           "hide_after_use" : false,
           "properties" : [""],
           "requirements" : [],
-          "unlocked_index" : -1
+          "unlocked_index" : 1
+        },
+        {
+          "class_name": "DialogAction",
+          "menu_name": "Inspect glass containers",
+          "text": "You turn to the glass contains, now a mere foot behind you. One seldom sees ice in these parts, let alone so much of it in one place.\nWhat purpose do these containers serve? You can't shake your curiosity and remove the lid from the nearest one. A heavy fog slowly lifts out from the container, obscuring the container's contents. After a minute, the fog thins, and you can make out some rough shapes in the waning light.\n\"What could that be?\" you wonder.\nYou wave your hand over the remaining fog and are dismayed with your findings. The container contains a series of carefully preserved organs, though none that you've seen before.\nHorrified with your findings, you retreat to the rear wall of the room. Its stoic presence and empty cots providing the only oasis from the testaments of cruelty surrounding you.\nYou stand, facing the wall, bracing yourself against it with your arm. \"I must regain my composure\" you think. \"Now is not the time to become unnerved\".\nYou take several breaths to steady yourself and notice a lever to your right.",
+          "hidden": true,
+          "hide_after_use": false,
+          "properties": [""],
+          "requirements": [],
+          "unlocked_index": 2
+        },
+        {
+          "class_name": "DialogAction",
+          "menu_name": "Pull the lever",
+          "text": "You take a step to your right and reach down to the lever, lazily hidden beneath a lightly-worn cot. You push it down, leaning your weight on it for leverage. It gives way to you, sliding down with a mechanical \"thunk\". The wall you were leaning on mere seconds ago begins to slowly grind its way into the floor until it is nearly flush with it. \nBeyond the now-missing section of wall is a well-lit staircase down.",
+          "hidden": true,
+          "hide_after_use": true,
+          "properties": [""],
+          "requirements": [],
+          "unlocked_index": 3
+        },
+        {
+          "class_name": "MoveAction",
+          "menu_name": "Descend Staircase",
+          "text": "You proceed through the passage into the staircase.",
+          "hidden": true,
+          "hide_after_use": true,
+          "properties": [
+            "4"
+          ],
+          "requirements": [],
+          "unlocked_index": -1
         }
       ]
     }
