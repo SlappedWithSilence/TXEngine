@@ -84,7 +84,36 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Acrobatics",
+      "description": "A measure of your acrobatic Abilities. Higher levels indicate higher capacity to execute jumps, climbs, and falls.",
+      "level": 1,
+      "xp": 0,
+      "level_up_xp": 25,
+      "level_ratio": 1.3,
+      "level_up_events": []
+    },
+    {
+      "name" : "Vengeance",
+      "description" : "A measure of how deeply you've carried out vengeance against those that have wronged you.",
+      "level" : 1,
+      "xp"  : 0,
+      "level_up_xp" : 75,
+      "level_ratio" : 1.5,
+      "level_up_events" :
+      [
+        {
+          "level" : 2,
+          "events" :
+          [
+            {
+              "class_name" : "AbilityEvent",
+              "properties" : ["Blood's Theft"]
+            }
+          ]
+        }
+      ]
     }
-
   ]
 }

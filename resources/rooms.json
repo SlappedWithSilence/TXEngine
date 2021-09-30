@@ -57,7 +57,7 @@
           "unlocked_index" : -1
         },
         {
-          "class_name" : "DialogueAction",
+          "class_name" : "DialogAction",
           "menu_name"  : "Look around",
           "text"      : "",
           "hidden"   : false,
@@ -67,7 +67,7 @@
           "unlocked_index" : -1
         },
         {
-          "class_name" : "DialogueAction",
+          "class_name" : "DialogAction",
           "menu_name"  : "Listen closely",
           "text"      : "",
           "hidden"   : false,
@@ -122,7 +122,7 @@
     },
     {
       "name"        : "Hallway",
-      "id"          : 1,
+      "id"          : 2,
       "text"        : "You push against the heavy wooden door. It groans against your weight, slowly opening.\nYou emerge into a long hallway, dotted irregularly with bar-covered windows. Its surprisingly, these windows contain glass. Whoever owns this prison must be wealthy.",
       "onFirstEnterActions" : [],
       "actions"  :
@@ -190,7 +190,7 @@
         {
           "class_name" : "DialogAction",
           "menu_name"  : "Search for a way out",
-          "text"      : "You turn towards the opposite end of the hallway. The windows to your right will not yeild, and you are too high off the ground to jump safely.",
+          "text"      : "You turn towards the opposite end of the hallway. The windows to your right will not yield, and you are too high off the ground to jump safely.",
           "hidden"   : true,
           "hide_after_use" : false,
           "properties" : [""],
@@ -198,7 +198,24 @@
           "unlocked_index" : -1
         }
       ]
-
+    },
+    {
+      "name": "Experimentation Room",
+      "id": 3,
+      "text": "Cautiously, you duck into the dim room. Inside it, nothing but horrors awaited you. Each wall is lined with rusted iron cots.\nSome cots are empty of all but blood, while others are occupied by cold human bodies.\nBeside some of the beds stand worn-down wooden racks populated with neatly-organized tools. Some are immediately recognizable as medical instruments while others seem more exotic.\nGlass contains stand in the center of the room. Some are covered with ice, while others lay bare.",
+      "onFirstEnterActions": [],
+      "actions": [
+        {
+          "class_name" : "DialogAction",
+          "menu_name"  : "Inspect the bodies",
+          "text"      : "You approach one of the bodies laying on a nearby cot.\n",
+          "hidden"   : false,
+          "hide_after_use" : false,
+          "properties" : [""],
+          "requirements" : [],
+          "unlocked_index" : -1
+        }
+      ]
     }
   ]
 }

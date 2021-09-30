@@ -38,6 +38,24 @@
       "effects" : [],
       "requirements" : [],
       "resource_cost" : ["Mana,5"]
+    },
+    {
+      "target_mode" : "SINGLE_HOSTILE",
+      "name" : "Blood's Theft",
+      "description" : "The caster uses arcane powers to extract and absorb life force from the target.",
+      "use_text" : "{CASTER} draws forth arcane powers, absorbing the very life force of {TARGET}",
+      "damage" : 20,
+      "effects" : [
+        {
+          "class_name" : "FlatResourceEffect",
+          "duration" : 1,
+          "trigger_phase" : "TURN_START",
+          "trigger_message" : "{OWNER} is exhausted and loses some stamina! (Stamina -5)",
+          "properties" : ["Stamina,-5"]
+        }
+      ],
+      "requirements" : [],
+      "resource_cost" : ["Mana,20", "Health,-5"]
     }
   ]
 }
