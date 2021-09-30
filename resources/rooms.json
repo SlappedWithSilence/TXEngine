@@ -1,123 +1,85 @@
 {
   "Rooms" : [
     {
-      "name"        : "Prison Cellar",
+      "name"        : "Debug Room",
       "id"          : 1,
-      "text"        : "You awake to the sound of approaching footsteps.",
-      "onFirstEnterActions" : [],
+      "text"        : "Welcome to the Debug Room! How did you get in here, anyways?",
+      "on_first_enter_actions" : [],
       "actions"  : [
         {
-          "class_name"   : "InventoryAction",
-          "menu_name"    : "Check your inventory",
-          "text"        : "You decide to check the contents of your pack.",
-          "hidden"     : false,
-          "hide_after_use" : false,
-          "properties"  : [],
+          "class_name"   : "StoreAction",
+          "menu_name"    : "Visit the Debug Store",
+          "text"        : "Welcome to the Debug Store! Nothing's free, and everything sucks. What can I help you with?",
+          "hidden"     : true,
+          "properties"  : ["1,1", "2,50", "3,5", "4,15", "5,101", "6,0","7,1","8,1","9,1"],
           "requirements" : [],
           "unlocked_index" : -1
         },
+
         {
-          "class_name" : "SummaryAction",
-          "menu_name"  : "Check yo-self",
-          "text"      : "",
+          "class_name" : "DialogAction",
+          "menu_name"  : "Speak with shady Frei",
+          "text"      : "You approach the Frei.",
           "hidden"   : false,
-          "hide_after_use" : false,
-          "properties" : [],
+          "properties" : ["Hey, I know a guy... He's got the stuff. You want in?"],
           "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
-          "class_name" : "AbilitySummaryAction",
-          "menu_name"  : "Inspect Abilities",
-          "text"      : "",
-          "hidden"   : false,
-          "hide_after_use" : false,
-          "properties" : [],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
-          "class_name" : "EquipmentAction",
-          "menu_name"  : "Manage your equipment",
-          "text"      : "",
-          "hidden"   : false,
-          "hide_after_use" : false,
-          "properties" : [""],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
-          "class_name" : "SkillSummaryAction",
-          "menu_name"  : "View Skills",
-          "text"      : "",
-          "hidden"   : false,
-          "hide_after_use" : false,
-          "properties" : [""],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
-          "class_name" : "DialogueAction",
-          "menu_name"  : "Look around",
-          "text"      : "",
-          "hidden"   : false,
-          "hide_after_use" : false,
-          "properties" : ["You look down. Your clothes are heavily worn, likely to fall apart at any moment. Your tunic is more loose-string than cloth. The cold stone floor easily saps the warmth from your legs through your burlap trousers. \nEnclosed on all four sides, the only light in the cell trickles in weakly from the between the bars of the sealed iron door."],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
-          "class_name" : "DialogueAction",
-          "menu_name"  : "Listen closely",
-          "text"      : "",
-          "hidden"   : false,
-          "hide_after_use" : true,
-          "properties" : ["Remaining on the cold stone floor, you listen closer to the sound of the footsteps. They sound heavy and pronounced, even on the damp and dirt-spewn stone.\nThe footsteps reach your cell door, and from beyond the bars you see the unmistakable silhouette of a human guard."],
-          "requirements" : [],
-          "unlocked_index" : 7
+          "unlocked_index" : 0
         },
         {
           "class_name" : "ConversationAction",
-          "menu_name"  : "Speak to the guard",
-          "text"      : "You motion to silent guard, beckoning him to come closer to your cell door.",
-          "hidden"   : true,
-          "hide_after_use" : true,
+          "menu_name"  : "Converse with the local doomsayer",
+          "text"      : "You approach the doomsayer.",
+          "hidden"   : false,
           "properties" : ["0"],
           "requirements" : [],
-          "unlocked_index" : 8
+          "unlocked_index" : -1
         },
         {
           "class_name" : "CombatAction",
-          "menu_name"  : "RETALIATE",
+          "menu_name"  : "Practice Fighting",
           "text"      : "",
-          "hidden"   : true,
-          "hide_after_use" : true,
-          "properties" : ["{FRIENDLY}",
-                          "{HOSTILE}", "1",
-                          "{LOOT}", "1,1", "4,2","18,1","19,1","20,1"],
-          "requirements" : [
-            {
-              "class_name" : "FlagRequirement",
-              "properties": ["ch0_anger_guard"]
-            }
-          ],
-          "unlocked_index" : 9
+          "hidden"   : false,
+          "properties" : ["{FRIENDLY}","2","{HOSTILE}", "-1","2","3", "{LOOT}", "1,1", "4,2"],
+          "requirements" : [],
+          "unlocked_index" : -1
         },
         {
           "class_name" : "MoveAction",
-          "menu_name"  : "Escape from your jail cell",
-          "text"      : "You retrieve the keys to your cell from the now-fallen guard. The heavy iron door to your cell swings open, shedding rust as you push it. The guard's clothing was damaged during the fight, but it is far superior to what you are wearing now.\nYou peek your head out from your cell and see no one. The sound of your fight should have gotten someone's attention, but for now the coast seems clear.\nYou duck out into the dim corridor and hurry towards a wooden door in the distance, keeping your head low as you move.",
-          "hidden"   : true,
-          "hide_after_use" : false,
+          "menu_name"  : "Go to Paddie's",
+          "text"      : "You slink away into the night, seeking out Paddie's Irish Bar.",
+          "hidden"   : false,
           "properties" : ["2"],
           "requirements" : [
             {
-              "class_name" : "FlagRequirement",
-              "properties": ["ch0_anger_guard"]
+              "class_name" : "LevelRequirement",
+              "properties" : ["2"]
+            },
+            {
+              "class_name" : "ResourceRequirement",
+              "properties" : ["Health,50"]
             }
           ],
           "unlocked_index" : -1
         }
+      ]
+    },
+    {
+      "name"        : "Paddie's Irish Pub",
+      "id"          : 2,
+      "text"        : "...",
+      "onFirstEnterActions" : [],
+      "actions"  :
+      [
+        {
+        "class_name" : "MoveAction",
+        "menu_name"  : "Go to Debug Room",
+        "text"      : "You return to the debug room.",
+        "hidden"   : false,
+        "properties" : ["1"],
+        "requirements" : [
+        ],
+        "unlocked_index" : -1
+      }
       ]
     }
   ]

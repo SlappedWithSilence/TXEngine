@@ -1,7 +1,9 @@
 package txengine.io.loaders;
 
+import txengine.io.Load;
 import txengine.io.LoadUtils;
 import txengine.io.Loader;
+import txengine.io.Resources;
 import txengine.systems.integration.Requirement;
 import txengine.systems.room.Room;
 import txengine.systems.room.action.Action;
@@ -22,6 +24,43 @@ import java.util.Iterator;
 import java.util.List;
 
 public class RoomLoader extends Loader {
+
+    static List<Action> defaultActions;
+
+    public RoomLoader() {
+        try {
+            File f = Resources.getResourceAsFile("default_actions.json");
+            if (f.exists()) {
+                // Read the JSON storage file
+                JSONParser parser = new JSONParser();
+
+                JSONObject obj;
+
+                try {
+                    obj = (JSONObject) parser.parse(new FileReader(f));
+                } catch (FileNotFoundException e) {
+                    LogUtils.error("Attempted to load from file: " + f.getAbsolutePath());
+                    e.printStackTrace();
+                    return;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
+                } catch (ParseException e) {
+                    LogUtils.error("Can't parse " + f.getAbsolutePath() + "!", "Loader : Room Loader");
+                    e.printStackTrace();
+                    return;
+                }
+
+                // Get the JSON array that contains all the items
+                JSONArray rawDefaultActions = (JSONArray) obj.get("actions");
+                defaultActions = getActions(rawDefaultActions);
+            }
+        } catch (Exception e) {
+            LogUtils.error("Failed to load Default Actions.", "Loader : Room Loader");
+        }
+
+        Room.setDefaultActions(defaultActions);
+    }
 
     @Override
     public HashMap<Integer, Room> load(File file) {
@@ -58,7 +97,7 @@ public class RoomLoader extends Loader {
             String roomName = (String) rawRoom.get("name");
             int id = ((Long) rawRoom.get("id")).intValue();
             String roomText = (String) rawRoom.get("text");
-
+            boolean ignoreDefaultActions = LoadUtils.optional(rawRoom, "ignore_default_actions", Boolean.class, false);
             //ArrayList<Action> onFirstEnterActions = getActions((JSONArray) rawRoom.get("on_first_enter_actions"));
             ArrayList<Action> onFirstEnterActions = getActions(LoadUtils.optional(rawRoom,"on_first_enter_actions",JSONArray.class, new JSONArray()));
 
@@ -67,7 +106,7 @@ public class RoomLoader extends Loader {
             Room room = new Room(id, roomName, roomText);
             room.setRoomActions(actions);
             room.setOnFirstEnterActions(onFirstEnterActions);
-
+            room.setIgnoreDefaultActions(ignoreDefaultActions);
             roomList.put(id, room);
 
         }

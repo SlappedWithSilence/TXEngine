@@ -3,6 +3,7 @@ package txengine.systems.room.action;
 import txengine.ui.color.*;
 import txengine.systems.integration.Requirement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Action {
@@ -11,7 +12,6 @@ public abstract class Action {
 	protected String text; // The text that is printed when action is selected
 	protected List<Requirement> requirements;
 	protected boolean hidden;
-	protected int numProperties = 3; // The expected number of properties
 	protected int unhideIndex = -1;	 // The other Action in the room this Action is in that should be un-hidden if this Action succeeds
 	protected boolean hideAfterUse;
 
@@ -26,17 +26,18 @@ public abstract class Action {
 		this.properties = properties;
 		this.text = text;
 		this.unhideIndex = unhideIndex;
+		this.hideAfterUse = hideAfterUse;
 		this.requirements = requirements;
 	}
 
-	public Action(String menuName, String text, String[] properties, boolean enabled, int unhideIndex, boolean hideAfterUse, int numProperties, List<Requirement> requirements) {
-		this.menuName = menuName;
-		this.hidden = enabled;
-		this.properties = properties;
-		this.text = text;
-		this.numProperties = numProperties;
-		this.unhideIndex = unhideIndex;
-		this.requirements = requirements;
+	public Action(Action copyFrom) {
+		menuName = copyFrom.menuName;
+		hidden = copyFrom.hidden;
+		properties = copyFrom.properties;
+		text = copyFrom.text;
+		unhideIndex = copyFrom.unhideIndex;
+		hideAfterUse = copyFrom.hideAfterUse;
+		this.requirements = new ArrayList<>(copyFrom.getRequirements());
 	}
 
 	/* Abstract Member Functions */
@@ -109,14 +110,6 @@ public abstract class Action {
 
 	public void setRequirements(List<Requirement> requirements) {
 		this.requirements = requirements;
-	}
-
-	public int getNumProperties() {
-		return numProperties;
-	}
-
-	public void setNumProperties(int numProperties) {
-		this.numProperties = numProperties;
 	}
 
 	public boolean isHideAfterUse() {
