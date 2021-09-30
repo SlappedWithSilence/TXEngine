@@ -38,6 +38,180 @@
       "effects" : [],
       "requirements" : [],
       "resource_cost" : ["Mana,5"]
+    },
+    {
+      "target_mode" : "SINGLE",
+      "name" : "Inversion",
+      "description" : "Converts the user's life force into raw energy, damaging the target.",
+      "use_text" : "{CASTER} drains away its life forcing, hurling it at {TARGET}",
+      "damage" : 20,
+      "effects" : [],
+      "requirements" : [
+        {
+          "class_name" : "LevelRequirement",
+          "properties" : ["2"]
+        }
+      ],
+      "resource_cost" : ["Health,20", "Stamina,5"]
+    },
+    {
+      "target_mode" : "SINGLE_HOSTILE",
+      "name" : "Smack",
+      "description" : "The target 'finna catch these hands'",
+      "use_text" : "{CASTER} smacks {TARGET} so hard it alters {TARGET}'s DNA.",
+      "damage" : 100,
+      "effects" : [],
+      "requirements" : [],
+      "resource_cost" : ["Stamina,90"]
+    },
+    {
+      "target_mode" : "ALL_HOSTILE",
+      "name" : "Blast",
+      "description" : "EXPLOOOOOOSION!",
+      "use_text" : "{CASTER} annihilates all enemies with explosion magic, devastating the enemies.",
+      "damage" : 100,
+      "effects" : [],
+      "requirements" : [],
+      "resource_cost" : ["Mana,50"]
+    },
+    {
+      "target_mode" : "SINGLE",
+      "name" : "Optical Pat-Down",
+      "description" : "Asses the HOSTILE with rough-shod accuracy.",
+      "use_text" : "{CASTER} visually assesses {TARGET}... with questionable accuracy.",
+      "damage" : 30,
+      "effects" : [
+        {
+          "class_name" : "ProportionalResourceEffect",
+          "duration"  : 1,
+          "trigger_phase" : "PRE_ACTION",
+          "trigger_message" : "{OWNER} gains the energy to act after being audibly misjudged. (Stamina +10)",
+          "cleanup_message" : "",
+          "properties": ["Stamina", ".10"]
+        }
+      ],
+      "requirements" : [],
+      "resource_cost" : ["Stamina,10"]
+    },
+    {
+      "target_mode" : "SINGLE_HOSTILE",
+      "name" : "Love Tap",
+      "description" : "I didn't hit you, that was a love tap.",
+      "use_text" : "{CASTER} hits {TARGET} hard enough to hurt, but not hard enough to justify retaliation.",
+      "damage" : 15,
+      "effects" : [
+        {
+          "class_name" : "FlatResourceEffect",
+          "duration"  : 3,
+          "trigger_phase" : "POST_ACTION",
+          "trigger_message" : "{OWNER} suffered from being love-tapped. (Health - 5)",
+          "cleanup_message" : "{OWNER} is no longer suffering from being love-tapped.",
+          "properties": ["Health", "-5"]
+        },
+        {
+          "class_name" : "FlatResourceEffect",
+          "duration"  : 3,
+          "trigger_phase" : "POST_ACTION",
+          "trigger_message" : "",
+          "cleanup_message" : "",
+          "properties": ["Stamina", "-2"]
+        }
+      ],
+      "requirements" : [],
+      "resource_cost" : ["Stamina,3"]
+    },
+    {
+      "target_mode" : "SINGLE_HOSTILE",
+      "name" : "Kidnap",
+      "description" : "Kidnap the target, making them unable to act for a single turn",
+      "use_text" : "{CASTER} kidnaps {TARGET} (and {TARGET}'s cat), preventing them from acting.",
+      "damage" : 0,
+      "effects" : [
+        {
+          "class_name" : "RemovePhaseEffect",
+          "duration"  : 1,
+          "trigger_phase" : "PRE_ACTION",
+          "trigger_message" : "{OWNER} has been kidnapped and cannot act.",
+          "cleanup_message" : "{OWNER} escaped from being kidnapped!",
+          "properties": ["ACTION"]
+        }
+      ],
+      "requirements" : [],
+      "resource_cost" : ["Stamina,55", "Health,20"]
+    },
+    {
+      "target_mode" : "SINGLE_HOSTILE",
+      "name" : "Spit",
+      "description" : "Spits on the target, accomplishing nearly nothing",
+      "use_text" : "{CASTER} spits on {TARGET}.",
+      "damage" : 1,
+      "effects" : [],
+      "requirements" : [],
+      "resource_cost" : []
+    },
+    {
+      "target_mode" : "SINGLE_HOSTILE",
+      "name" : "Dupe",
+      "description" : "Tricks the target into giving the user some of their Health",
+      "use_text" : "{CASTER} deceives {TARGET}, stealing Health in the process.",
+      "damage" : 20,
+      "effects" : [],
+      "requirements" : [],
+      "resource_cost" : ["Health,-10"]
+    },
+    {
+      "target_mode" : "ALL_FRIENDLY",
+      "name" : "Bomb-Threat",
+      "description" : "Makes a bomb-threat, delaying all friendly entities from acting. Restores Health and Stamina.",
+      "use_text" : "{CASTER} makes a bomb-threat, delaying all friendly entities and restoring resources.",
+      "damage" : 0,
+      "effects" : [
+        {
+          "class_name" : "AddPhaseEffect",
+          "duration"  : 1,
+          "trigger_phase" : "PRE_ACTION",
+          "trigger_message" : "{OWNER} was delayed by the bomb threat!.",
+          "cleanup_message" : "{OWNER} figured out it was a ruse!",
+          "properties": ["ACTION"]
+        }
+      ],
+      "requirements" : [],
+      "resource_cost" : ["Stamina,-100", "Health,-100"]
+    },
+    {
+      "target_mode" : "SINGLE_HOSTILE",
+      "name" : "Bounce",
+      "description" : "The user flings its mass at the HOSTILE, hoping to deal some damage.",
+      "use_text" : "{CASTER} slams into {TARGET}, hurting {TARGET} a little.",
+      "damage" : 8,
+      "effects" : [],
+      "requirements" : [],
+      "resource_cost" : []
+    },
+    {
+      "target_mode" : "SINGLE_HOSTILE",
+      "name" : "Water Shot",
+      "description" : "The user shoots a powerful stream of water at the target.",
+      "use_text" : "{CASTER} shoots a powerful jet of water at {TARGET}.",
+      "damage" : 7,
+      "effects" : [],
+      "requirements" : [],
+      "resource_cost" : ["Mana,2"]
+    },
+    {
+      "target_mode" : "SINGLE_HOSTILE",
+      "name" : "Rock Shot",
+      "description" : "The throws a stone at the target with pin-point precision.",
+      "use_text" : "{CASTER} forcefully throws a rock at {TARGET}.",
+      "damage" : 7,
+      "effects" : [],
+      "requirements" : [
+        {
+          "class_name" : "ItemRequirement",
+          "properties" : ["1"]
+        }
+      ],
+      "resource_cost" : ["Stamina,2"]
     }
   ]
 }

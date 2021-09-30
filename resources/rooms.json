@@ -39,7 +39,7 @@
           "menu_name"  : "Practice Fighting",
           "text"      : "",
           "hidden"   : false,
-          "properties" : ["{FRIENDLY}","2","{HOSTILE}", "-1","2","3", "{LOOT}", "1,1", "4,2"],
+          "properties" : ["{FRIENDLY}","{HOSTILE}", "-1","-2","1", "{LOOT}", "1,1", "4,2"],
           "requirements" : [],
           "unlocked_index" : -1
         },
@@ -50,14 +50,6 @@
           "hidden"   : false,
           "properties" : ["2"],
           "requirements" : [
-            {
-              "class_name" : "LevelRequirement",
-              "properties" : ["2"]
-            },
-            {
-              "class_name" : "ResourceRequirement",
-              "properties" : ["Health,50"]
-            }
           ],
           "unlocked_index" : -1
         }
@@ -68,6 +60,7 @@
       "id"          : 2,
       "text"        : "...",
       "onFirstEnterActions" : [],
+      "ignore_default_actions" : true,
       "actions"  :
       [
         {

@@ -54,12 +54,11 @@ public class RoomLoader extends Loader {
                 // Get the JSON array that contains all the items
                 JSONArray rawDefaultActions = (JSONArray) obj.get("actions");
                 defaultActions = getActions(rawDefaultActions);
+                Room.setDefaultActions(defaultActions);
             }
         } catch (Exception e) {
             LogUtils.error("Failed to load Default Actions.", "Loader : Room Loader");
         }
-
-        Room.setDefaultActions(defaultActions);
     }
 
     @Override
