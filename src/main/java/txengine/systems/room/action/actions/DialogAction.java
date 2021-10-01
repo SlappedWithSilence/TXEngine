@@ -5,13 +5,13 @@ import txengine.systems.room.action.Action;
 
 import java.util.List;
 
-public class DialogueAction extends Action {
+public class DialogAction extends Action {
 
-    public DialogueAction() {
+    public DialogAction() {
         super();
     }
 
-    public DialogueAction(String menuName, String text, String[] properties, boolean enabled, int unlockIndex, boolean hideOnUse, List<Requirement> requirements) {
+    public DialogAction(String menuName, String text, String[] properties, boolean enabled, int unlockIndex, boolean hideOnUse, List<Requirement> requirements) {
         super(menuName, text, properties, enabled, unlockIndex, hideOnUse, requirements);
     }
 

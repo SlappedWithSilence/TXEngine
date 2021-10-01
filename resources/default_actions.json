@@ -1,0 +1,58 @@
+{
+  "actions" : [
+    {
+      "class_name"   : "InventoryAction",
+      "menu_name"    : "Check your inventory",
+      "text"        : "You decide to check the contents of your pack.",
+      "hidden"     : false,
+      "properties"  : [],
+      "requirements" : [],
+      "unlocked_index" : -1
+    },
+    {
+      "class_name" : "SummaryAction",
+      "menu_name"  : "Check yo-self",
+      "text"      : "",
+      "hidden"   : false,
+      "properties" : [],
+      "requirements" : [],
+      "unlocked_index" : -1
+    },
+    {
+      "class_name" : "AbilitySummaryAction",
+      "menu_name"  : "Inspect Abilities",
+      "text"      : "",
+      "hidden"   : false,
+      "properties" : [],
+      "requirements" : [],
+      "unlocked_index" : -1
+    },
+    {
+      "class_name": "SimpleCraftingAction",
+      "menu_name": "Craft Something",
+      "text": "You consult your inventory, seeking to create something new.",
+      "hidden": false,
+      "properties": [],
+      "requirements": [],
+      "unlocked_index" : -1
+    },
+    {
+      "class_name" : "EquipmentAction",
+      "menu_name"  : "Manage your equipment",
+      "text"      : "",
+      "hidden"   : false,
+      "properties" : [""],
+      "requirements" : [],
+      "unlocked_index" : -1
+    },
+    {
+      "class_name" : "SkillSummaryAction",
+      "menu_name"  : "View Skills",
+      "text"      : "",
+      "hidden"   : false,
+      "properties" : [""],
+      "requirements" : [],
+      "unlocked_index" : -1
+    }
+  ]
+}

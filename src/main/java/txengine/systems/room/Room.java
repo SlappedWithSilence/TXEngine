@@ -1,5 +1,6 @@
 package txengine.systems.room;
 
+import com.rits.cloning.Cloner;
 import txengine.systems.integration.Requirement;
 import txengine.ui.component.Components;
 import txengine.ui.LogUtils;
@@ -15,20 +16,34 @@ public class Room {
 	int id;      // The room's id. This is used to track which room the user is in as well as to map the user into new rooms. All IDs must be unique.
 	String name; // The room's name. Used for visual prompting.
 	String text; // The text that is printed when you enter the room
-	ArrayList<Action> onFirstEnterActions = new ArrayList<>(); // A list of actions to be performed series the first time a user enters a room
-	ArrayList<Action> roomActions = new ArrayList<>(); // A list of things the user can do in the room
-
+	ArrayList<Action> onFirstEnterActions; // A list of actions to be performed series the first time a user enters a room
+	ArrayList<Action> roomActions; // A list of things the user can do in the room
 	String introPrompt; // The string that is printed when the user first enters the room
+	boolean ignoreDefaultActions;
+
+	private static List<Action> defaultActions; // Whenever adding default actions to roomActions list, must add them *last* to avoid breaking unhide indexes
+
+	// Constructors
 
 	public Room() {
-
+		id = -1;
+		name = "Generic Room";
+		text = "Generic opener text";
+		onFirstEnterActions = new ArrayList<>();
+		roomActions = new ArrayList<>();
+		ignoreDefaultActions = false;
 	}
 
 	public Room(int id, String name, String text) {
 		this.id = id;
 		this.name = name;
 		this.text = text;
+		onFirstEnterActions = new ArrayList<>();
+		roomActions = new ArrayList<>();
+		ignoreDefaultActions = false;
 	}
+
+	// Public Methods
 
 	public void printActions() {
 
@@ -67,6 +82,51 @@ public class Room {
 		}
 	}
 
+	// Helper Methods
+
+	private void addDefaultActions() {
+		if (ignoreDefaultActions) {
+			LogUtils.info("Ignoring default actions...",name);
+			return;
+		}
+
+		if (defaultActions == null || defaultActions.size() == 0) {
+			LogUtils.warn("ignoreDefaultActions set to false, but no Default Actions found!", "Room: " + name);
+			return;
+		}
+
+		for (Action a : defaultActions) {
+			Cloner cloner = new Cloner();
+			if (a != null) roomActions.add(cloner.deepClone(a));
+		}
+	}
+
+	// Accessor Methods
+
+	public static List<Action> getDefaultActions() {
+		return defaultActions;
+	}
+
+	public static void setDefaultActions(List<Action> actions) {
+		defaultActions = actions;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public boolean isIgnoreDefaultActions() {
+		return ignoreDefaultActions;
+	}
+
+	public void setIgnoreDefaultActions(boolean ignoreDefaultActions) {
+		this.ignoreDefaultActions = ignoreDefaultActions;
+	}
+
 	public List<Action> getVisibleActions() {
 		return roomActions.stream().filter(action -> !action.isHidden()).toList();
 	}
@@ -101,6 +161,7 @@ public class Room {
 
 	public void setRoomActions(ArrayList<Action> roomActions) {
 		this.roomActions = roomActions;
+		if (!ignoreDefaultActions) addDefaultActions(); // Must add default actions *last* to avoid breaking unhide indexes
 	}
 
 	public String getIntroPrompt() {

@@ -2,8 +2,8 @@
   "combatResources" : [
     {
       "resourceName" : "Health",
-      "value"        : 25,
-      "maxValue"     : 25
+      "value"        : 100,
+      "maxValue"     : 100
     },
     {
       "resourceName" : "Stamina",
@@ -12,8 +12,8 @@
     },
     {
       "resourceName" : "Mana",
-      "value"        : 40,
-      "maxValue"     : 40
+      "value"        : 100,
+      "maxValue"     : 100
     }
   ],
 
