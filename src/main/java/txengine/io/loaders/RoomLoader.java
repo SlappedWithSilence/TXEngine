@@ -25,8 +25,6 @@ import java.util.List;
 
 public class RoomLoader extends Loader {
 
-    static List<Action> defaultActions;
-
     public RoomLoader() {
         try {
             File f = Resources.getResourceAsFile("default_actions.json");
@@ -53,7 +51,8 @@ public class RoomLoader extends Loader {
 
                 // Get the JSON array that contains all the items
                 JSONArray rawDefaultActions = (JSONArray) obj.get("actions");
-                defaultActions = getActions(rawDefaultActions);
+                List<Action> defaultActions = getActions(rawDefaultActions);
+                if (defaultActions == null) LogUtils.error("Default Actions is null!", "Loader, Default Actions");
                 Room.setDefaultActions(defaultActions);
             }
         } catch (Exception e) {
@@ -103,9 +102,9 @@ public class RoomLoader extends Loader {
             ArrayList<Action> actions = getActions((JSONArray) rawRoom.get("actions"));
 
             Room room = new Room(id, roomName, roomText);
-            room.setRoomActions(actions);
-            room.setOnFirstEnterActions(onFirstEnterActions);
             room.setIgnoreDefaultActions(ignoreDefaultActions);
+            room.setOnFirstEnterActions(onFirstEnterActions);
+            room.setRoomActions(actions); // Always set Room Actions last
             roomList.put(id, room);
 
         }

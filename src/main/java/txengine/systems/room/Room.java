@@ -85,7 +85,10 @@ public class Room {
 	// Helper Methods
 
 	private void addDefaultActions() {
-		if (ignoreDefaultActions) return;
+		if (ignoreDefaultActions) {
+			LogUtils.info("Ignoring default actions...",name);
+			return;
+		}
 
 		if (defaultActions == null || defaultActions.size() == 0) {
 			LogUtils.warn("ignoreDefaultActions set to false, but no Default Actions found!", "Room: " + name);

@@ -60,7 +60,7 @@
       "id"          : 2,
       "text"        : "...",
       "onFirstEnterActions" : [],
-      "ignore_default_actions" : true,
+      "ignore_default_actions" : false,
       "actions"  :
       [
         {
