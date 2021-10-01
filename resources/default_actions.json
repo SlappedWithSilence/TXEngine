@@ -2,7 +2,7 @@
   "actions" : [
     {
       "class_name"   : "InventoryAction",
-      "menu_name"    : "Check your inventory",
+      "menu_name"    : "Check inventory",
       "text"        : "You decide to check the contents of your pack.",
       "hidden"     : false,
       "properties"  : [],
@@ -11,7 +11,7 @@
     },
     {
       "class_name" : "SummaryAction",
-      "menu_name"  : "Check yo-self",
+      "menu_name"  : "Check resources",
       "text"      : "",
       "hidden"   : false,
       "properties" : [],
@@ -20,7 +20,7 @@
     },
     {
       "class_name" : "AbilitySummaryAction",
-      "menu_name"  : "Inspect Abilities",
+      "menu_name"  : "Inspect abilities",
       "text"      : "",
       "hidden"   : false,
       "properties" : [],
@@ -29,7 +29,7 @@
     },
     {
       "class_name": "SimpleCraftingAction",
-      "menu_name": "Craft Something",
+      "menu_name": "Craft something",
       "text": "You consult your inventory, seeking to create something new.",
       "hidden": false,
       "properties": [],
@@ -38,7 +38,7 @@
     },
     {
       "class_name" : "EquipmentAction",
-      "menu_name"  : "Manage your equipment",
+      "menu_name"  : "Manage equipment",
       "text"      : "",
       "hidden"   : false,
       "properties" : [""],
@@ -47,7 +47,7 @@
     },
     {
       "class_name" : "SkillSummaryAction",
-      "menu_name"  : "View Skills",
+      "menu_name"  : "View skills",
       "text"      : "",
       "hidden"   : false,
       "properties" : [""],

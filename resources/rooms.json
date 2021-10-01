@@ -7,56 +7,6 @@
       "onFirstEnterActions" : [],
       "actions"  : [
         {
-          "class_name"   : "InventoryAction",
-          "menu_name"    : "Check your inventory",
-          "text"        : "You decide to check the contents of your pack.",
-          "hidden"     : false,
-          "hide_after_use" : false,
-          "properties"  : [],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
-          "class_name" : "SummaryAction",
-          "menu_name"  : "Check yo-self",
-          "text"      : "",
-          "hidden"   : false,
-          "hide_after_use" : false,
-          "properties" : [],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
-          "class_name" : "AbilitySummaryAction",
-          "menu_name"  : "Inspect Abilities",
-          "text"      : "",
-          "hidden"   : false,
-          "hide_after_use" : false,
-          "properties" : [],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
-          "class_name" : "EquipmentAction",
-          "menu_name"  : "Manage your equipment",
-          "text"      : "",
-          "hidden"   : false,
-          "hide_after_use" : false,
-          "properties" : [""],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
-          "class_name" : "SkillSummaryAction",
-          "menu_name"  : "View Skills",
-          "text"      : "",
-          "hidden"   : false,
-          "hide_after_use" : false,
-          "properties" : [""],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
           "class_name" : "DialogAction",
           "menu_name"  : "Look around",
           "text"      : "",
@@ -74,7 +24,7 @@
           "hide_after_use" : true,
           "properties" : ["Remaining on the cold stone floor, you listen closer to the sound of the footsteps. They sound heavy and pronounced, even on the damp and dirt-spewn stone.\nThe footsteps reach your cell door, and from beyond the bars you see the unmistakable silhouette of a human guard."],
           "requirements" : [],
-          "unlocked_index" : 7
+          "unlocked_index" : 2
         },
         {
           "class_name" : "ConversationAction",
@@ -84,7 +34,7 @@
           "hide_after_use" : true,
           "properties" : ["0"],
           "requirements" : [],
-          "unlocked_index" : 8
+          "unlocked_index" : 3
         },
         {
           "class_name" : "CombatAction",
@@ -101,7 +51,7 @@
               "properties": ["ch0_anger_guard"]
             }
           ],
-          "unlocked_index" : 9
+          "unlocked_index" : 4
         },
         {
           "class_name" : "MoveAction",
@@ -128,56 +78,6 @@
       "actions"  :
       [
         {
-          "class_name"   : "InventoryAction",
-          "menu_name"    : "Check your inventory",
-          "text"        : "You decide to check the contents of your pack.",
-          "hidden"     : false,
-          "hide_after_use" : false,
-          "properties"  : [],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
-          "class_name" : "SummaryAction",
-          "menu_name"  : "Check yo-self",
-          "text"      : "",
-          "hidden"   : false,
-          "hide_after_use" : false,
-          "properties" : [],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
-          "class_name" : "AbilitySummaryAction",
-          "menu_name"  : "Inspect Abilities",
-          "text"      : "",
-          "hidden"   : false,
-          "hide_after_use" : false,
-          "properties" : [],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
-          "class_name" : "EquipmentAction",
-          "menu_name"  : "Manage your equipment",
-          "text"      : "",
-          "hidden"   : false,
-          "hide_after_use" : false,
-          "properties" : [""],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
-          "class_name" : "SkillSummaryAction",
-          "menu_name"  : "View Skills",
-          "text"      : "",
-          "hidden"   : false,
-          "hide_after_use" : false,
-          "properties" : [""],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
           "class_name" : "DialogAction",
           "menu_name"  : "Approach the window",
           "text"      : "You approach the nearest window. From outside the dusty and smudged glass you see a waning sun washing over a golden forest. Shining towers stab into the sky, dotting the skyline.\n\"This is not home\" you mutter to yourself. \"Is this the Kingdom of the Frei? No, I had a human guard, it can't be.",
@@ -185,7 +85,7 @@
           "hide_after_use" : false,
           "properties" : [""],
           "requirements" : [],
-          "unlocked_index" : 6
+          "unlocked_index" : 1
         },
         {
           "class_name" : "DialogAction",
@@ -195,7 +95,7 @@
           "hide_after_use" : false,
           "properties" : [""],
           "requirements" : [],
-          "unlocked_index" : 7
+          "unlocked_index" : 2
         },
         {
           "class_name" : "MoveAction",
@@ -258,6 +158,18 @@
           "unlocked_index": -1
         }
       ]
+    },
+    {
+      "name": "Spiral Staircase",
+      "id": 4,
+      "text": "",
+      "onFirstEnterActions": [],
+      "actions":
+      [
+
+      ],
+      "requirements": [],
+      "unlocked_index": -1
     }
   ]
 }
