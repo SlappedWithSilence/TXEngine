@@ -1,6 +1,8 @@
 package txengine.main;
 
 import txengine.io.loaders.*;
+import txengine.io.save.Exporters;
+import txengine.io.save.SaveManager;
 import txengine.ui.color.*;
 import txengine.systems.combat.CombatEntity;
 import txengine.systems.combat.CombatResourceManager;
@@ -115,6 +117,10 @@ public class Manager {
         // Set up global managers
         flagManager = new FlagManager();
         skillManager = new SkillManager(skillHashMap);
+
+        // Register save data exporters
+        SaveManager.getInstance().registerExporter(Exporters.playerData());
+        SaveManager.getInstance().registerExporter(Exporters.inventoryData());
     }
 
     private static void initDebug() {

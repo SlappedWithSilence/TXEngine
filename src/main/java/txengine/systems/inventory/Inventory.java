@@ -251,4 +251,8 @@ public class Inventory {
 	public List<Item> getItemInstances() {
 		return itemIDs.stream().map(integer -> Manager.itemHashMap.get(integer)).toList();
 	}
+
+	public List<Integer> getItemQuantities() {
+		return itemQuantities;
+	}
 }

@@ -1,6 +1,6 @@
 package txengine.systems.room.action.actions;
 
-import txengine.io.Save;
+import txengine.io.save.SaveManager;
 import txengine.systems.room.action.Action;
 
 import java.util.ArrayList;
@@ -16,8 +16,7 @@ public class SaveAction extends Action {
     @Override
     public int perform() {
 
-        Save.saveInventory();
-        Save.SavePlayer();
+        SaveManager.getInstance().save();
 
         return super.enableOnComplete();
     }

@@ -21,11 +21,6 @@ public class Player extends CombatEntity {
 
 	private final String DEFAULT_PLAYER_NAME = "Player";
 
-	private int level;
-	private int levelXP; // TODO: Implement XP system
-	private int levelXPMax;
-	private int nextLevelXPModifier;
-
 	private int money;
 	private int location; // The room that the player is currently in. This value must always be a valid room id.
 
@@ -190,30 +185,6 @@ public class Player extends CombatEntity {
 
 	public void setMoney(int money) {
 		this.money = money;
-	}
-
-	public int getLevelXP() {
-		return levelXP;
-	}
-
-	public void setLevelXP(int levelXP) {
-		this.levelXP = levelXP;
-	}
-
-	public int getLevelXPMax() {
-		return levelXPMax;
-	}
-
-	public void setLevelXPMax(int levelXPMax) {
-		this.levelXPMax = levelXPMax;
-	}
-
-	public int getNextLevelXPModifier() {
-		return nextLevelXPModifier;
-	}
-
-	public void setNextLevelXPModifier(int nextLevelXPModifier) {
-		this.nextLevelXPModifier = nextLevelXPModifier;
 	}
 
 	public void setLocation(int location) {
