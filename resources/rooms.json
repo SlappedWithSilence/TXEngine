@@ -80,7 +80,7 @@
         {
           "class_name" : "DialogAction",
           "menu_name"  : "Approach the window",
-          "text"      : "You approach the nearest window. From outside the dusty and smudged glass you see a waning sun washing over a golden forest. Shining towers stab into the sky, dotting the skyline.\n\"This is not home\" you mutter to yourself. \"Is this the Kingdom of the Frei? No, I had a human guard, it can't be.",
+          "text"      : "You approach the nearest window. From outside the dusty and smudged glass you see a waning sun washing over a golden forest. Shining towers stab into the sky, dotting the skyline.\n\"This is not home\" you mutter to yourself. \"Is this the Kingdom of the Frei? No, I had a human guard, it can't be.\"",
           "hidden"   : false,
           "hide_after_use" : false,
           "properties" : [""],
@@ -100,7 +100,7 @@
         {
           "class_name" : "MoveAction",
           "menu_name" : "Go to door left ajar",
-          "text" : "You move swiftly to the door. Getting caught now would be bad, so time is of the essence. Whatever magic you used earlier may not work again.\n\"Best not rely on it\" you think. \"A power acquired so suddenly will likely be fickle\".",
+          "text" : "You move swiftly to the door. Getting caught now would be fatal, so time is of the essence. Whatever magic you used earlier may not work again.\n\"Best not rely on it\" you think. \"Fickle is a power acquired so suddenly.\".",
           "hidden" : true,
           "hide_after_use" : false,
           "properties" : ["3"],
