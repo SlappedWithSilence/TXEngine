@@ -17,6 +17,7 @@ public class Recipe {
     private List<AbstractMap.SimpleEntry<Integer, Integer>> products;
     private List<Requirement> requirements;
     private List<Event> events;
+    private int id;
 
     public Recipe() {
         ingredients = new ArrayList<>();
@@ -119,5 +120,13 @@ public class Recipe {
 
     public void setEvents(List<Event> events) {
         this.events = events;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -4,7 +4,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import txengine.main.Manager;
+import txengine.systems.crafting.Recipe;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
 
 // A collection of static methods that return Exporters with a specific purpose
@@ -69,14 +72,40 @@ public class Exporters {
                     resource.put("name", key);
                     resource.put("max", map.get(key)[0]);
                     resource.put("current", map.get(key)[1]);
+
+                    arr.add(resource);
                 }
 
+                combatResourceJSON.put("data", arr);
                 return combatResourceJSON;
             }
 
             @Override
             public String getKey() {
                 return "combat_resources";
+            }
+        };
+    }
+
+    public static Exporter recipeData() {
+        return new Exporter() {
+            @Override
+            @SuppressWarnings("unchecked")
+            public JSONObject toJSON() {
+                JSONObject recipeJSON = new JSONObject();
+
+                List<Integer> recipeNames = new ArrayList<>();
+
+                for (Recipe r : Manager.player.getRecipeManager().getRecipeList()) recipeNames.add(r.getId());
+
+                recipeJSON.put("data",recipeJSON);
+
+                return recipeJSON;
+            }
+
+            @Override
+            public String getKey() {
+                return "recipes";
             }
         };
     }

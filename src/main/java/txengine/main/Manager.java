@@ -121,6 +121,8 @@ public class Manager {
         // Register save data exporters
         SaveManager.getInstance().registerExporter(Exporters.playerData());
         SaveManager.getInstance().registerExporter(Exporters.inventoryData());
+        SaveManager.getInstance().registerExporter(Exporters.combatResourceData());
+        SaveManager.getInstance().registerExporter(Exporters.recipeData());
     }
 
     private static void initDebug() {

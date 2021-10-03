@@ -65,8 +65,9 @@ public class RecipeLoader {
             }).toList();
 
             List<Event> events = LoadUtils.parseEvents((JSONArray) rawRecipe.get("events"));
-
-            recipeHashMap.put(id, RecipeFactory.build(ingredients, products, requirementList, events));
+            Recipe r = RecipeFactory.build(ingredients, products, requirementList, events);
+            r.setId(id);
+            recipeHashMap.put(id, r);
         }
 
         return recipeHashMap;
