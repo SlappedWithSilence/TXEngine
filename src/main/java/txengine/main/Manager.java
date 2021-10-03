@@ -119,10 +119,11 @@ public class Manager {
         skillManager = new SkillManager(skillHashMap);
 
         // Register save data exporters
-        SaveManager.getInstance().registerExporter(Exporters.playerData());
-        SaveManager.getInstance().registerExporter(Exporters.inventoryData());
-        SaveManager.getInstance().registerExporter(Exporters.combatResourceData());
-        SaveManager.getInstance().registerExporter(Exporters.recipeData());
+        //SaveManager.getInstance().registerExporter(Exporters.playerData());
+        //SaveManager.getInstance().registerExporter(Exporters.inventoryData());
+        //SaveManager.getInstance().registerExporter(Exporters.combatResourceData());
+        //SaveManager.getInstance().registerExporter(Exporters.recipeData());
+        Exporters.registerAll();
     }
 
     private static void initDebug() {

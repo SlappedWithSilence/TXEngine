@@ -2,9 +2,10 @@ package txengine.io.save;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import txengine.main.Manager;
+import txengine.systems.ability.Ability;
 import txengine.systems.crafting.Recipe;
+import txengine.systems.room.RoomManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,16 @@ import java.util.TreeMap;
 
 // A collection of static methods that return Exporters with a specific purpose
 public class Exporters {
+    public static void registerAll() {
+        SaveManager.getInstance().registerExporter(playerData());
+        SaveManager.getInstance().registerExporter(inventoryData());
+        SaveManager.getInstance().registerExporter(combatResourceData());
+        SaveManager.getInstance().registerExporter(recipeData());
+        SaveManager.getInstance().registerExporter(abilityData());
+        SaveManager.getInstance().registerExporter(equipmentData());
+        SaveManager.getInstance().registerExporter(roomStateData());
+        SaveManager.getInstance().registerExporter(visitedRoomsData());
+    }
 
     // Exports player-specific data to JSON object
     public static Exporter playerData() {
@@ -44,8 +55,8 @@ public class Exporters {
             public JSONObject toJSON() {
                 JSONObject inventoryJSON = new JSONObject();
 
-                inventoryJSON.put("ids",JSONValue.toJSONString(Manager.player.getInventory().getItemIDs()));
-                inventoryJSON.put("quantities",JSONValue.toJSONString(Manager.player.getInventory().getItemQuantities()));
+                inventoryJSON.put("ids",Manager.player.getInventory().getItemIDs());
+                inventoryJSON.put("quantities",Manager.player.getInventory().getItemQuantities());
 
                 return inventoryJSON;
             }
@@ -98,7 +109,7 @@ public class Exporters {
 
                 for (Recipe r : Manager.player.getRecipeManager().getRecipeList()) recipeNames.add(r.getId());
 
-                recipeJSON.put("data",recipeJSON);
+                recipeJSON.put("data",recipeNames);
 
                 return recipeJSON;
             }
@@ -113,13 +124,18 @@ public class Exporters {
     public static Exporter abilityData() {
        return new Exporter() {
            @Override
+           @SuppressWarnings("unchecked")
            public JSONObject toJSON() {
-               return null;
+               JSONObject abilitiesJSON = new JSONObject();
+
+               List<String> abilityNames = Manager.player.getAbilityManager().getAbilityList().stream().map(Ability::getName).toList();
+               abilitiesJSON.put("data", abilityNames);
+               return abilitiesJSON;
            }
 
            @Override
            public String getKey() {
-               return null;
+               return "abilities";
            }
        };
     }
@@ -127,13 +143,19 @@ public class Exporters {
     public static Exporter equipmentData() {
         return new Exporter() {
             @Override
+            @SuppressWarnings("unchecked")
             public JSONObject toJSON() {
-                return null;
+                JSONObject equipmentJSON = new JSONObject();
+
+                List<Integer> equipmentIDs = Manager.player.getEquipmentManager().getIDs();
+                equipmentJSON.put("data", equipmentIDs);
+
+                return equipmentJSON;
             }
 
             @Override
             public String getKey() {
-                return null;
+                return "equipment";
             }
         };
     }
@@ -142,12 +164,36 @@ public class Exporters {
         return new Exporter() {
             @Override
             public JSONObject toJSON() {
-                return null;
+                JSONObject roomStateJSON = new JSONObject();
+
+                // Use room manager's reporting data to export room IDs that have had a change in Action visibility
+                // Export only the rooms that the player has visited
+
+                return roomStateJSON;
             }
 
             @Override
             public String getKey() {
-                return null;
+                return "room_states";
+            }
+        };
+    }
+
+    public static Exporter visitedRoomsData() {
+        return new Exporter() {
+            @Override
+            @SuppressWarnings("unchecked")
+            public JSONObject toJSON() {
+                JSONObject visitedRoomsJSON = new JSONObject();
+
+                visitedRoomsJSON.put("data",RoomManager.getVisitedRooms());
+
+                return visitedRoomsJSON;
+            }
+
+            @Override
+            public String getKey() {
+                return "visited_rooms";
             }
         };
     }

@@ -119,4 +119,9 @@ public class EquipmentManager {
         return equipmentMap.get(type);
     }
 
+    // Return a list of item IDs associated with equipment in each slot.
+    public List<Integer> getIDs() {
+        return equipmentMap.values().stream().filter(id -> id != null && id != -1).toList();
+    }
+
 }
