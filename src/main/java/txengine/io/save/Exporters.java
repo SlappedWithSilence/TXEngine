@@ -110,5 +110,45 @@ public class Exporters {
         };
     }
 
+    public static Exporter abilityData() {
+       return new Exporter() {
+           @Override
+           public JSONObject toJSON() {
+               return null;
+           }
 
+           @Override
+           public String getKey() {
+               return null;
+           }
+       };
+    }
+
+    public static Exporter equipmentData() {
+        return new Exporter() {
+            @Override
+            public JSONObject toJSON() {
+                return null;
+            }
+
+            @Override
+            public String getKey() {
+                return null;
+            }
+        };
+    }
+
+    public static Exporter roomStateData() {
+        return new Exporter() {
+            @Override
+            public JSONObject toJSON() {
+                return null;
+            }
+
+            @Override
+            public String getKey() {
+                return null;
+            }
+        };
+    }
 }
