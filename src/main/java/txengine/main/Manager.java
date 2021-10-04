@@ -2,7 +2,6 @@ package txengine.main;
 
 import txengine.io.loaders.*;
 import txengine.io.save.Exporters;
-import txengine.io.save.SaveManager;
 import txengine.ui.color.*;
 import txengine.systems.combat.CombatEntity;
 import txengine.systems.combat.CombatResourceManager;
@@ -65,28 +64,39 @@ public class Manager {
     // The class that handles the main menu, then launches the game.
     public static void main( String[] args ) {
 
-        // Start the main game loop
+
         if (args.length > 0 && args[0].equals("-D")) {
-            debug = true;
+            //debug = true;
         }
+
+        ArgsHandler.getInstance().registerHandler("-D", new Handler() {
+            @Override
+            public boolean handle(ArrayList<String> values) {
+                debug = true;
+                return true;
+            }
+
+            @Override
+            public String getPreferredTrigger() {
+                return "-D";
+            }
+        });
+        ArgsHandler.getInstance().parseArgs(args);
+        ArgsHandler.getInstance().run();
 
         initialize();
+        if (LoadManager.getInstance().hasSave()) {
+            System.out.println("Do you want to resume your game?");
+            boolean resumeGame = LogUtils.getAffirmative();
 
-        saveExists = Load.hasSave(); // Check for a saved game
-        if (saveExists) {            // If the save exists
-            promptLoadGame();        // Ask the user if they want to resume from that save
-            if (LogUtils.getAffirmative()) Load.loadGame(); // If the user says yes, load the game
-        } else {                        // if no save exists
-            Load.initializeNewGame();   // Set up a new game
+            if (resumeGame) LoadManager.getInstance().loadGame();
+        } else {
+            LoadManager.getInstance().initializeNewGame();
         }
 
-
+        if (debug) initDebug();
 
         // Start the main game loop
-        if (debug) {
-            initDebug();
-        }
-
         RoomManager.roomLoop();
 
     }
@@ -118,12 +128,9 @@ public class Manager {
         flagManager = new FlagManager();
         skillManager = new SkillManager(skillHashMap);
 
-        // Register save data exporters
-        //SaveManager.getInstance().registerExporter(Exporters.playerData());
-        //SaveManager.getInstance().registerExporter(Exporters.inventoryData());
-        //SaveManager.getInstance().registerExporter(Exporters.combatResourceData());
-        //SaveManager.getInstance().registerExporter(Exporters.recipeData());
         Exporters.registerAll();
+
+        player = new Player();
     }
 
     private static void initDebug() {
