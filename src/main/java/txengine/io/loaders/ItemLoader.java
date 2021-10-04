@@ -22,6 +22,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+import static txengine.io.LoadUtils.optional;
+
 public class ItemLoader extends Loader {
 
     @Override
@@ -56,7 +58,7 @@ public class ItemLoader extends Loader {
         // Loop through the item JSON objects
         while (iterator.hasNext()) {
             JSONObject rawItem = iterator.next();
-            String itemType = (String) rawItem.get("type");
+            String itemType = LoadUtils.asString(rawItem,"type");
 
             switch (itemType) {
                 case "item":
@@ -99,11 +101,11 @@ public class ItemLoader extends Loader {
 
     private Consumable loadConsumable(JSONObject rawItem) {
         // Get standard values
-        String name = (String) rawItem.get("name");
-        String desc = (String) rawItem.get("description");
-        int id = ((Long) rawItem.get("id")).intValue();
-        int value = ((Long) rawItem.get("value")).intValue();
-        int maxStacks = ((Long) rawItem.get("maxStacks")).intValue();
+        String name = LoadUtils.asString(rawItem,"name");
+        String desc = LoadUtils.asString(rawItem,"description");
+        int id = LoadUtils.asInt(rawItem, "id");
+        int value = optional(rawItem, "value", Long.class, 0L ).intValue();
+        int maxStacks = optional(rawItem, "maxStacks", Long.class, 10L ).intValue();
 
         // Begin loading effects
         ArrayList<Effect> effects = new ArrayList<>();            // The list that will hold the effects
@@ -128,39 +130,41 @@ public class ItemLoader extends Loader {
     }
 
     private Item loadItem(JSONObject rawItem) {
-        String name = (String) rawItem.get("name");
-        String desc = (String) rawItem.get("description");
-        int id = ((Long) rawItem.get("id")).intValue();
-        int value = ((Long) rawItem.get("value")).intValue();
-        int maxStacks = ((Long) rawItem.get("maxStacks")).intValue();
+        String name = LoadUtils.asString(rawItem,"name");
+        String desc = LoadUtils.asString(rawItem,"description");
+        int id = LoadUtils.asInt(rawItem, "id");
+        int value = optional(rawItem, "value", Long.class, 0L ).intValue();
+        int maxStacks = optional(rawItem, "maxStacks", Long.class, 1L ).intValue();
 
         return new Item(name, desc, id, value, maxStacks);
     }
 
     private Equipment loadEquipment(JSONObject rawItem) {
         // Get standard values
-        String name = (String) rawItem.get("name");
-        String desc = (String) rawItem.get("description");
-        int id = ((Long) rawItem.get("id")).intValue();
-        int value = ((Long) rawItem.get("value")).intValue();
-        int maxStacks = ((Long) rawItem.get("maxStacks")).intValue();
+        String name = LoadUtils.asString(rawItem,"name");
+        String desc = LoadUtils.asString(rawItem,"description");
+        int id = LoadUtils.asInt(rawItem, "id");
+        int value = optional(rawItem, "value", Long.class, 0L ).intValue();
+        int maxStacks = optional(rawItem, "maxStacks", Long.class, 1L ).intValue();
 
         // Load Equipment-specific fields
-        Equipment.EquipmentType type = Equipment.EquipmentType.valueOf((String) rawItem.get("equipment_type"));
-        int damage = ((Long) rawItem.get("damage")).intValue();
-        int defense = ((Long) rawItem.get("defense")).intValue();
+        Equipment.EquipmentType type = Equipment.EquipmentType.valueOf(LoadUtils.asString(rawItem,"equipment_type"));
+        int damage = optional(rawItem, "damage", Long.class, 0L ).intValue();
+        int defense = optional(rawItem, "defense", Long.class, 0L ).intValue();
 
         // Begin loading effects
-        ArrayList<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects = LoadUtils.parseCombatEffects((JSONArray) rawItem.get("combat_effects"));
+        ArrayList<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects = LoadUtils.parseCombatEffects((JSONArray) optional(rawItem,"combat_effects",JSONArray.class, new JSONArray()));
 
         // Load tags
-        List<AbstractMap.SimpleEntry<String, Float>> tagResistances = LoadUtils.parseStringFloatPairs((JSONArray) rawItem.get("tag_resistances"));
+        List<AbstractMap.SimpleEntry<String, Float>> tagResistances = LoadUtils.parseStringFloatPairs((JSONArray) optional(rawItem,"tag_resistances",JSONArray.class, new JSONArray()));
 
         // Load Requirements
-        List<Requirement> requirements = LoadUtils.parseRequirements((JSONArray) rawItem.get("requirements"));
+        List<Requirement> requirements = LoadUtils.parseRequirements((JSONArray) optional(rawItem,"requirements",JSONArray.class, new JSONArray()));
 
-        List<String> abilityNames = List.of(LoadUtils.getStringArray((JSONArray) rawItem.get("abilities")));
+        //Load Abilities
+        List<String> abilityNames = List.of(LoadUtils.getStringArray((JSONArray) optional(rawItem,"abilities",JSONArray.class, new JSONArray())));
 
+        //System.out.println(name + " " + desc + " " + id + " " + value + " " + type);
         return new Equipment(name, desc, id, value, maxStacks, effects, tagResistances, requirements, abilityNames, type, damage, defense);
     }
 }

@@ -20,8 +20,7 @@
                           "class_name" : "ItemEvent",
                           "properties" : ["1", "1"]
                         }
-                      ],
-              "target" : 1
+                      ]
             },
             {
               "__comment__" : "This is the second option.",
@@ -102,6 +101,9 @@
                 }
               ],
               "target" : -1
+            },
+            {
+              "menu_text" : "Bye"
             },
             {
               "__comment__" : "This is the second option.",

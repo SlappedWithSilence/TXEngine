@@ -1,5 +1,6 @@
 package txengine.io.loaders;
 
+import org.json.simple.JSONValue;
 import txengine.io.Load;
 import txengine.io.LoadUtils;
 import txengine.io.Loader;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+
+import static txengine.io.LoadUtils.optional;
 
 public class ConversationLoader extends Loader {
 
@@ -82,9 +85,9 @@ public class ConversationLoader extends Loader {
         for (int i = 0; i < width; i++) {
             JSONObject rawOption = (JSONObject) ((JSONArray) rawModule.get("options")).get(i);
             options[i] = LoadUtils.asString(rawOption, "menu_text");
-            events[i] = new Event[((JSONArray) rawOption.get("events")).size()];
-            events[i] = LoadUtils.parseEvents((JSONArray) rawOption.get("events")).toArray(new Event[0]);
-            targets[i] = LoadUtils.asInt(rawOption, "target");
+            events[i] = new Event[((JSONArray) optional(rawOption,"events",JSONArray.class, new JSONArray())).size()];
+            events[i] = LoadUtils.parseEvents( (JSONArray) optional(rawOption,"events",JSONArray.class, new JSONArray())).toArray(new Event[0]);
+            targets[i] = optional(rawOption, "target", Long.class, -1L ).intValue();
         }
 
         return new ConversationModule(id, npcText, options, events, targets);
