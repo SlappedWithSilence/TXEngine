@@ -68,6 +68,7 @@ public class Room {
 			if (Requirement.allMet(getVisibleActions().get(userSelection).getRequirements())) {
 				System.out.println(getVisibleActions().get(userSelection).getText());
 				int unhide = getVisibleActions().get(userSelection).perform(); // Calculate the index of the action to unhide (if any)
+
 				if (unhide >= 0) roomActions.get(unhide).setHidden(false); // Enable the Action that was passed through the last performed Action.
 
 				if (getVisibleActions().get(userSelection) instanceof MoveAction) break; // If the user needs to move, do so
@@ -170,5 +171,18 @@ public class Room {
 
 	public void setIntroPrompt(String introPrompt) {
 		this.introPrompt = introPrompt;
+	}
+
+	public List<Integer> getHiddenActions() {
+		int offset = 0;
+		if (!ignoreDefaultActions) offset = Room.defaultActions.size();
+
+		List<Integer> hiddenIndexes = new ArrayList<>();
+
+		for (int i = 0; i < roomActions.size() - offset; i++) {
+			if (roomActions.get(i).isHidden()) hiddenIndexes.add(i);
+		}
+
+		return hiddenIndexes;
 	}
 }

@@ -166,8 +166,11 @@ public class Exporters {
             public JSONObject toJSON() {
                 JSONObject roomStateJSON = new JSONObject();
 
-                // Use room manager's reporting data to export room IDs that have had a change in Action visibility
                 // Export only the rooms that the player has visited
+                for (int roomID : RoomManager.getVisitedRooms()) {
+                    List<Integer> hiddenActions = Manager.roomHashMap.get(roomID).getHiddenActions();
+                    roomStateJSON.put(roomID,hiddenActions);
+                }
 
                 return roomStateJSON;
             }
