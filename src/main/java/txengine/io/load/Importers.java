@@ -1,17 +1,13 @@
-package txengine.io;
+package txengine.io.load;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import txengine.io.save.Exporter;
+import txengine.io.LoadUtils;
 import txengine.main.Manager;
 import txengine.systems.room.RoomManager;
-import txengine.systems.room.action.Action;
 import txengine.ui.LogUtils;
 
-import java.io.File;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 // A series of functions that return Importers. Each importer should load a specific component from the user's save file
 public class Importers {

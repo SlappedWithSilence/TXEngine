@@ -1,5 +1,6 @@
 package txengine.main;
 
+import txengine.io.load.LoadManager;
 import txengine.io.loaders.*;
 import txengine.io.save.Exporters;
 import txengine.ui.color.*;

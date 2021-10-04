@@ -1,9 +1,8 @@
-package txengine.io;
+package txengine.io.load;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import txengine.io.save.SaveManager;
 import txengine.main.Manager;
 import txengine.systems.combat.Player;
 import txengine.ui.LogUtils;
