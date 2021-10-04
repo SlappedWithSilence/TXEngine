@@ -1,6 +1,5 @@
 package txengine.io.loaders;
 
-import txengine.io.Load;
 import txengine.io.LoadUtils;
 import txengine.io.Loader;
 import txengine.io.Resources;

@@ -105,11 +105,11 @@ public class Exporters {
             public JSONObject toJSON() {
                 JSONObject recipeJSON = new JSONObject();
 
-                List<Integer> recipeNames = new ArrayList<>();
+                List<Integer> recipeIDs = new ArrayList<>();
 
-                for (Recipe r : Manager.player.getRecipeManager().getRecipeList()) recipeNames.add(r.getId());
+                for (Recipe r : Manager.player.getRecipeManager().getRecipeList()) recipeIDs.add(r.getId());
 
-                recipeJSON.put("data",recipeNames);
+                recipeJSON.put("data",recipeIDs);
 
                 return recipeJSON;
             }

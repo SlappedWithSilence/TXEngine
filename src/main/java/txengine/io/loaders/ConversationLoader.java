@@ -1,6 +1,5 @@
 package txengine.io.loaders;
 
-import txengine.io.Load;
 import txengine.io.LoadUtils;
 import txengine.io.Loader;
 import txengine.systems.conversation.*;
@@ -9,7 +8,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import txengine.systems.event.Event;
-import txengine.systems.event.EventFactory;
 import txengine.ui.LogUtils;
 
 import java.io.File;
@@ -18,7 +16,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 public class ConversationLoader extends Loader {
