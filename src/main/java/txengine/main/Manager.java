@@ -127,8 +127,8 @@ public class Manager {
         player.getAbilityManager().learn("Smack");
         player.getAbilityManager().learn("Kidnap");
         player.getAbilityManager().learn("Spit");
-        player.getAbilityManager().learn("Meditate");
-        player.getAbilityManager().learn("Illusory Weapon");
+        //player.getAbilityManager().learn("Meditate");
+        //player.getAbilityManager().learn("Illusory Weapon");
         //player.getAbilityManager().learn("Accelerate");
         player.getAbilityManager().learn("Bomb-Threat");
         player.getAbilityManager().learn("Blast");
@@ -137,6 +137,7 @@ public class Manager {
 
         player.getInventory().addItem(16);
         player.getInventory().addItem(17);
+        player.getInventory().addItem(18);
     }
 
 }

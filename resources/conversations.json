@@ -91,7 +91,6 @@
           "options" :
           [
             {
-              "__comment__" : "This is the first option.",
               "menu_text" : "I'd to set a flag",
               "events" :
               [
@@ -106,7 +105,6 @@
               "menu_text" : "Bye"
             },
             {
-              "__comment__" : "This is the second option.",
               "menu_text" : "I'd like to learn a new Ability.",
               "events" :
               [
@@ -118,12 +116,11 @@
               "target" : -1
             },
             {
-              "__comment__" : "This is the second option.",
               "menu_text" : "Go back to the start.",
-              "events" :
-              [
-              ],
               "target" : 0
+            },
+            {
+              "menu_text" : "Exit Conversation."
             }
           ]
         }

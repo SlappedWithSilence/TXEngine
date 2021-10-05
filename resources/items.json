@@ -234,6 +234,13 @@
          ],
          "combat_effects" :
          []
+      },
+      {
+         "type"      :  "equipment",
+         "name"      :  "Wedding Ring",
+         "description": "Useless, but better not be caught without it",
+         "equipment_type" : "RING",
+         "id"        :  18
       }
    ]
 }
