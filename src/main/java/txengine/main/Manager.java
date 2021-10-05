@@ -65,19 +65,7 @@ public class Manager {
     // The class that handles the main menu, then launches the game.
     public static void main(String[] args ) {
 
-        ArgsHandler.getInstance().registerHandler("-D", new Handler() {
-            @Override
-            public boolean handle(ArrayList<String> values) {
-                debug = true;
-                return true;
-            }
-
-            @Override
-            public String getPreferredTrigger() {
-                return "-D";
-            }
-        });
-
+        Handlers.registerAll();
         ArgsHandler.getInstance().parseArgs(args);
         ArgsHandler.getInstance().run();
 
@@ -95,6 +83,8 @@ public class Manager {
         }
 
         if (debug) initDebug();
+
+        ArgsHandler.getInstance().runLate();
 
         // Start the main game loop
         roomManager.roomLoop();
