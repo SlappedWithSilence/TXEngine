@@ -20,16 +20,16 @@ public class SimpleCraftingAction extends Action {
             case 0 -> {
                 Components.header("Choose a Recipe");
                 System.out.println("Which recipe would you like to craft? (-1 to choose none)");
-                Components.numberedList(Manager.player.getRecipeManager().getCraftableRecipes(Manager.player).stream().map(Recipe::toString).toList());
-                int recipeChoice = LogUtils.getNumber(-1, Manager.player.getRecipeManager().getCraftableRecipes(Manager.player).size() - 1);
+                Components.numberedList(Manager.recipeManager.getCraftableRecipes(Manager.player).stream().map(Recipe::toString).toList());
+                int recipeChoice = LogUtils.getNumber(-1, Manager.recipeManager.getCraftableRecipes(Manager.player).size() - 1);
 
                 if (recipeChoice < 0) break;
 
-                Manager.player.getRecipeManager().craft(Manager.player.getRecipeManager().getCraftableRecipes(Manager.player).get(recipeChoice), Manager.player.getInventory());
+                Manager.recipeManager.craft(Manager.recipeManager.getCraftableRecipes(Manager.player).get(recipeChoice), Manager.player.getInventory());
             }
             case 1 -> {
                 Components.header("All Learned Recipes");
-                Components.numberedList(Manager.player.getRecipeManager().getRecipeList().stream().map(Recipe::toFormattedString).toList());
+                Components.numberedList(Manager.recipeManager.getLearnedRecipeList().stream().map(Recipe::toFormattedString).toList());
             }
         }
 

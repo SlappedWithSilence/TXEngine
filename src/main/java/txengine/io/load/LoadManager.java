@@ -21,7 +21,6 @@ public class LoadManager {
 
 	private static File saveFile;
 
-
 	// Checks for a saved game
 	public boolean hasSave() {
 		if (saveFile == null) saveFile = new File(SAVE_PATH);

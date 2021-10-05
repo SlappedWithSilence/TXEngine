@@ -6,6 +6,7 @@ import txengine.main.Manager;
 import txengine.systems.ability.Ability;
 import txengine.systems.crafting.Recipe;
 import txengine.systems.room.RoomManager;
+import txengine.systems.skill.Skill;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +23,12 @@ public class Exporters {
         SaveManager.getInstance().registerExporter(equipmentData());
         SaveManager.getInstance().registerExporter(roomStateData());
         SaveManager.getInstance().registerExporter(visitedRoomsData());
+        SaveManager.getInstance().registerExporter(skillsData());
     }
 
     // Exports player-specific data to JSON object
     public static Exporter playerData() {
-        return (new Exporter() {
+        return new Exporter() {
 
             @Override
             @SuppressWarnings("unchecked")
@@ -36,6 +38,7 @@ public class Exporters {
                 playerJSON.put("name", Manager.player.getName());
                 playerJSON.put("location", Manager.player.getLocation());
                 playerJSON.put("money", Manager.player.getMoney());
+                playerJSON.put("speed", Manager.player.getSpeed());
 
                 return playerJSON;
             }
@@ -44,7 +47,7 @@ public class Exporters {
             public String getKey() {
                 return "player";
             }
-        });
+        };
     }
 
     // Exports the player's inventory data to a JSON object
@@ -107,7 +110,7 @@ public class Exporters {
 
                 List<Integer> recipeIDs = new ArrayList<>();
 
-                for (Recipe r : Manager.player.getRecipeManager().getRecipeList()) recipeIDs.add(r.getId());
+                for (Recipe r : Manager.recipeManager.getLearnedRecipeList()) recipeIDs.add(r.getId());
 
                 recipeJSON.put("data",recipeIDs);
 
@@ -167,8 +170,8 @@ public class Exporters {
                 JSONObject roomStateJSON = new JSONObject();
 
                 // Export only the rooms that the player has visited
-                for (int roomID : RoomManager.getVisitedRooms()) {
-                    List<Integer> hiddenActions = Manager.roomHashMap.get(roomID).getHiddenActions();
+                for (int roomID : Manager.roomManager.getVisitedRooms()) {
+                    List<Integer> hiddenActions = Manager.roomManager.get(roomID).getHiddenActions();
                     roomStateJSON.put(roomID,hiddenActions);
                 }
 
@@ -189,7 +192,7 @@ public class Exporters {
             public JSONObject toJSON() {
                 JSONObject visitedRoomsJSON = new JSONObject();
 
-                visitedRoomsJSON.put("data",RoomManager.getVisitedRooms());
+                visitedRoomsJSON.put("data",Manager.roomManager.getVisitedRooms());
 
                 return visitedRoomsJSON;
             }
@@ -197,6 +200,39 @@ public class Exporters {
             @Override
             public String getKey() {
                 return "visited_rooms";
+            }
+        };
+    }
+
+    public static Exporter skillsData() {
+        return new Exporter() {
+            @Override
+            @SuppressWarnings("unchecked")
+            public JSONObject toJSON() {
+                JSONObject skillsJSON = new JSONObject();
+
+                JSONArray sks = new JSONArray();
+
+                for (String skillName : Manager.skillManager.getSkillNames()) {
+                    int xp = Manager.skillManager.getSkillXP(skillName);
+                    int maxXP = Manager.skillManager.getSkillMaxXP(skillName);
+
+                    JSONObject skillJSON = new JSONObject();
+                    skillJSON.put("name",skillName);
+                    skillJSON.put("xp",xp);
+                    skillJSON.put("max_xp",maxXP);
+
+                    sks.add(skillJSON);
+                }
+
+                skillsJSON.put("data",sks);
+
+                return skillsJSON;
+            }
+
+            @Override
+            public String getKey() {
+                return "skills";
             }
         };
     }

@@ -4,6 +4,7 @@ import txengine.main.Manager;
 import txengine.ui.component.Components;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class SkillManager {
 
@@ -36,6 +37,12 @@ public class SkillManager {
 
     public int getSkillLevel(String skillName) {
         return skills.get(skillName).getLevel();
+    }
+    public final int getSkillXP(String skillName) { return skills.get(skillName).xp; }
+    public final int getSkillMaxXP(String skillName) { return skills.get(skillName).levelUpXP; }
+
+    public List<String> getSkillNames() {
+        return skills.values().stream().map(Skill::getName).toList();
     }
 
     public int getPrimaryLevel() {

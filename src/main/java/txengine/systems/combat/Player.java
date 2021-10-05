@@ -24,8 +24,6 @@ public class Player extends CombatEntity {
 	private int money;
 	private int location; // The room that the player is currently in. This value must always be a valid room id.
 
-	private RecipeManager recipeManager;
-
 	//*** Constructors ***//
 
 	// Default constructor
@@ -38,11 +36,11 @@ public class Player extends CombatEntity {
 		money = 0;
 		location = 1;
 
-		recipeManager = new RecipeManager();
+
 	}
 
 	// Specific constructor
-	public Player(String name, int level, Inventory inventory, int location, int money, RecipeManager recipeManager) {
+	public Player(String name, int level, Inventory inventory, int location, int money) {
 		this.name = name;
 
 		this.level = level;
@@ -54,8 +52,6 @@ public class Player extends CombatEntity {
 		this.location = location;
 
 		resourceManager = new CombatResourceManager(Manager.playerResourceMap);
-
-		this.recipeManager = recipeManager;
 	}
 
 	/* Member Methods */
@@ -138,15 +134,6 @@ public class Player extends CombatEntity {
 	}
 
 	/* Accessor Methods */
-
-	public RecipeManager getRecipeManager() {
-		return recipeManager;
-	}
-
-	public void setRecipeManager(RecipeManager recipeManager) {
-		this.recipeManager = recipeManager;
-	}
-
 	public static boolean isPlayer(CombatEntity entity) {
 		return entity instanceof Player;
 	}

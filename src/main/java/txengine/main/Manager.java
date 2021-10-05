@@ -3,6 +3,7 @@ package txengine.main;
 import txengine.io.load.LoadManager;
 import txengine.io.loaders.*;
 import txengine.io.save.Exporters;
+import txengine.systems.crafting.RecipeManager;
 import txengine.ui.color.*;
 import txengine.systems.combat.CombatEntity;
 import txengine.systems.combat.CombatResourceManager;
@@ -47,13 +48,10 @@ public class Manager {
     public static Player player;
 
     public static HashMap<Integer, Item> itemHashMap;
-    public static HashMap<Integer, Room> roomHashMap;
     public static HashMap<Integer, Conversation> conversationHashMap;
     public static HashMap<String, Integer[]> playerResourceMap;
     public static HashMap<String, Ability> abilityHashMap;
     public static HashMap<Integer, CombatEntity> combatEntityHashMap;
-    public static HashMap<Integer, Recipe> recipeHashMap;
-    private static HashMap<String, Skill> skillHashMap;
 
     public static String primaryResource = "Health";
     public static String primarySkill = "Combat";
@@ -61,14 +59,11 @@ public class Manager {
 
     public static FlagManager flagManager;
     public static SkillManager skillManager;
+    public static RoomManager roomManager;
+    public static RecipeManager recipeManager;
 
     // The class that handles the main menu, then launches the game.
-    public static void main( String[] args ) {
-
-
-        if (args.length > 0 && args[0].equals("-D")) {
-            //debug = true;
-        }
+    public static void main(String[] args ) {
 
         ArgsHandler.getInstance().registerHandler("-D", new Handler() {
             @Override
@@ -82,15 +77,19 @@ public class Manager {
                 return "-D";
             }
         });
+
         ArgsHandler.getInstance().parseArgs(args);
         ArgsHandler.getInstance().run();
 
         initialize();
+
         if (LoadManager.getInstance().hasSave()) {
             System.out.println("Do you want to resume your game?");
             boolean resumeGame = LogUtils.getAffirmative();
 
             if (resumeGame) LoadManager.getInstance().loadGame();
+            else  LoadManager.getInstance().initializeNewGame();
+
         } else {
             LoadManager.getInstance().initializeNewGame();
         }
@@ -98,7 +97,7 @@ public class Manager {
         if (debug) initDebug();
 
         // Start the main game loop
-        RoomManager.roomLoop();
+        roomManager.roomLoop();
 
     }
 
@@ -117,17 +116,19 @@ public class Manager {
 
         // Load resource files
         itemHashMap = new ItemLoader().load(Resources.getResourceAsFile(ITEM_RESOURCE_FILE));
-        roomHashMap = new RoomLoader().load(Resources.getResourceAsFile(ROOM_RESOURCE_FILE));
+        HashMap<Integer, Room> roomHashMap = new RoomLoader().load(Resources.getResourceAsFile(ROOM_RESOURCE_FILE));
         conversationHashMap = new ConversationLoader().load(Resources.getResourceAsFile(CONVERSATION_RESOURCE_FILE));
         playerResourceMap = new CombatResourceLoader().load(Resources.getResourceAsFile(PLAYER_RESOURCE_FILE));
         abilityHashMap = new AbilityLoader().load(Resources.getResourceAsFile(ABILITY_RESOURCE_FILE));
         combatEntityHashMap = new CombatEntityLoader().load(Resources.getResourceAsFile(COMBAT_ENTITY_RESOURCE_FILE));
-        recipeHashMap = RecipeLoader.load(Resources.getResourceAsFile(RECIPES_RESOURCE_FILE));
-        skillHashMap = new SkillLoader().load(Resources.getResourceAsFile(SKILLS_RESOURCE_FILE));
+        HashMap<Integer, Recipe> recipeHashMap = RecipeLoader.load(Resources.getResourceAsFile(RECIPES_RESOURCE_FILE));
+        HashMap<String, Skill> skillHashMap = new SkillLoader().load(Resources.getResourceAsFile(SKILLS_RESOURCE_FILE));
 
         // Set up global managers
         flagManager = new FlagManager();
         skillManager = new SkillManager(skillHashMap);
+        roomManager = new RoomManager(roomHashMap);
+        recipeManager = new RecipeManager(recipeHashMap);
 
         Exporters.registerAll();
 
@@ -147,7 +148,7 @@ public class Manager {
         player.getAbilityManager().learn("Bomb-Threat");
         player.getAbilityManager().learn("Blast");
 
-        for (Recipe r : recipeHashMap.values()) player.getRecipeManager().learn(r);
+        for (Recipe r : recipeManager.getRecipes()) recipeManager.learn(r);
 
         player.getInventory().addItem(16);
         player.getInventory().addItem(17);

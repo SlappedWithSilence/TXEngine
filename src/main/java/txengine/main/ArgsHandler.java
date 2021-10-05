@@ -3,8 +3,13 @@ package txengine.main;
 import txengine.ui.LogUtils;
 
 import java.util.*;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+
+// A class for parsing run time arguments
+// must follow these rules:
+// - <ARG_KEY> <ARG_VALUE> <ARG_KEY>... etc.
+// An arg key must be followed
 
 public class ArgsHandler {
 
@@ -12,10 +17,8 @@ public class ArgsHandler {
 
     private static final String ARG_REGEX = "-[a-zA-Z]+";
 
-    private HashMap<String, List<String>> argsParams;
-    private HashMap<String, List<Handler>> paramHandlers;
-
-
+    private HashMap<String, List<String>> argsParams; // Maps a given args key to whatever args values come after it
+    private HashMap<String, List<Handler>> paramHandlers; // Maps a given args key to whatever handlers are registered to it
 
     public ArgsHandler() {
         argsParams = new HashMap<>();
@@ -39,8 +42,11 @@ public class ArgsHandler {
             } else if (argsParams.containsKey(curArg)) {
                 LogUtils.error("Argument \"" + curArg + "\" already passed!","ArgsHandler");
                 throw new IllegalArgumentException();
+
+            }
+
             // Case: an argument value is passed
-            } else {
+            else {
                 // Case: a value was passed with no preceding key
                 if (lastKey == null) {
                     LogUtils.error("Value \"" + curArg + "\" was passed with no key!","ArgsHandler");

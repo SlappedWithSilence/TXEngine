@@ -11,7 +11,7 @@ public class RecipeEvent extends Event {
 
     @Override
     public void execute() {
-        Manager.player.getRecipeManager().learn(Integer.parseInt(getProperties()[0]));
+        Manager.recipeManager.learn(Integer.parseInt(getProperties()[0]));
     }
 
     @Override

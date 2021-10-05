@@ -29,10 +29,12 @@ public class Importers {
             String name = LoadUtils.asString(playerJSON,"name");
             int location = LoadUtils.asInt(playerJSON,"location");
             int money = LoadUtils.asInt(playerJSON,"money");
+            int speed = LoadUtils.asInt(playerJSON, "speed");
 
             Manager.player.setName(name);
             Manager.player.setLocation(location);
             Manager.player.setMoney(money);
+            Manager.player.setSpeed(speed);
         };
     }
 
@@ -64,7 +66,7 @@ public class Importers {
         return root -> {
           JSONArray recipeJSON = (JSONArray) ((JSONObject) root.get("recipes")).get("data");
           int[] recipeIDs = LoadUtils.getIntArray(recipeJSON);
-          for (int i = 0; i < recipeIDs.length; i++) Manager.player.getRecipeManager().learn(recipeIDs[i]);
+          for (int i = 0; i < recipeIDs.length; i++) Manager.recipeManager.learn(recipeIDs[i]);
         };
     }
 
@@ -87,7 +89,7 @@ public class Importers {
           int[] visitedRoomIDs = LoadUtils.getIntArray((JSONArray) ((JSONObject) root.get("visited_rooms")).get("data"));
           HashSet<Integer> set = new HashSet<>();
           for (int id : visitedRoomIDs) set.add(id);
-          RoomManager.setVisitedRooms(set);
+          Manager.roomManager.setVisitedRooms(set);
         };
     }
 
@@ -95,13 +97,13 @@ public class Importers {
         return root -> {
           JSONObject roomStateJSON = (JSONObject) root.get("room_states");
 
-          for (int roomID : RoomManager.getVisitedRooms()) { // For each visited room
+          for (int roomID : Manager.roomManager.getVisitedRooms()) { // For each visited room
               JSONArray roomElement = (JSONArray) roomStateJSON.get(""+roomID);
               if (roomElement == null) LogUtils.error("Something went wrong while loading room states for room " + roomID + "!");
               int[] hiddenActions = LoadUtils.getIntArray(roomElement); // get the list of indexes of hidden actions
 
-              Manager.roomHashMap.get(roomID).getRoomActions().forEach(action -> action.setHidden(false));
-              for (int actionsIndex : hiddenActions) Manager.roomHashMap.get(roomID).getRoomActions().get(actionsIndex).setHidden(true);
+              Manager.roomManager.get(roomID).getRoomActions().forEach(action -> action.setHidden(false));
+              for (int actionsIndex : hiddenActions) Manager.roomManager.get(roomID).getRoomActions().get(actionsIndex).setHidden(true);
           }
         };
     }

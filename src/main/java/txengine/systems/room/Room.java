@@ -1,6 +1,7 @@
 package txengine.systems.room;
 
 import com.rits.cloning.Cloner;
+import txengine.main.Manager;
 import txengine.systems.integration.Requirement;
 import txengine.ui.component.Components;
 import txengine.ui.LogUtils;
@@ -55,7 +56,7 @@ public class Room {
 
 		System.out.println(text);
 
-		if (!RoomManager.getVisitedRooms().contains(id)) { // If this room hasn't been entered before
+		if (!Manager.roomManager.getVisitedRooms().contains(id)) { // If this room hasn't been entered before
 			for(Action a : onFirstEnterActions) a.perform(); // Perform all the first-time-only actions
 		}
 

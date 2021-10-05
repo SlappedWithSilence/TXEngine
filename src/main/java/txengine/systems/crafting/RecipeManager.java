@@ -12,27 +12,29 @@ import java.util.*;
 // Records and manages all the recipies that the player has learned.
 public class RecipeManager {
 
-    List<Recipe> recipeList;
+    HashMap<Integer, Recipe> recipeHashMap;
+    Set<Recipe> learnedRecipeList;
 
-    public RecipeManager() {
-        recipeList = new ArrayList<>();
+    public RecipeManager(HashMap<Integer, Recipe> recipeHashMap) {
+        this.recipeHashMap = recipeHashMap;
+        learnedRecipeList = new HashSet<>();
     }
 
     public RecipeManager(List<Recipe> recipes) {
-        recipeList = new ArrayList<>(recipes);
+        learnedRecipeList = new HashSet<>(recipes);
     }
 
     /* Member Functions */
     public void addRecipe(Recipe recipe) {
-        if (recipeList.contains(recipe)) {
+        if (learnedRecipeList.contains(recipe)) {
             return;
         }
-        recipeList.add(recipe);
+        learnedRecipeList.add(recipe);
     }
 
     // Returns a list of items that the combatEntity has the ingredients to craft
     public List<Recipe> getCraftableRecipes(CombatEntity combatEntity) {
-        return recipeList.stream().filter(recipe -> recipe.hasIngredients(Manager.player.getInventory())).toList();
+        return learnedRecipeList.stream().filter(recipe -> recipe.hasIngredients(Manager.player.getInventory())).toList();
     }
 
     public List<String> ingredientsAsStrings(Recipe recipe) {
@@ -92,19 +94,20 @@ public class RecipeManager {
     }
 
     public void learn(Recipe r) {
-        recipeList.add(r);
+        learnedRecipeList.add(r);
     }
 
-    public void learn(int id) { recipeList.add(Manager.recipeHashMap.get(id));}
+    public void learn(int id) { learnedRecipeList.add(recipeHashMap.get(id));}
 
     /* Accessor Functions */
 
-    public List<Recipe> getRecipeList() {
-        return recipeList;
+    public Set<Recipe> getLearnedRecipeList() {
+        return learnedRecipeList;
     }
+    public Collection<Recipe> getRecipes() {return recipeHashMap.values();}
 
-    public void setRecipeList(List<Recipe> recipeList) {
-        this.recipeList = recipeList;
+    public void setLearnedRecipeList(Set<Recipe> learnedRecipeList) {
+        this.learnedRecipeList = learnedRecipeList;
     }
 
 
