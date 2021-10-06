@@ -128,7 +128,7 @@ public class Player extends CombatEntity {
 
 		System.out.println("What is your target?");
 
-		Components.verticalTabList(entityArrayList.stream().map(CombatEntity::getTabData).toList());
+		Components.numberedVerticalTabList(entityArrayList.stream().map(CombatEntity::getTabData).toList());
 
 		return entityArrayList.get(LogUtils.getNumber(0,entityArrayList.size()-1));
 	}

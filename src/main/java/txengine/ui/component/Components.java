@@ -183,6 +183,21 @@ public class Components {
         return sb.toString();
     }
 
+    public static String numberedVerticalTab(Collection<String> strings, int number) {
+        String topBar = "-".repeat(HEADER_LENGTH);
+        final char SIDE_WALL = '|';
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(topBar).append('\n');
+        sb.append(SIDE_WALL).append(""+number).append(" ".repeat(HEADER_LENGTH-2-(""+number).length())).append(SIDE_WALL).append("\n");
+        for (String s : strings) {
+            sb.append(SIDE_WALL).append(centerString(s, HEADER_LENGTH-2)).append(SIDE_WALL).append('\n');
+        }
+        sb.append(SIDE_WALL).append("_".repeat(HEADER_LENGTH-2)).append(SIDE_WALL);
+
+        return sb.toString();
+    }
+
     public static String verticalTab(Collection<String> strings, int length) {
         String topBar = "-".repeat(length);
         final char SIDE_WALL = '|';
@@ -250,6 +265,23 @@ public class Components {
     public static void verticalTabList(Collection<Tabable> elements) {
         for (Tabable element : elements)  System.out.println(verticalTab(element));
     }
+
+    public static void numberedVerticalTabList(Collection<Tabable> elements) {
+        int i = 0;
+        for (Tabable element : elements) {
+            System.out.println(numberedVerticalTab(element.getTabData(),i));
+            i++;
+        }
+    }
+
+    public static void numberedVerticalTabList(List<List<String>> elements) {
+        int i = 0;
+        for (List<String> element : elements) {
+            System.out.println(numberedVerticalTab(element,i));
+            i++;
+        }
+    }
+
 
     // returns a vertical list of horizontal VerticalTab pairs
     public static void parallelVerticalTabList(List<List<String>> left, List<List<String>> right, int length, String lefTitle, String rightTitle) {
