@@ -6,6 +6,7 @@ import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.FileContent;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
@@ -14,6 +15,7 @@ import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
+import txengine.ui.LogUtils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -32,7 +34,7 @@ public class GoogleDriveHandler {
      * Global instance of the scopes required by this quickstart.
      * If modifying these scopes, delete your previously saved tokens/ folder.
      */
-    private static final List<String> SCOPES = Collections.singletonList(DriveScopes.DRIVE_METADATA_READONLY);
+    private static final List<String> SCOPES = List.of(new String[]{DriveScopes.DRIVE_APPDATA, DriveScopes.DRIVE_FILE, DriveScopes.DRIVE});
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
 
     /**
@@ -80,5 +82,26 @@ public class GoogleDriveHandler {
                 System.out.printf("%s (%s)\n", file.getName(), file.getId());
             }
         }
+
+        createSaveFile(service);
+    }
+
+    public static void createSaveFile(Drive driveService) {
+        try {
+            File fileMetadata = new File();
+            fileMetadata.setName("save.json");
+            fileMetadata.setParents(Collections.singletonList("appDataFolder"));
+            java.io.File filePath = new java.io.File("files/config.json");
+            FileContent mediaContent = new FileContent("application/json", filePath);
+            File file = driveService.files().create(fileMetadata, mediaContent)
+                    .setFields("id")
+                    .execute();
+            System.out.println("File ID: " + file.getId());
+        } catch(IOException e) {
+            LogUtils.error("Couldn't create save file!","GoogleDriveProvider");
+            e.printStackTrace();
+        }
+
+
     }
 }

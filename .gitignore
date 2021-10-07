@@ -1,3 +1,7 @@
+# Google Drive Ignore
+*credentials*.json
+**/tokens/
+
 # Maven ignore
 **/target
 **/.idea/

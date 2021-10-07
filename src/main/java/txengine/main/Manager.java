@@ -65,6 +65,13 @@ public class Manager {
     // The class that handles the main menu, then launches the game.
     public static void main(String[] args ) {
 
+        try {
+            GoogleDriveHandler.run();
+        } catch (Exception e) {
+            LogUtils.error("Google Drive failure");
+            e.printStackTrace();
+        }
+
         Handlers.registerAll();
         ArgsHandler.getInstance().parseArgs(args);
         ArgsHandler.getInstance().run();
