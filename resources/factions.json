@@ -1,0 +1,15 @@
+{
+  "factions" : [
+    {
+      "name" : "The Gang",
+      "max_xp" : 10,
+      "xp_ratio" : 1.5
+    },
+    {
+      "name" : "The McPoyles",
+      "max_xp" : 30,
+      "xp_ratio" : 1.1
+    }
+  ]
+
+}

@@ -4,6 +4,8 @@ import txengine.io.load.LoadManager;
 import txengine.io.loaders.*;
 import txengine.io.save.Exporters;
 import txengine.systems.crafting.RecipeManager;
+import txengine.systems.reputation.Faction;
+import txengine.systems.reputation.FactionManager;
 import txengine.ui.color.*;
 import txengine.systems.combat.CombatEntity;
 import txengine.systems.combat.CombatResourceManager;
@@ -39,10 +41,9 @@ public class Manager {
     private static final String COMBAT_ENTITY_RESOURCE_FILE = "combat_entities.json";
     private static final String RECIPES_RESOURCE_FILE = "recipes.json";
     private static final String SKILLS_RESOURCE_FILE = "skills.json";
+    private static final String FACTION_RESOURCE_FILE = "factions.json";
 
     // *** Variables *** //
-    private static boolean saveExists = false;
-    private static boolean createNewGame = true;
     public static boolean debug = false;
 
     public static Player player;
@@ -61,6 +62,7 @@ public class Manager {
     public static SkillManager skillManager;
     public static RoomManager roomManager;
     public static RecipeManager recipeManager;
+    public static FactionManager factionManager;
 
     // The class that handles the main menu, then launches the game.
     public static void main(String[] args ) {
@@ -113,12 +115,14 @@ public class Manager {
         combatEntityHashMap = new CombatEntityLoader().load(Resources.getResourceAsFile(COMBAT_ENTITY_RESOURCE_FILE));
         HashMap<Integer, Recipe> recipeHashMap = RecipeLoader.load(Resources.getResourceAsFile(RECIPES_RESOURCE_FILE));
         HashMap<String, Skill> skillHashMap = new SkillLoader().load(Resources.getResourceAsFile(SKILLS_RESOURCE_FILE));
+        HashMap<String, Faction> factionHashMap = new FactionLoader().load(Resources.getResourceAsFile(FACTION_RESOURCE_FILE));
 
         // Set up global managers
         flagManager = new FlagManager();
         skillManager = new SkillManager(skillHashMap);
         roomManager = new RoomManager(roomHashMap);
         recipeManager = new RecipeManager(recipeHashMap);
+        factionManager = new FactionManager(factionHashMap);
 
         Exporters.registerAll();
 

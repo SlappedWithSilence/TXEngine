@@ -200,9 +200,11 @@ public class LoadUtils {
         Double d = null;
 
         try {
-             d = ((Long) obj.get(key)).doubleValue();
+             d = (Double) obj.get(key);
         } catch (Exception e) {
+            e.printStackTrace();
             LogUtils.error(key + " is not a double!", "Loader, " + key);
+            return null;
         }
 
         if (d == null) LogUtils.error("No field " + key + " found!", "Loader, " + key);
