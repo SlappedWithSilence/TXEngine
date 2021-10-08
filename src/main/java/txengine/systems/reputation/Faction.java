@@ -1,8 +1,13 @@
 package txengine.systems.reputation;
 
+import txengine.ui.component.Components;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
 // A representation of how well-liked the player is by a designer-defined faction.
 // Faction "reputation" may be gained or lost by triggering in-game events via the Event system.
-public class Faction {
+public class Faction implements Components.Tabable {
     String name;
     int level;
     int xp;
@@ -76,5 +81,15 @@ public class Faction {
 
     public void setLevelUpRatio(float levelUpRatio) {
         this.levelUpRatio = levelUpRatio;
+    }
+
+    @Override
+    public Collection<String> getTabData() {
+        ArrayList<String> s = new ArrayList<>();
+
+        s.add(name);
+        s.add("XP: " + xp + "/" + levelUpXP);
+
+        return s;
     }
 }
