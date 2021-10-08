@@ -8,6 +8,18 @@ import java.util.Collection;
 // A representation of how well-liked the player is by a designer-defined faction.
 // Faction "reputation" may be gained or lost by triggering in-game events via the Event system.
 public class Faction implements Components.Tabable {
+
+    public enum Growth {
+        MAJOR,
+        AVERAGE,
+        MINOR
+    }
+
+    public enum GrowthMode {
+        GAIN,
+        LOSS
+    }
+
     String name;
     int level;
     int xp;
@@ -31,15 +43,44 @@ public class Faction implements Components.Tabable {
         levelUpRatio = 1f;
     }
 
-    public void changeXP(int XPChange) {
+    public int changeXP(int XPChange) {
         xp = xp + XPChange;
         if (xp > levelUpXP) levelUp();
+
+        return XPChange;
+    }
+
+    public int changeXP(Growth growth, GrowthMode mode) {
+        int mod = 1;
+        if (mode == GrowthMode.LOSS) mod = -1;
+        xp = xp + (int)(levelUpXP * growthMap(growth) * mod);
+        if (xp > levelUpXP) levelUp();
+
+        return (int)(levelUpXP * growthMap(growth) * mod);
     }
 
     public void levelUp() {
         xp = 0;
         level++;
         levelUpXP = (int) (levelUpXP * levelUpRatio);
+    }
+
+    /*** Helper Methods ***/
+    private float growthMap(Growth g) {
+        switch (g) {
+            case MAJOR -> {
+                return 0.33f;
+            }
+            case AVERAGE -> {
+                return 0.2f;
+            }
+            case MINOR -> {
+                return 0.1f;
+            }
+            default -> {
+                return 0.0f;
+            }
+        }
     }
 
     /*** Accessor Methods ***/

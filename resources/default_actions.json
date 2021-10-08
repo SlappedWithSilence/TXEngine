@@ -55,6 +55,15 @@
       "unlocked_index" : -1
     },
     {
+      "class_name" : "ReputationSummaryAction",
+      "menu_name"  : "Check you reputation",
+      "text"      : "",
+      "hidden"   : false,
+      "properties" : [""],
+      "requirements" : [],
+      "unlocked_index" : -1
+    },
+    {
       "class_name" : "SaveAction",
       "menu_name"  : "Save Progress",
       "text"      : "",
