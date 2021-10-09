@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import txengine.main.Manager;
 import txengine.systems.ability.Ability;
 import txengine.systems.crafting.Recipe;
+import txengine.systems.reputation.Faction;
 import txengine.systems.room.RoomManager;
 import txengine.systems.skill.Skill;
 
@@ -24,6 +25,7 @@ public class Exporters {
         SaveManager.getInstance().registerExporter(roomStateData());
         SaveManager.getInstance().registerExporter(visitedRoomsData());
         SaveManager.getInstance().registerExporter(skillsData());
+        SaveManager.getInstance().registerExporter(factionsData());
     }
 
     // Exports player-specific data to JSON object
@@ -233,6 +235,37 @@ public class Exporters {
             @Override
             public String getKey() {
                 return "skills";
+            }
+        };
+    }
+
+    public static Exporter factionsData() {
+        return new Exporter() {
+            @Override
+            @SuppressWarnings("unchecked")
+            public JSONObject toJSON() {
+                JSONObject factionJSON = new JSONObject();
+
+                JSONArray arr = new JSONArray();
+
+                for (Faction f : Manager.factionManager.getFactions()) {
+                    JSONObject obj = new JSONObject();
+                    obj.put("name", f.getName());
+                    obj.put("level",f.getLevel());
+                    obj.put("xp",f.getXp());
+                    obj.put("max_xp",f.getLevelUpXP());
+
+                    arr.add(obj);
+                }
+
+                factionJSON.put("data", arr);
+
+                return factionJSON;
+            }
+
+            @Override
+            public String getKey() {
+                return "factions";
             }
         };
     }

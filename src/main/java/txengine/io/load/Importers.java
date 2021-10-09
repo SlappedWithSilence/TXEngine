@@ -4,9 +4,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import txengine.io.LoadUtils;
 import txengine.main.Manager;
+import txengine.systems.reputation.Faction;
 import txengine.systems.room.RoomManager;
 import txengine.ui.LogUtils;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 // A series of functions that return Importers. Each importer should load a specific component from the user's save file
@@ -105,6 +107,27 @@ public class Importers {
               Manager.roomManager.get(roomID).getRoomActions().forEach(action -> action.setHidden(false));
               for (int actionsIndex : hiddenActions) Manager.roomManager.get(roomID).getRoomActions().get(actionsIndex).setHidden(true);
           }
+        };
+    }
+
+    public static Importer factionsData() {
+        return root -> {
+            JSONArray factionsJSON = (JSONArray) ((JSONObject) root.get("factions")).get("data");
+
+            for (Object o : factionsJSON) {
+                JSONObject faction = (JSONObject) o;
+
+                String name = LoadUtils.asString(faction, "name");
+
+                int level = LoadUtils.asInt(faction, "level");
+                int xp = LoadUtils.asInt(faction, "xp");
+                int levelUpXP = LoadUtils.asInt(faction, "max_xp");
+
+                Manager.factionManager.getFaction(name).setLevel(level);
+                Manager.factionManager.getFaction(name).setXp(xp);
+                Manager.factionManager.getFaction(name).setLevelUpXP(levelUpXP);
+
+            }
         };
     }
 }

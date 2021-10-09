@@ -45,4 +45,8 @@ public class FactionManager {
         return new ArrayList<>(factionMap.values());
     }
 
+    public Faction getFaction(String factionName) {
+        return factionMap.get(factionName);
+    }
+
 }
