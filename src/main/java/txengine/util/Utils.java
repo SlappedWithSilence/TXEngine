@@ -1,9 +1,6 @@
 package txengine.util;
 
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class Utils {
 
@@ -15,6 +12,14 @@ public class Utils {
 		for (int i = 0; i < list.size(); i++) if ( (int) list.get(i) == value) indexes.add(i);
 
 		return indexes;
+	}
+
+	public static List<AbstractMap.SimpleEntry<Integer, Integer>> parseIntPairs(String separatedPairs) {
+		String[] pairs = separatedPairs.split(" ");
+		return Arrays.stream(pairs).map(pair -> {
+			String[] s = pair.split(",");
+			return new AbstractMap.SimpleEntry<Integer, Integer>(Integer.parseInt(s[0]),Integer.parseInt(s[1]));
+		}).toList();
 	}
 
 	public static int[] parseInts(String separatedValues, String sep) {
