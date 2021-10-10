@@ -4,8 +4,45 @@ import java.util.*;
 
 public class Utils {
 
+	public static int randomInt(int lower, int upper) {
+		Random r = new Random();
+		return r.nextInt((upper - lower) + 1) + lower;
+	}
+
+	public static int randomInt(int lower, int upper, Random random) {
+		Random r;
+
+		if (random == null) {
+			r = new Random();
+		} else {
+			r = random;
+		}
+
+		return r.nextInt((upper - lower) + 1) + lower;
+	}
+
+	public static <T> T selectRandom(List<T> collection, Random random) {
+		Random r;
+		if (random == null) {
+			r = new Random();
+		} else {
+			r = random;
+		}
+		return collection.get(r.nextInt((collection.size()) + 1));
+	}
+
+	public static <T> T selectRandom(T[] arr, Random random) {
+		Random r;
+		if (random == null) {
+			r = new Random();
+		} else {
+			r = random;
+		}
+		return arr[r.nextInt((arr.length) + 1)];
+	}
+
 	// Gets all occurrences of a number in an arraylist
-	public static ArrayList<Integer> getAllInstances(ArrayList list, int value) {
+	public static ArrayList<Integer> getAllInstances(ArrayList<Integer> list, int value) {
 		ArrayList<Integer> indexes = new ArrayList<Integer>();
 
 
