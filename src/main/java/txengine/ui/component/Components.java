@@ -348,45 +348,29 @@ public class Components {
         }
     }
 
-
-   /* public static void parallelVerticalTabList(List<Tabable> left, List<Tabable> right, String lefTitle, String rightTitle) {
-        List<Tabable> leftInternal = new ArrayList<>(left);
-        List<Tabable> rightInternal = new ArrayList<>(right);
-
-        int mode = 0;
-
-        if (left.size() == right.size()) mode = 0; // The tab lengths are the same
-        if (left.size() > right.size())  mode = 1; // left tab is longer
-        if (left.size() < right.size())  mode = 2; // right tab is longer
-
-        if (mode == 1) { // Normalize the tab sizes by inserting empty lines into the right tab
-            for (int i = 0; i < left.size() - right.size(); i++) rightInternal.add(ArrayList::new);
-        }
-        if (mode == 2) { // Normalize the tab sizes by inserting empty lines into the left tab
-            for (int i = 0; i < right.size() - left.size(); i++) leftInternal.add(ArrayList::new);
-        }
-
-        if (lefTitle != null && rightTitle != null && !rightTitle.equals("") && !lefTitle.equals("")) { // Print headers
-            StringBuilder sb = new StringBuilder();
-
-            String topBar = "-".repeat(HEADER_LENGTH/2);
-            sb.append(topBar).append("   ").append(topBar).append('\n');
-            sb.append('|').append(centerString(lefTitle, HEADER_LENGTH/2 - 2)).append("|").append("   ").append("|").append(centerString(rightTitle, HEADER_LENGTH/2 - 2)).append("|");
-
-            System.out.println(sb);
-        }
-
-        for (int i = 0; i < Math.max(leftInternal.size(), rightInternal.size()); i++) {
-            System.out.println(LogUtils.combineBlocks(verticalTab(leftInternal.get(i)), verticalTab(rightInternal.get(i)), true));
-        }
-    }*/
-
     public static void parallelVerticalTabList(List<List<String>> left, List<List<String>> right, String leftTitle, String rightTitle) {
         parallelVerticalTabList(left, right, HEADER_LENGTH, leftTitle, rightTitle);
     }
 
     public static void parallelVerticalTabList(List<List<String>> left, List<List<String>> right) {
         parallelVerticalTabList(left, right, HEADER_LENGTH, null, null);
+    }
+
+    public static String percentBar(double percentage, char sep) {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append('[');
+
+        for (int i = 0; i < percentage/10; i++) {
+            sb.append(sep);
+        }
+
+        for (int i = 0; i < (100-percentage)/10; i++) {
+            sb.append(' ');
+        }
+
+        sb.append(']');
+        return sb.toString();
     }
 
 }

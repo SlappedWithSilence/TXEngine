@@ -23,6 +23,7 @@ public class Importers {
         equipmentData().load(saveObject);
         visitedRoomsData().load(saveObject);
         roomStateData().load(saveObject);
+        factionsData().load(saveObject);
     }
 
     public static Importer playerData() {

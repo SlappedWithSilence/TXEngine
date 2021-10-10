@@ -133,4 +133,11 @@ public class Faction implements Components.Tabable {
 
         return s;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(name).append('\t').append(xp).append('/').append(levelUpXP).append('\t').append(Components.percentBar(((double) xp / (double) levelUpXP)*100, '#'));
+        return sb.toString();
+    }
 }
