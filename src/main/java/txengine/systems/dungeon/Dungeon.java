@@ -64,4 +64,53 @@ public class Dungeon {
 
         return actions;
     }
+
+    /*** Accessors ***/
+    public Canvas getRoomCanvas() {
+        return roomCanvas;
+    }
+
+    public void setRoomCanvas(Canvas roomCanvas) {
+        this.roomCanvas = roomCanvas;
+    }
+
+    public String getSeed() {
+        return seed;
+    }
+
+    public void setSeed(String seed) {
+        this.seed = seed;
+    }
+
+    public int[] getEnemyPool() {
+        return enemyPool;
+    }
+
+    public void setEnemyPool(int[] enemyPool) {
+        this.enemyPool = enemyPool;
+    }
+
+    public List<AbstractMap.SimpleEntry<Integer, Integer>> getClearRewards() {
+        return clearRewards;
+    }
+
+    public void setClearRewards(List<AbstractMap.SimpleEntry<Integer, Integer>> clearRewards) {
+        this.clearRewards = clearRewards;
+    }
+
+    public int getMaximumLength() {
+        return maximumLength;
+    }
+
+    public void setMaximumLength(int maximumLength) {
+        this.maximumLength = maximumLength;
+    }
+
+    public Random getRand() {
+        return rand;
+    }
+
+    public void setRand(Random rand) {
+        this.rand = rand;
+    }
 }
