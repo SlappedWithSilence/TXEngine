@@ -20,7 +20,7 @@ public class Dungeon {
 
     Canvas roomCanvas;
     String seed;
-    int[] enemyPool;
+    Integer[] enemyPool;
     List<AbstractMap.SimpleEntry<Integer, Integer>> clearRewards;
     int maximumLength;
     Random rand;
@@ -82,11 +82,11 @@ public class Dungeon {
         this.seed = seed;
     }
 
-    public int[] getEnemyPool() {
+    public Integer[] getEnemyPool() {
         return enemyPool;
     }
 
-    public void setEnemyPool(int[] enemyPool) {
+    public void setEnemyPool(Integer[] enemyPool) {
         this.enemyPool = enemyPool;
     }
 

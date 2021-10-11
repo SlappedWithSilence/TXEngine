@@ -22,7 +22,7 @@ public class CombatGimmick extends DungeonGimmick {
         List<Action> actions = new ArrayList<>();
 
         int randomEntityID = Utils.selectRandom(owner.getEnemyPool(), owner.getRand());
-        CombatEntity ce = new CombatEntity();
+        CombatEntity ce = new CombatEntity(Manager.combatEntityHashMap.get(randomEntityID));
 
         return actions;
     }
