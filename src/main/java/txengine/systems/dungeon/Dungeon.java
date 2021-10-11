@@ -38,6 +38,7 @@ public class Dungeon {
         rand = new Random(seed);
 
         clearRewards = new ArrayList<>();
+        enemyPool = new Integer[0];
     }
 
     public Dungeon(Long seed) {
@@ -46,6 +47,8 @@ public class Dungeon {
         rand = new Random(seed);
         this.seed = seed;
         clearRewards = new ArrayList<>();
+        enemyPool = new Integer[0];
+
     }
 
     public boolean enter() {
@@ -62,18 +65,19 @@ public class Dungeon {
         return dr;
     }
 
-    private void generateCoreRoute(DungeonRoom from, int length, CanvasNode.Direction fromDirection) {
-        if (length > maximumLength) return;
+    private boolean generateCoreRoute(DungeonRoom from, int length, CanvasNode.Direction fromDirection) {
+        if (length > maximumLength) return true;
         if (roomCanvas.openDirections(from).size() == 0) {
             LogUtils.error("Failed to generate dungeon! Writing configuration files to crash-details.txt","Dungeon::GenerateCoreRoute");
             handleCrash();
+            return false;
         }
 
         CanvasNode.Direction nextDirection = null;
 
         // Choose the direction relative to place the next module with a 75% change to continue in the same direction
         if (fromDirection == null || !roomCanvas.openDirections(from).contains(fromDirection)) nextDirection = Utils.selectRandom(roomCanvas.openDirections(from).toArray(new CanvasNode.Direction[0]), rand); // If from==root_node then choose a random direction or the last direction is obstructed
-        else if (Utils.randomInt(0,100, rand) <= 25) Utils.selectRandom(roomCanvas.openDirections(from).toArray(new CanvasNode.Direction[0]), rand);
+        else if (Utils.randomInt(0,100, rand) <= 40) nextDirection = Utils.selectRandom(roomCanvas.openDirections(from).toArray(new CanvasNode.Direction[0]), rand);
         else nextDirection = fromDirection;
 
 
@@ -82,7 +86,8 @@ public class Dungeon {
         roomCanvas.put(from.to(nextDirection), to);
         to.addDoor(Canvas.inverseDirection(nextDirection));
 
-        generateCoreRoute(to, length++, nextDirection);
+
+        return generateCoreRoute(to, length + 1, nextDirection);
     }
 
     private void generate() {
@@ -117,18 +122,21 @@ public class Dungeon {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-
+        for (int i = 0; i < roomCanvas.getLength(); i++) sb.append("---");
         for (int y = 0; y < getRoomCanvas().getLength(); y++) {
             StringBuilder nodeBuilder0 = new StringBuilder();
             StringBuilder nodeBuilder1 = new StringBuilder();
             StringBuilder nodeBuilder2 = new StringBuilder();
+            nodeBuilder0.append("|");
+            nodeBuilder1.append("|");
+            nodeBuilder2.append("|");
             for (int x = 0; x < getRoomCanvas().getWidth(); x++) {
                 if (roomCanvas.getNode(x, y) == null) {
                     nodeBuilder0.append("   ");
                     nodeBuilder1.append("   ");
                     nodeBuilder2.append("   ");
                 } else {
-                    Set<CanvasNode.Direction> doors = roomCanvas.getNode(x,y).getDoors();
+                    Set<CanvasNode.Direction> doors = roomCanvas.getNode(x, y).getDoors();
                     // North
                     nodeBuilder0.append(" ");
                     if (doors.contains(CanvasNode.Direction.NORTH)) nodeBuilder0.append("|");
@@ -137,29 +145,32 @@ public class Dungeon {
 
                     // West
                     if (doors.contains(CanvasNode.Direction.WEST)) nodeBuilder1.append("-");
+                    else nodeBuilder1.append(" ");
 
                     // Node
-                    if (playerLocation.x == x && playerLocation.y == y) nodeBuilder1.append(Colors.GREEN_BOLD + "*" + Colors.RESET);
-                    else nodeBuilder1.append("*");
+                    nodeBuilder1.append("*");
 
                     // East
                     if (doors.contains(CanvasNode.Direction.EAST)) nodeBuilder1.append("-");
                     else nodeBuilder1.append(" ");
 
-                    // North
+                    // South
                     nodeBuilder2.append(" ");
                     if (doors.contains(CanvasNode.Direction.SOUTH)) nodeBuilder2.append("|");
                     else nodeBuilder2.append(" ");
                     nodeBuilder2.append(" ");
                 }
-
-                sb.append(nodeBuilder0);
-                sb.append(nodeBuilder1);
-                sb.append(nodeBuilder2);
             }
 
-        }
+            sb.append(nodeBuilder0).append("|\n");
+            sb.append(nodeBuilder1).append("|\n");
+            sb.append(nodeBuilder2).append("|\n");
 
+        }
+        for (int i = 0; i < roomCanvas.getLength(); i++) sb.append("---");
+        CrashReporter.getInstance().clear();
+        CrashReporter.getInstance().append(sb);
+        CrashReporter.getInstance().write();
         return sb.toString();
     }
 

@@ -1,11 +1,13 @@
 package txengine.structures;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 
 public class CanvasNode {
 
+    // Inner Classes
     public enum Direction {
         NORTH,
         SOUTH,
@@ -13,17 +15,22 @@ public class CanvasNode {
         WEST
     }
 
+    // Member Variables
     protected Coordinate coordinates;
     Set<Direction> doors;
 
+    // Constructors
     public CanvasNode() {
         coordinates = new Coordinate(0,0);
+        doors = new HashSet<>();
     }
 
     public CanvasNode(Coordinate coordinates) {
+
         this.coordinates = coordinates;
     }
 
+    // Member Methods
     public Coordinate north() {
         Coordinate c = new Coordinate(coordinates.x,coordinates.y-1);
         if (c.x < 0 || c.y < 0) return null;
@@ -50,22 +57,6 @@ public class CanvasNode {
         return coordinates;
     }
 
-    public Coordinate getCoordinates() {
-        return coordinates;
-    }
-
-    public void setCoordinates(Coordinate coordinates) {
-        this.coordinates = coordinates;
-    }
-
-    public Set<Direction> getDoors() {
-        return doors;
-    }
-
-    public void setDoors(Set<Direction> doors) {
-        this.doors = doors;
-    }
-
     public void addDoor(Direction d) {
         doors.add(d);
     }
@@ -88,5 +79,23 @@ public class CanvasNode {
                 return null;
             }
         }
+    }
+
+    // Accessors
+
+    public Coordinate getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(Coordinate coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public Set<Direction> getDoors() {
+        return doors;
+    }
+
+    public void setDoors(Set<Direction> doors) {
+        this.doors = doors;
     }
 }

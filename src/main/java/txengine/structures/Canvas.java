@@ -79,12 +79,31 @@ public class Canvas {
         //North
         if (canvasNode.north() != null && canvasNode.north().y >= 0 && nodes[canvasNode.north().y][canvasNode.north().x] == null) dirs.add(CanvasNode.Direction.NORTH);
         // South
-        if (canvasNode.south().y < length && nodes[canvasNode.south().y][canvasNode.south().x] == null) dirs.add(CanvasNode.Direction.SOUTH);
+        if (canvasNode.south().y < length && canvasNode.south().x < width && nodes[canvasNode.south().y][canvasNode.south().x] == null) dirs.add(CanvasNode.Direction.SOUTH);
         // East
         if (canvasNode.east().x < width && nodes[canvasNode.east().y][canvasNode.east().x] == null) dirs.add(CanvasNode.Direction.EAST);
         // West
         if (canvasNode.west() != null && canvasNode.west().x >= 0 && nodes[canvasNode.west().y][canvasNode.west().x] == null) dirs.add(CanvasNode.Direction.WEST);
 
         return dirs;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++) sb.append("-");
+        sb.append("\n");
+        for (int y = 0; y < length; y++) {
+            sb.append("|");
+            for (int x = 0; x < width; x++) {
+                if (nodes[y][x] != null) sb.append("*");
+                else sb.append(" ");
+            }
+            sb.append("|");
+            sb.append("\n");
+        }
+        for (int i = 0; i < length; i++) sb.append("-");
+        sb.append("\n");
+        return sb.toString();
     }
 }

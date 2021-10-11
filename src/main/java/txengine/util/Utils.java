@@ -1,5 +1,7 @@
 package txengine.util;
 
+import txengine.ui.LogUtils;
+
 import java.util.*;
 
 public class Utils {
@@ -18,6 +20,7 @@ public class Utils {
 			r = random;
 		}
 
+		//LogUtils.info("Bound: " + ((upper - lower) + 1 + lower), "Utils::randomInt");
 		return r.nextInt((upper - lower) + 1) + lower;
 	}
 
@@ -28,7 +31,7 @@ public class Utils {
 		} else {
 			r = random;
 		}
-		return collection.get(r.nextInt((collection.size()) + 1));
+		return collection.get(r.nextInt((collection.size()-1)));
 	}
 
 	public static <T> T selectRandom(T[] arr, Random random) {
@@ -38,7 +41,11 @@ public class Utils {
 		} else {
 			r = random;
 		}
-		return arr[r.nextInt((arr.length) + 1)];
+
+		//LogUtils.info("arr size: " + arr.length, "Utils::selectRandom");
+		int randomIndex = randomInt(0, arr.length-1, r);
+
+		return arr[randomIndex];
 	}
 
 	// Gets all occurrences of a number in an arraylist
