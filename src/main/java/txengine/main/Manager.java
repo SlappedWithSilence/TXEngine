@@ -4,6 +4,7 @@ import txengine.io.load.LoadManager;
 import txengine.io.loaders.*;
 import txengine.io.save.Exporters;
 import txengine.systems.crafting.RecipeManager;
+import txengine.systems.dungeon.Dungeon;
 import txengine.systems.reputation.Faction;
 import txengine.systems.reputation.FactionManager;
 import txengine.ui.color.*;
@@ -146,6 +147,10 @@ public class Manager {
 
         player.getInventory().addItem(16);
         player.getInventory().addItem(17);
+
+        Dungeon dungeon = new Dungeon();
+        dungeon.enter();
+        System.out.println(dungeon.toString());
     }
 
 }

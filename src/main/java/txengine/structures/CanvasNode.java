@@ -41,7 +41,7 @@ public class CanvasNode {
 
     }
     public Coordinate west() {
-        Coordinate c = new Coordinate(coordinates.x,coordinates.y-1);
+        Coordinate c = new Coordinate(coordinates.x-1,coordinates.y);
         if (c.x < 0 || c.y < 0) return null;
         return c;
 
@@ -68,5 +68,25 @@ public class CanvasNode {
 
     public void addDoor(Direction d) {
         doors.add(d);
+    }
+
+    public Coordinate to(Direction d) {
+        switch (d) {
+            case EAST -> {
+                return east();
+            }
+            case WEST -> {
+                return west();
+            }
+            case NORTH -> {
+                return north();
+            }
+            case SOUTH -> {
+                return south();
+            }
+            default -> {
+                return null;
+            }
+        }
     }
 }
