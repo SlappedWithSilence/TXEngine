@@ -10,7 +10,9 @@ import txengine.main.Manager;
 import txengine.systems.room.action.Action;
 import txengine.util.Utils;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CombatAction extends Action {
     CombatEngine combatEngine;
@@ -28,6 +30,26 @@ public class CombatAction extends Action {
         HOSTILE,
         FRIENDLY,
         LOOT
+    }
+
+    public CombatAction() {
+        super();
+    }
+
+    public CombatAction(List<Integer> friendlyIDs, List<Integer> hostileIDs, List<AbstractMap.SimpleEntry<Integer, Integer>> loot) {
+        StringBuilder sb = new StringBuilder();
+        List<String> tempProperties = new ArrayList<>();
+        tempProperties.add(FRIENDLY_ENTITY_PROP_MARKER);
+        for (Integer i : friendlyIDs) tempProperties.add(i.toString());
+        tempProperties.add(HOSTILE_ENTITY_PROP_MARKER);
+        for (Integer i : hostileIDs) tempProperties.add(i.toString());
+        tempProperties.add(LOOT_DATA_MARKER);
+        for (AbstractMap.SimpleEntry<Integer, Integer> item : loot) {
+            Integer id = item.getKey();
+            Integer quantity = item.getValue();
+            tempProperties.add(id+","+quantity);
+        }
+        setProperties(tempProperties.toArray(new String[0]));
     }
 
     @Override
