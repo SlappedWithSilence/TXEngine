@@ -148,14 +148,8 @@ public class Manager {
         player.getInventory().addItem(16);
         player.getInventory().addItem(17);
 
-        CrashReporter.getInstance().clear();
-        for (int i = 0; i < 10; i++) {
-            Dungeon dungeon = new Dungeon();
-            dungeon.enter();
-            //System.out.println(dungeon);
-            CrashReporter.getInstance().append(dungeon.toString());
-        }
-        CrashReporter.getInstance().write();
+        Dungeon d = new Dungeon();
+        d.enter();
 
     }
 
