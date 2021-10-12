@@ -15,6 +15,11 @@ public class SummaryAction extends Action {
 
     int page = 1;
 
+    public SummaryAction() {
+        super();
+        menuName = "View your summary";
+    }
+
     public String formatPlayerResource(Map.Entry<String, Integer[]> entry) {
         String output = "";
 

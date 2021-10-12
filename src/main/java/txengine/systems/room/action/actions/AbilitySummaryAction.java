@@ -10,6 +10,11 @@ public class AbilitySummaryAction extends Action {
 
     final String prompt = "Which ability would you like to inspect? (-1 to exit)";
 
+    public AbilitySummaryAction() {
+        super();
+        menuName = "Check you abilities";
+    }
+
     @Override
     public int perform() {
 

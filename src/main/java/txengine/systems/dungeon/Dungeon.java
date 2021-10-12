@@ -56,7 +56,7 @@ public class Dungeon {
 
     public boolean enter() {
         while (!generate());
-        while (playerLocation != exitCoordinates) {
+        while (!playerLocation.equals(exitCoordinates)) {
             LogUtils.info("Player location:" + playerLocation.x + ", " + playerLocation.y, "Dungeon::enter");
             playerLocation = ((DungeonRoom) roomCanvas.getNode(playerLocation)).enter();
         }
@@ -65,7 +65,7 @@ public class Dungeon {
 
     private DungeonRoom getRoot() {
         // Generate a coordinate pair at (n,0) where n is between 0 and the width of the canvas
-        Coordinate rootCoordinate = new Coordinate(Utils.randomInt(0,roomCanvas.getWidth()),0);
+        Coordinate rootCoordinate = new Coordinate(Utils.randomInt(0,roomCanvas.getWidth()-1),0);
         DungeonRoom dr = new DungeonRoom(this, rootCoordinate);
         playerLocation = rootCoordinate;
         LogUtils.info("Root: " + rootCoordinate.x + ", " + rootCoordinate.y, "Dungeon::getRoot");
@@ -92,12 +92,10 @@ public class Dungeon {
         else if (Utils.randomInt(0,100, rand) <= directionalSpread) nextDirection = Utils.selectRandom(roomCanvas.openDirections(from).toArray(new CanvasNode.Direction[0]), rand);
         else nextDirection = fromDirection;
 
-
         from.addDoor(nextDirection);
         DungeonRoom to = new DungeonRoom(this, new ArrayList<>(), from.to(nextDirection));
         roomCanvas.put(from.to(nextDirection), to);
         to.addDoor(Canvas.inverseDirection(nextDirection));
-
 
         return generateCoreRoute(to, length + 1, nextDirection);
     }

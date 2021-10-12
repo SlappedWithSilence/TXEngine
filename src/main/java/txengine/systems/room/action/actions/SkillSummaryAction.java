@@ -6,8 +6,7 @@ import txengine.systems.room.action.Action;
 public class SkillSummaryAction extends Action {
 
     public SkillSummaryAction() {
-
-
+        menuName = "Check your skills";
     }
 
     @Override
