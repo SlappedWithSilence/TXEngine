@@ -14,4 +14,6 @@ public abstract class DungeonGimmick {
 
     public abstract List<Action> get();
 
+
+
 }

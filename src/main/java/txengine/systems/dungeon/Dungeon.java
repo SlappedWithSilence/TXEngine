@@ -6,6 +6,7 @@ import txengine.structures.Canvas;
 import txengine.structures.CanvasNode;
 import txengine.structures.Coordinate;
 import txengine.structures.Graph;
+import txengine.systems.dungeon.gimmicks.GimmickFactory;
 import txengine.systems.room.Room;
 import txengine.systems.room.action.Action;
 import txengine.systems.room.action.actions.*;
@@ -74,29 +75,46 @@ public class Dungeon {
     }
 
     private boolean generateCoreRoute(DungeonRoom from, int length, CanvasNode.Direction fromDirection) {
+        // Check if the route has reached its maximum length (ie is done generating)
         if (length > maximumLength) {
             exitCoordinates = from.getCoordinates();
             LogUtils.info("Exit: " + exitCoordinates, "Dungeon::generateCoreRoute");
             return true;
         }
+
+        // Check if the route trapped itself before reaching its maximum length
         if (roomCanvas.openDirections(from).size() == 0) {
             LogUtils.error("Failed to generate dungeon! Writing configuration files to crash-details.txt","Dungeon::GenerateCoreRoute");
             handleCrash();
             return false;
         }
 
+
         CanvasNode.Direction nextDirection = null;
 
-        // Choose the direction relative to place the next module with a 75% change to continue in the same direction
-        if (fromDirection == null || !roomCanvas.openDirections(from).contains(fromDirection)) nextDirection = Utils.selectRandom(roomCanvas.openDirections(from).toArray(new CanvasNode.Direction[0]), rand); // If from==root_node then choose a random direction or the last direction is obstructed
-        else if (Utils.randomInt(0,100, rand) <= directionalSpread) nextDirection = Utils.selectRandom(roomCanvas.openDirections(from).toArray(new CanvasNode.Direction[0]), rand);
+        // Detect if we are extending from the root node, or if we cannot continue in the same direction
+        if (fromDirection == null || !roomCanvas.openDirections(from).contains(fromDirection)) nextDirection = Utils.selectRandom(roomCanvas.openDirections(from).toArray(new CanvasNode.Direction[0]), rand); // Choose a random direction
+
+        // directionalSpread% chance to go in a direction other than the same direction
+        else if (Utils.randomInt(0,100, rand) <= directionalSpread) {
+            Set<CanvasNode.Direction> directions = roomCanvas.openDirections(from);
+            directions.remove(fromDirection);
+            nextDirection = Utils.selectRandom(directions.toArray(new CanvasNode.Direction[0]), rand);
+        }
+
+        // Generate the next node in the same direction
         else nextDirection = fromDirection;
 
+        // Create a door to the next node in the previous node
         from.addDoor(nextDirection);
-        DungeonRoom to = new DungeonRoom(this, new ArrayList<>(), from.to(nextDirection));
-        roomCanvas.put(from.to(nextDirection), to);
-        to.addDoor(Canvas.inverseDirection(nextDirection));
 
+        // Generate the new node
+        DungeonRoom to = new DungeonRoom(this, new ArrayList<>(), from.to(nextDirection));
+        to.addDoor(Canvas.inverseDirection(nextDirection));
+        to.roomActions.addAll(GimmickFactory.build(this));
+
+        // Add the new node to the canvas
+        roomCanvas.put(from.to(nextDirection), to);
         return generateCoreRoute(to, length + 1, nextDirection);
     }
 
