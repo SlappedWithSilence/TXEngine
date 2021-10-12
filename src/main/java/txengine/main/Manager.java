@@ -153,7 +153,7 @@ public class Manager {
             Dungeon dungeon = new Dungeon();
             dungeon.enter();
             //System.out.println(dungeon);
-            CrashReporter.getInstance().append(dungeon.getRoomCanvas().toString());
+            CrashReporter.getInstance().append(dungeon.toString());
         }
         CrashReporter.getInstance().write();
 

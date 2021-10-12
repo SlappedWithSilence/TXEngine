@@ -19,13 +19,15 @@ import java.util.*;
 import java.util.List;
 
 public class Dungeon {
-
     Canvas roomCanvas;
-    Long seed;
+
     Integer[] enemyPool;
     List<AbstractMap.SimpleEntry<Integer, Integer>> clearRewards;
+
     int maximumLength;
+    Long seed;
     Random rand;
+    int directionalSpread = 50; // How likely it is for the core route to change directions during generation (out of 100)
 
     Coordinate playerLocation = null;
 
@@ -77,7 +79,7 @@ public class Dungeon {
 
         // Choose the direction relative to place the next module with a 75% change to continue in the same direction
         if (fromDirection == null || !roomCanvas.openDirections(from).contains(fromDirection)) nextDirection = Utils.selectRandom(roomCanvas.openDirections(from).toArray(new CanvasNode.Direction[0]), rand); // If from==root_node then choose a random direction or the last direction is obstructed
-        else if (Utils.randomInt(0,100, rand) <= 40) nextDirection = Utils.selectRandom(roomCanvas.openDirections(from).toArray(new CanvasNode.Direction[0]), rand);
+        else if (Utils.randomInt(0,100, rand) <= directionalSpread) nextDirection = Utils.selectRandom(roomCanvas.openDirections(from).toArray(new CanvasNode.Direction[0]), rand);
         else nextDirection = fromDirection;
 
 
@@ -123,6 +125,7 @@ public class Dungeon {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < roomCanvas.getLength(); i++) sb.append("---");
+        sb.append("\n");
         for (int y = 0; y < getRoomCanvas().getLength(); y++) {
             StringBuilder nodeBuilder0 = new StringBuilder();
             StringBuilder nodeBuilder1 = new StringBuilder();
@@ -168,9 +171,7 @@ public class Dungeon {
 
         }
         for (int i = 0; i < roomCanvas.getLength(); i++) sb.append("---");
-        CrashReporter.getInstance().clear();
-        CrashReporter.getInstance().append(sb);
-        CrashReporter.getInstance().write();
+        sb.append("\n");
         return sb.toString();
     }
 
