@@ -4,24 +4,27 @@ import txengine.structures.Canvas;
 import txengine.structures.CanvasNode;
 import txengine.structures.Coordinate;
 import txengine.systems.room.action.Action;
+import txengine.systems.room.action.actions.MoveAction;
 import txengine.ui.LogUtils;
 import txengine.ui.component.Components;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 class DungeonMove extends Action {
-    DungeonRoom targetRoom;
+    Coordinate targetRoom;
 
-    public DungeonMove(DungeonRoom targetRoom) {
+    public DungeonMove(Coordinate targetRoom) {
         this.targetRoom = targetRoom;
-        menuName = "Move to " + targetRoom.name;
+        menuName = "Move to " + targetRoom;
     }
 
-    public DungeonRoom getTargetRoom() {
+    public Coordinate getTargetRoom() {
         return targetRoom;
     }
 
-    public void setTargetRoom(DungeonRoom targetRoom) {
+    public void setTargetRoom(Coordinate targetRoom) {
         this.targetRoom = targetRoom;
     }
 
@@ -44,11 +47,12 @@ public class DungeonRoom extends CanvasNode {
     }
 
     public DungeonRoom(Dungeon owner, Coordinate rootCoordinate) {
+        roomActions = new ArrayList<>();
         this.owner = owner;
         super.coordinates = rootCoordinate;
     }
 
-    public DungeonRoom enter() {
+    public Coordinate enter() {
         while(true) {
             System.out.println("What would you like to do?");
             Components.numberedList(roomActions.stream().map(Action::getMenuName).toList());
@@ -61,6 +65,14 @@ public class DungeonRoom extends CanvasNode {
             }
 
             roomActions.get(choice).perform();
+        }
+    }
+
+    @Override
+    public void addDoor(Direction d) {
+        if (getDoors() == null) setDoors(new HashSet<>());
+        if (!super.getDoors().contains(d)) {
+            roomActions.add(new DungeonMove(to(d)));
         }
     }
 }

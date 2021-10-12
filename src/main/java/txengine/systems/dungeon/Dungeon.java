@@ -30,6 +30,7 @@ public class Dungeon {
     int directionalSpread = 50; // How likely it is for the core route to change directions during generation (out of 100)
 
     Coordinate playerLocation = null;
+    Coordinate exitCoordinates = null;
 
     public Dungeon() {
         maximumLength = 10;
@@ -54,8 +55,11 @@ public class Dungeon {
     }
 
     public boolean enter() {
-        generate();
-
+        while (!generate());
+        while (playerLocation != exitCoordinates) {
+            LogUtils.info("Player location:" + playerLocation.x + ", " + playerLocation.y, "Dungeon::enter");
+            playerLocation = ((DungeonRoom) roomCanvas.getNode(playerLocation)).enter();
+        }
         return true;
     }
 
@@ -63,12 +67,18 @@ public class Dungeon {
         // Generate a coordinate pair at (n,0) where n is between 0 and the width of the canvas
         Coordinate rootCoordinate = new Coordinate(Utils.randomInt(0,roomCanvas.getWidth()),0);
         DungeonRoom dr = new DungeonRoom(this, rootCoordinate);
-        playerLocation = dr.getCoordinates();
+        playerLocation = rootCoordinate;
+        LogUtils.info("Root: " + rootCoordinate.x + ", " + rootCoordinate.y, "Dungeon::getRoot");
+        roomCanvas.put(rootCoordinate, dr);
         return dr;
     }
 
     private boolean generateCoreRoute(DungeonRoom from, int length, CanvasNode.Direction fromDirection) {
-        if (length > maximumLength) return true;
+        if (length > maximumLength) {
+            exitCoordinates = from.getCoordinates();
+            LogUtils.info("Exit: " + exitCoordinates, "Dungeon::generateCoreRoute");
+            return true;
+        }
         if (roomCanvas.openDirections(from).size() == 0) {
             LogUtils.error("Failed to generate dungeon! Writing configuration files to crash-details.txt","Dungeon::GenerateCoreRoute");
             handleCrash();
@@ -92,9 +102,9 @@ public class Dungeon {
         return generateCoreRoute(to, length + 1, nextDirection);
     }
 
-    private void generate() {
+    private boolean generate() {
         DungeonRoom root = getRoot();
-        generateCoreRoute(root, 1, null);
+        return generateCoreRoute(root, 1, null);
     }
 
     public static List<Action> getDefaultActions() {
