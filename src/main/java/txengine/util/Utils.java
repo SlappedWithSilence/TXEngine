@@ -19,9 +19,18 @@ public class Utils {
 		} else {
 			r = random;
 		}
+		int genInt = -1;
+		try {
+			genInt = r.nextInt((upper - lower) + 1) + lower;
+		} catch (IllegalArgumentException e) {
+			LogUtils.error("Bound is negative: " + (upper - lower) + 1);
+			LogUtils.error("Upper: " + upper);
+			LogUtils.error("Lower: " + lower);
+			e.printStackTrace();
+			System.exit(-1);
+		}
 
-		//LogUtils.info("Bound: " + ((upper - lower) + 1 + lower), "Utils::randomInt");
-		return r.nextInt((upper - lower) + 1) + lower;
+		return genInt;
 	}
 
 	public static <T> T selectRandom(List<T> collection, Random random) {
@@ -35,6 +44,9 @@ public class Utils {
 	}
 
 	public static <T> T selectRandom(T[] arr, Random random) {
+		if (arr.length == 0) return null;
+		if (arr.length == 1) return arr[0];
+
 		Random r;
 		if (random == null) {
 			r = new Random();

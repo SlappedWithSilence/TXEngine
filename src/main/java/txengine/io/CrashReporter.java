@@ -36,6 +36,19 @@ public class CrashReporter {
         }
     }
 
+    public void write(String fileName) {
+        try {
+            File f = new File(fileName);
+            f.createNewFile();
+            FileWriter fw = new FileWriter(f);
+            fw.write(stringBuilder.toString());
+            fw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void clear() {
         stringBuilder = new StringBuilder();
     }

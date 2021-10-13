@@ -50,6 +50,7 @@ public class GimmickFactory {
 
     private static Set<String> initClassSet() {
         Set<String> s = new HashSet<>();
+        s.add("CombatGimmick");
         return s;
     }
 }

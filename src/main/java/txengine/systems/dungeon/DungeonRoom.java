@@ -71,8 +71,9 @@ public class DungeonRoom extends CanvasNode {
     @Override
     public void addDoor(Direction d) {
         if (getDoors() == null) setDoors(new HashSet<>());
-        if (!super.getDoors().contains(d)) {
+        if (!doors.contains(d)) {
             roomActions.add(new DungeonMove(to(d)));
+            doors.add(d);
         }
     }
 }

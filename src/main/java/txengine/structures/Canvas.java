@@ -1,5 +1,7 @@
 package txengine.structures;
 
+import txengine.ui.LogUtils;
+
 import java.io.DataInput;
 import java.util.ArrayList;
 import java.util.HashSet;

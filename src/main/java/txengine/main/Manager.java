@@ -148,9 +148,6 @@ public class Manager {
         player.getInventory().addItem(16);
         player.getInventory().addItem(17);
 
-        Dungeon d = new Dungeon();
-        d.enter();
-
     }
 
 }

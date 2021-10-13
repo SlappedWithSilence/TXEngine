@@ -25,7 +25,7 @@ public class CombatGimmick extends DungeonGimmick {
 
         // Get random enemy
         Integer randomEntityID = Utils.selectRandom(owner.getEnemyPool(), owner.getRand());
-        ArrayList<Integer> hostiles = new ArrayList<>();
+        List<Integer> hostiles = new ArrayList<>();
         hostiles.add(randomEntityID);
 
         // Get random loot

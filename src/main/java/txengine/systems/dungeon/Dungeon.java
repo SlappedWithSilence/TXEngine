@@ -1,58 +1,59 @@
 package txengine.systems.dungeon;
 
-import jdk.jshell.execution.Util;
-import txengine.io.CrashReporter;
+import txengine.main.Manager;
 import txengine.structures.Canvas;
 import txengine.structures.CanvasNode;
 import txengine.structures.Coordinate;
-import txengine.structures.Graph;
 import txengine.systems.dungeon.gimmicks.GimmickFactory;
-import txengine.systems.room.Room;
 import txengine.systems.room.action.Action;
 import txengine.systems.room.action.actions.*;
 import txengine.ui.LogUtils;
-import txengine.ui.color.Colors;
-import txengine.ui.component.Components;
 import txengine.util.Utils;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
 public class Dungeon {
+    private final static int DEFAULT_LENGTH = 15;
+    private final static int DEFAULT_SPREAD = 33; // How likely it is for the core route to change directions during generation (out of 100)
+
     Canvas roomCanvas;
 
     Integer[] enemyPool;
-    List<AbstractMap.SimpleEntry<Integer, Integer>> clearRewards;
+    List<AbstractMap.SimpleEntry<Integer, Integer>> rewardsPool;
 
+    int randomness;
     int maximumLength;
     Long seed;
     Random rand;
-    int directionalSpread = 50; // How likely it is for the core route to change directions during generation (out of 100)
+
 
     Coordinate playerLocation = null;
     Coordinate exitCoordinates = null;
 
     public Dungeon() {
-        maximumLength = 10;
+        maximumLength = DEFAULT_LENGTH;
+        randomness = DEFAULT_SPREAD;
         roomCanvas = new Canvas(maximumLength+ Utils.randomInt(-1,maximumLength/2), maximumLength + Utils.randomInt(-1, maximumLength/2));
 
         rand = new Random();
         seed = rand.nextLong();
         rand = new Random(seed);
 
-        clearRewards = new ArrayList<>();
-        enemyPool = new Integer[0];
+        rewardsPool = new ArrayList<>();
+        enemyPool = Manager.combatEntityHashMap.keySet().toArray(new Integer[0]);
     }
 
     public Dungeon(Long seed) {
-        maximumLength = 10;
+        maximumLength = DEFAULT_LENGTH;
+        randomness = DEFAULT_SPREAD;
         roomCanvas = new Canvas(maximumLength+ Utils.randomInt(-1,maximumLength/2), maximumLength + Utils.randomInt(-1, maximumLength/2));
+
         rand = new Random(seed);
         this.seed = seed;
-        clearRewards = new ArrayList<>();
-        enemyPool = new Integer[0];
 
+        rewardsPool = new ArrayList<>();
+        enemyPool = Manager.combatEntityHashMap.keySet().toArray(new Integer[0]);
     }
 
     public boolean enter() {
@@ -89,36 +90,39 @@ public class Dungeon {
             return false;
         }
 
-
         CanvasNode.Direction nextDirection = null;
 
         // Detect if we are extending from the root node, or if we cannot continue in the same direction
-        if (fromDirection == null || !roomCanvas.openDirections(from).contains(fromDirection)) nextDirection = Utils.selectRandom(roomCanvas.openDirections(from).toArray(new CanvasNode.Direction[0]), rand); // Choose a random direction
+        if (fromDirection == null || !roomCanvas.openDirections(from).contains(fromDirection)) {
+            nextDirection = Utils.selectRandom(roomCanvas.openDirections(from).toArray(new CanvasNode.Direction[0]), rand); // Choose a random direction
+        }
 
         // directionalSpread% chance to go in a direction other than the same direction
-        else if (Utils.randomInt(0,100, rand) <= directionalSpread) {
+        else if (Utils.randomInt(0,100, rand) <= randomness) {
             Set<CanvasNode.Direction> directions = roomCanvas.openDirections(from);
             directions.remove(fromDirection);
             nextDirection = Utils.selectRandom(directions.toArray(new CanvasNode.Direction[0]), rand);
         }
 
         // Generate the next node in the same direction
-        else nextDirection = fromDirection;
+        else {
+            nextDirection = fromDirection;
+        }
 
         // Create a door to the next node in the previous node
         from.addDoor(nextDirection);
 
         // Generate the new node
-        DungeonRoom to = new DungeonRoom(this, new ArrayList<>(), from.to(nextDirection));
+        DungeonRoom to = new DungeonRoom(this, GimmickFactory.randomGimmick(this), from.to(nextDirection));
         to.addDoor(Canvas.inverseDirection(nextDirection));
-        to.roomActions.addAll(GimmickFactory.build(this));
+        to.roomActions.addAll(GimmickFactory.randomGimmick(this));
 
         // Add the new node to the canvas
         roomCanvas.put(from.to(nextDirection), to);
         return generateCoreRoute(to, length + 1, nextDirection);
     }
 
-    private boolean generate() {
+    public boolean generate() {
         DungeonRoom root = getRoot();
         return generateCoreRoute(root, 1, null);
     }
@@ -135,7 +139,7 @@ public class Dungeon {
     }
 
     private void handleCrash() {
-        CrashReporter.getInstance().append("Failed to generate dungeon!\n");
+        /*CrashReporter.getInstance().append("Failed to generate dungeon!\n");
         StringBuilder sb = new StringBuilder();
         sb.append("Seed: ").append(seed).append("\n");
         sb.append("Dimensions (LxW): ").append(roomCanvas.getLength()).append(",").append(roomCanvas.getWidth()).append("\n");
@@ -144,7 +148,7 @@ public class Dungeon {
         for (int i : enemyPool) sb.append(i).append(" ");
         sb.append("\n");
         CrashReporter.getInstance().append(sb);
-        CrashReporter.getInstance().write();
+        CrashReporter.getInstance().write();*/
     }
 
     @Override
@@ -226,12 +230,12 @@ public class Dungeon {
         this.enemyPool = enemyPool;
     }
 
-    public List<AbstractMap.SimpleEntry<Integer, Integer>> getClearRewards() {
-        return clearRewards;
+    public List<AbstractMap.SimpleEntry<Integer, Integer>> getRewardsPool() {
+        return rewardsPool;
     }
 
-    public void setClearRewards(List<AbstractMap.SimpleEntry<Integer, Integer>> clearRewards) {
-        this.clearRewards = clearRewards;
+    public void setRewardsPool(List<AbstractMap.SimpleEntry<Integer, Integer>> rewardsPool) {
+        this.rewardsPool = rewardsPool;
     }
 
     public int getMaximumLength() {

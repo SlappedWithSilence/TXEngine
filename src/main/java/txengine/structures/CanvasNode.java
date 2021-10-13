@@ -1,7 +1,6 @@
 package txengine.structures;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -17,7 +16,7 @@ public class CanvasNode {
 
     // Member Variables
     protected Coordinate coordinates;
-    Set<Direction> doors;
+    protected Set<Direction> doors;
 
     // Constructors
     public CanvasNode() {
