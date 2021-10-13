@@ -44,7 +44,10 @@ public class Utils {
 	}
 
 	public static <T> T selectRandom(T[] arr, Random random) {
-		if (arr.length == 0) return null;
+		if (arr.length == 0) {
+			LogUtils.warn("Called on empty array!", "Utils::selectRandom");
+			return null;
+		}
 		if (arr.length == 1) return arr[0];
 
 		Random r;

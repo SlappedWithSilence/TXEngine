@@ -4,6 +4,7 @@ import txengine.main.Manager;
 import txengine.structures.Canvas;
 import txengine.structures.CanvasNode;
 import txengine.structures.Coordinate;
+import txengine.structures.Pair;
 import txengine.systems.dungeon.gimmicks.GimmickFactory;
 import txengine.systems.room.action.Action;
 import txengine.systems.room.action.actions.*;
@@ -16,18 +17,27 @@ import java.util.List;
 public class Dungeon {
     private final static int DEFAULT_LENGTH = 15;
     private final static int DEFAULT_SPREAD = 33; // How likely it is for the core route to change directions during generation (out of 100)
+    private final static int DEFAULT_LOOT_QUANTITY = 5;
+    private final static int DEFAULT_LOOT_QUANTITY_SPREAD = 3;
 
+    // Inner structures
     Canvas roomCanvas;
 
+    // Config pools
     Integer[] enemyPool;
     List<AbstractMap.SimpleEntry<Integer, Integer>> rewardsPool;
 
+    // Loot Settings
+    int lootQuantity;
+    int lootSpread;
+
+    // Generation settings
     int randomness;
     int maximumLength;
     Long seed;
     Random rand;
 
-
+    // Core route details
     Coordinate playerLocation = null;
     Coordinate exitCoordinates = null;
 
@@ -42,6 +52,9 @@ public class Dungeon {
 
         rewardsPool = new ArrayList<>();
         enemyPool = Manager.combatEntityHashMap.keySet().toArray(new Integer[0]);
+
+        lootQuantity = DEFAULT_LOOT_QUANTITY;
+        lootSpread = DEFAULT_LOOT_QUANTITY_SPREAD;
     }
 
     public Dungeon(Long seed) {
@@ -90,23 +103,32 @@ public class Dungeon {
             return false;
         }
 
+        if (fromDirection == null && length > 1) {
+            LogUtils.error("An error occurred while generating core route! fromDirection is null without root!");
+            LogUtils.error("At length: " + length + " from node: " + from.getCoordinates().toString());
+            LogUtils.error("Open directions on that node: " + roomCanvas.openDirections(from).stream().map(Enum::toString).reduce("", (acc, str) -> acc + ", " + str));
+        }
+
         CanvasNode.Direction nextDirection = null;
 
         // Detect if we are extending from the root node, or if we cannot continue in the same direction
         if (fromDirection == null || !roomCanvas.openDirections(from).contains(fromDirection)) {
             nextDirection = Utils.selectRandom(roomCanvas.openDirections(from).toArray(new CanvasNode.Direction[0]), rand); // Choose a random direction
+            if (nextDirection == null) LogUtils.error("Obstruction case failure", "Dungeon::generateCoreRoute");
         }
 
         // directionalSpread% chance to go in a direction other than the same direction
         else if (Utils.randomInt(0,100, rand) <= randomness) {
             Set<CanvasNode.Direction> directions = roomCanvas.openDirections(from);
-            directions.remove(fromDirection);
+            if (directions.size() > 1) directions.remove(fromDirection); // If
             nextDirection = Utils.selectRandom(directions.toArray(new CanvasNode.Direction[0]), rand);
+            if (nextDirection == null) LogUtils.error("Random-direction case failure", "Dungeon::generateCoreRoute");
         }
 
         // Generate the next node in the same direction
         else {
             nextDirection = fromDirection;
+            if (nextDirection == null) LogUtils.error("Same-direction case failure", "Dungeon::generateCoreRoute");
         }
 
         // Create a door to the next node in the previous node
@@ -136,6 +158,14 @@ public class Dungeon {
         actions.add(new EquipmentAction());
 
         return actions;
+    }
+
+    public List<Pair<Integer, Integer>> getRewards() {
+        List<Pair<Integer, Integer>> rewards = new ArrayList<>();
+
+
+
+        return rewards;
     }
 
     private void handleCrash() {

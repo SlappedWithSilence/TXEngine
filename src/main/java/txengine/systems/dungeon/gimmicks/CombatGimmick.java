@@ -32,6 +32,7 @@ public class CombatGimmick extends DungeonGimmick {
         // TODO: Fetch loot from Dungeon loot pool
         ArrayList<AbstractMap.SimpleEntry<Integer, Integer>> loot = new ArrayList<>();
         CombatAction a = new CombatAction(new ArrayList<>(), hostiles, loot);
+        a.setMenuName("Fight mysterious entity");
 
         actions.add(a);
         return actions;
