@@ -1,10 +1,11 @@
 package txengine.systems.dungeon;
 
+import txengine.exceptions.GenerationException;
+import txengine.io.CrashReporter;
 import txengine.main.Manager;
 import txengine.structures.Canvas;
 import txengine.structures.CanvasNode;
 import txengine.structures.Coordinate;
-import txengine.structures.Pair;
 import txengine.systems.dungeon.gimmicks.GimmickFactory;
 import txengine.systems.room.action.Action;
 import txengine.systems.room.action.actions.*;
@@ -25,7 +26,7 @@ public class Dungeon {
 
     // Config pools
     Integer[] enemyPool;
-    List<AbstractMap.SimpleEntry<Integer, Integer>> rewardsPool;
+    List<Integer> rewardsPool;
 
     // Loot Settings
     int lootQuantity;
@@ -50,7 +51,7 @@ public class Dungeon {
         seed = rand.nextLong();
         rand = new Random(seed);
 
-        rewardsPool = new ArrayList<>();
+        rewardsPool = Manager.itemHashMap.keySet().stream().toList();
         enemyPool = Manager.combatEntityHashMap.keySet().toArray(new Integer[0]);
 
         lootQuantity = DEFAULT_LOOT_QUANTITY;
@@ -67,6 +68,9 @@ public class Dungeon {
 
         rewardsPool = new ArrayList<>();
         enemyPool = Manager.combatEntityHashMap.keySet().toArray(new Integer[0]);
+
+        lootQuantity = DEFAULT_LOOT_QUANTITY;
+        lootSpread = DEFAULT_LOOT_QUANTITY_SPREAD;
     }
 
     public boolean enter() {
@@ -88,7 +92,7 @@ public class Dungeon {
         return dr;
     }
 
-    private boolean generateCoreRoute(DungeonRoom from, int length, CanvasNode.Direction fromDirection) {
+    private boolean generateCoreRoute(DungeonRoom from, int length, CanvasNode.Direction fromDirection) throws GenerationException {
         // Check if the route has reached its maximum length (ie is done generating)
         if (length > maximumLength) {
             exitCoordinates = from.getCoordinates();
@@ -99,14 +103,7 @@ public class Dungeon {
         // Check if the route trapped itself before reaching its maximum length
         if (roomCanvas.openDirections(from).size() == 0) {
             LogUtils.error("Failed to generate dungeon! Writing configuration files to crash-details.txt","Dungeon::GenerateCoreRoute");
-            handleCrash();
-            return false;
-        }
-
-        if (fromDirection == null && length > 1) {
-            LogUtils.error("An error occurred while generating core route! fromDirection is null without root!");
-            LogUtils.error("At length: " + length + " from node: " + from.getCoordinates().toString());
-            LogUtils.error("Open directions on that node: " + roomCanvas.openDirections(from).stream().map(Enum::toString).reduce("", (acc, str) -> acc + ", " + str));
+            throw new GenerationException();
         }
 
         CanvasNode.Direction nextDirection = null;
@@ -114,7 +111,9 @@ public class Dungeon {
         // Detect if we are extending from the root node, or if we cannot continue in the same direction
         if (fromDirection == null || !roomCanvas.openDirections(from).contains(fromDirection)) {
             nextDirection = Utils.selectRandom(roomCanvas.openDirections(from).toArray(new CanvasNode.Direction[0]), rand); // Choose a random direction
-            if (nextDirection == null) LogUtils.error("Obstruction case failure", "Dungeon::generateCoreRoute");
+            if (nextDirection == null) {
+                LogUtils.error("Obstruction case failure", "Dungeon::generateCoreRoute");
+            }
         }
 
         // directionalSpread% chance to go in a direction other than the same direction
@@ -128,7 +127,6 @@ public class Dungeon {
         // Generate the next node in the same direction
         else {
             nextDirection = fromDirection;
-            if (nextDirection == null) LogUtils.error("Same-direction case failure", "Dungeon::generateCoreRoute");
         }
 
         // Create a door to the next node in the previous node
@@ -145,8 +143,16 @@ public class Dungeon {
     }
 
     public boolean generate() {
-        DungeonRoom root = getRoot();
-        return generateCoreRoute(root, 1, null);
+        try {
+            DungeonRoom root = getRoot();
+            return generateCoreRoute(root, 1, null);
+        } catch (GenerationException ge) {
+            return false;
+        } catch (Exception e) {
+            handleCrash();
+            System.exit(-1);
+            return false;
+        }
     }
 
     public static List<Action> getDefaultActions() {
@@ -160,16 +166,18 @@ public class Dungeon {
         return actions;
     }
 
-    public List<Pair<Integer, Integer>> getRewards() {
-        List<Pair<Integer, Integer>> rewards = new ArrayList<>();
+    public List<Integer> getRewards() {
+        if (rewardsPool == null || rewardsPool.size() == 0) return new ArrayList<>();
 
+        List<Integer> rewards = new ArrayList<>();
 
-
+        int dynamicQuantity = lootQuantity + Utils.randomInt(0, lootSpread);
+        for (int i = 0; i < dynamicQuantity; i++) rewards.add(Utils.selectRandom(rewardsPool, rand));
         return rewards;
     }
 
     private void handleCrash() {
-        /*CrashReporter.getInstance().append("Failed to generate dungeon!\n");
+        CrashReporter.getInstance().append("Failed to generate dungeon!\n");
         StringBuilder sb = new StringBuilder();
         sb.append("Seed: ").append(seed).append("\n");
         sb.append("Dimensions (LxW): ").append(roomCanvas.getLength()).append(",").append(roomCanvas.getWidth()).append("\n");
@@ -178,7 +186,7 @@ public class Dungeon {
         for (int i : enemyPool) sb.append(i).append(" ");
         sb.append("\n");
         CrashReporter.getInstance().append(sb);
-        CrashReporter.getInstance().write();*/
+        CrashReporter.getInstance().write();
     }
 
     @Override
@@ -260,11 +268,11 @@ public class Dungeon {
         this.enemyPool = enemyPool;
     }
 
-    public List<AbstractMap.SimpleEntry<Integer, Integer>> getRewardsPool() {
+    public List<Integer> getRewardsPool() {
         return rewardsPool;
     }
 
-    public void setRewardsPool(List<AbstractMap.SimpleEntry<Integer, Integer>> rewardsPool) {
+    public void setRewardsPool(List<Integer> rewardsPool) {
         this.rewardsPool = rewardsPool;
     }
 
