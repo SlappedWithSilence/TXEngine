@@ -17,12 +17,15 @@ import java.util.List;
 
 public class Dungeon {
     private final static int DEFAULT_LENGTH = 15;
-    private final static int DEFAULT_SPREAD = 33; // How likely it is for the core route to change directions during generation (out of 100)
+    private final static int DEFAULT_CORE_ROUTE_SPREAD = 33; // How likely it is for the core route to change directions during generation (out of 100)
+    private final static int DEFAULT_BRANCH_SPREAD = 75;
+
     private final static int DEFAULT_LOOT_QUANTITY = 5;
     private final static int DEFAULT_LOOT_QUANTITY_SPREAD = 3;
 
     // Inner structures
     Canvas roomCanvas;
+    Canvas visitedNodes;
 
     // Config pools
     Integer[] enemyPool;
@@ -35,16 +38,19 @@ public class Dungeon {
     // Generation settings
     int randomness;
     int maximumLength;
+    int branchRandomness;
     Long seed;
     Random rand;
 
     // Core route details
     Coordinate playerLocation = null;
+    Coordinate startCoordinates = null;
     Coordinate exitCoordinates = null;
 
     public Dungeon() {
         maximumLength = DEFAULT_LENGTH;
-        randomness = DEFAULT_SPREAD;
+        randomness = DEFAULT_CORE_ROUTE_SPREAD;
+        branchRandomness = DEFAULT_BRANCH_SPREAD;
         roomCanvas = new Canvas(maximumLength+ Utils.randomInt(-1,maximumLength/2), maximumLength + Utils.randomInt(-1, maximumLength/2));
 
         rand = new Random();
@@ -60,8 +66,9 @@ public class Dungeon {
 
     public Dungeon(Long seed) {
         maximumLength = DEFAULT_LENGTH;
-        randomness = DEFAULT_SPREAD;
+        randomness = DEFAULT_CORE_ROUTE_SPREAD;
         roomCanvas = new Canvas(maximumLength+ Utils.randomInt(-1,maximumLength/2), maximumLength + Utils.randomInt(-1, maximumLength/2));
+        branchRandomness = DEFAULT_BRANCH_SPREAD;
 
         rand = new Random(seed);
         this.seed = seed;
@@ -74,9 +81,11 @@ public class Dungeon {
     }
 
     public boolean enter() {
+        visitedNodes = new Canvas(roomCanvas.getLength(), roomCanvas.getWidth());
         while (!generate());
         while (!playerLocation.equals(exitCoordinates)) {
             LogUtils.info("Player location:" + playerLocation.x + ", " + playerLocation.y, "Dungeon::enter");
+            visitedNodes.put(playerLocation.x, playerLocation.y, roomCanvas.getNode(playerLocation.x, playerLocation.y));
             playerLocation = ((DungeonRoom) roomCanvas.getNode(playerLocation)).enter();
         }
         return true;
@@ -89,6 +98,7 @@ public class Dungeon {
         playerLocation = rootCoordinate;
         LogUtils.info("Root: " + rootCoordinate.x + ", " + rootCoordinate.y, "Dungeon::getRoot");
         roomCanvas.put(rootCoordinate, dr);
+        startCoordinates = rootCoordinate;
         return dr;
     }
 
@@ -142,13 +152,45 @@ public class Dungeon {
         return generateCoreRoute(to, length + 1, nextDirection);
     }
 
+    private void generateBranches(int passes, int spread) {
+        List<CanvasNode> lastNodes = roomCanvas.allNodes();
+        lastNodes.remove(roomCanvas.getNode(exitCoordinates));
+        for (int i = 0; i < passes; i++) lastNodes = flatBranchPass(lastNodes, spread);
+    }
+
+    private final List<CanvasNode> flatBranchPass(final List<CanvasNode> lastPass, final int spread) {
+        List<CanvasNode> newNodes = new ArrayList<>();
+        if (lastPass.size() == 0) return lastPass;
+        for (CanvasNode n : lastPass) { // For each node generated in the last pass
+            if (Utils.randomInt(0,100) <= spread) { // If we succeed our check
+                Set<CanvasNode.Direction> possibleNodeDirections = roomCanvas.openDirections(n); // Determine possible directions
+                if (!possibleNodeDirections.isEmpty()) { // If there is at least one possible direction
+                    CanvasNode.Direction newNodeDirection =
+                            Utils.selectRandom(possibleNodeDirections.toArray(new CanvasNode.Direction[0]), rand); // Randomly select a direction
+                    n.addDoor(newNodeDirection); // Add the direction to the current node's door list
+                    DungeonRoom dr = new DungeonRoom(this, GimmickFactory.randomGimmick(this), n.to(newNodeDirection));
+                    dr.addDoor(Canvas.inverseDirection(newNodeDirection));
+                    roomCanvas.put(dr.self(), dr);
+                    newNodes.add(dr);
+                }
+            }
+        }
+        return newNodes;
+    }
+
     public boolean generate() {
         try {
             DungeonRoom root = getRoot();
-            return generateCoreRoute(root, 1, null);
+            if (generateCoreRoute(root, 1, null)) {
+                generateBranches(5, DEFAULT_BRANCH_SPREAD);
+                return true;
+            } else {
+                return false;
+            }
         } catch (GenerationException ge) {
             return false;
         } catch (Exception e) {
+            e.printStackTrace();
             handleCrash();
             System.exit(-1);
             return false;
@@ -219,7 +261,9 @@ public class Dungeon {
                     else nodeBuilder1.append(" ");
 
                     // Node
-                    nodeBuilder1.append("*");
+                    if (exitCoordinates != null && exitCoordinates.x == x && exitCoordinates.y == y ) nodeBuilder1.append("X");
+                    else if (startCoordinates.x == x && startCoordinates.y == y) nodeBuilder1.append("E");
+                    else nodeBuilder1.append('*');
 
                     // East
                     if (doors.contains(CanvasNode.Direction.EAST)) nodeBuilder1.append("-");

@@ -3,10 +3,7 @@ package txengine.structures;
 import txengine.ui.LogUtils;
 
 import java.io.DataInput;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Canvas {
     int length;
@@ -41,6 +38,12 @@ public class Canvas {
             case WEST -> { return CanvasNode.Direction.EAST;}
             default -> { return null;}
         }
+    }
+
+    public List<CanvasNode> allNodes() {
+        List<CanvasNode> all = new ArrayList<>();
+        for (CanvasNode[] n : nodes) all.addAll(Arrays.stream(n).filter(Objects::nonNull).toList());
+        return all;
     }
 
     public CanvasNode getNode(int x, int y) {
