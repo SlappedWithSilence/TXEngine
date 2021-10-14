@@ -46,6 +46,14 @@ public class Canvas {
         return all;
     }
 
+    public boolean isEmpty() {
+        for (CanvasNode[] carr : nodes) {
+            if (Arrays.stream(carr).anyMatch(Objects::nonNull)) return false;
+        }
+
+        return true;
+    }
+
     public CanvasNode getNode(int x, int y) {
         return nodes[y][x];
     }
