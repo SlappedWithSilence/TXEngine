@@ -1,8 +1,11 @@
 package txengine.systems.dungeon;
 
+import txengine.io.CrashReporter;
 import txengine.structures.Canvas;
 import txengine.structures.CanvasNode;
 import txengine.structures.Coordinate;
+import txengine.systems.integration.requirements.ConsumeItemRequirement;
+import txengine.systems.integration.requirements.ItemRequirement;
 import txengine.systems.room.action.Action;
 import txengine.systems.room.action.actions.MoveAction;
 import txengine.ui.LogUtils;
@@ -74,6 +77,29 @@ public class DungeonRoom extends CanvasNode {
         if (!doors.contains(d)) {
             roomActions.add(new DungeonMove(to(d)));
             doors.add(d);
+        }
+    }
+
+    // Add a new gimmick to the room
+    public void addGimmick(DungeonGimmick dg) {
+        if (dg.get() == null) {
+            LogUtils.error(dg.getClass().getSimpleName() + " returned null instead of List<Action>!","DungeonRoom::addGimmick");
+            CrashReporter.getInstance().clear();
+            CrashReporter.getInstance().append("Crashed while adding a gimmick!\n");
+            CrashReporter.getInstance().append("ClassName: " + dg.getClass().getSimpleName() + "\n");
+            CrashReporter.getInstance().append("in Dungeon\n");
+            CrashReporter.getInstance().append("seed: " + owner.getSeed() + "\n");
+            CrashReporter.getInstance().append("key id: " + owner.gimmickKeyID + "\n");
+            CrashReporter.getInstance().write();
+            CrashReporter.getInstance().clear();
+        } else {
+            roomActions.addAll(dg.get());
+        }
+
+        if (dg.getType() == DungeonGimmick.Type.LOCKED) {
+            for (Action a : roomActions) {
+                if (a instanceof MoveAction) a.addRequirement(new ConsumeItemRequirement(new String[]{""+ owner.gimmickKeyID}));
+            }
         }
     }
 }

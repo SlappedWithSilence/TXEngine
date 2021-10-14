@@ -23,6 +23,7 @@ public class Dungeon {
     private final static int DEFAULT_LOOT_QUANTITY = 5;
     private final static int DEFAULT_LOOT_QUANTITY_SPREAD = 3;
 
+    private final static int DEFAULT_KEY_ID = -3;
     // Inner structures
     Canvas roomCanvas;
     Canvas visitedNodes;
@@ -46,6 +47,9 @@ public class Dungeon {
     Coordinate playerLocation = null;
     Coordinate startCoordinates = null;
     Coordinate exitCoordinates = null;
+
+    // Misc
+    int gimmickKeyID;
 
     public Dungeon() {
         maximumLength = DEFAULT_LENGTH;

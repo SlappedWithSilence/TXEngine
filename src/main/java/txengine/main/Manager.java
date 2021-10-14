@@ -128,6 +128,7 @@ public class Manager {
         Exporters.registerAll();
 
         player = new Player();
+        itemHashMap.put(-3, new Item("Key of Bone", "A strange key formed from a skeleton.", -3, 0, 4));
     }
 
     private static void initDebug() {

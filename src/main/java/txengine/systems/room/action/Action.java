@@ -62,6 +62,10 @@ public abstract class Action {
 		return isHidden();
 	}
 
+	public void addRequirement(Requirement r) {
+		if (r != null) requirements.add(r);
+	}
+
 
 	@Override
 	public String toString() {

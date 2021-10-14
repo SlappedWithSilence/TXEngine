@@ -15,12 +15,14 @@ public class CrashReporter {
         stringBuilder = new StringBuilder();
     }
 
-    public void append(String s) {
+    public CrashReporter append(String s) {
         stringBuilder.append(s);
+        return this;
     }
 
-    public void append(StringBuilder s) {
+    public CrashReporter append(StringBuilder s) {
         stringBuilder.append(s);
+        return this;
     }
 
     public void write() {
@@ -49,8 +51,9 @@ public class CrashReporter {
         }
     }
 
-    public void clear() {
+    public CrashReporter clear() {
         stringBuilder = new StringBuilder();
+        return this;
     }
 
     public static CrashReporter getInstance() {
