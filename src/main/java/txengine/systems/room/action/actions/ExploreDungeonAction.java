@@ -11,9 +11,9 @@ import java.util.Map;
 
 import static txengine.io.load.PropertyTags.*;
 
-public class DungeonAction extends Action {
+public class ExploreDungeonAction extends Action {
 
-    public DungeonAction() {
+    public ExploreDungeonAction() {
 
     }
 

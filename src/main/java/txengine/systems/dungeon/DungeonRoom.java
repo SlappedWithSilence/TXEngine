@@ -15,28 +15,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-class DungeonMove extends Action {
-    Coordinate targetRoom;
-
-    public DungeonMove(Coordinate targetRoom) {
-        this.targetRoom = targetRoom;
-        menuName = "Move to " + targetRoom;
-    }
-
-    public Coordinate getTargetRoom() {
-        return targetRoom;
-    }
-
-    public void setTargetRoom(Coordinate targetRoom) {
-        this.targetRoom = targetRoom;
-    }
-
-    @Override
-    public int perform() {
-        return 0;
-    }
-}
-
 public class DungeonRoom extends CanvasNode {
     String name;
     List<Action> roomActions;
@@ -46,7 +24,7 @@ public class DungeonRoom extends CanvasNode {
         super.coordinates = coordinate;
         this.owner = owner;
         this.roomActions = roomActions;
-        this.roomActions.addAll(Dungeon.getDefaultActions());
+        this.roomActions.addAll(owner.getDefaultActions());
     }
 
     public DungeonRoom(Dungeon owner, Coordinate rootCoordinate) {
@@ -75,7 +53,7 @@ public class DungeonRoom extends CanvasNode {
     public void addDoor(Direction d) {
         if (getDoors() == null) setDoors(new HashSet<>());
         if (!doors.contains(d)) {
-            roomActions.add(new DungeonMove(to(d)));
+            roomActions.add(new DungeonMove(owner, to(d)));
             doors.add(d);
         }
     }

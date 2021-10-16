@@ -207,13 +207,14 @@ public class Dungeon {
         }
     }
 
-    public static List<Action> getDefaultActions() {
+    public List<Action> getDefaultActions() {
         List<Action> actions = new ArrayList<>();
         actions.add(new SummaryAction());
         actions.add(new InventoryAction());
         actions.add(new AbilitySummaryAction());
         actions.add(new SkillSummaryAction());
         actions.add(new EquipmentAction());
+        actions.add(new DungeonView(this));
 
         return actions;
     }

@@ -44,15 +44,6 @@
           "unlocked_index" : -1
         },
         {
-          "class_name" : "DungeonAction",
-          "menu_name" : "Default Dungeon",
-          "text" : "You venture into the dungeon.",
-          "hidden" : false,
-          "properties" : [],
-          "requirements" : [],
-          "unlocked_index" : -1
-        },
-        {
           "class_name" : "MoveAction",
           "menu_name"  : "Go to Paddie's",
           "text"      : "You slink away into the night, seeking out Paddie's Irish Bar.",
@@ -83,7 +74,7 @@
           "unlocked_index" : -1
         },
         {
-          "class_name" : "DungeonAction",
+          "class_name" : "ExploreDungeonAction",
           "menu_name" : "Enter a dungeon",
           "text" : "You venture into the dungeon.",
           "hidden" : false,
