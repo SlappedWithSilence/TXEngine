@@ -43,29 +43,7 @@ public class Utils {
 		return collection.get(r.nextInt((collection.size()-1)));
 	}
 
-	public static boolean isPropertyTag(String str) {
-		if (str == null) return false;
-		if (str.length() < 3) return false;
-		return str.charAt(0) == '{' && str.charAt(str.length() - 1) == '}';
-	}
 
-	public static Map<String, List<String>> getMarkedProperties(String[] properties) {
-		Map<String, List<String>> propertiesMap = new HashMap<>();
-
-		String mode = null;
-
-		for (String s : properties) {
-			if (isPropertyTag(s)) {
-				if (!propertiesMap.containsKey(s)) propertiesMap.put(s, new ArrayList<>());
-				mode = s;
-			}
-			else if (isPropertyTag(mode)) {
-				propertiesMap.get(mode).add(s);
-			}
-		}
-
-		return propertiesMap;
-	}
 
 	public static <T> T selectRandom(T[] arr, Random random) {
 		if (arr.length == 0) {

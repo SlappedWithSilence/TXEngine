@@ -59,8 +59,8 @@ public class CombatAction extends Action {
         Cloner cloner = new Cloner();
         ArrayList<CombatEntity> friendlies = new ArrayList<>();
         ArrayList<CombatEntity> hostiles = new ArrayList<>();
-        lootIds = new ArrayList<>();
-        lootQuantities = new ArrayList<>();
+        if (lootIds== null) lootIds = new ArrayList<>();
+        if (lootQuantities == null)  lootQuantities = new ArrayList<>();
 
         for (String s:
              properties) {
@@ -139,13 +139,17 @@ public class CombatAction extends Action {
     }
 
     public void addLoot(int id) {
+        if (lootIds == null) lootIds = new ArrayList<>();
+        if (lootQuantities == null)  lootQuantities = new ArrayList<>();
         lootIds.add(id);
-        lootIds.add(1);
+        lootQuantities.add(1);
     }
 
     public void addLoot(int id, int quantity) {
+        if (lootIds== null) lootIds = new ArrayList<>();
+        if (lootQuantities == null)  lootQuantities = new ArrayList<>();
         lootIds.add(id);
-        lootIds.add(quantity);
+        lootQuantities.add(quantity);
     }
 
 

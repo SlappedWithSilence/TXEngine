@@ -1,5 +1,6 @@
 package txengine.systems.room.action.actions;
 
+import txengine.io.load.PropertyTags;
 import txengine.main.Manager;
 import txengine.systems.dungeon.Dungeon;
 import txengine.systems.room.action.Action;
@@ -8,11 +9,9 @@ import txengine.util.Utils;
 import java.util.List;
 import java.util.Map;
 
-public class DungeonAction extends Action {
+import static txengine.io.load.PropertyTags.*;
 
-    private static final String hostileMarker = "{HOSTILE}";
-    private static final String rewardsMarker = "{REWARDS}";
-    private static final String seedMarker = "{SEED}";
+public class DungeonAction extends Action {
 
     public DungeonAction() {
 
@@ -28,7 +27,7 @@ public class DungeonAction extends Action {
         int complexity = Integer.parseInt(properties[2]);
         int doorKeyID = Integer.parseInt(properties[3]);
 
-        Map<String, List<String>> data = Utils.getMarkedProperties(properties);
+        Map<String, List<String>> data = PropertyTags.getMarkedProperties(properties);
 
         // Set up pools and seed
         if  (data.containsKey(seedMarker)) d.setSeed(Long.parseLong(data.get(seedMarker).get(0)));
