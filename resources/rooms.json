@@ -73,15 +73,23 @@
       "actions"  :
       [
         {
-        "class_name" : "MoveAction",
-        "menu_name"  : "Go to Debug Room",
-        "text"      : "You return to the debug room.",
-        "hidden"   : false,
-        "properties" : ["1"],
-        "requirements" : [
-        ],
-        "unlocked_index" : -1
-      }
+          "class_name" : "MoveAction",
+          "menu_name"  : "Go to Debug Room",
+          "text"      : "You return to the debug room.",
+          "hidden"   : false,
+          "properties" : ["1"],
+          "requirements" : [
+          ],
+          "unlocked_index" : -1
+        },
+        {
+          "class_name" : "DungeonAction",
+          "menu_name" : "Enter a dungeon",
+          "text" : "You venture into the dungeon.",
+          "hidden" : false,
+          "hide_after_use" : false,
+          "properties" : ["8","33","33","-3"]
+        }
       ]
     }
   ]

@@ -92,6 +92,12 @@ public class Dungeon {
             visitedNodes.put(playerLocation.x, playerLocation.y, roomCanvas.getNode(playerLocation.x, playerLocation.y));
             playerLocation = ((DungeonRoom) roomCanvas.getNode(playerLocation)).enter();
         }
+
+        // Distribute loot
+        for (int i = 0; i < Utils.randomInt(Math.max(1,lootQuantity-lootSpread), lootQuantity+lootSpread, rand); i++) {
+            int randLootID = Utils.selectRandom(rewardsPool, rand);
+            Manager.player.getInventory().addItem(randLootID);
+        }
         return true;
     }
 
@@ -306,10 +312,51 @@ public class Dungeon {
 
     public void setSeed(Long seed) {
         this.seed = seed;
+        this.rand = new Random(seed);
     }
 
     public Integer[] getEnemyPool() {
         return enemyPool;
+    }
+
+    public Canvas getVisitedNodes() {
+        return visitedNodes;
+    }
+
+    public void setVisitedNodes(Canvas visitedNodes) {
+        this.visitedNodes = visitedNodes;
+    }
+
+    public Coordinate getPlayerLocation() {
+        return playerLocation;
+    }
+
+    public void setPlayerLocation(Coordinate playerLocation) {
+        this.playerLocation = playerLocation;
+    }
+
+    public Coordinate getStartCoordinates() {
+        return startCoordinates;
+    }
+
+    public void setStartCoordinates(Coordinate startCoordinates) {
+        this.startCoordinates = startCoordinates;
+    }
+
+    public Coordinate getExitCoordinates() {
+        return exitCoordinates;
+    }
+
+    public void setExitCoordinates(Coordinate exitCoordinates) {
+        this.exitCoordinates = exitCoordinates;
+    }
+
+    public int getGimmickKeyID() {
+        return gimmickKeyID;
+    }
+
+    public void setGimmickKeyID(int gimmickKeyID) {
+        this.gimmickKeyID = gimmickKeyID;
     }
 
     public void setEnemyPool(Integer[] enemyPool) {
@@ -338,5 +385,37 @@ public class Dungeon {
 
     public void setRand(Random rand) {
         this.rand = rand;
+    }
+
+    public int getLootQuantity() {
+        return lootQuantity;
+    }
+
+    public void setLootQuantity(int lootQuantity) {
+        this.lootQuantity = lootQuantity;
+    }
+
+    public int getLootSpread() {
+        return lootSpread;
+    }
+
+    public void setLootSpread(int lootSpread) {
+        this.lootSpread = lootSpread;
+    }
+
+    public int getRandomness() {
+        return randomness;
+    }
+
+    public void setRandomness(int randomness) {
+        this.randomness = randomness;
+    }
+
+    public int getBranchRandomness() {
+        return branchRandomness;
+    }
+
+    public void setBranchRandomness(int branchRandomness) {
+        this.branchRandomness = branchRandomness;
     }
 }

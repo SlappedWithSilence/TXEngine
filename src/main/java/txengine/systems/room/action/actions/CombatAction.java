@@ -26,6 +26,8 @@ public class CombatAction extends Action {
     private ArrayList<Integer> lootIds;        // The ids of the items to give to the player when they win
     private ArrayList<Integer> lootQuantities; // The quantities of each item to give to the player
 
+    private boolean hideOnWin = false;
+
     private enum LoadType {
         HOSTILE,
         FRIENDLY,
@@ -100,10 +102,19 @@ public class CombatAction extends Action {
             System.out.println("You emerge victorious from combat!");
             printLoot();
             giveLoot(lootIds, lootQuantities);
+            if (hideOnWin) hidden = true;
         }
         else System.out.println("You failed to conquer your foes and lie defeated.");
 
         return unhideIndex;
+    }
+
+    public boolean isHideOnWin() {
+        return hideOnWin;
+    }
+
+    public void setHideOnWin(boolean hideOnWin) {
+        this.hideOnWin = hideOnWin;
     }
 
     private void printLoot() {
@@ -126,5 +137,17 @@ public class CombatAction extends Action {
             Manager.player.getInventory().addItem(ids.get(i), quantities.get(i));
         }
     }
+
+    public void addLoot(int id) {
+        lootIds.add(id);
+        lootIds.add(1);
+    }
+
+    public void addLoot(int id, int quantity) {
+        lootIds.add(id);
+        lootIds.add(quantity);
+    }
+
+
 
 }
