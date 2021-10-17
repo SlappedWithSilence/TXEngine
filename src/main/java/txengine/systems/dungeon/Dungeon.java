@@ -88,19 +88,14 @@ public class Dungeon {
         visitedNodes = new Canvas(roomCanvas.getLength(), roomCanvas.getWidth());
         while (!generate());
         while (!playerLocation.equals(exitCoordinates)) {
-            LogUtils.info("Player location:" + playerLocation.x + ", " + playerLocation.y, "Dungeon::enter");
             visitedNodes.put(playerLocation.x, playerLocation.y, roomCanvas.getNode(playerLocation.x, playerLocation.y));
             playerLocation = ((DungeonRoom) roomCanvas.getNode(playerLocation)).enter();
         }
 
-        // Distribute loot
-        for (int i = 0; i < Utils.randomInt(Math.max(1,lootQuantity-lootSpread), lootQuantity+lootSpread, rand); i++) {
-            int randLootID = Utils.selectRandom(rewardsPool, rand);
-            Manager.player.getInventory().addItem(randLootID);
-        }
         return true;
     }
 
+    /*** Generator Methods ***/
     private DungeonRoom getRoot() {
         // Generate a coordinate pair at (n,0) where n is between 0 and the width of the canvas
         Coordinate rootCoordinate = new Coordinate(Utils.randomInt(0,roomCanvas.getWidth()-1),0);
@@ -207,6 +202,7 @@ public class Dungeon {
         }
     }
 
+    /*** Rewards Methods ***/
     public List<Action> getDefaultActions() {
         List<Action> actions = new ArrayList<>();
         actions.add(new SummaryAction());

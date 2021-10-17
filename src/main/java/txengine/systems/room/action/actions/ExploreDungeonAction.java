@@ -5,8 +5,6 @@ import txengine.main.Manager;
 import txengine.systems.dungeon.Dungeon;
 import txengine.systems.room.action.Action;
 import txengine.ui.color.Colors;
-import txengine.util.Utils;
-
 import java.util.List;
 import java.util.Map;
 

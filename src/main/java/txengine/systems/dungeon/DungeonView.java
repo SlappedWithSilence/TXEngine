@@ -1,7 +1,6 @@
 package txengine.systems.dungeon;
 
 import txengine.structures.CanvasNode;
-import txengine.systems.room.action.Action;
 import txengine.ui.color.Colors;
 import txengine.ui.component.Components;
 
@@ -11,6 +10,8 @@ public class DungeonView extends DungeonAction{
 
     public DungeonView(Dungeon owner) {
         super(owner);
+        menuName = "View dungeon map";
+        text = "";
     }
 
     @Override
