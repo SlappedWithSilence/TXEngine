@@ -9,7 +9,7 @@ public class DungeonMove extends DungeonAction{
         super(owner);
         this.targetRoom = targetRoom;
         menuName = "Move to " + targetRoom;
-        text = "";
+        text = "You moved from " + owner.playerLocation + " to " + targetRoom;
     }
 
     public Coordinate getTargetRoom() {
