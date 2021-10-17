@@ -59,9 +59,12 @@ public class DungeonView extends DungeonAction{
                 }
             }
 
-            sb.append(nodeBuilder0).append("|\n");
-            sb.append(nodeBuilder1).append("|\n");
-            sb.append(nodeBuilder2).append("|\n");
+            if (nodeBuilder1.toString().contains("*")) {
+                sb.append(nodeBuilder0).append("|\n");
+                sb.append(nodeBuilder1).append("|\n");
+                sb.append(nodeBuilder2).append("|\n");
+            }
+
 
         }
         sb.append("\n");
