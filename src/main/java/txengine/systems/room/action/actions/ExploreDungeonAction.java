@@ -4,6 +4,7 @@ import txengine.io.load.PropertyTags;
 import txengine.main.Manager;
 import txengine.systems.dungeon.Dungeon;
 import txengine.systems.room.action.Action;
+import txengine.ui.color.Colors;
 import txengine.util.Utils;
 
 import java.util.List;
@@ -47,8 +48,10 @@ public class ExploreDungeonAction extends Action {
         d.setGimmickKeyID(doorKeyID);
 
         if (d.enter()) {
+            System.out.println("As you reach the end of the dungeon you notice a large chest.\nYou open it to find:");
             for (Integer loot : d.getRewards()) {
                 Manager.player.getInventory().addItem(loot);
+                System.out.println(Colors.GREEN_BRIGHT + Manager.itemHashMap.get(loot).getName());
             }
         } else {
             System.out.println("You failed to conquer the dungeon and awake at its entrance.");
