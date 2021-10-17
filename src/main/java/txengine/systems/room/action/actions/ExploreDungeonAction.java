@@ -51,7 +51,7 @@ public class ExploreDungeonAction extends Action {
             System.out.println("As you reach the end of the dungeon you notice a large chest.\nYou open it to find:");
             for (Integer loot : d.getRewards()) {
                 Manager.player.getInventory().addItem(loot);
-                System.out.println(Colors.GREEN_BRIGHT + Manager.itemHashMap.get(loot).getName());
+                System.out.println(Colors.GREEN_BRIGHT + Manager.itemHashMap.get(loot).getName() + Colors.RESET);
             }
         } else {
             System.out.println("You failed to conquer the dungeon and awake at its entrance.");
