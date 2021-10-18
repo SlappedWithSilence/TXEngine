@@ -17,16 +17,15 @@ public class ConsumeItemRequirement extends Requirement {
     boolean met = false;
 
     public ConsumeItemRequirement() {
-        try {
-            persist = Boolean.parseBoolean(properties[0]);
-            LogUtils.info("Successfully set persistence to " + persist, "ConsumeItemRequirement::()");
-        } catch (Exception ignored) {
-            LogUtils.info("Failed to set persistence", "ConsumeItemRequirement::()");
-        }
+
     }
 
     public ConsumeItemRequirement(String[] properties) {
         super(properties);
+        try {
+            persist = Boolean.parseBoolean(properties[0]);
+        } catch (Exception ignored) {
+        }
     }
 
     public ConsumeItemRequirement(Requirement requirement) {

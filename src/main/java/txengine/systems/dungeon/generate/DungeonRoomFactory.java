@@ -27,8 +27,6 @@ public class DungeonRoomFactory {
 
 
     public static Requirement buildLock(final Dungeon owner) {
-        ConsumeItemRequirement r = new ConsumeItemRequirement();
-        r.setProperties(new String[] {"true",""+owner.getGimmickKeyID()});
-        return r;
+        return new ConsumeItemRequirement(new String[] {"true",""+owner.getGimmickKeyID()});
     }
 }
