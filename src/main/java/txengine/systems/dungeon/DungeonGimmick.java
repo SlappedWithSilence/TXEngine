@@ -7,7 +7,7 @@ import java.util.List;
 public abstract class DungeonGimmick {
 
     // If locked, whenever this gimmick is used all doors in that room will require a key to be used.
-    enum Type {
+    public enum Type {
         LOCKED,
         UNLOCKED
     }

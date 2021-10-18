@@ -17,7 +17,12 @@ public abstract class Action {
 
 	/* Constructors */
 	public Action() {
-
+		properties = new String[0];
+		menuName = "Default Menu Name";
+		text = "Default room text";
+		requirements = new ArrayList<>();
+		hidden = false;
+		hideAfterUse = false;
 	}
 
 	public Action(String menuName, String text, String[] properties, boolean enabled, int unhideIndex, boolean hideAfterUse, List<Requirement> requirements) {

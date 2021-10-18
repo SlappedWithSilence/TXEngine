@@ -44,8 +44,8 @@ public class GimmickFactory {
 
     }
 
-    public static List<Action> randomGimmick(final Dungeon owner) {
-        return build(Utils.selectRandom(gimmickClassSet.toArray(new String[0]), owner.getRand()), owner).get();
+    public static DungeonGimmick randomGimmick(final Dungeon owner) {
+        return build(Utils.selectRandom(gimmickClassSet.toArray(new String[0]), owner.getRand()), owner);
     }
 
     private static Set<String> initClassSet() {

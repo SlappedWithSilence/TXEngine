@@ -13,7 +13,16 @@ import java.util.List;
 // - Agrees to "consume" them
 public class ConsumeItemRequirement extends Requirement {
 
+    Boolean persist = false;
+    boolean met = false;
+
     public ConsumeItemRequirement() {
+        try {
+            persist = Boolean.parseBoolean(properties[0]);
+            LogUtils.info("Successfully set persistence to " + persist, "ConsumeItemRequirement::()");
+        } catch (Exception ignored) {
+            LogUtils.info("Failed to set persistence", "ConsumeItemRequirement::()");
+        }
     }
 
     public ConsumeItemRequirement(String[] properties) {
@@ -40,8 +49,8 @@ public class ConsumeItemRequirement extends Requirement {
 
         sb.append("You must have ");
 
-        for (int id : Utils.toInts(List.of(properties))) sb.append(Manager.itemHashMap.get(id)).append(",");
-        sb.replace(sb.length()-1, sb.length()-1, " ");
+        for (int id : Utils.toInts(List.of(properties))) sb.append(Manager.itemHashMap.get(id).getName()).append(",");
+        sb.replace(sb.length()-1, sb.length(), " ");
         sb.append("in your inventory.");
 
         return sb.toString();
@@ -49,6 +58,12 @@ public class ConsumeItemRequirement extends Requirement {
 
     @Override
     public boolean met() {
+        if (persist && met) {
+            return true;
+        } else {
+            LogUtils.info("Persist: " + persist, "ConsumeItemRequirement::met");
+            LogUtils.info("Met: " + met, "ConsumeItemRequirement::met");
+        }
         List<Integer> ids = Utils.toInts(List.of(properties)); //  Track the parsed IDs
         if (Manager.player.getInventory().getItemIDs().containsAll(ids)) {
             StringBuilder names = new StringBuilder();
@@ -58,9 +73,9 @@ public class ConsumeItemRequirement extends Requirement {
             System.out.println("Are you sure you want to use " + names.toString() + "?");
             if (LogUtils.getAffirmative()) {
                 for (int id : ids) Manager.player.getInventory().consumeQuantity(id, 1);
+                met = true;
                 return true;
             }
-            return false;
         }
         return false;
     }

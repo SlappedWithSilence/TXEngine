@@ -102,7 +102,15 @@ public class Utils {
 	}
 
 	public static List<Integer> toInts(Collection<String> collection) {
-		return collection.stream().map(Integer::parseInt).toList();
+		List<Integer> arr = new ArrayList<>();
+		for (String s : collection) {
+			try {
+				arr.add(Integer.parseInt(s));
+			} catch (Exception e) {
+
+			}
+		}
+		return arr;
 	}
 
 	// Parses a pair of string-int values into a list of pairs. pair values are stored in a single string with

@@ -6,6 +6,7 @@ import txengine.main.Manager;
 import txengine.structures.Canvas;
 import txengine.structures.CanvasNode;
 import txengine.structures.Coordinate;
+import txengine.systems.dungeon.generate.DungeonRoomFactory;
 import txengine.systems.dungeon.gimmicks.GimmickFactory;
 import txengine.systems.room.action.Action;
 import txengine.systems.room.action.actions.*;
@@ -99,11 +100,14 @@ public class Dungeon {
     private DungeonRoom getRoot() {
         // Generate a coordinate pair at (n,0) where n is between 0 and the width of the canvas
         Coordinate rootCoordinate = new Coordinate(Utils.randomInt(0,roomCanvas.getWidth()-1),0);
-        DungeonRoom dr = new DungeonRoom(this, rootCoordinate);
+        DungeonGimmick gimmick = GimmickFactory.randomGimmick(this);
+
+        DungeonRoom dr = DungeonRoomFactory.build(this, rootCoordinate, gimmick, null, null);
+
         playerLocation = rootCoordinate;
-        LogUtils.info("Root: " + rootCoordinate.x + ", " + rootCoordinate.y, "Dungeon::getRoot");
-        roomCanvas.put(rootCoordinate, dr);
         startCoordinates = rootCoordinate;
+
+        roomCanvas.put(rootCoordinate, dr);
         return dr;
     }
 
@@ -148,12 +152,12 @@ public class Dungeon {
         from.addDoor(nextDirection);
 
         // Generate the new node
-        DungeonRoom to = new DungeonRoom(this, GimmickFactory.randomGimmick(this), from.to(nextDirection));
-        to.addDoor(Canvas.inverseDirection(nextDirection));
-        to.roomActions.addAll(GimmickFactory.randomGimmick(this));
+        DungeonRoom to = DungeonRoomFactory.build(this, from.to(nextDirection),
+                GimmickFactory.randomGimmick(this), Canvas.inverseDirection(nextDirection), null);
 
         // Add the new node to the canvas
-        roomCanvas.put(from.to(nextDirection), to);
+        roomCanvas.put(to.self(), to);
+
         return generateCoreRoute(to, length + 1, nextDirection);
     }
 
@@ -163,18 +167,24 @@ public class Dungeon {
         for (int i = 0; i < passes; i++) lastNodes = flatBranchPass(lastNodes, spread);
     }
 
-    private final List<CanvasNode> flatBranchPass(final List<CanvasNode> lastPass, final int spread) {
+    private List<CanvasNode> flatBranchPass(final List<CanvasNode> lastPass, final int spread) {
         List<CanvasNode> newNodes = new ArrayList<>();
         if (lastPass.size() == 0) return lastPass;
         for (CanvasNode n : lastPass) { // For each node generated in the last pass
+
             if (Utils.randomInt(0,100) <= spread) { // If we succeed our check
+
                 Set<CanvasNode.Direction> possibleNodeDirections = roomCanvas.openDirections(n); // Determine possible directions
+
                 if (!possibleNodeDirections.isEmpty()) { // If there is at least one possible direction
+
                     CanvasNode.Direction newNodeDirection =
                             Utils.selectRandom(possibleNodeDirections.toArray(new CanvasNode.Direction[0]), rand); // Randomly select a direction
+
                     n.addDoor(newNodeDirection); // Add the direction to the current node's door list
-                    DungeonRoom dr = new DungeonRoom(this, GimmickFactory.randomGimmick(this), n.to(newNodeDirection));
-                    dr.addDoor(Canvas.inverseDirection(newNodeDirection));
+                    DungeonRoom dr = DungeonRoomFactory.build(this, n.to(newNodeDirection), GimmickFactory.randomGimmick(this),
+                            Canvas.inverseDirection(newNodeDirection), null);
+
                     roomCanvas.put(dr.self(), dr);
                     newNodes.add(dr);
                 }

@@ -49,8 +49,7 @@
           "text"      : "You slink away into the night, seeking out Paddie's Irish Bar.",
           "hidden"   : false,
           "properties" : ["2"],
-          "requirements" : [
-          ],
+          "requirements" : [],
           "unlocked_index" : -1
         }
       ]

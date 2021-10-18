@@ -22,6 +22,7 @@ public class CombatGimmick extends DungeonGimmick {
     public CombatGimmick(Dungeon owner) {
         super(owner);
         lootQuantity = Utils.randomInt(Math.max(DEFAULT_LOOT_QUANTITY - DEFAULT_LOOT_SPREAD,1), DEFAULT_LOOT_QUANTITY+DEFAULT_LOOT_SPREAD);
+        type = Type.LOCKED;
     }
 
     @Override
