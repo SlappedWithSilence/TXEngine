@@ -26,7 +26,7 @@ public class Conversation {
     // Methods
 
     public void converse() {
-
+        nextModuleId = 0;
       while (nextModuleId > -1) {
           nextModuleId = modules.get(nextModuleId).perform();
       }
