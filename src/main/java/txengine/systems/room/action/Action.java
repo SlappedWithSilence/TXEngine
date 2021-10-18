@@ -19,7 +19,7 @@ public abstract class Action {
 	public Action() {
 		properties = new String[0];
 		menuName = "Default Menu Name";
-		text = "Default room text";
+		text = "";
 		requirements = new ArrayList<>();
 		hidden = false;
 		hideAfterUse = false;

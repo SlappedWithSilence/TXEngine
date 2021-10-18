@@ -2,7 +2,6 @@ package txengine.systems.dungeon;
 
 import txengine.systems.integration.Requirement;
 import txengine.systems.room.action.Action;
-import txengine.systems.room.action.actions.AbilitySummaryAction;
 
 import java.util.ArrayList;
 import java.util.List;

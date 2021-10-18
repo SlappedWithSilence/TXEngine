@@ -48,6 +48,7 @@ public class Dungeon {
     Coordinate playerLocation = null;
     Coordinate startCoordinates = null;
     Coordinate exitCoordinates = null;
+    boolean forceExit = false;
 
     // Misc
     int gimmickKeyID;
@@ -88,12 +89,11 @@ public class Dungeon {
     public boolean enter() {
         visitedNodes = new Canvas(roomCanvas.getLength(), roomCanvas.getWidth());
         while (!generate());
-        while (!playerLocation.equals(exitCoordinates)) {
+        while (!forceExit && !playerLocation.equals(exitCoordinates)) {
             visitedNodes.put(playerLocation.x, playerLocation.y, roomCanvas.getNode(playerLocation.x, playerLocation.y));
             playerLocation = ((DungeonRoom) roomCanvas.getNode(playerLocation)).enter();
         }
-
-        return true;
+        return !forceExit;
     }
 
     /*** Generator Methods ***/
@@ -221,6 +221,7 @@ public class Dungeon {
         actions.add(new SkillSummaryAction());
         actions.add(new EquipmentAction());
         actions.add(new DungeonView(this));
+        actions.add(new DungeonForfeit(this));
 
         return actions;
     }
@@ -251,7 +252,7 @@ public class Dungeon {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < roomCanvas.getLength(); i++) sb.append("---");
+        sb.append("---".repeat(Math.max(0, roomCanvas.getLength())));
         sb.append("\n");
         for (int y = 0; y < getRoomCanvas().getLength(); y++) {
             StringBuilder nodeBuilder0 = new StringBuilder();
@@ -424,5 +425,13 @@ public class Dungeon {
 
     public void setBranchRandomness(int branchRandomness) {
         this.branchRandomness = branchRandomness;
+    }
+
+    public boolean isForceExit() {
+        return forceExit;
+    }
+
+    public void setForceExit(boolean forceExit) {
+        this.forceExit = forceExit;
     }
 }

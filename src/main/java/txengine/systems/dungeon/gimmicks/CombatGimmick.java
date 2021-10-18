@@ -1,7 +1,5 @@
 package txengine.systems.dungeon.gimmicks;
 
-import txengine.main.Manager;
-import txengine.systems.combat.CombatEntity;
 import txengine.systems.dungeon.Dungeon;
 import txengine.systems.dungeon.DungeonGimmick;
 import txengine.systems.room.action.Action;

@@ -1,15 +1,12 @@
 package txengine.systems.dungeon;
 
 import txengine.io.CrashReporter;
-import txengine.structures.Canvas;
 import txengine.structures.CanvasNode;
 import txengine.structures.Coordinate;
 import txengine.systems.dungeon.generate.DungeonRoomFactory;
 import txengine.systems.integration.Requirement;
 import txengine.systems.integration.requirements.ConsumeItemRequirement;
-import txengine.systems.integration.requirements.ItemRequirement;
 import txengine.systems.room.action.Action;
-import txengine.systems.room.action.actions.MoveAction;
 import txengine.ui.LogUtils;
 import txengine.ui.component.Components;
 
@@ -31,7 +28,7 @@ public class DungeonRoom extends CanvasNode {
     }
 
     public Coordinate enter() {
-        while(true) {
+        while(!owner.isForceExit()) {
             System.out.println("What would you like to do?");
             Components.numberedList(roomActions.stream().map(Action::getMenuName).toList());
 
@@ -54,6 +51,7 @@ public class DungeonRoom extends CanvasNode {
                 roomActions.get(choice).perform();
             }
         }
+        return null;
     }
 
     @Override
@@ -108,5 +106,33 @@ public class DungeonRoom extends CanvasNode {
                 if (a instanceof DungeonMove) a.addRequirement(r);
             }
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Action> getRoomActions() {
+        return roomActions;
+    }
+
+    public void setRoomActions(List<Action> roomActions) {
+        this.roomActions = roomActions;
+    }
+
+    public Dungeon getOwner() {
+        return owner;
+    }
+
+    public DungeonGimmick getGimmick() {
+        return gimmick;
+    }
+
+    public void setGimmick(DungeonGimmick gimmick) {
+        this.gimmick = gimmick;
     }
 }
