@@ -28,8 +28,11 @@ public class ConsumeItemRequirement extends Requirement {
         }
     }
 
-    public ConsumeItemRequirement(Requirement requirement) {
+    public ConsumeItemRequirement(ConsumeItemRequirement requirement) {
+
         super(requirement);
+        this.persist = requirement.persist;
+        this.met = requirement.met;
     }
 
     @Override

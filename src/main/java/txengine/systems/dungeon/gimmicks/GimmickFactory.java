@@ -51,6 +51,8 @@ public class GimmickFactory {
     private static Set<String> initClassSet() {
         Set<String> s = new HashSet<>();
         s.add("CombatGimmick");
+        s.add("EmptyGimmick");
+        s.add("RestGimmick");
         return s;
     }
 }
