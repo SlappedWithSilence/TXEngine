@@ -11,6 +11,30 @@
       "abilities" : ["Blunt Hit"],
       "speed" : 1,
       "level" : 5
+    },
+    {
+      "id" : 2,
+      "name" : "Green Slime",
+      "opening_dialog" : "",
+      "inventory" : [],
+      "equipment_ids" : [],
+      "combat_xp_yield" : 10,
+      "resources" : ["Health,20"],
+      "abilities" : ["Water Shot"],
+      "speed" : 1,
+      "level" : 2
+    },
+    {
+      "id" : 3,
+      "name" : "Red Slime",
+      "opening_dialog" : "",
+      "inventory" : [],
+      "equipment_ids" : [],
+      "combat_xp_yield" : 10,
+      "resources" : ["Health,20", "Mana,50", "Stamina,50"],
+      "abilities" : ["Sear", "Bounce"],
+      "speed" : 1,
+      "level" : 2
     }
   ]
 }

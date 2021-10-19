@@ -34,6 +34,7 @@ public class Utils {
 	}
 
 	public static <T> T selectRandom(List<T> collection, Random random) {
+		if (collection.size() == 1) return collection.get(0);
 		Random r;
 		if (random == null) {
 			r = new Random();

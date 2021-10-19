@@ -78,7 +78,7 @@
           "text" : "You venture into the dungeon.",
           "hidden" : false,
           "hide_after_use" : false,
-          "properties" : ["2","33","33","-3", "{HOSTILE}", "1", "{REWARDS}", "8", "9", "7", "6"],
+          "properties" : ["2","33","33","-3", "{HOSTILE}", "2", "3", "{REWARDS}", "21"],
           "requirements" : [],
           "unlocked_index" : -1
         }

@@ -282,7 +282,14 @@
             }
          ],
          "combat_effects" : []
+      },
+      {
+         "type"      :  "item",
+         "name"      :  "Slime Ball",
+         "description": "A small ball of slime.",
+         "id"        :  21,
+         "value"     :  16,
+         "maxStacks" :  30
       }
-
    ]
 }
