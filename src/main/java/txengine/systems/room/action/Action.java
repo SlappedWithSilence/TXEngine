@@ -17,12 +17,17 @@ public abstract class Action {
 
 	/* Constructors */
 	public Action() {
-
+		properties = new String[0];
+		menuName = "Default Menu Name";
+		text = "";
+		requirements = new ArrayList<>();
+		hidden = false;
+		hideAfterUse = false;
 	}
 
-	public Action(String menuName, String text, String[] properties, boolean enabled, int unhideIndex, boolean hideAfterUse, List<Requirement> requirements) {
+	public Action(String menuName, String text, String[] properties, boolean hidden, int unhideIndex, boolean hideAfterUse, List<Requirement> requirements) {
 		this.menuName = menuName;
-		this.hidden = enabled;
+		this.hidden = hidden;
 		this.properties = properties;
 		this.text = text;
 		this.unhideIndex = unhideIndex;
@@ -60,6 +65,10 @@ public abstract class Action {
 	public boolean print() {
 		if (!isHidden()) ColorConsole.d(menuName + "\n", false);
 		return isHidden();
+	}
+
+	public void addRequirement(Requirement r) {
+		if (r != null) requirements.add(r);
 	}
 
 

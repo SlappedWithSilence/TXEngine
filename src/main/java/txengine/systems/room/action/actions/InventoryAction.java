@@ -16,6 +16,7 @@ public class InventoryAction extends Action {
 	private ArrayList<String> itemOptions = new ArrayList<>(3);
 
 	public InventoryAction() {
+		menuName = "Check your inventory";
 		itemOptions.add("Inspect");
 		itemOptions.add("Use");
 		itemOptions.add("Equip");

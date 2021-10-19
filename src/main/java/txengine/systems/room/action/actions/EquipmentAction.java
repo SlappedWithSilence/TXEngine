@@ -12,6 +12,11 @@ import java.util.List;
 
 public class EquipmentAction extends Action {
 
+    public EquipmentAction() {
+        super();
+        menuName = "Check your equipment";
+    }
+
     @Override
     public int perform() {
         int totalDef = Manager.player.getEquipmentManager().getDamageResistance();

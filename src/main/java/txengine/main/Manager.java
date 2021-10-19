@@ -4,6 +4,7 @@ import txengine.io.load.LoadManager;
 import txengine.io.loaders.*;
 import txengine.io.save.Exporters;
 import txengine.systems.crafting.RecipeManager;
+import txengine.systems.dungeon.Dungeon;
 import txengine.systems.reputation.Faction;
 import txengine.systems.reputation.FactionManager;
 import txengine.ui.color.*;
@@ -127,6 +128,7 @@ public class Manager {
         Exporters.registerAll();
 
         player = new Player();
+        itemHashMap.put(-3, new Item("Key of Bone", "A strange key formed from a skeleton.", -3, 0, 4));
     }
 
     private static void initDebug() {
@@ -146,6 +148,7 @@ public class Manager {
 
         player.getInventory().addItem(16);
         player.getInventory().addItem(17);
+
     }
 
 }
