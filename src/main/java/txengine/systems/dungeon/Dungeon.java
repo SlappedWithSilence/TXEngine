@@ -6,7 +6,10 @@ import txengine.main.Manager;
 import txengine.structures.Canvas;
 import txengine.structures.CanvasNode;
 import txengine.structures.Coordinate;
+import txengine.systems.dungeon.generate.BranchPasser;
 import txengine.systems.dungeon.generate.DungeonRoomFactory;
+import txengine.systems.dungeon.generate.FlatBranchPasser;
+import txengine.systems.dungeon.generate.ProgressiveBranchPasser;
 import txengine.systems.dungeon.gimmicks.GimmickFactory;
 import txengine.systems.room.action.Action;
 import txengine.systems.room.action.actions.*;
@@ -161,43 +164,12 @@ public class Dungeon {
         return generateCoreRoute(to, length + 1, nextDirection);
     }
 
-    private void generateBranches(int passes, int spread) {
-        List<CanvasNode> lastNodes = roomCanvas.allNodes();
-        lastNodes.remove(roomCanvas.getNode(exitCoordinates));
-        for (int i = 0; i < passes; i++) lastNodes = flatBranchPass(lastNodes, spread);
-    }
-
-    private List<CanvasNode> flatBranchPass(final List<CanvasNode> lastPass, final int spread) {
-        List<CanvasNode> newNodes = new ArrayList<>();
-        if (lastPass.size() == 0) return lastPass;
-        for (CanvasNode n : lastPass) { // For each node generated in the last pass
-
-            if (Utils.randomInt(0,100) <= spread) { // If we succeed our check
-
-                Set<CanvasNode.Direction> possibleNodeDirections = roomCanvas.openDirections(n); // Determine possible directions
-
-                if (!possibleNodeDirections.isEmpty()) { // If there is at least one possible direction
-
-                    CanvasNode.Direction newNodeDirection =
-                            Utils.selectRandom(possibleNodeDirections.toArray(new CanvasNode.Direction[0]), rand); // Randomly select a direction
-
-                    n.addDoor(newNodeDirection); // Add the direction to the current node's door list
-                    DungeonRoom dr = DungeonRoomFactory.build(this, n.to(newNodeDirection), GimmickFactory.randomGimmick(this),
-                            Canvas.inverseDirection(newNodeDirection), null);
-
-                    roomCanvas.put(dr.self(), dr);
-                    newNodes.add(dr);
-                }
-            }
-        }
-        return newNodes;
-    }
-
     public boolean generate() {
         try {
             DungeonRoom root = getRoot();
             if (generateCoreRoute(root, 1, null)) {
-                generateBranches(5, DEFAULT_BRANCH_SPREAD);
+                BranchPasser brancher = new ProgressiveBranchPasser();
+                brancher.generate(5,roomCanvas, rand, this);
                 return true;
             } else {
                 return false;
