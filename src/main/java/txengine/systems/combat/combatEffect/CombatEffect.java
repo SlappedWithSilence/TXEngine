@@ -11,7 +11,6 @@ public abstract class CombatEffect extends Effect {
     int duration; // Duration (in turns) of the effect. A value of -1 means that the effect lasts indefinitely.
     String triggerMessage; // A message that gets printed when the ability triggers
     String cleanupMessage; // A message that gets printed when the ability is cleaned up
-
     String[] tags;
 
     // Constructors

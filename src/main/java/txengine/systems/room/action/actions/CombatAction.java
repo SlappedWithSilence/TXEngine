@@ -1,6 +1,8 @@
 package txengine.systems.room.action.actions;
 
 import com.rits.cloning.Cloner;
+import txengine.io.LoadUtils;
+import txengine.io.load.PropertyTags;
 import txengine.structures.Pair;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.CombatEntity;
@@ -11,9 +13,7 @@ import txengine.main.Manager;
 import txengine.systems.room.action.Action;
 import txengine.util.Utils;
 
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class CombatAction extends Action {
     CombatEngine combatEngine;
@@ -57,44 +57,18 @@ public class CombatAction extends Action {
 
     @Override
     public int perform() {
-        Cloner cloner = new Cloner();
         ArrayList<CombatEntity> friendlies = new ArrayList<>();
         ArrayList<CombatEntity> hostiles = new ArrayList<>();
         if (lootIds== null) lootIds = new ArrayList<>();
         if (lootQuantities == null)  lootQuantities = new ArrayList<>();
 
-        for (String s:
-             properties) {
-
-            // Set load type to friendly when encountering a friendly entity marker in the properties
-            if (loadType == null || s.equals(FRIENDLY_ENTITY_PROP_MARKER)) {
-                loadType = LoadType.FRIENDLY;
-            }
-            // Set the load type to loot when encountering a loot entity marker in the properties
-            else if (s.equals(LOOT_DATA_MARKER)) {
-                loadType = LoadType.LOOT;
-            }
-            // Set the load type to hostile when encountering a hostile entity marker in the properties
-            else if (s.equals(HOSTILE_ENTITY_PROP_MARKER)) {
-                loadType = LoadType.HOSTILE;
-            }
-            // If load type is set to friendly, add the entity with id value 's' to the friendly array
-            else if (loadType == LoadType.FRIENDLY) {
-                friendlies.add(new CombatEntity(Manager.combatEntityHashMap.get(Integer.parseInt(s))));
-            }
-            // If load type is set to hostile, add the entity with id value 's' to the hostile array
-            else if (loadType == LoadType.HOSTILE) {
-                hostiles.add(new CombatEntity(Manager.combatEntityHashMap.get(Integer.parseInt(s))));
-            // If the load type is set to Loot, process 's' as a pair of ints and add them to the loot arrays
-            } else if (loadType == LoadType.LOOT) {
-                if (s.contains(ITEM_SEPARATER)) { // Make sure that the value pair is formatted correctly
-                   int[] lootProperties = Utils.parseInts(s, ITEM_SEPARATER);
-
-                    // Add the item id and its quantity to their respective arrays
-                    lootIds.add(lootProperties[0]);
-                    lootQuantities.add(lootProperties[1]);
-                }
-            }
+        Map<String, List<String>> markedProperties = PropertyTags.getMarkedProperties(properties);
+        for (String s : markedProperties.get(PropertyTags.friendlyMarker)) friendlies.add(new CombatEntity(Manager.combatEntityHashMap.get(Integer.parseInt(s))));
+        for (String s : markedProperties.get(PropertyTags.hostileMarker)) hostiles.add(new CombatEntity(Manager.combatEntityHashMap.get(Integer.parseInt(s))));
+        for (String s : markedProperties.get(PropertyTags.lootMarker)) {
+            int[] values = Utils.parseInts(s, ",");
+            lootIds.add(values[0]);
+            lootQuantities.add(values[1]);
         }
 
         combatEngine = new CombatEngine(friendlies, hostiles);
