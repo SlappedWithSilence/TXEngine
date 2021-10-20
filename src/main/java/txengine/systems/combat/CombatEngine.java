@@ -70,11 +70,11 @@ public class CombatEngine {
     String primaryResourceName; // The name of the resources that triggers death when it hits zero
 
     // Master turn order. All turns follow this phase order by default.
-    final ArrayList<CombatPhase> PHASE_ORDER = new ArrayList<>(List.of(CombatPhase.values()));
+    final List<CombatPhase> PHASE_ORDER = new ArrayList<>(List.of(CombatPhase.values()));
 
     ArrayList<Pair<CombatEngine.EntityType, Integer>> TURN_ORDER;
 
-    HashMap<CombatEngine.EntityType, ArrayList<CombatEntity>> entities; // A collection of CombatEntities sorted by friendly or hostile
+    HashMap<CombatEngine.EntityType, List<CombatEntity>> entities; // A collection of CombatEntities sorted by friendly or hostile
 
     Iterator<Pair<CombatEngine.EntityType, Integer>> entityIterator;
 
@@ -102,7 +102,7 @@ public class CombatEngine {
         endConditions.add(getDefaultEndCondition());
     }
 
-    public CombatEngine(ArrayList<CombatEntity> friendlyEntities, ArrayList<CombatEntity> hostileEntities) {
+    public CombatEngine(List<CombatEntity> friendlyEntities, List<CombatEntity> hostileEntities) {
         entities = new HashMap<>();
 
         // Set up entities
@@ -115,7 +115,7 @@ public class CombatEngine {
         endConditions.add(getDefaultEndCondition());
     }
 
-    public CombatEngine(ArrayList<CombatEntity> friendlyEntities, ArrayList<CombatEntity> hostileEntities, String primaryResourceName) {
+    public CombatEngine(List<CombatEntity> friendlyEntities, List<CombatEntity> hostileEntities, String primaryResourceName) {
         entities = new HashMap<>();
 
         // Set up entities
@@ -128,7 +128,7 @@ public class CombatEngine {
         endConditions.add(getDefaultEndCondition());
     }
 
-    public CombatEngine(ArrayList<CombatEntity> friendlyEntities, ArrayList<CombatEntity> hostileEntities, String primaryResourceName, List<EndCondition> endConditions) {
+    public CombatEngine(List<CombatEntity> friendlyEntities, List<CombatEntity> hostileEntities, String primaryResourceName, List<EndCondition> endConditions) {
         entities = new HashMap<>();
 
         // Set up entities
@@ -167,7 +167,7 @@ public class CombatEngine {
         return false;
     }
 
-    public final ArrayList<CombatEntity> getEntities(EntityType type) {
+    public final List<CombatEntity> getEntities(EntityType type) {
         return entities.get(type);
     }
 

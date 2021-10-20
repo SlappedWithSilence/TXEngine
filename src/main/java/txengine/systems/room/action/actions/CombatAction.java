@@ -19,15 +19,13 @@ public class CombatAction extends Action {
     CombatEngine combatEngine;
     LoadType loadType;
 
-    private final static String FRIENDLY_ENTITY_PROP_MARKER = "{FRIENDLY}";
-    private final static String HOSTILE_ENTITY_PROP_MARKER  = "{HOSTILE}";
-    private final static String LOOT_DATA_MARKER = "{LOOT}";
-    private final static String ITEM_SEPARATER = ",";
-
-    private ArrayList<Integer> lootIds;        // The ids of the items to give to the player when they win
-    private ArrayList<Integer> lootQuantities; // The quantities of each item to give to the player
-
     private boolean hideOnWin = false;
+
+    private List<CombatEntity> friendlies;
+    private List<CombatEntity> hostiles;
+
+    private List<Integer> lootIds;        // The ids of the items to give to the player when they win
+    private List<Integer> lootQuantities; // The quantities of each item to give to the player
 
     private enum LoadType {
         HOSTILE,
@@ -40,36 +38,36 @@ public class CombatAction extends Action {
     }
 
     public CombatAction(List<Integer> friendlyIDs, List<Integer> hostileIDs, List<Pair<Integer, Integer>> loot) {
-        StringBuilder sb = new StringBuilder();
-        List<String> tempProperties = new ArrayList<>();
-        tempProperties.add(FRIENDLY_ENTITY_PROP_MARKER);
-        for (Integer i : friendlyIDs) tempProperties.add(i.toString());
-        tempProperties.add(HOSTILE_ENTITY_PROP_MARKER);
-        for (Integer i : hostileIDs) tempProperties.add(i.toString());
-        tempProperties.add(LOOT_DATA_MARKER);
-        for (Pair<Integer, Integer> item : loot) {
-            Integer id = item.getKey();
-            Integer quantity = item.getValue();
-            tempProperties.add(id+","+quantity);
+        friendlies = friendlyIDs.stream().map(entityID -> new CombatEntity(Manager.combatEntityHashMap.get(entityID))).toList();
+        hostiles = hostileIDs.stream().map(entityID -> new CombatEntity(Manager.combatEntityHashMap.get(entityID))).toList();
+
+        lootQuantities = new ArrayList<>();
+        lootIds = new ArrayList<>();
+
+        for (Pair<Integer, Integer> lootPair : loot) {
+            lootIds.add(lootPair.getKey());
+            lootQuantities.add(lootPair.getValue());
         }
-        setProperties(tempProperties.toArray(new String[0]));
     }
 
     @Override
     public int perform() {
-        ArrayList<CombatEntity> friendlies = new ArrayList<>();
-        ArrayList<CombatEntity> hostiles = new ArrayList<>();
         if (lootIds== null) lootIds = new ArrayList<>();
         if (lootQuantities == null)  lootQuantities = new ArrayList<>();
 
-        Map<String, List<String>> markedProperties = PropertyTags.getMarkedProperties(properties);
-        for (String s : markedProperties.get(PropertyTags.friendlyMarker)) friendlies.add(new CombatEntity(Manager.combatEntityHashMap.get(Integer.parseInt(s))));
-        for (String s : markedProperties.get(PropertyTags.hostileMarker)) hostiles.add(new CombatEntity(Manager.combatEntityHashMap.get(Integer.parseInt(s))));
-        for (String s : markedProperties.get(PropertyTags.lootMarker)) {
-            int[] values = Utils.parseInts(s, ",");
-            lootIds.add(values[0]);
-            lootQuantities.add(values[1]);
+        if (hostiles == null || friendlies == null) {
+            hostiles = new ArrayList<>();
+            friendlies = new ArrayList<>();
+            Map<String, List<String>> markedProperties = PropertyTags.getMarkedProperties(properties);
+            for (String s : markedProperties.get(PropertyTags.friendlyMarker)) friendlies.add(new CombatEntity(Manager.combatEntityHashMap.get(Integer.parseInt(s))));
+            for (String s : markedProperties.get(PropertyTags.hostileMarker)) hostiles.add(new CombatEntity(Manager.combatEntityHashMap.get(Integer.parseInt(s))));
+            for (String s : markedProperties.get(PropertyTags.lootMarker)) {
+                int[] values = Utils.parseInts(s, ",");
+                lootIds.add(values[0]);
+                lootQuantities.add(values[1]);
+            }
         }
+
 
         combatEngine = new CombatEngine(friendlies, hostiles);
 
@@ -102,7 +100,7 @@ public class CombatAction extends Action {
     }
 
 
-    private void giveLoot(ArrayList<Integer> ids, ArrayList<Integer> quantities) {
+    private void giveLoot(List<Integer> ids, List<Integer> quantities) {
         if (ids.size() != quantities.size()) {
             LogUtils.error("Something went wrong while distributing loot to the player!\n");
             return;
