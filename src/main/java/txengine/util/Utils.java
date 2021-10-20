@@ -1,5 +1,6 @@
 package txengine.util;
 
+import txengine.structures.Pair;
 import txengine.ui.LogUtils;
 
 import java.util.*;
@@ -76,11 +77,11 @@ public class Utils {
 		return indexes;
 	}
 
-	public static List<AbstractMap.SimpleEntry<Integer, Integer>> parseIntPairs(String separatedPairs) {
+	public static List<Pair<Integer, Integer>> parseIntPairs(String separatedPairs) {
 		String[] pairs = separatedPairs.split(" ");
 		return Arrays.stream(pairs).map(pair -> {
 			String[] s = pair.split(",");
-			return new AbstractMap.SimpleEntry<Integer, Integer>(Integer.parseInt(s[0]),Integer.parseInt(s[1]));
+			return new Pair<>(Integer.parseInt(s[0]), Integer.parseInt(s[1]));
 		}).toList();
 	}
 
@@ -119,19 +120,19 @@ public class Utils {
 	// "<String><sep><Int>"
 	// Ex: sep = "," | "Health,40"
 	// Ex: sep = " " | "Health 40"
-	public static List<AbstractMap.SimpleEntry<String, Integer>> parseStringIntPairs(Collection<String> rawPairs, String sep, boolean invert) {
+	public static List<Pair<String, Integer>> parseStringIntPairs(Collection<String> rawPairs, String sep, boolean invert) {
 		if (!invert) return rawPairs.stream().map(pair -> {
 			String[] sArr = pair.split(sep);
-			return new AbstractMap.SimpleEntry<>(sArr[0], Integer.parseInt(sArr[1]));
+			return new Pair<>(sArr[0], Integer.parseInt(sArr[1]));
 		}).toList();
 
 		else return rawPairs.stream().map(pair -> {
 			String[] sArr = pair.split(sep);
-			return new AbstractMap.SimpleEntry<>(sArr[1], Integer.parseInt(sArr[0]));
+			return new Pair<>(sArr[1], Integer.parseInt(sArr[0]));
 		}).toList();
 	}
 
-	public static List<AbstractMap.SimpleEntry<String, Integer>> parseStringIntPairs(Collection<String> rawPairs) {
+	public static List<Pair<String, Integer>> parseStringIntPairs(Collection<String> rawPairs) {
 		return parseStringIntPairs(rawPairs, ",", false);
 	}
 

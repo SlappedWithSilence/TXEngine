@@ -2,6 +2,7 @@ package txengine.io.loaders;
 
 import txengine.io.LoadUtils;
 import txengine.io.Loader;
+import txengine.structures.Pair;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.ability.Ability;
 import txengine.systems.ability.AbilityFactory;
@@ -60,8 +61,8 @@ public class AbilityLoader extends Loader {
         String description;
         String useText;
         int damage;
-        List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects = new ArrayList<>();
-        List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts = new ArrayList<>();
+        List<Pair<CombatEffect, CombatEngine.CombatPhase>> effects = new ArrayList<>();
+        List<Pair<String, Integer>> resourceCosts = new ArrayList<>();
         List<Requirement> requirements;
 
         while (iterator.hasNext()) {

@@ -3,6 +3,7 @@ package txengine.io.loaders;
 import txengine.io.LoadUtils;
 import txengine.io.Loader;
 import txengine.main.Manager;
+import txengine.structures.Pair;
 import txengine.systems.combat.CombatEntity;
 import txengine.systems.combat.CombatResourceManager;
 import txengine.systems.ability.AbilityManager;
@@ -105,9 +106,9 @@ public class CombatEntityLoader extends Loader {
     private Inventory buildInventory(JSONArray rawItemPair) {
         Inventory inventory = new Inventory();
 
-       List<AbstractMap.SimpleEntry<Integer, Integer>> arr = LoadUtils.parseIntPairs(rawItemPair);
+       List<Pair<Integer, Integer>> arr = LoadUtils.parseIntPairs(rawItemPair);
 
-        for (AbstractMap.SimpleEntry<Integer, Integer> pair : arr) inventory.addItem(pair.getKey(), pair.getValue());
+        for (Pair<Integer, Integer> pair : arr) inventory.addItem(pair.getKey(), pair.getValue());
 
         return inventory;
     }
@@ -116,9 +117,9 @@ public class CombatEntityLoader extends Loader {
     private CombatResourceManager buildResourceManager(JSONArray rawResource) {
         CombatResourceManager resourceManager = new CombatResourceManager();
 
-        List<AbstractMap.SimpleEntry<String, Integer>> pairs = LoadUtils.parseStringIntPairs(rawResource);
+        List<Pair<String, Integer>> pairs = LoadUtils.parseStringIntPairs(rawResource);
 
-        for (AbstractMap.SimpleEntry<String, Integer> pair : pairs) resourceManager.registerResource(pair.getKey(), pair.getValue(), pair.getValue());
+        for (Pair<String, Integer> pair : pairs) resourceManager.registerResource(pair.getKey(), pair.getValue(), pair.getValue());
 
         return resourceManager;
     }

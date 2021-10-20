@@ -1,11 +1,12 @@
 package txengine.systems.integration.requirements;
 
+import txengine.structures.Pair;
 import txengine.systems.integration.Requirement;
-import txengine.main.Manager;
+import txengine.util.Utils;
 
-// A LevelRequirement is met when the player's level is greater-than or equal-to the integer is properties[0]
-public class LevelRequirement extends Requirement {
+import java.util.List;
 
+public class SkillLevelRequirement extends Requirement {
     @Override
     public String[] getProperties() {
         return properties;
@@ -18,11 +19,12 @@ public class LevelRequirement extends Requirement {
 
     @Override
     public String toString() {
-        return "You must be at least level " + properties[0] +".";
+        return null;
     }
 
     @Override
     public boolean met() {
-        return Manager.skillManager.getPrimaryLevel() >= Integer.parseInt(properties[0]);
+        List<Pair<String, Integer>> data = Utils.parseStringIntPairs(List.of(properties));
+        return false;
     }
 }

@@ -1,5 +1,6 @@
 package txengine.systems.crafting;
 
+import txengine.structures.Pair;
 import txengine.systems.event.Event;
 import txengine.ui.color.Colors;
 import txengine.systems.integration.Requirement;
@@ -41,7 +42,7 @@ public class RecipeManager {
         List<String> formattedIngredients = new ArrayList<>();
 
         // Pair key = item id, pair value = item quantity
-        for (AbstractMap.SimpleEntry<Integer, Integer> pair : recipe.getIngredients()) {
+        for (Pair<Integer, Integer> pair : recipe.getIngredients()) {
             StringBuilder sb = new StringBuilder();
 
             sb.append(Manager.itemHashMap.get(pair.getKey())).append(": ");
@@ -80,11 +81,11 @@ public class RecipeManager {
             return false;
         }
 
-        for (AbstractMap.SimpleEntry<Integer, Integer> pair : recipe.getIngredients()) {
+        for (Pair<Integer, Integer> pair : recipe.getIngredients()) {
             inventory.consumeQuantity(pair.getKey(), pair.getValue());
         }
 
-        for (AbstractMap.SimpleEntry<Integer, Integer> pair : recipe.getProducts()) {
+        for (Pair<Integer, Integer> pair : recipe.getProducts()) {
             inventory.addItem(pair.getKey(), pair.getValue());
         }
 

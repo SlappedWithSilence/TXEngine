@@ -1,5 +1,6 @@
 package txengine.systems.ability;
 
+import txengine.structures.Pair;
 import txengine.systems.integration.Requirement;
 import txengine.ui.color.Colors;
 import txengine.systems.combat.CombatEntity;
@@ -91,7 +92,7 @@ public class AbilityManager {
     public String resourceCostsAsString(Ability a) {
         StringBuilder s = new StringBuilder();
 
-        for (AbstractMap.SimpleEntry<String, Integer> cost : a.getResourceCosts()) {
+        for (Pair<String, Integer> cost : a.getResourceCosts()) {
 
             String color; // The name of the color to set the cost to
 

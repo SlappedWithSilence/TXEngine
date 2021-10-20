@@ -1,5 +1,6 @@
 package txengine.systems.dungeon.gimmicks;
 
+import txengine.structures.Pair;
 import txengine.systems.dungeon.Dungeon;
 import txengine.systems.dungeon.DungeonGimmick;
 import txengine.systems.room.action.Action;
@@ -33,7 +34,7 @@ public class CombatGimmick extends DungeonGimmick {
         hostiles.add(randomEntityID);
 
         // Get random loot
-        ArrayList<AbstractMap.SimpleEntry<Integer, Integer>> loot = new ArrayList<>();
+        ArrayList<Pair<Integer, Integer>> loot = new ArrayList<>();
         CombatAction a = new CombatAction(new ArrayList<>(), hostiles, loot);
         a.setMenuName("Fight mysterious entity");
         a.setHideOnWin(true);

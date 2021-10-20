@@ -1,5 +1,6 @@
 package txengine.systems.crafting;
 
+import txengine.structures.Pair;
 import txengine.systems.event.Event;
 import txengine.ui.color.Colors;
 import txengine.systems.integration.Requirement;
@@ -13,8 +14,8 @@ public class Recipe {
 
     /* Member Variables */
 
-    private List<AbstractMap.SimpleEntry<Integer, Integer>> ingredients;
-    private List<AbstractMap.SimpleEntry<Integer, Integer>> products;
+    private List<Pair<Integer, Integer>> ingredients;
+    private List<Pair<Integer, Integer>> products;
     private List<Requirement> requirements;
     private List<Event> events;
     private int id;
@@ -26,14 +27,14 @@ public class Recipe {
         events = new ArrayList<>();
     }
 
-    public Recipe(List<AbstractMap.SimpleEntry<Integer, Integer>> ingredients, List<AbstractMap.SimpleEntry<Integer, Integer>> products) {
+    public Recipe(List<Pair<Integer, Integer>> ingredients, List<Pair<Integer, Integer>> products) {
         this.ingredients = ingredients;
         this.products = products;
         requirements = new ArrayList<>();
         events = new ArrayList<>();
     }
 
-    public Recipe(List<AbstractMap.SimpleEntry<Integer, Integer>> ingredients, List<AbstractMap.SimpleEntry<Integer, Integer>> products, List<Requirement> requirements, List<Event> events) {
+    public Recipe(List<Pair<Integer, Integer>> ingredients, List<Pair<Integer, Integer>> products, List<Requirement> requirements, List<Event> events) {
         this.ingredients = ingredients;
         this.products = products;
         this.requirements = requirements;
@@ -48,14 +49,14 @@ public class Recipe {
     }
 
 
-    public boolean hasIngredients(Collection<AbstractMap.SimpleEntry<Integer, Integer>> itemPairs) {
+    public boolean hasIngredients(Collection<Pair<Integer, Integer>> itemPairs) {
         return itemPairs.containsAll(ingredients);
     }
 
     public boolean hasIngredients(Inventory inventory) {
         if (!Requirement.allMet(requirements)) return false;
 
-        for (AbstractMap.SimpleEntry<Integer, Integer> pair : ingredients) {
+        for (Pair<Integer, Integer> pair : ingredients) {
             if (inventory.getItemQuantity(pair.getKey()) < pair.getValue()) return false;
         }
 
@@ -66,9 +67,9 @@ public class Recipe {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        for (AbstractMap.SimpleEntry<Integer, Integer> pair : ingredients) sb.append("[").append(Manager.itemHashMap.get(pair.getKey()).getName()).append(": ").append(pair.getValue()).append("]");
+        for (Pair<Integer, Integer> pair : ingredients) sb.append("[").append(Manager.itemHashMap.get(pair.getKey()).getName()).append(": ").append(pair.getValue()).append("]");
         sb.append(" -> ");
-        for (AbstractMap.SimpleEntry<Integer, Integer> pair : products) sb.append("[").append(Manager.itemHashMap.get(pair.getKey()).getName()).append(": ").append(pair.getValue()).append("]");
+        for (Pair<Integer, Integer> pair : products) sb.append("[").append(Manager.itemHashMap.get(pair.getKey()).getName()).append(": ").append(pair.getValue()).append("]");
 
         return sb.toString();
     }
@@ -76,7 +77,7 @@ public class Recipe {
     public String toFormattedString() {
         StringBuilder sb = new StringBuilder();
 
-        for (AbstractMap.SimpleEntry<Integer, Integer> pair : ingredients){
+        for (Pair<Integer, Integer> pair : ingredients){
             String color;
 
             if (Manager.player.getInventory().getItemQuantity(pair.getKey()) >= pair.getValue()) color = Colors.GREEN;
@@ -85,24 +86,24 @@ public class Recipe {
             sb.append("[").append(Manager.itemHashMap.get(pair.getKey()).getName()).append(": ").append(color).append(pair.getValue()).append(Colors.RESET).append("]");
         }
         sb.append(" -> ");
-        for (AbstractMap.SimpleEntry<Integer, Integer> pair : products) sb.append("[").append(Manager.itemHashMap.get(pair.getKey()).getName()).append(": ").append(pair.getValue()).append("]");
+        for (Pair<Integer, Integer> pair : products) sb.append("[").append(Manager.itemHashMap.get(pair.getKey()).getName()).append(": ").append(pair.getValue()).append("]");
 
         return sb.toString();
     }
 
-    public List<AbstractMap.SimpleEntry<Integer, Integer>> getIngredients() {
+    public List<Pair<Integer, Integer>> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<AbstractMap.SimpleEntry<Integer, Integer>> ingredients) {
+    public void setIngredients(List<Pair<Integer, Integer>> ingredients) {
         this.ingredients = ingredients;
     }
 
-    public List<AbstractMap.SimpleEntry<Integer, Integer>> getProducts() {
+    public List<Pair<Integer, Integer>> getProducts() {
         return products;
     }
 
-    public void setProducts(List<AbstractMap.SimpleEntry<Integer, Integer>> products) {
+    public void setProducts(List<Pair<Integer, Integer>> products) {
         this.products = products;
     }
 

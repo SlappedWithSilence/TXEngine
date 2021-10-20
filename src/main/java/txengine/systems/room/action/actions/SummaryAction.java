@@ -1,5 +1,6 @@
 package txengine.systems.room.action.actions;
 
+import txengine.structures.Pair;
 import txengine.ui.component.Components;
 import txengine.ui.LogUtils;
 import txengine.main.Manager;
@@ -42,7 +43,7 @@ public class SummaryAction extends Action {
         }
 
         for (int i = startIndex; i <= finalIndex; i++) {
-            Map.Entry<String, Integer[]> p = new AbstractMap.SimpleEntry<>((String) keys[i], Manager.player.getResourceManager().getResources().get((String) keys[i])); // generate a key-value pair
+            Map.Entry<String, Integer[]> p = new Pair<>((String) keys[i], Manager.player.getResourceManager().getResources().get((String) keys[i])); // generate a key-value pair
             System.out.println(formatPlayerResource(p));    // print the key-value pair
         }
         System.out.println(); // generate an empty line for aesthetic purposes

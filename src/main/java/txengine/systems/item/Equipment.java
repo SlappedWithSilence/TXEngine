@@ -1,6 +1,7 @@
 package txengine.systems.item;
 
 import com.rits.cloning.Cloner;
+import txengine.structures.Pair;
 import txengine.systems.integration.Requirement;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.combatEffect.CombatEffect;
@@ -27,9 +28,9 @@ public class Equipment extends Item implements Components.Tabable {
     }
 
     /* Member Variables */
-    private List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> preCombatEffects;
+    private List<Pair<CombatEffect, CombatEngine.CombatPhase>> preCombatEffects;
     private EquipmentType type;
-    private List<AbstractMap.SimpleEntry<String, Float>> tagResistances;
+    private List<Pair<String, Float>> tagResistances;
     private List<Requirement> equipRequirements;
     private List<String> abilityNames;
     private int damageBuff;
@@ -54,7 +55,7 @@ public class Equipment extends Item implements Components.Tabable {
     }
 
     // Value constructor, effects
-    public Equipment(String name, String description, int id, int value, int maxStacks, List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> preCombatEffects,  List<AbstractMap.SimpleEntry<String, Float>> tagResistances, List<Requirement> equipRequirements, List<String> abilityNames, EquipmentType type, int damage, int defense) {
+    public Equipment(String name, String description, int id, int value, int maxStacks, List<Pair<CombatEffect, CombatEngine.CombatPhase>> preCombatEffects,  List<Pair<String, Float>> tagResistances, List<Requirement> equipRequirements, List<String> abilityNames, EquipmentType type, int damage, int defense) {
         super(name, description, id, value, maxStacks);
         setPreCombatEffects(preCombatEffects);
         this.tagResistances = tagResistances;
@@ -110,11 +111,11 @@ public class Equipment extends Item implements Components.Tabable {
         this.abilityNames = abilityNames;
     }
 
-    public final List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> getPreCombatEffects() {
+    public final List<Pair<CombatEffect, CombatEngine.CombatPhase>> getPreCombatEffects() {
         return preCombatEffects;
     }
 
-    public void setPreCombatEffects(List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> preCombatEffects) {
+    public void setPreCombatEffects(List<Pair<CombatEffect, CombatEngine.CombatPhase>> preCombatEffects) {
         this.preCombatEffects = new ArrayList<>(preCombatEffects);
     }
 
@@ -126,11 +127,11 @@ public class Equipment extends Item implements Components.Tabable {
         this.type = type;
     }
 
-    public List<AbstractMap.SimpleEntry<String, Float>> getTagResistances() {
+    public List<Pair<String, Float>> getTagResistances() {
         return tagResistances;
     }
 
-    public void setTagResistances(List<AbstractMap.SimpleEntry<String, Float>> tagResistances) {
+    public void setTagResistances(List<Pair<String, Float>> tagResistances) {
         this.tagResistances = tagResistances;
     }
 

@@ -1,6 +1,7 @@
 package txengine.systems.combat;
 
 import com.rits.cloning.Cloner;
+import txengine.structures.Pair;
 import txengine.ui.LogUtils;
 import txengine.main.Manager;
 
@@ -58,9 +59,9 @@ public class CombatResourceManager {
     }
 
     // Test if a list of resources are available at their respective given quantities. If any are not available, return false.
-    public boolean testResource(List<AbstractMap.SimpleEntry<String, Integer>> requirements) {
+    public boolean testResource(List<Pair<String, Integer>> requirements) {
 
-        for (AbstractMap.SimpleEntry<String, Integer> requirement : requirements) { // Iterate through the list of resource name-quantity pairs
+        for (Pair<String, Integer> requirement : requirements) { // Iterate through the list of resource name-quantity pairs
             if (!testResource(requirement.getKey(), requirement.getValue())) return false; // If a resource doesn't have enough quantity remaining, return false
         }
 

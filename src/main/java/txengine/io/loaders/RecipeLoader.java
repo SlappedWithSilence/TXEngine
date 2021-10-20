@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import txengine.io.LoadUtils;
+import txengine.structures.Pair;
 import txengine.systems.event.Event;
 import txengine.systems.integration.Requirement;
 import txengine.systems.crafting.Recipe;
@@ -57,11 +58,11 @@ public class RecipeLoader {
 
             int id = ((Long) rawRecipe.get("id")).intValue();
 
-            List<AbstractMap.SimpleEntry<Integer, Integer>> ingredients = Arrays.stream(rawIngredients).map(s -> { int[] vals = Utils.parseInts(s,",");
-                                                                                                                    return new AbstractMap.SimpleEntry<>(vals[0], vals[1]);
+            List<Pair<Integer, Integer>> ingredients = Arrays.stream(rawIngredients).map(s -> { int[] vals = Utils.parseInts(s,",");
+                                                                                                                    return new Pair<>(vals[0], vals[1]);
                                                                                                                  }).toList();
-            List<AbstractMap.SimpleEntry<Integer, Integer>> products = Arrays.stream(rawProducts).map(s -> { int[] vals = Utils.parseInts(s,",");
-                return new AbstractMap.SimpleEntry<>(vals[0], vals[1]);
+            List<Pair<Integer, Integer>> products = Arrays.stream(rawProducts).map(s -> { int[] vals = Utils.parseInts(s,",");
+                return new Pair<>(vals[0], vals[1]);
             }).toList();
 
             List<Event> events = LoadUtils.parseEvents((JSONArray) rawRecipe.get("events"));

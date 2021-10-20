@@ -1,5 +1,6 @@
 package txengine.systems.ability;
 
+import txengine.structures.Pair;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.combatEffect.CombatEffect;
 import txengine.systems.integration.Requirement;
@@ -19,9 +20,9 @@ public class AbilityFactory {
                                 String name,
                                 String description,
                                 String useText,
-                                List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects,
+                                List<Pair<CombatEffect, CombatEngine.CombatPhase>> effects,
                                 int damage,
-                                List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts,
+                                List<Pair<String, Integer>> resourceCosts,
                                 List<Requirement> requirements) {
         return new Ability(targetMode, name, description, useText, effects, damage, resourceCosts, requirements);
     }

@@ -1,6 +1,7 @@
 package txengine.systems.combat;
 
 import com.rits.cloning.Cloner;
+import txengine.structures.Pair;
 import txengine.systems.integration.Requirement;
 import txengine.ui.LogUtils;
 import txengine.main.Manager;
@@ -36,8 +37,8 @@ public class EquipmentManager {
 
     /* Member Methods */
 
-    public List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> getAllEffects() {
-        List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects = new ArrayList<>();
+    public List<Pair<CombatEffect, CombatEngine.CombatPhase>> getAllEffects() {
+        List<Pair<CombatEffect, CombatEngine.CombatPhase>> effects = new ArrayList<>();
 
         equipmentMap.values().stream().filter(Objects::nonNull).filter(i -> i > 0).forEach(equipmentID -> effects.addAll(new Equipment((Equipment) Manager.itemHashMap.get(equipmentID)).getPreCombatEffects()));
 

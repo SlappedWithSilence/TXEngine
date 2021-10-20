@@ -1,6 +1,7 @@
 package txengine.systems.room.action.actions;
 
 import com.rits.cloning.Cloner;
+import txengine.structures.Pair;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.CombatEntity;
 import txengine.systems.inventory.Inventory;
@@ -38,7 +39,7 @@ public class CombatAction extends Action {
         super();
     }
 
-    public CombatAction(List<Integer> friendlyIDs, List<Integer> hostileIDs, List<AbstractMap.SimpleEntry<Integer, Integer>> loot) {
+    public CombatAction(List<Integer> friendlyIDs, List<Integer> hostileIDs, List<Pair<Integer, Integer>> loot) {
         StringBuilder sb = new StringBuilder();
         List<String> tempProperties = new ArrayList<>();
         tempProperties.add(FRIENDLY_ENTITY_PROP_MARKER);
@@ -46,7 +47,7 @@ public class CombatAction extends Action {
         tempProperties.add(HOSTILE_ENTITY_PROP_MARKER);
         for (Integer i : hostileIDs) tempProperties.add(i.toString());
         tempProperties.add(LOOT_DATA_MARKER);
-        for (AbstractMap.SimpleEntry<Integer, Integer> item : loot) {
+        for (Pair<Integer, Integer> item : loot) {
             Integer id = item.getKey();
             Integer quantity = item.getValue();
             tempProperties.add(id+","+quantity);

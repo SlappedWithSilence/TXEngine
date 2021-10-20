@@ -2,6 +2,7 @@ package txengine.io.loaders;
 
 import txengine.io.LoadUtils;
 import txengine.io.Loader;
+import txengine.structures.Pair;
 import txengine.systems.integration.Requirement;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.combatEffect.CombatEffect;
@@ -151,10 +152,10 @@ public class ItemLoader extends Loader {
         int defense = ((Long) rawItem.get("defense")).intValue();
 
         // Begin loading effects
-        ArrayList<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects = LoadUtils.parseCombatEffects((JSONArray) rawItem.get("combat_effects"));
+        ArrayList<Pair<CombatEffect, CombatEngine.CombatPhase>> effects = LoadUtils.parseCombatEffects((JSONArray) rawItem.get("combat_effects"));
 
         // Load tags
-        List<AbstractMap.SimpleEntry<String, Float>> tagResistances = LoadUtils.parseStringFloatPairs((JSONArray) rawItem.get("tag_resistances"));
+        List<Pair<String, Float>> tagResistances = LoadUtils.parseStringFloatPairs((JSONArray) rawItem.get("tag_resistances"));
 
         // Load Requirements
         List<Requirement> requirements = LoadUtils.parseRequirements((JSONArray) rawItem.get("requirements"));

@@ -1,5 +1,6 @@
 package txengine.systems.integration.requirements;
 
+import txengine.structures.Pair;
 import txengine.systems.integration.Requirement;
 import txengine.main.Manager;
 import txengine.util.Utils;
@@ -24,7 +25,7 @@ public class ResourceRequirement extends Requirement {
 
         sb.append("You must have at least ");
 
-        for (AbstractMap.SimpleEntry<String, Integer> pair : Utils.parseStringIntPairs(List.of(properties))) {
+        for (Pair<String, Integer> pair : Utils.parseStringIntPairs(List.of(properties))) {
             sb.append(pair.getValue()).append(" ").append(pair.getKey());
             sb.append(", ");
         }

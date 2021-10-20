@@ -1,5 +1,6 @@
 package txengine.systems.ability;
 
+import txengine.structures.Pair;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.CombatEntity;
 import txengine.systems.combat.combatEffect.CombatEffect;
@@ -31,8 +32,8 @@ public class Ability {
     String name;
     String description;
     String useText; // The text that gets printed when the ability is used.
-    List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects;
-    List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts;
+    List<Pair<CombatEffect, CombatEngine.CombatPhase>> effects;
+    List<Pair<String, Integer>> resourceCosts;
     List<Requirement> requirements;
     int damage;
 
@@ -57,7 +58,7 @@ public class Ability {
     }
 
     // Full constructor. Shouldn't often be used, as targets are not determined at instantiation.
-    public Ability(CombatEngine.TargetMode targetMode, String name, String description, String useText, List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects, int damage, CombatEntity target, List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts, List<Requirement> requirements) {
+    public Ability(CombatEngine.TargetMode targetMode, String name, String description, String useText, List<Pair<CombatEffect, CombatEngine.CombatPhase>> effects, int damage, CombatEntity target, List<Pair<String, Integer>> resourceCosts, List<Requirement> requirements) {
         this.targetMode = targetMode;
         this.name = name;
         this.description = description;
@@ -70,7 +71,7 @@ public class Ability {
     }
 
     // Nearly-full constructor. Should be most-often used. Target is not set as it is determined during run-time.
-    public Ability(CombatEngine.TargetMode targetMode, String name, String description, String useText, List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects, int damage, List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts, List<Requirement> requirements) {
+    public Ability(CombatEngine.TargetMode targetMode, String name, String description, String useText, List<Pair<CombatEffect, CombatEngine.CombatPhase>> effects, int damage, List<Pair<String, Integer>> resourceCosts, List<Requirement> requirements) {
         this.targetMode = targetMode;
         this.name = name;
         this.description = description;
@@ -89,11 +90,11 @@ public class Ability {
         this.name = name;
     }
 
-    public List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> getEffects() {
+    public List<Pair<CombatEffect, CombatEngine.CombatPhase>> getEffects() {
         return effects;
     }
 
-    public void setEffects(List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects) {
+    public void setEffects(List<Pair<CombatEffect, CombatEngine.CombatPhase>> effects) {
         this.effects = effects;
     }
 
@@ -121,11 +122,11 @@ public class Ability {
         this.target = target;
     }
 
-    public List<AbstractMap.SimpleEntry<String, Integer>> getResourceCosts() {
+    public List<Pair<String, Integer>> getResourceCosts() {
         return resourceCosts;
     }
 
-    public void setResourceCosts(List<AbstractMap.SimpleEntry<String, Integer>> resourceCosts) {
+    public void setResourceCosts(List<Pair<String, Integer>> resourceCosts) {
         this.resourceCosts = resourceCosts;
     }
 

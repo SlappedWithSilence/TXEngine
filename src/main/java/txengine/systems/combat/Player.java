@@ -1,5 +1,6 @@
 package txengine.systems.combat;
 
+import txengine.structures.Pair;
 import txengine.systems.ability.Ability;
 import txengine.ui.component.Components;
 import txengine.ui.LogUtils;
@@ -57,8 +58,8 @@ public class Player extends CombatEntity {
 	/* Member Methods */
 
 	@Override
-	public AbstractMap.SimpleEntry<Ability, Item> makeChoice(CombatEngine engine) {
-		AbstractMap.SimpleEntry<Ability, Item> choice = null;
+	public Pair<Ability, Item> makeChoice(CombatEngine engine) {
+		Pair<Ability, Item> choice = null;
 
 		Components.header("Combat - Make a Choice");
 
@@ -95,7 +96,7 @@ public class Player extends CombatEntity {
 							ab.setTarget(chooseTarget(engine.getValidTargets(ab)));
 						}
 
-						return new AbstractMap.SimpleEntry<>(ab, null);
+						return new Pair<>(ab, null);
 					} else if (abilityChoice == -1) {
 						break;
 					}
@@ -110,7 +111,7 @@ public class Player extends CombatEntity {
 					inventory.display();
 					int itemChoice = LogUtils.getNumber(-1, inventory.getUsage());
 
-					if (itemChoice > -1)  return new AbstractMap.SimpleEntry<>(null, inventory.getItemInstance(itemChoice));
+					if (itemChoice > -1)  return new Pair<>(null, inventory.getItemInstance(itemChoice));
 
 					break;
 				case 2:

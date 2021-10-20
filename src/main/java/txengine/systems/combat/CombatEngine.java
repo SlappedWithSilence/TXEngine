@@ -1,5 +1,6 @@
 package txengine.systems.combat;
 
+import txengine.structures.Pair;
 import txengine.systems.ability.Ability;
 import txengine.systems.combat.combatEffect.CombatEffect;
 import txengine.systems.combat.combatEffect.combatEffects.AddPhaseEffect;
@@ -30,7 +31,7 @@ public class CombatEngine {
         // Arbitrarily calculates if combat should end. This functions returns a pair of values.
         // The key is whether combat should end, and the value represents if the player has won combat. WIN signals victory, LOSS signals defeat.
         // Only a pair with a key value of true will be evaluated. If multiple end-conditions are satisfied simultaneously, the first one in the endConditions list is chosen.
-        AbstractMap.SimpleEntry<Boolean, gameState> satisfied(CombatEngine engine);
+        Pair<Boolean, gameState> satisfied(CombatEngine engine);
     }
 
     /*******************
@@ -71,11 +72,11 @@ public class CombatEngine {
     // Master turn order. All turns follow this phase order by default.
     final ArrayList<CombatPhase> PHASE_ORDER = new ArrayList<>(List.of(CombatPhase.values()));
 
-    ArrayList<AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer>> TURN_ORDER;
+    ArrayList<Pair<CombatEngine.EntityType, Integer>> TURN_ORDER;
 
     HashMap<CombatEngine.EntityType, ArrayList<CombatEntity>> entities; // A collection of CombatEntities sorted by friendly or hostile
 
-    Iterator<AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer>> entityIterator;
+    Iterator<Pair<CombatEngine.EntityType, Integer>> entityIterator;
 
     List<EndCondition> endConditions;
 
@@ -184,10 +185,10 @@ public class CombatEngine {
 
         // Add all effects from equipment to each entity
         for (CombatEntity ce : entities.get(EntityType.FRIENDLY)) {
-            List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects = ce.getEquipmentManager().getAllEffects();
+            List<Pair<CombatEffect, CombatEngine.CombatPhase>> effects = ce.getEquipmentManager().getAllEffects();
 
             // Add all the effects on the equipment to their correct phases
-            for (AbstractMap.SimpleEntry<CombatEffect, CombatPhase> pair : effects) ce.getCombatEffects().get(pair.getValue()).add(pair.getKey());
+            for (Pair<CombatEffect, CombatPhase> pair : effects) ce.getCombatEffects().get(pair.getValue()).add(pair.getKey());
 
         }
     }
@@ -198,14 +199,14 @@ public class CombatEngine {
     private EndCondition getDefaultEndCondition() {
         return engine -> {
             if (Manager.player.getResourceManager().getResourceQuantity(primaryResourceName) <= 0) {
-                return new AbstractMap.SimpleEntry<>(true, EndCondition.gameState.LOSS);
+                return new Pair<>(true, EndCondition.gameState.LOSS);
             }
 
             if (entities.get(EntityType.HOSTILE).stream().allMatch(n -> n.resourceManager.getResourceQuantity(primaryResourceName) <= 0)) { // If all enemies are dead
-                return new AbstractMap.SimpleEntry<>(true, EndCondition.gameState.WIN); // Return a win
+                return new Pair<>(true, EndCondition.gameState.WIN); // Return a win
             }
 
-            return new AbstractMap.SimpleEntry<>(false, null);
+            return new Pair<>(false, null);
         };
     }
 
@@ -215,23 +216,23 @@ public class CombatEngine {
 
     // TODO: Rewrite this late-term-abortion of a function
     // TODO: Change to private
-    public ArrayList<AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer>> getTurnOrder() {
-        ArrayList<AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer>> turnOrder = new ArrayList<>();
+    public ArrayList<Pair<CombatEngine.EntityType, Integer>> getTurnOrder() {
+        ArrayList<Pair<CombatEngine.EntityType, Integer>> turnOrder = new ArrayList<>();
 
         for (int i = 0; i < entities.get(EntityType.FRIENDLY).size(); i++) { // Iterate through the friendly entities (i=index in the list of friendly entities that we want to add to the turnOrder)
             if (turnOrder.isEmpty()) { // If the turn order is empty, just add the current entity
-                turnOrder.add(new AbstractMap.SimpleEntry<>(EntityType.FRIENDLY, i));
+                turnOrder.add(new Pair<>(EntityType.FRIENDLY, i));
             } else { // If the turn order isn't empty, iterate until you find a slower entity, then insert directly in front of them
                 for (int j = 0; j <= turnOrder.size(); j++) { // Iterate through each entity already in the turn order (j = index in the turnOrder list)
                     if (j == turnOrder.size()) {
-                        turnOrder.add(new AbstractMap.SimpleEntry<>(EntityType.FRIENDLY, i)); // If the for loop has reached an end without finding any slower entities, append to the end of the list
+                        turnOrder.add(new Pair<>(EntityType.FRIENDLY, i)); // If the for loop has reached an end without finding any slower entities, append to the end of the list
                         break;
                     }
 
                     CombatEntity entityAlreadySorted = entities.get(turnOrder.get(j).getKey()).get(turnOrder.get(j).getValue());
 
                     if (entityAlreadySorted.speed < entities.get(EntityType.FRIENDLY).get(i).speed) { // If the entity currently being observed from the turnOrder list is slower than the current entity, insert the current entity at this index
-                        turnOrder.add(j, new AbstractMap.SimpleEntry<>(EntityType.FRIENDLY, i));
+                        turnOrder.add(j, new Pair<>(EntityType.FRIENDLY, i));
                         break;
                     }
                 }
@@ -241,18 +242,18 @@ public class CombatEngine {
 
         for (int i = 0; i < entities.get(EntityType.HOSTILE).size(); i++) { // Iterate through the hostile entities (i=index in the list of hostile entities that we want to add to the turnOrder)
             if (turnOrder.isEmpty()) { // If the turn order is empty, just add the current entity
-                turnOrder.add(new AbstractMap.SimpleEntry<>(EntityType.HOSTILE, i));
+                turnOrder.add(new Pair<>(EntityType.HOSTILE, i));
             } else { // If the turn order isn't empty, iterate until you find a slower entity, then insert directly in front of them
                 for (int j = 0; j <= turnOrder.size(); j++) { // Iterate through each entity already in the turn order (j = index in the turnOrder list)
                     if (j == turnOrder.size()) {
-                        turnOrder.add(new AbstractMap.SimpleEntry<>(EntityType.HOSTILE, i)); // If the for loop has reached an end without finding any slower entities, append to the end of the list
+                        turnOrder.add(new Pair<>(EntityType.HOSTILE, i)); // If the for loop has reached an end without finding any slower entities, append to the end of the list
                         break;
                     }
 
                     CombatEntity entityAlreadySorted = entities.get(turnOrder.get(j).getKey()).get(turnOrder.get(j).getValue());
 
                     if (entityAlreadySorted.speed < entities.get(EntityType.HOSTILE).get(i).speed) { // If the entity currently being observed from the turnOrder list is slower than the current entity, insert the current entity at this index
-                        turnOrder.add(j, new AbstractMap.SimpleEntry<>(EntityType.HOSTILE, i));
+                        turnOrder.add(j, new Pair<>(EntityType.HOSTILE, i));
                         break;
                     }
                 }
@@ -263,7 +264,7 @@ public class CombatEngine {
         return turnOrder;
     }
 
-    private AbstractMap.SimpleEntry<Boolean, EndCondition.gameState> endConditionReached() {
+    private Pair<Boolean, EndCondition.gameState> endConditionReached() {
         for (EndCondition condition : endConditions) {
             if (condition.satisfied(this).getKey()) {
                 return condition.satisfied(this);
@@ -304,7 +305,7 @@ public class CombatEngine {
     private void turnCycle() {
         entityIterator = TURN_ORDER.iterator();
         while (entityIterator.hasNext()) { // While someone hasn't taken their turn yet
-            AbstractMap.SimpleEntry<CombatEngine.EntityType, Integer> currentEntity = entityIterator.next(); // Get the next entity
+            Pair<CombatEngine.EntityType, Integer> currentEntity = entityIterator.next(); // Get the next entity
 
             if (lookUpEntity(currentEntity.getKey(), currentEntity.getValue()).resourceManager.getResourceQuantity(primaryResourceName) > 0) { // If the entity isn't dead
                 turn(currentEntity.getKey(), currentEntity.getValue()); // Take the turn
@@ -329,7 +330,7 @@ public class CombatEngine {
             // If the current phase is the ACTION phase, then run the get-action logic
             if (phaseOrder.get(i) == CombatPhase.ACTION &&  !lookUpEntity(turnType, index).isDead()) {
 
-                AbstractMap.SimpleEntry<Ability, Item> combatAction = lookUpEntity(turnType, index).makeChoice(this);
+                Pair<Ability, Item> combatAction = lookUpEntity(turnType, index).makeChoice(this);
 
                 if (combatAction.getKey() != null) { // If the entity chose to use an ability
 

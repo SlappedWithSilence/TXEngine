@@ -2,6 +2,7 @@ package txengine.io;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import txengine.structures.Pair;
 import txengine.systems.integration.Requirement;
 import txengine.systems.integration.RequirementFactory;
 import txengine.systems.combat.CombatEngine;
@@ -50,8 +51,8 @@ public class LoadUtils {
         return requirements;
     }
 
-    public static ArrayList<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> parseCombatEffects(JSONArray obj) {
-        ArrayList<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> arr = new ArrayList<>();
+    public static ArrayList<Pair<CombatEffect, CombatEngine.CombatPhase>> parseCombatEffects(JSONArray obj) {
+        ArrayList<Pair<CombatEffect, CombatEngine.CombatPhase>> arr = new ArrayList<>();
 
         for (int i = 0; i < obj.size(); i++) {
             JSONObject rawEffect = (JSONObject) obj.get(i);
@@ -65,7 +66,7 @@ public class LoadUtils {
 
             CombatEffect ce = CombatEffectFactory.build(className, duration, triggerMessage, cleanupMessage, properties);
 
-            arr.add(new AbstractMap.SimpleEntry<>(ce, CombatEngine.CombatPhase.valueOf(triggerPhase)));
+            arr.add(new Pair<>(ce, CombatEngine.CombatPhase.valueOf(triggerPhase)));
         }
 
         return arr;
@@ -91,43 +92,43 @@ public class LoadUtils {
         return array;
     }
 
-    public static List<AbstractMap.SimpleEntry<String, Integer>> parseResourceCosts(JSONArray obj) {
+    public static List<Pair<String, Integer>> parseResourceCosts(JSONArray obj) {
         return parseStringIntPairs(obj);
     }
 
-    public static List<AbstractMap.SimpleEntry<String, Float>> parseStringFloatPairs(JSONArray obj) {
-        List<AbstractMap.SimpleEntry<String, Float>> arr = new ArrayList<>();
+    public static List<Pair<String, Float>> parseStringFloatPairs(JSONArray obj) {
+        List<Pair<String, Float>> arr = new ArrayList<>();
 
         for (Object o : obj) {
             String[] values = ((String) o).split(",");
 
-            arr.add(new AbstractMap.SimpleEntry<>(values[0], Float.parseFloat(values[1])));
+            arr.add(new Pair<>(values[0], Float.parseFloat(values[1])));
         }
 
         return arr;
     }
 
-    public static List<AbstractMap.SimpleEntry<String, Integer>> parseStringIntPairs(JSONArray obj) {
-        List<AbstractMap.SimpleEntry<String, Integer>> arr = new ArrayList<>();
+    public static List<Pair<String, Integer>> parseStringIntPairs(JSONArray obj) {
+        List<Pair<String, Integer>> arr = new ArrayList<>();
 
         if (obj.isEmpty()) return arr;
 
         for (Object o : obj) {
             String[] values = ((String) o).split(",");
 
-            arr.add(new AbstractMap.SimpleEntry<>(values[0], Integer.parseInt(values[1])));
+            arr.add(new Pair<>(values[0], Integer.parseInt(values[1])));
         }
 
         return arr;
     }
 
-    public static List<AbstractMap.SimpleEntry<Integer, Integer>> parseIntPairs(JSONArray obj) {
-        List<AbstractMap.SimpleEntry<Integer, Integer>> arr = new ArrayList<>();
+    public static List<Pair<Integer, Integer>> parseIntPairs(JSONArray obj) {
+        List<Pair<Integer, Integer>> arr = new ArrayList<>();
 
         for (Object o : obj) {
             String[] values = ((String) o).split(",");
 
-            arr.add(new AbstractMap.SimpleEntry<>(Integer.parseInt(values[0]), Integer.parseInt(values[1])));
+            arr.add(new Pair<>(Integer.parseInt(values[0]), Integer.parseInt(values[1])));
         }
 
         return arr;

@@ -30,7 +30,6 @@ public class Conversation {
       while (nextModuleId > -1) {
           nextModuleId = modules.get(nextModuleId).perform();
       }
-
     }
 
     // Getters and setters

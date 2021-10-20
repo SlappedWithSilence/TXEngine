@@ -1,5 +1,6 @@
 package txengine.systems.combat;
 
+import txengine.structures.Pair;
 import txengine.systems.ability.Ability;
 import txengine.systems.ability.AbilityManager;
 import txengine.systems.combat.combatEffect.CombatEffect;
@@ -78,7 +79,7 @@ public class CombatEntityLogic {
         if (ab.getDamage() >= target.getResourceManager().getResourceQuantity(Manager.primaryResource)) return true;
 
         int totalDamage = ab.getDamage();
-        List<AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase>> effects = ab.getEffects().stream().filter(pair -> pair.getKey().getProperties()[0].equals(Manager.primaryResource) && Double.parseDouble(pair.getKey().getProperties()[1]) < 0).toList();
+        List<Pair<CombatEffect, CombatEngine.CombatPhase>> effects = ab.getEffects().stream().filter(pair -> pair.getKey().getProperties()[0].equals(Manager.primaryResource) && Double.parseDouble(pair.getKey().getProperties()[1]) < 0).toList();
 
         // TODO: Analyse effects and quantify them
 

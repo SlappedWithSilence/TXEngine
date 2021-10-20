@@ -1,6 +1,7 @@
 package txengine.systems.combat;
 
 import com.rits.cloning.Cloner;
+import txengine.structures.Pair;
 import txengine.systems.ability.Ability;
 import txengine.systems.ability.AbilityManager;
 import txengine.systems.combat.combatEffect.CombatEffect;
@@ -126,7 +127,7 @@ public class CombatEntity implements CombatAgency, Components.Tabable {
 
     // This returns a Combat choice using a standard AI. It will optimize for damage and try to prevent itself from being killed.
     @Override
-    public AbstractMap.SimpleEntry<Ability, Item> makeChoice(CombatEngine engine) {
+    public Pair<Ability, Item> makeChoice(CombatEngine engine) {
         final double PRIMARY_RESOURCE_TOLERANCE = 0.25; // The lowest the entity's primary resource can be before it tries to restore it
 
         // Check for primary resource value. If it is too low, attempt to heal.
@@ -134,11 +135,11 @@ public class CombatEntity implements CombatAgency, Components.Tabable {
             ArrayList<Integer> healingItems = CombatEntityLogic.getHealingItems(this.getInventory());
 
             // If the entity possesses healing items in its inventory, use a random one
-            if (healingItems.size() > 0) return new AbstractMap.SimpleEntry<>(null, Manager.itemHashMap.get(healingItems.get(new Random().nextInt(healingItems.size())))); // TODO: Verify that this won't go out of bounds
+            if (healingItems.size() > 0) return new Pair<>(null, Manager.itemHashMap.get(healingItems.get(new Random().nextInt(healingItems.size())))); // TODO: Verify that this won't go out of bounds
 
             ArrayList<Ability> healingAbilities = CombatEntityLogic.getHealingAbilities(this.abilityManager);
 
-            if (healingAbilities.size() > 0) return new AbstractMap.SimpleEntry<>(healingAbilities.get(new Random().nextInt(healingAbilities.size() - 1)), null);
+            if (healingAbilities.size() > 0) return new Pair<>(healingAbilities.get(new Random().nextInt(healingAbilities.size() - 1)), null);
         }
 
         List<Ability> offensiveAbilities = CombatEntityLogic.getOffensiveAbilities(abilityManager);
@@ -153,7 +154,7 @@ public class CombatEntity implements CombatAgency, Components.Tabable {
 
                 ab.setTarget(killable.get(randomIndex)); // Set it
 
-                return new AbstractMap.SimpleEntry<Ability, Item>(ab, null); // Return the ability with its target already set
+                return new Pair<Ability, Item>(ab, null); // Return the ability with its target already set
             }
         }
 
@@ -166,7 +167,7 @@ public class CombatEntity implements CombatAgency, Components.Tabable {
             Ability ability = offensiveAbilities.get(randomAbilityIndex);
             ability.setTarget(engine.getValidTargets(ability).get(randomTargetIndex));
 
-            return new AbstractMap.SimpleEntry<Ability, Item>(ability, null);
+            return new Pair<Ability, Item>(ability, null);
         }
 
 
@@ -176,11 +177,11 @@ public class CombatEntity implements CombatAgency, Components.Tabable {
 
             ability.setTarget(engine.getValidTargets(ability).get(new Random().nextInt(engine.getValidTargets(ability).size())));
 
-            return new AbstractMap.SimpleEntry<>(ability, null);
+            return new Pair<>(ability, null);
         }
 
         // If we can't do any of the above, do nothing
-        return new AbstractMap.SimpleEntry<>(null, null);
+        return new Pair<>(null, null);
     }
 
     public boolean isDead() {
@@ -191,7 +192,7 @@ public class CombatEntity implements CombatAgency, Components.Tabable {
     public void handleAbility(Ability ability) {
 
         Cloner cloner = new Cloner();
-        for (AbstractMap.SimpleEntry<CombatEffect, CombatEngine.CombatPhase> ce : ability.getEffects()) { // Iterate through each effect in the ability
+        for (Pair<CombatEffect, CombatEngine.CombatPhase> ce : ability.getEffects()) { // Iterate through each effect in the ability
             combatEffects.get(ce.getValue()).add(cloner.deepClone(ce.getKey())); // Add a deep clone of effect to this entity's effect map
         }
     }
