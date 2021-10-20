@@ -1,5 +1,6 @@
 package txengine.systems.integration.requirements;
 
+import txengine.main.Manager;
 import txengine.structures.Pair;
 import txengine.systems.integration.Requirement;
 import txengine.util.Utils;
@@ -25,6 +26,9 @@ public class SkillLevelRequirement extends Requirement {
     @Override
     public boolean met() {
         List<Pair<String, Integer>> data = Utils.parseStringIntPairs(List.of(properties));
-        return false;
+        for (Pair<String, Integer> p : data) {
+            if (Manager.skillManager.getSkillLevel(p.getKey()) < p.getValue()) return false;
+        }
+        return true;
     }
 }
