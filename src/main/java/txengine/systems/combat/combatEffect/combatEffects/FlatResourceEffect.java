@@ -26,6 +26,10 @@ public class FlatResourceEffect extends CombatEffect {
 
     @Override
     public void perform(CombatEntity entity) {
-        entity.getResourceManager().incrementResource(super.properties[0], Integer.parseInt(super.properties[1]));
+        float resistBy = 1;
+        if (getTags() != null && getTags().length > 0) {
+            resistBy = resistBy - entity.getEquipmentManager().totalResistance(getTags());
+        }
+        entity.getResourceManager().incrementResource(super.properties[0], (int)(Integer.parseInt(super.properties[1]) * resistBy));
     }
 }

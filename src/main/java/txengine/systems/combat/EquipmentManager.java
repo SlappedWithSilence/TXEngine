@@ -16,6 +16,7 @@ public class EquipmentManager {
     /* Member Variables */
 
     private HashMap<Equipment.EquipmentType, Integer> equipmentMap;
+    private HashMap<String, Float> tagResistanceMap;
 
     /* Constructors */
     public EquipmentManager() {
@@ -100,7 +101,41 @@ public class EquipmentManager {
         Arrays.stream(Equipment.EquipmentType.values()).forEach(equipmentType -> equipmentMap.put(equipmentType, -1));
     }
 
+    // Calculate and store the tag resistances for each equipment
+    private void calculateTagResistances() {
+        tagResistanceMap.clear(); // Clear existing values
+        for (int equipmentID : equipmentMap.values()) { // For each equipment
+            Equipment eq = (Equipment) Manager.itemHashMap.get(equipmentID); // Get item instance
+            List<Pair<String, Float>> tagRes = eq.getTagResistances(); // Get resistances from that item
+            if (tagRes == null || tagRes.size() == 0) continue; // Skip if there are no resistances
+
+            for (Pair<String, Float> data : tagRes) { // For each tag resistance
+                // If the tag exists, add it to the current sum of resistances
+                if (tagResistanceMap.containsKey(data.getKey())) tagResistanceMap.put(data.getKey(), tagResistanceMap.get(data.getKey()) + data.getValue());
+                // If it doesn't exist already, set the resistance of that tag to the current resistance
+                else tagResistanceMap.put(data.getKey(), data.getValue());
+            }
+        }
+    }
+
     /* Accessor Methods */
+    public Float resistsBy(String tag) {
+        return tagResistanceMap.getOrDefault(tag, 0f);
+    }
+
+    public Float totalResistance(String[] tags) {
+        if (tags == null || tags.length == 0) return 0f;
+
+        Float totalResistance = 0f;
+
+        for (String tag : tags) {
+            if (totalResistance == 0f) totalResistance = resistsBy(tag);
+            else totalResistance = totalResistance * (1 + resistsBy(tag));
+        }
+
+        return totalResistance;
+    }
+
     public void setSlot(Equipment.EquipmentType slot, int equipmentID) {
         if (equipmentID  != -1 && ((Equipment) Manager.itemHashMap.get(equipmentID)).getType() != slot) {
             LogUtils.error("Cannot assign a " + ((Equipment) Manager.itemHashMap.get(equipmentID)).getType().toString() + " to the " + slot.toString() + " slot!");
@@ -125,4 +160,11 @@ public class EquipmentManager {
         return equipmentMap.values().stream().filter(id -> id != null && id != -1).toList();
     }
 
+    public HashMap<String, Float> getTagResistanceMap() {
+        return tagResistanceMap;
+    }
+
+    public void setTagResistanceMap(HashMap<String, Float> tagResistanceMap) {
+        this.tagResistanceMap = tagResistanceMap;
+    }
 }
