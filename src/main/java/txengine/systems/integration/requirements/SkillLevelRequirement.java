@@ -25,9 +25,9 @@ public class SkillLevelRequirement extends Requirement {
 
     @Override
     public boolean met() {
-        List<Pair<String, Integer>> data = Utils.parseStringIntPairs(List.of(properties));
-        for (Pair<String, Integer> p : data) {
-            if (Manager.skillManager.getSkillLevel(p.getKey()) < p.getValue()) return false;
+        List<Pair<String, Integer>> data = Utils.parseStringIntPairs(List.of(properties)); // Convert properties into workable Pairs
+        for (Pair<String, Integer> p : data) { // For each Pair
+            if (Manager.skillManager.getSkillLevel(p.getKey()) < p.getValue()) return false; // If any level of any skill is too low, return false
         }
         return true;
     }
