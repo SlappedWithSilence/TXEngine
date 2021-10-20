@@ -46,7 +46,8 @@ public class AbilityManager {
             } else {
                 System.out.print(Colors.colored(abilityList.get(i).getName(), "GRAY"));   // Print name in red if any ability costs aren't satisfied
             }
-            System.out.println("\t"+resourceCostsAsString(abilityList.get(i))); // Print individual resource costs of the current item
+            System.out.print("\t\t"+abilityList.get(i).getDamage() + " damage");
+            System.out.println("\t"+resourceCostsAsString(abilityList.get(i))+"\t" + abilityList.get(i).targetMode.toString()); // Print individual resource costs of the current item
 
         }
     }
