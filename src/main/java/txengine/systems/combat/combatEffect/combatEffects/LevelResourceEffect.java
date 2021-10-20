@@ -19,8 +19,13 @@ public class LevelResourceEffect extends CombatEffect {
 
     @Override
     public void perform(CombatEntity entity) {
+        float resistBy = 1;
+        if (getTags() != null && getTags().length > 0) {
+            resistBy = resistBy - entity.getEquipmentManager().totalResistance(getTags());
+        }
+
         int newValue = entity.getResourceManager().getResourceQuantity(super.properties[0]);
         newValue += entity.getLevel() * Integer.parseInt(super.properties[1]);
-        entity.getResourceManager().setResource(super.properties[0], newValue);
+        entity.getResourceManager().setResource(super.properties[0], (int)(newValue * resistBy));
     }
 }

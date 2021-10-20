@@ -21,7 +21,14 @@ public class ProportionalResourceEffect extends CombatEffect {
 
     @Override
     public void perform(CombatEntity entity) {
-        entity.getResourceManager().setResource(super.properties[0], entity.getResourceManager().getResourceQuantity(super.properties[0]) +
-                (int) (entity.getResourceManager().getResources().get(super.properties[0])[0] * Double.parseDouble(super.properties[1])));
+        float resistBy = 1;
+        if (getTags() != null && getTags().length > 0) {
+            resistBy = resistBy - entity.getEquipmentManager().totalResistance(getTags());
+        }
+
+        int quantity = entity.getResourceManager().getResourceQuantity(super.properties[0]) +
+                (int) (entity.getResourceManager().getResources().get(super.properties[0])[0] * Double.parseDouble(super.properties[1]));
+
+        entity.getResourceManager().setResource(super.properties[0], (int)(quantity * resistBy));
     }
 }
