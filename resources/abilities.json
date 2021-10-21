@@ -23,6 +23,7 @@
           "trigger_phase" : "TURN_START",
           "trigger_message" : "{OWNER} suffered from its burn!",
           "cleanup_message" : "{OWNER} recovered from its burn.",
+          "tags" : ["burn"],
           "properties": ["Health", "-5"]
         }
       ],

@@ -11,4 +11,9 @@ public class Pair<K,V>  extends AbstractMap.SimpleEntry<K,V> {
     public Pair(Map.Entry<K,V> entry) {
         super(entry);
     }
+
+    @Override
+    public String toString() {
+        return "(" + getKey().toString() + ", " + getValue().toString() + ")";
+    }
 }

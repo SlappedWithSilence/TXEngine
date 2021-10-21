@@ -3,21 +3,22 @@ package txengine.main;
 import txengine.io.load.LoadManager;
 import txengine.io.loaders.*;
 import txengine.io.save.Exporters;
+import txengine.structures.Pair;
+import txengine.systems.combat.*;
+import txengine.systems.combat.combatEffect.CombatEffect;
 import txengine.systems.crafting.RecipeManager;
 import txengine.systems.dungeon.Dungeon;
+import txengine.systems.item.Equipment;
 import txengine.systems.reputation.Faction;
 import txengine.systems.reputation.FactionManager;
+import txengine.ui.Out;
 import txengine.ui.color.*;
-import txengine.systems.combat.CombatEntity;
-import txengine.systems.combat.CombatResourceManager;
 import txengine.systems.ability.Ability;
 import txengine.systems.ability.AbilityManager;
-import txengine.systems.combat.EquipmentManager;
 import txengine.systems.crafting.Recipe;
 import txengine.systems.flag.FlagManager;
 import txengine.systems.inventory.Inventory;
 import txengine.io.*;
-import txengine.systems.combat.Player;
 
 import java.util.*;
 
@@ -148,7 +149,15 @@ public class Manager {
 
         player.getInventory().addItem(16);
         player.getInventory().addItem(17);
+        player.getInventory().addItem(22);
 
+        for (Pair<String, Float> p : ((Equipment) itemHashMap.get(22)).getTagResistances()) {
+            Out.d(p.toString());
+        }
+
+        for (Pair<CombatEffect, CombatEngine.CombatPhase> p : abilityHashMap.get("Sear").getEffects()) {
+            for (String s : p.getKey().getTags()) Out.d(s);
+        }
     }
 
 }

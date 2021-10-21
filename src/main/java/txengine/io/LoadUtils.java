@@ -63,8 +63,11 @@ public class LoadUtils {
             String triggerMessage = (String) rawEffect.get("trigger_message");
             String cleanupMessage = (String) rawEffect.get("cleanup_message");
             String[] properties = getStringArray((JSONArray) rawEffect.get("properties"));
-
+            String[] tags = LoadUtils.getStringArray(optional(rawEffect,"tags",JSONArray.class, new JSONArray()));
             CombatEffect ce = CombatEffectFactory.build(className, duration, triggerMessage, cleanupMessage, properties);
+
+            if (tags == null) ce.setTags(new String[0]);
+            else ce.setTags(tags);
 
             arr.add(new Pair<>(ce, CombatEngine.CombatPhase.valueOf(triggerPhase)));
         }

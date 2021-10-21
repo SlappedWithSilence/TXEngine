@@ -93,7 +93,6 @@ public class Equipment extends Item implements Components.Tabable {
 
         data.add(getName());
         data.add("Type: " + type.toString());
-        data.add(getDescription());
         data.add("Attack: " + damageBuff);
         data.add("Defense: " + damageResistance);
         data.add("Abilities: " + abilityNames.stream().reduce("", (partialString, name) -> partialString + name));
