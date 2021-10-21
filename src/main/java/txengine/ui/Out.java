@@ -6,15 +6,19 @@ import txengine.ui.color.ColorConsole;
 import java.util.Optional;
 
 public class Out {
+    // 0 = error only
+    // 1 = warning + error
+    // 2 = info + warning + error
+    private static int verbosity = 0;
 
+    /*** Output Methods ***/
+
+    // Standard Dialog
     public static void d(String s) {
         System.out.println(s);
     }
 
-    /*** Output Methods ***/
-
     public static void error(String text, String source) {
-        if (!Manager.debug) return;
         String sourceText = "";
         Optional<String> opt = Optional.ofNullable(source);
 
@@ -28,7 +32,7 @@ public class Out {
     }
 
     public static void warn(String text,  String source) {
-        if (!Manager.debug) return;
+        if (verbosity < 1) return;
         String sourceText = "";
 
         Optional<String> opt = Optional.ofNullable(source);
@@ -38,13 +42,18 @@ public class Out {
     }
 
     public static void info(String text, String source) {
-        if (!Manager.debug) return;
+        if (verbosity < 2) return;
         String sourceText = "";
 
         Optional<String> opt = Optional.ofNullable(source);
         if (opt.isPresent()) sourceText = "[" + opt.get() + "]";
 
         ColorConsole.i("[Info]" + sourceText + " " + text + "\n", false);
+    }
+
+    /*** Helper Methods ***/
+    public static void setVerbosity(int v) {
+        verbosity = v;
     }
 
 }
