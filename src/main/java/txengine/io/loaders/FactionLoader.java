@@ -8,6 +8,7 @@ import txengine.io.LoadUtils;
 import txengine.io.Loader;
 import txengine.systems.reputation.Faction;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,14 +30,14 @@ public class FactionLoader extends Loader {
         try {
             root = (JSONObject) parser.parse(new FileReader(file));
         } catch (FileNotFoundException e) {
-            LogUtils.error("Attempted to load from file: " + file.getAbsolutePath());
+            Out.error("Attempted to load from file: " + file.getAbsolutePath());
             e.printStackTrace();
             return null;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         } catch (ParseException e) {
-            LogUtils.error(file.getName() + " appears to be corrupted. Please re-download it from https://github.com/TopperMcKek/TheAlley/blob/master/thealley/resources/conversations.json\n");
+            Out.error(file.getName() + " appears to be corrupted. Please re-download it from https://github.com/TopperMcKek/TheAlley/blob/master/thealley/resources/conversations.json\n");
             e.printStackTrace();
             return null;
         }

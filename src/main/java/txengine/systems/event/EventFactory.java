@@ -1,6 +1,7 @@
 package txengine.systems.event;
 
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 public class EventFactory {
 
@@ -19,16 +20,16 @@ public class EventFactory {
             return e;	// Returns the event
 
         } catch (InstantiationException e) {
-            LogUtils.error("Failed to build class.");
+            Out.error("Failed to build class.");
             e.printStackTrace();
             return null;
 
         } catch (ClassNotFoundException e) {
-            LogUtils.error("Can't locate class: " + className);
+            Out.error("Can't locate class: " + className);
             e.printStackTrace();
             return null;
         } catch (Exception e) {
-            LogUtils.error("Something went wrong while building an Event!");
+            Out.error("Something went wrong while building an Event!");
             e.printStackTrace();
             return null;
         }

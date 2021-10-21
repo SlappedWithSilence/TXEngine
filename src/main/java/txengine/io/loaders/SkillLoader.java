@@ -9,6 +9,7 @@ import txengine.io.Loader;
 import txengine.systems.event.Event;
 import txengine.systems.skill.Skill;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,7 +34,7 @@ public class SkillLoader extends Loader {
         try {
             obj = (JSONObject) parser.parse(new FileReader(file));
         } catch (FileNotFoundException e) {
-            LogUtils.error("Attempted to load from file: " + file.getAbsolutePath());
+            Out.error("Attempted to load from file: " + file.getAbsolutePath());
             e.printStackTrace();
             return null;
         } catch (IOException e) {
@@ -64,7 +65,7 @@ public class SkillLoader extends Loader {
             Skill s = new Skill(name, desc, level, xp, levelUpXP, levelRatio, levelEvents);
 
             skills.put(name, s);
-            LogUtils.info("Skill added: " + s.getName(), null);
+            Out.info("Skill added: " + s.getName(), null);
         }
 
         return skills;

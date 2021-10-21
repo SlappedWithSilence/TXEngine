@@ -4,6 +4,7 @@ import com.rits.cloning.Cloner;
 import txengine.structures.Pair;
 import txengine.ui.LogUtils;
 import txengine.main.Manager;
+import txengine.ui.Out;
 
 import java.util.AbstractMap;
 import java.util.HashMap;
@@ -85,7 +86,7 @@ public class CombatResourceManager {
     public void setResource(String resourceName, int resourceQuantity) {
 
         if (!resources.containsKey(resourceName)) {
-            LogUtils.error("Resource " + resourceName + " does not exist!");
+            Out.error("Resource " + resourceName + " does not exist!");
             return;
         }
 
@@ -98,7 +99,7 @@ public class CombatResourceManager {
     // Increments the value of an existing resource up to the resource's max
     public void incrementResource(String resourceName, int increment) {
         if (!resources.containsKey(resourceName)) {
-            LogUtils.error("Resource " + resourceName + " does not exist!");
+            Out.error("Resource " + resourceName + " does not exist!");
             return;
         }
 
@@ -110,7 +111,7 @@ public class CombatResourceManager {
     // Decrements the value of an existing resource down to at least zero.
     public void decrementResource(String resourceName, int decrement) {
         if (!resources.containsKey(resourceName)) {
-            LogUtils.error("Resource " + resourceName + " does not exist!");
+            Out.error("Resource " + resourceName + " does not exist!");
             return;
         }
 
@@ -120,7 +121,7 @@ public class CombatResourceManager {
     // Simulates consuming exactly X of a resource. If there is not enough of the resource, none will be consumed and the function will return false.
     public boolean consumeResource(String resourceName, int resourceQuantity) {
         if (!resources.containsKey(resourceName)) {
-            LogUtils.error("Resource " + resourceName + " does not exist!");
+            Out.error("Resource " + resourceName + " does not exist!");
             return false;
         }
 
@@ -136,7 +137,7 @@ public class CombatResourceManager {
 
     public int getResourceQuantity(String resourceName) {
         if (!resources.containsKey(resourceName)) {
-            LogUtils.error("Resource " + resourceName + " does not exist!");
+            Out.error("Resource " + resourceName + " does not exist!");
             return -1;
         }
 
@@ -145,7 +146,7 @@ public class CombatResourceManager {
 
     public int getResourceMax(String resourceName) {
         if (!resources.containsKey(resourceName)) {
-            LogUtils.error("Resource " + resourceName + " does not exist!");
+            Out.error("Resource " + resourceName + " does not exist!");
             return -1;
         }
         return resources.get(resourceName)[0];

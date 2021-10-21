@@ -16,6 +16,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,14 +39,14 @@ public class ItemLoader extends Loader {
         try {
             obj = (JSONObject) parser.parse(new FileReader(file));
         } catch (FileNotFoundException e) {
-            LogUtils.error("Attempted to load from file: " + file.getAbsolutePath());
+            Out.error("Attempted to load from file: " + file.getAbsolutePath());
             e.printStackTrace();
             return null;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         } catch (ParseException e) {
-            LogUtils.error("items.JSON appears to be corrupted. Please re-download it from https://github.com/TopperMcKek/TheAlley/blob/master/thealley/resources/items.json\n");
+            Out.error("items.JSON appears to be corrupted. Please re-download it from https://github.com/TopperMcKek/TheAlley/blob/master/thealley/resources/items.json\n");
             e.printStackTrace();
             return null;
         }

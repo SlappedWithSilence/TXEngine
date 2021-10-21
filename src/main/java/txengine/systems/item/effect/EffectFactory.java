@@ -4,6 +4,7 @@ import java.lang.InstantiationException;
 import java.lang.ClassNotFoundException;
 
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 public class EffectFactory {
 
@@ -22,16 +23,16 @@ public class EffectFactory {
 			return e;	// Returns the effect
 			
 		} catch (InstantiationException e) {
-			LogUtils.error("Failed to build class.");
+			Out.error("Failed to build class.");
 			e.printStackTrace();
 			return null;
 		
 		} catch (ClassNotFoundException e) {
-			LogUtils.error("Can't locate class: " + className);
+			Out.error("Can't locate class: " + className);
 			e.printStackTrace();
 			return null;
 		} catch (Exception e) {
-			LogUtils.error("Something went wrong while building an Effect!");
+			Out.error("Something went wrong while building an Effect!");
 			e.printStackTrace();
 			return null;
 		}

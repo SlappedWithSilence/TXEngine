@@ -8,6 +8,7 @@ import txengine.systems.integration.Requirement;
 import txengine.systems.integration.requirements.ConsumeItemRequirement;
 import txengine.systems.room.action.Action;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 import txengine.ui.component.Components;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class DungeonRoom extends CanvasNode {
 
             int choice = LogUtils.getNumber(0,roomActions.size()-1); // Get user choice
 
-            LogUtils.error(roomActions.get(choice).getRequirements().size() + " total requirements");
+            Out.error(roomActions.get(choice).getRequirements().size() + " total requirements");
 
             if (!Requirement.allMet(roomActions.get(choice).getRequirements())) { // Handle any requirements not being met
                 System.out.println("You can't do that!");
@@ -86,7 +87,7 @@ public class DungeonRoom extends CanvasNode {
     public void addGimmick(DungeonGimmick dg) {
         gimmick = dg;
         if (gimmick == null) {
-            LogUtils.error(gimmick.getClass().getSimpleName() + " returned null instead of List<Action>!","DungeonRoom::addGimmick");
+            Out.error(gimmick.getClass().getSimpleName() + " returned null instead of List<Action>!","DungeonRoom::addGimmick");
             CrashReporter.getInstance().clear();
             CrashReporter.getInstance().append("Crashed while adding a gimmick!\n");
             CrashReporter.getInstance().append("ClassName: " + dg.getClass().getSimpleName() + "\n");

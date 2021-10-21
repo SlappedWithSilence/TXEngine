@@ -7,6 +7,7 @@ import txengine.structures.Pair;
 import txengine.systems.combat.CombatEngine;
 import txengine.systems.combat.CombatEntity;
 import txengine.systems.inventory.Inventory;
+import txengine.ui.Out;
 import txengine.ui.component.Components;
 import txengine.ui.LogUtils;
 import txengine.main.Manager;
@@ -102,7 +103,7 @@ public class CombatAction extends Action {
 
     private void giveLoot(List<Integer> ids, List<Integer> quantities) {
         if (ids.size() != quantities.size()) {
-            LogUtils.error("Something went wrong while distributing loot to the player!\n");
+            Out.error("Something went wrong while distributing loot to the player!\n");
             return;
         }
 

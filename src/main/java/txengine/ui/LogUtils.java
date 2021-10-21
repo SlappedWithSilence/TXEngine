@@ -118,42 +118,6 @@ public class LogUtils {
 		return scan.next();
 	}
 
-	/*** Output Methods ***/
-
-	public static void error(String text, String source) {
-		if (!Manager.debug) return;
-		String sourceText = "";
-		Optional<String> opt = Optional.ofNullable(source);
-
-		if (opt.isPresent()) sourceText = "[" + opt.get() + "]";
-
-		ColorConsole.e("[Error]" + sourceText + " " +text + "\n", false);
-	}
-
-	public static void error(String text) {
-		error(text, null);
-	}
-
-	public static void warn(String text,  String source) {
-		if (!Manager.debug) return;
-		String sourceText = "";
-
-		Optional<String> opt = Optional.ofNullable(source);
-		if (opt.isPresent()) sourceText = "[" + opt.get() + "]";
-
-		ColorConsole.i("[Warning]" + sourceText + " " + text + "\n", false);
-	}
-
-	public static void info(String text, String source) {
-		if (!Manager.debug) return;
-		String sourceText = "";
-
-		Optional<String> opt = Optional.ofNullable(source);
-		if (opt.isPresent()) sourceText = "[" + opt.get() + "]";
-
-		ColorConsole.i("[Info]" + sourceText + " " + text + "\n", false);
-	}
-
 	public static String centerString(String s, int length) {
 		if (s.length() >= length) return s;
 
@@ -213,7 +177,7 @@ public class LogUtils {
 		StringBuilder sb = new StringBuilder();
 
 		if (lines1.size() != lines2.size()) {
-			LogUtils.error("Cannot combine text blocks, they have different lengths!\n", null);
+			Out.error("Cannot combine text blocks, they have different lengths!\n", null);
 			return null;
 		}
 

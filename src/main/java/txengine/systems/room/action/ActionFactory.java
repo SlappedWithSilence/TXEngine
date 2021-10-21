@@ -2,6 +2,7 @@ package txengine.systems.room.action;
 
 import txengine.systems.integration.Requirement;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 import java.util.List;
 
@@ -28,16 +29,16 @@ public class ActionFactory {
                 return a;	// Returns the effect
 
             } catch (InstantiationException e) {
-                LogUtils.error("Failed to build class.");
+                Out.error("Failed to build class.");
                 e.printStackTrace();
                 return null;
 
             } catch (ClassNotFoundException e) {
-                LogUtils.error("Can't locate class: " + className);
+                Out.error("Can't locate class: " + className);
                 e.printStackTrace();
                 return null;
             } catch (Exception e) {
-                LogUtils.error("Something went wrong while building an Action!");
+                Out.error("Something went wrong while building an Action!");
                 e.printStackTrace();
                 return null;
             }

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import txengine.main.Manager;
+import txengine.ui.Out;
 import txengine.ui.color.*;
 import txengine.ui.component.Components;
 import txengine.ui.LogUtils;
@@ -46,7 +47,7 @@ public class Inventory {
 		this.itemQuantities = new ArrayList<>();
 
 		if (itemIds.size() != itemQuantities.size()) {
-			LogUtils.error("Something went wrong building an Inventory. itemIDs and itemQuantities are not equal in length!\n");
+			Out.error("Something went wrong building an Inventory. itemIDs and itemQuantities are not equal in length!\n");
 			return;
 		}
 
@@ -70,10 +71,10 @@ public class Inventory {
 
 	// Add an item to the inventory. This function should only ever be called after ensuring there is space in the inventory.
 	public void addItem(Item i) {
-		if (i == null) LogUtils.error("tried to add a null item");
+		if (i == null) Out.error("tried to add a null item");
 
 		if (usage >= capacity) {
-			LogUtils.error("Tried to add an item when the inventory was full! This is an error, please report it on https://github.com/TopperMcKek/TheAlley");
+			Out.error("Tried to add an item when the inventory was full! This is an error, please report it on https://github.com/TopperMcKek/TheAlley");
 		}
 
 		// Check if the inventory contains that item already

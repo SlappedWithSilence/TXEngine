@@ -2,6 +2,7 @@ package txengine.io.save;
 
 import org.json.simple.JSONObject;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -40,7 +41,7 @@ public class SaveManager {
 
         JSONObject saveObject = new JSONObject();
         for (Exporter ex : exporters) {
-            if (saveObject.containsKey(ex.getKey())) LogUtils.warn("Key " + ex.getKey() + " already exists!", "SaveManager");
+            if (saveObject.containsKey(ex.getKey())) Out.warn("Key " + ex.getKey() + " already exists!", "SaveManager");
             saveObject.put(ex.getKey(), ex.toJSON());
         }
 
@@ -49,22 +50,22 @@ public class SaveManager {
             fw.write(saveObject.toJSONString()); // Write the contents of the JSON Save object to the file
             fw.close(); // Close the FileWriter
         } catch (IOException e) {
-            LogUtils.error("Can't write to save file!","SaveManager");
+            Out.error("Can't write to save file!","SaveManager");
             e.printStackTrace();
         }
     }
 
     private void handleExistingSave() {
-        LogUtils.warn("A save file already exists!","SaveManager");
+        Out.warn("A save file already exists!","SaveManager");
     }
 
     private void handleNewSave(File file) {
-        LogUtils.info("Writing a fresh save file...","SaveManager");
+        Out.info("Writing a fresh save file...","SaveManager");
         try {
             Files.createDirectory(Paths.get(SaveRelativePathPrefix + SaveRelativePath));
             file.createNewFile();
         } catch (IOException e) {
-            LogUtils.error("Something went wrong while creating new Save File!","SaveManager");
+            Out.error("Something went wrong while creating new Save File!","SaveManager");
             e.printStackTrace();
         }
 

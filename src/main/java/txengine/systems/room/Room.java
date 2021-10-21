@@ -3,6 +3,7 @@ package txengine.systems.room;
 import com.rits.cloning.Cloner;
 import txengine.main.Manager;
 import txengine.systems.integration.Requirement;
+import txengine.ui.Out;
 import txengine.ui.component.Components;
 import txengine.ui.LogUtils;
 import txengine.systems.room.action.Action;
@@ -88,12 +89,12 @@ public class Room {
 
 	private void addDefaultActions() {
 		if (ignoreDefaultActions) {
-			LogUtils.info("Ignoring default actions...",name);
+			Out.info("Ignoring default actions...",name);
 			return;
 		}
 
 		if (defaultActions == null || defaultActions.size() == 0) {
-			LogUtils.warn("ignoreDefaultActions set to false, but no Default Actions found!", "Room: " + name);
+			Out.warn("ignoreDefaultActions set to false, but no Default Actions found!", "Room: " + name);
 			return;
 		}
 

@@ -8,6 +8,7 @@ import txengine.main.Manager;
 import txengine.systems.combat.combatEffect.CombatEffect;
 import txengine.systems.item.Equipment;
 import txengine.systems.item.Item;
+import txengine.ui.Out;
 
 import java.util.*;
 
@@ -50,17 +51,17 @@ public class EquipmentManager {
         Item i = Manager.itemHashMap.get(id);
 
         if (i == null) {
-            LogUtils.error(id + " is not a valid Item ID!","EquipmentManager");
+            Out.error(id + " is not a valid Item ID!","EquipmentManager");
             return false;
         }
         // Verify if the equipment can actually be equipped.
         if (!(i instanceof Equipment)) {
-            LogUtils.error("Thats not an equipment\n");
+            Out.error("Thats not an equipment\n");
             return false;
         }
 
         if (!Requirement.allMet(((Equipment) i).getEquipRequirements())) {
-            LogUtils.error("Requirements not met!\n");
+            Out.error("Requirements not met!\n");
             return false;
         }
 
@@ -138,7 +139,7 @@ public class EquipmentManager {
 
     public void setSlot(Equipment.EquipmentType slot, int equipmentID) {
         if (equipmentID  != -1 && ((Equipment) Manager.itemHashMap.get(equipmentID)).getType() != slot) {
-            LogUtils.error("Cannot assign a " + ((Equipment) Manager.itemHashMap.get(equipmentID)).getType().toString() + " to the " + slot.toString() + " slot!");
+            Out.error("Cannot assign a " + ((Equipment) Manager.itemHashMap.get(equipmentID)).getType().toString() + " to the " + slot.toString() + " slot!");
             return;
         }
 

@@ -3,6 +3,7 @@ package txengine.systems.item.effect.effects;
 import txengine.systems.combat.CombatEntity;
 import txengine.ui.LogUtils;
 import txengine.systems.item.effect.Effect;
+import txengine.ui.Out;
 
 public class TeachAbilityEffect extends Effect {
 
@@ -21,7 +22,7 @@ public class TeachAbilityEffect extends Effect {
     @Override
     public void perform(CombatEntity user) {
         if (properties.length < 1) {
-            LogUtils.error("Malformed properties for a TeachAbilityEffect!");
+            Out.error("Malformed properties for a TeachAbilityEffect!");
             return;
         }
 

@@ -4,6 +4,7 @@ import txengine.main.Manager;
 import txengine.systems.event.Event;
 import txengine.systems.reputation.Faction;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 public class ReputationEvent extends Event {
 
@@ -23,13 +24,13 @@ public class ReputationEvent extends Event {
             try {
                 growth = Faction.Growth.valueOf(getProperties()[1]);
             } catch (IllegalArgumentException ire) {
-                LogUtils.error("Expected a Faction.Growth value, got " + getProperties()[1] + " instead!","ReputationEvent");
+                Out.error("Expected a Faction.Growth value, got " + getProperties()[1] + " instead!","ReputationEvent");
             }
 
             try {
                 mode = Faction.GrowthMode.valueOf(getProperties()[2]);
             } catch (IllegalArgumentException ire) {
-                LogUtils.error("Expected a Faction.GrowthMode value, got " + getProperties()[2] + " instead!","ReputationEvent");
+                Out.error("Expected a Faction.GrowthMode value, got " + getProperties()[2] + " instead!","ReputationEvent");
             }
 
             xpGiven = Manager.factionManager.changeReputation(factionName, growth, mode);

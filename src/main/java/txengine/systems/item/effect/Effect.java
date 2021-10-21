@@ -2,6 +2,7 @@ package txengine.systems.item.effect;
 
 import txengine.systems.combat.CombatEntity;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 public abstract class Effect {
 
@@ -35,7 +36,7 @@ public abstract class Effect {
 	// Allows for external effect configuration. Useful for loading an effect from disk.
 	public void setProperty(int index, String value) {
 		if (index >= numProperties) { // Checks for a valid index
-			LogUtils.error("Invalid property index for effect configuration! This is an error, please report it on https://github.com/TopperMcKek/TheAlley");
+			Out.error("Invalid property index for effect configuration! This is an error, please report it on https://github.com/TopperMcKek/TheAlley");
 		} else {
 			properties[index] = value;
 		}

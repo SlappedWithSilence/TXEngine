@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,14 +37,14 @@ public class RoomLoader extends Loader {
                 try {
                     obj = (JSONObject) parser.parse(new FileReader(f));
                 } catch (FileNotFoundException e) {
-                    LogUtils.error("Attempted to load from file: " + f.getAbsolutePath());
+                    Out.error("Attempted to load from file: " + f.getAbsolutePath());
                     e.printStackTrace();
                     return;
                 } catch (IOException e) {
                     e.printStackTrace();
                     return;
                 } catch (ParseException e) {
-                    LogUtils.error("Can't parse " + f.getAbsolutePath() + "!", "Loader : Room Loader");
+                    Out.error("Can't parse " + f.getAbsolutePath() + "!", "Loader : Room Loader");
                     e.printStackTrace();
                     return;
                 }
@@ -51,11 +52,11 @@ public class RoomLoader extends Loader {
                 // Get the JSON array that contains all the items
                 JSONArray rawDefaultActions = (JSONArray) obj.get("actions");
                 List<Action> defaultActions = getActions(rawDefaultActions);
-                if (defaultActions == null) LogUtils.error("Default Actions is null!", "Loader, Default Actions");
+                if (defaultActions == null) Out.error("Default Actions is null!", "Loader, Default Actions");
                 Room.setDefaultActions(defaultActions);
             }
         } catch (Exception e) {
-            LogUtils.error("Failed to load Default Actions.", "Loader : Room Loader");
+            Out.error("Failed to load Default Actions.", "Loader : Room Loader");
         }
     }
 
@@ -71,14 +72,14 @@ public class RoomLoader extends Loader {
         try {
             obj = (JSONObject) parser.parse(new FileReader(file));
         } catch (FileNotFoundException e) {
-            LogUtils.error("Attempted to load from file: " + file.getAbsolutePath());
+            Out.error("Attempted to load from file: " + file.getAbsolutePath());
             e.printStackTrace();
             return null;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         } catch (ParseException e) {
-            LogUtils.error("rooms.JSON appears to be corrupted. Please re-download it from https://github.com/TopperMcKek/TheAlley/blob/master/thealley/resources/items.json\n");
+            Out.error("rooms.JSON appears to be corrupted. Please re-download it from https://github.com/TopperMcKek/TheAlley/blob/master/thealley/resources/items.json\n");
             e.printStackTrace();
             return null;
         }
@@ -135,8 +136,8 @@ public class RoomLoader extends Loader {
             if (text == null) text = "";
 
             // Catch missing required values and print error messages
-            if (className == null) LogUtils.error("Missing required field from Activity: class_name\n");
-            if (menuName == null) LogUtils.error("Missing required field from Activity: menu_name\n");
+            if (className == null) Out.error("Missing required field from Activity: class_name\n");
+            if (menuName == null) Out.error("Missing required field from Activity: menu_name\n");
 
             String[] actionProperties = new String[ propertiesArray.size()];		// Create a java-array to store the action's property values
             for (int i = 0; i < propertiesArray.size(); i++) {						// Iterate through the JSONArray that stores the property values

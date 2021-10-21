@@ -1,6 +1,7 @@
 package txengine.systems.reputation;
 
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 import java.util.*;
 
@@ -21,7 +22,7 @@ public class FactionManager {
     /*** Public Methods ***/
     public int changeReputation(String factionName, int reputationChange) {
         if (!factionMap.containsKey(factionName)) {
-            LogUtils.error("No Faction" + factionName + " exists!","FactionManager");
+            Out.error("No Faction" + factionName + " exists!","FactionManager");
             throw new NoSuchElementException();
         }
 
@@ -30,7 +31,7 @@ public class FactionManager {
 
     public int changeReputation(String factionName, Faction.Growth growth, Faction.GrowthMode mode) {
         if (!factionMap.containsKey(factionName)) {
-            LogUtils.error("No Faction" + factionName + " exists!","FactionManager");
+            Out.error("No Faction" + factionName + " exists!","FactionManager");
             throw new NoSuchElementException();
         }
 

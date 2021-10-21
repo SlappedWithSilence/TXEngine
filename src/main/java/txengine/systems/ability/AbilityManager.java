@@ -2,6 +2,7 @@ package txengine.systems.ability;
 
 import txengine.structures.Pair;
 import txengine.systems.integration.Requirement;
+import txengine.ui.Out;
 import txengine.ui.color.Colors;
 import txengine.systems.combat.CombatEntity;
 import txengine.ui.LogUtils;
@@ -32,8 +33,8 @@ public class AbilityManager {
         ArrayList<Boolean> enabled = getEnabledList(owner); // get the list of enabled abilities
 
         if (enabled.size() != abilityList.size()) { // Check for potential issues with getEnabledList not functioning correctly
-            LogUtils.error("Something went wrong when validating Abilities for " + owner.getName() + ". ");
-            LogUtils.error("ArrayList sizes don't match! AbilityList (" + abilityList.size() + ") instead of " + "enabledList (" +enabled.size() + ")!");
+            Out.error("Something went wrong when validating Abilities for " + owner.getName() + ". ");
+            Out.error("ArrayList sizes don't match! AbilityList (" + abilityList.size() + ") instead of " + "enabledList (" +enabled.size() + ")!");
             return;
         }
 

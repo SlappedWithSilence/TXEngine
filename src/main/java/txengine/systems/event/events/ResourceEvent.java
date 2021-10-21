@@ -2,6 +2,7 @@ package txengine.systems.event.events;
 
 import txengine.systems.event.Event;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 import txengine.ui.color.Colors;
 
 public class ResourceEvent extends Event {
@@ -29,7 +30,7 @@ public class ResourceEvent extends Event {
                 mode = "flat";
             } catch (Exception e) {
                 e.printStackTrace();
-                LogUtils.error("Couldn't parse" + getProperties()[1] + "!", "ResourceEvent::execute");
+                Out.error("Couldn't parse" + getProperties()[1] + "!", "ResourceEvent::execute");
             }
         }
     }

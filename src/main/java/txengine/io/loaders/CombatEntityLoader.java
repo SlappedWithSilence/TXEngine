@@ -16,6 +16,7 @@ import org.json.simple.parser.ParseException;
 import txengine.systems.item.Equipment;
 import txengine.systems.item.Item;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,7 +41,7 @@ public class CombatEntityLoader extends Loader {
         try {
             obj = (JSONObject) parser.parse(new FileReader(file));
         } catch (FileNotFoundException e) {
-            LogUtils.error("Attempted to load from file: " + file.getAbsolutePath());
+            Out.error("Attempted to load from file: " + file.getAbsolutePath());
             e.printStackTrace();
             return null;
         } catch (IOException | ParseException e) {
@@ -76,7 +77,7 @@ public class CombatEntityLoader extends Loader {
                 Item item = Manager.itemHashMap.get(i);
 
                 if (!(item instanceof Equipment)) {
-                    LogUtils.error("Error loading entity with id: " + id + "! A non-equipment item was found in the equipment_ids array!");
+                    Out.error("Error loading entity with id: " + id + "! A non-equipment item was found in the equipment_ids array!");
                 } else {
                     Equipment.EquipmentType type = ((Equipment) item).getType();
 

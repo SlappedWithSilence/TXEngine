@@ -11,6 +11,7 @@ import txengine.systems.integration.Requirement;
 import txengine.systems.crafting.Recipe;
 import txengine.systems.crafting.RecipeFactory;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 import txengine.util.Utils;
 
 import java.io.File;
@@ -32,14 +33,14 @@ public class RecipeLoader {
         try {
             obj = (JSONObject) parser.parse(new FileReader(file));
         } catch (FileNotFoundException e) {
-            LogUtils.error("Attempted to load from file: " + file.getAbsolutePath());
+            Out.error("Attempted to load from file: " + file.getAbsolutePath());
             e.printStackTrace();
             return null;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         } catch (ParseException e) {
-            LogUtils.error("rooms.JSON appears to be corrupted. Please re-download it from https://github.com/TopperMcKek/TheAlley/blob/master/thealley/resources/items.json\n");
+            Out.error("rooms.JSON appears to be corrupted. Please re-download it from https://github.com/TopperMcKek/TheAlley/blob/master/thealley/resources/items.json\n");
             e.printStackTrace();
             return null;
         }

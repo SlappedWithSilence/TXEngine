@@ -6,6 +6,7 @@ import org.json.simple.parser.ParseException;
 import txengine.main.Manager;
 import txengine.systems.combat.Player;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,7 +40,7 @@ public class LoadManager {
 		try {
 			obj = (JSONObject) parser.parse(new FileReader(saveFile));
 		} catch (FileNotFoundException e) {
-			LogUtils.error("Attempted to load from file: " + saveFile.getAbsolutePath());
+			Out.error("Attempted to load from file: " + saveFile.getAbsolutePath());
 			e.printStackTrace();
 			return;
 		} catch (IOException | ParseException e) {

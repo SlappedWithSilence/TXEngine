@@ -1,6 +1,7 @@
 package txengine.systems.combat.combatEffect;
 
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 public class CombatEffectFactory {
 
@@ -22,16 +23,16 @@ public class CombatEffectFactory {
             return e;	// Returns the effect
 
         } catch (InstantiationException e) {
-            LogUtils.error("Failed to build class.");
+            Out.error("Failed to build class.");
             e.printStackTrace();
             return null;
 
         } catch (ClassNotFoundException e) {
-            LogUtils.error("Can't locate class: " + className);
+            Out.error("Can't locate class: " + className);
             e.printStackTrace();
             return null;
         } catch (Exception e) {
-            LogUtils.error("Something went wrong while building a CombatEffect!");
+            Out.error("Something went wrong while building a CombatEffect!");
             e.printStackTrace();
             return null;
         }

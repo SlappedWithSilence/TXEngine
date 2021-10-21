@@ -7,6 +7,7 @@ import txengine.main.Manager;
 import txengine.systems.reputation.Faction;
 import txengine.systems.room.RoomManager;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -102,7 +103,7 @@ public class Importers {
 
           for (int roomID : Manager.roomManager.getVisitedRooms()) { // For each visited room
               JSONArray roomElement = (JSONArray) roomStateJSON.get(""+roomID);
-              if (roomElement == null) LogUtils.error("Something went wrong while loading room states for room " + roomID + "!");
+              if (roomElement == null) Out.error("Something went wrong while loading room states for room " + roomID + "!");
               int[] hiddenActions = LoadUtils.getIntArray(roomElement); // get the list of indexes of hidden actions
 
               Manager.roomManager.get(roomID).getRoomActions().forEach(action -> action.setHidden(false));

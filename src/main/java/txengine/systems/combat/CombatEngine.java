@@ -10,6 +10,7 @@ import txengine.ui.LogUtils;
 import txengine.systems.item.Item;
 import txengine.systems.item.Usable;
 import txengine.main.Manager;
+import txengine.ui.Out;
 
 import java.util.*;
 
@@ -445,7 +446,7 @@ public class CombatEngine {
                     case "AddPhaseEffect" -> { // Handles the adding of a new phase to the current turn. Any phase may be added, and it is always added after the current phase
 
                         CombatPhase phaseToAdd = ((AddPhaseEffect) combatEffect).getPhase(); // Get the phase we need to add
-                        if (phaseToAdd == null) LogUtils.error("phaseToAdd is null!");
+                        if (phaseToAdd == null) Out.error("phaseToAdd is null!");
                         if (i + 1 >= phaseOrder.size()) { // Check if we are currently in the last phase
                             phaseOrder.add(phaseToAdd); // Append to list
                         } else { // If we aren't in the last phase
@@ -485,7 +486,7 @@ public class CombatEngine {
         entities.get(EntityType.HOSTILE).forEach(entity -> entity.getCombatEffects().forEach( (p, list) -> list.clear()));
 
         if (Manager.player.getResourceManager().getResourceQuantity(Manager.primaryResource) < 1) {
-            LogUtils.error("Player is dead, reviving at 1 " + Manager.primaryResource);
+            Out.error("Player is dead, reviving at 1 " + Manager.primaryResource);
             Manager.player.getResourceManager().setResource(Manager.primaryResource, 1);
         }
     }

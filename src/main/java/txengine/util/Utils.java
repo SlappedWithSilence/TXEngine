@@ -1,7 +1,7 @@
 package txengine.util;
 
 import txengine.structures.Pair;
-import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 import java.util.*;
 
@@ -24,9 +24,9 @@ public class Utils {
 		try {
 			genInt = r.nextInt((upper - lower) + 1) + lower;
 		} catch (IllegalArgumentException e) {
-			LogUtils.error("Bound is negative: " + (upper - lower) + 1);
-			LogUtils.error("Upper: " + upper);
-			LogUtils.error("Lower: " + lower);
+			Out.error("Bound is negative: " + (upper - lower) + 1);
+			Out.error("Upper: " + upper);
+			Out.error("Lower: " + lower);
 			e.printStackTrace();
 			System.exit(-1);
 		}
@@ -49,7 +49,7 @@ public class Utils {
 
 	public static <T> T selectRandom(T[] arr, Random random) {
 		if (arr.length == 0) {
-			LogUtils.warn("Called on empty array!", "Utils::selectRandom");
+			Out.error("Called on empty array!", "Utils::selectRandom");
 			return null;
 		}
 		if (arr.length == 1) return arr[0];

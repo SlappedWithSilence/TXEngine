@@ -3,6 +3,7 @@ package txengine.main;
 import txengine.io.CrashReporter;
 import txengine.systems.dungeon.Dungeon;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 import java.util.ArrayList;
 
@@ -44,11 +45,11 @@ public class Handlers {
 
                 } catch (Exception e) {
                     if (values.get(0) == null) {
-                        LogUtils.error("Expected an integer!","ArgsHandler");
+                        Out.error("Expected an integer!","ArgsHandler");
                         return false;
                     }
 
-                    LogUtils.error("Expected an integer! Found " + values.get(0),"ArgsHandler");
+                    Out.error("Expected an integer! Found " + values.get(0),"ArgsHandler");
                     return false;
                 }
 
@@ -65,12 +66,12 @@ public class Handlers {
         return new Handler() {
             @Override
             public boolean handle(ArrayList<String> values) {
-                LogUtils.info("Running...", "Handlers::dumpDungeons");
+                Out.info("Running...", "Handlers::dumpDungeons");
                 int repititions = 1;
                 try {
                     repititions = Integer.parseInt(values.get(0));
                 } catch (Exception e) {
-                    LogUtils.info("Assuming value of 1","Handlers::dumpDungeons");
+                    Out.info("Assuming value of 1","Handlers::dumpDungeons");
                 }
 
                 CrashReporter.getInstance().clear();

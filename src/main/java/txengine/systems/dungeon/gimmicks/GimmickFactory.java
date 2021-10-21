@@ -4,6 +4,7 @@ import txengine.systems.dungeon.Dungeon;
 import txengine.systems.dungeon.DungeonGimmick;
 import txengine.systems.room.action.Action;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 import txengine.util.Utils;
 
 import java.util.HashMap;
@@ -28,16 +29,16 @@ public class GimmickFactory {
 
         } catch (InstantiationException e) {
 
-            LogUtils.error("Failed to build class.");
+            Out.error("Failed to build class.");
             e.printStackTrace();
             return null;
 
         } catch (ClassNotFoundException e) {
-            LogUtils.error("Can't locate class: " + className);
+            Out.error("Can't locate class: " + className);
             e.printStackTrace();
             return null;
         } catch (Exception e) {
-            LogUtils.error("Something went wrong while building a Gimmick!");
+            Out.error("Something went wrong while building a Gimmick!");
             e.printStackTrace();
             return null;
         }

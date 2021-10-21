@@ -3,6 +3,7 @@ package txengine.systems.integration.requirements;
 import txengine.main.Manager;
 import txengine.systems.integration.Requirement;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 import txengine.util.Utils;
 
 import java.util.ArrayList;
@@ -63,8 +64,8 @@ public class ConsumeItemRequirement extends Requirement {
         if (persist && met) {
             return true;
         } else {
-            LogUtils.info("Persist: " + persist, "ConsumeItemRequirement::met");
-            LogUtils.info("Met: " + met, "ConsumeItemRequirement::met");
+            Out.info("Persist: " + persist, "ConsumeItemRequirement::met");
+            Out.info("Met: " + met, "ConsumeItemRequirement::met");
         }
         List<Integer> ids = Utils.toInts(List.of(properties)); //  Track the parsed IDs
         if (Manager.player.getInventory().getItemIDs().containsAll(ids)) {

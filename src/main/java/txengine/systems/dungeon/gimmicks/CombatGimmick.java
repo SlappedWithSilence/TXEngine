@@ -6,6 +6,7 @@ import txengine.systems.dungeon.DungeonGimmick;
 import txengine.systems.room.action.Action;
 import txengine.systems.room.action.actions.CombatAction;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 import txengine.util.Utils;
 
 import java.util.AbstractMap;
@@ -45,7 +46,7 @@ public class CombatGimmick extends DungeonGimmick {
                 break;
             }
             if (owner.getRand() == null) {
-                LogUtils.error("Dungeon random generator is null!", "CombatGimmick::get");
+                Out.error("Dungeon random generator is null!", "CombatGimmick::get");
             }
             int randID = Utils.selectRandom(owner.getRewardsPool(), owner.getRand());
             a.addLoot(randID);

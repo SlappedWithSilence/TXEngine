@@ -1,6 +1,7 @@
 package txengine.main;
 
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -42,7 +43,7 @@ public class ArgsHandler {
                 argumentMap.put(curArg, new ArrayList<>());
                 lastKey = curArg;
             } else if (argumentMap.containsKey(curArg)) {
-                LogUtils.error("Argument \"" + curArg + "\" already passed!","ArgsHandler");
+                Out.error("Argument \"" + curArg + "\" already passed!","ArgsHandler");
                 throw new IllegalArgumentException();
             }
 
@@ -50,7 +51,7 @@ public class ArgsHandler {
             else {
                 // Case: a value was passed with no preceding key
                 if (lastKey == null) {
-                    LogUtils.error("Value \"" + curArg + "\" was passed with no key!","ArgsHandler");
+                    Out.error("Value \"" + curArg + "\" was passed with no key!","ArgsHandler");
                     throw new IllegalArgumentException();
                 }
                 // Case: a value was passed with a valid preceding key

@@ -14,6 +14,7 @@ import txengine.systems.dungeon.gimmicks.GimmickFactory;
 import txengine.systems.room.action.Action;
 import txengine.systems.room.action.actions.*;
 import txengine.ui.LogUtils;
+import txengine.ui.Out;
 import txengine.util.Utils;
 
 import java.util.*;
@@ -118,13 +119,13 @@ public class Dungeon {
         // Check if the route has reached its maximum length (ie is done generating)
         if (length > maximumLength) {
             exitCoordinates = from.getCoordinates();
-            LogUtils.info("Exit: " + exitCoordinates, "Dungeon::generateCoreRoute");
+            Out.info("Exit: " + exitCoordinates, "Dungeon::generateCoreRoute");
             return true;
         }
 
         // Check if the route trapped itself before reaching its maximum length
         if (roomCanvas.openDirections(from).size() == 0) {
-            LogUtils.error("Failed to generate dungeon! Writing configuration files to crash-details.txt","Dungeon::GenerateCoreRoute");
+            Out.error("Failed to generate dungeon! Writing configuration files to crash-details.txt","Dungeon::GenerateCoreRoute");
             throw new GenerationException();
         }
 
@@ -134,7 +135,7 @@ public class Dungeon {
         if (fromDirection == null || !roomCanvas.openDirections(from).contains(fromDirection)) {
             nextDirection = Utils.selectRandom(roomCanvas.openDirections(from).toArray(new CanvasNode.Direction[0]), rand); // Choose a random direction
             if (nextDirection == null) {
-                LogUtils.error("Obstruction case failure", "Dungeon::generateCoreRoute");
+                Out.error("Obstruction case failure", "Dungeon::generateCoreRoute");
             }
         }
 
@@ -143,7 +144,7 @@ public class Dungeon {
             Set<CanvasNode.Direction> directions = roomCanvas.openDirections(from);
             if (directions.size() > 1) directions.remove(fromDirection); // If
             nextDirection = Utils.selectRandom(directions.toArray(new CanvasNode.Direction[0]), rand);
-            if (nextDirection == null) LogUtils.error("Random-direction case failure", "Dungeon::generateCoreRoute");
+            if (nextDirection == null) Out.error("Random-direction case failure", "Dungeon::generateCoreRoute");
         }
 
         // Generate the next node in the same direction
