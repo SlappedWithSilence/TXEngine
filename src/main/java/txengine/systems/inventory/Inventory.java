@@ -3,6 +3,7 @@ package txengine.systems.inventory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 import txengine.main.Manager;
 import txengine.ui.color.*;
@@ -73,7 +74,49 @@ public class Inventory {
 		if (i == null) LogUtils.error("tried to add a null item");
 
 		if (usage >= capacity) {
-			LogUtils.error("Tried to add an item when the inventory was full! This is an error, please report it on https://github.com/TopperMcKek/TheAlley");
+			Scanner kbd = new Scanner (System.in);
+			System.out.println("Your inventory is full! Would you like to drop an item? Y/N");
+			String yn = kbd.nextLine();
+			yn = yn.toLowerCase();
+			switch(yn) {
+				case "n":
+					System.out.println("The new item was not added to the inventory!");
+				break;
+
+				case "y":
+					System.out.println("Enter the ID of the item you would like to drop:");
+					String pickItem = kbd.nextLine();
+					// TODO: Add check for valid item ID
+					removeItem(Integer.parseInt(pickItem));
+				break;
+				
+				default:
+					System.out.println("Invalid selection. Please keep response to 1 letter (Y/N)");
+					boolean repeat = true;
+
+					while (repeat) {
+						yn = kbd.nextLine();
+						yn = yn.toLowerCase();
+						switch(yn) {
+							case "n":
+								System.out.println("The new item was not added to the inventory!");
+								repeat = false;
+							break;
+		
+							case "y":
+								System.out.println("Enter the ID of the item you would like to drop:");
+								pickItem = kbd.nextLine();
+								// TODO: Add check for valid item ID
+								removeItem(Integer.parseInt(pickItem));
+								repeat = false;
+							break;
+							
+							default:
+								repeat = true;
+						}
+					}	
+			}
+
 		}
 
 		// Check if the inventory contains that item already
