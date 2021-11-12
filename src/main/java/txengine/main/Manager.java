@@ -9,6 +9,7 @@ import txengine.systems.combat.combatEffect.CombatEffect;
 import txengine.systems.crafting.RecipeManager;
 import txengine.systems.dungeon.Dungeon;
 import txengine.systems.item.Equipment;
+import txengine.systems.item.ItemManager;
 import txengine.systems.reputation.Faction;
 import txengine.systems.reputation.FactionManager;
 import txengine.ui.Out;
@@ -50,7 +51,7 @@ public class Manager {
 
     public static Player player;
 
-    public static HashMap<Integer, Item> itemHashMap;
+    private static HashMap<Integer, Item> itemHashMap;
     public static HashMap<Integer, Conversation> conversationHashMap;
     public static HashMap<String, Integer[]> playerResourceMap;
     public static HashMap<String, Ability> abilityHashMap;
@@ -65,6 +66,7 @@ public class Manager {
     public static RoomManager roomManager;
     public static RecipeManager recipeManager;
     public static FactionManager factionManager;
+    public static ItemManager itemManager;
 
     // The class that handles the main menu, then launches the game.
     public static void main(String[] args ) {
@@ -110,21 +112,30 @@ public class Manager {
 
         // Load resource files
         itemHashMap = new ItemLoader().load(Resources.getResourceAsFile(ITEM_RESOURCE_FILE));
+        itemManager = new ItemManager(itemHashMap);
+
         HashMap<Integer, Room> roomHashMap = new RoomLoader().load(Resources.getResourceAsFile(ROOM_RESOURCE_FILE));
+        roomManager = new RoomManager(roomHashMap);
+
         conversationHashMap = new ConversationLoader().load(Resources.getResourceAsFile(CONVERSATION_RESOURCE_FILE));
+
         playerResourceMap = new CombatResourceLoader().load(Resources.getResourceAsFile(PLAYER_RESOURCE_FILE));
+
         abilityHashMap = new AbilityLoader().load(Resources.getResourceAsFile(ABILITY_RESOURCE_FILE));
+
         combatEntityHashMap = new CombatEntityLoader().load(Resources.getResourceAsFile(COMBAT_ENTITY_RESOURCE_FILE));
+
         HashMap<Integer, Recipe> recipeHashMap = RecipeLoader.load(Resources.getResourceAsFile(RECIPES_RESOURCE_FILE));
+        recipeManager = new RecipeManager(recipeHashMap);
+
         HashMap<String, Skill> skillHashMap = new SkillLoader().load(Resources.getResourceAsFile(SKILLS_RESOURCE_FILE));
+        skillManager = new SkillManager(skillHashMap);
+
         HashMap<String, Faction> factionHashMap = new FactionLoader().load(Resources.getResourceAsFile(FACTION_RESOURCE_FILE));
+        factionManager = new FactionManager(factionHashMap);
 
         // Set up global managers
         flagManager = new FlagManager();
-        skillManager = new SkillManager(skillHashMap);
-        roomManager = new RoomManager(roomHashMap);
-        recipeManager = new RecipeManager(recipeHashMap);
-        factionManager = new FactionManager(factionHashMap);
 
         Exporters.registerAll();
 

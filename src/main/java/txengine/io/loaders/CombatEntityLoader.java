@@ -74,7 +74,7 @@ public class CombatEntityLoader extends Loader {
             EquipmentManager equipmentManager = new EquipmentManager(); // Make a new equipment manager
 
             for (int i : LoadUtils.getIntArray((JSONArray) rawEntity.get("equipment_ids"))) {
-                Item item = Manager.itemHashMap.get(i);
+                Item item = Manager.itemManager.get_instance(i);
 
                 if (!(item instanceof Equipment)) {
                     Out.error("Error loading entity with id: " + id + "! A non-equipment item was found in the equipment_ids array!");

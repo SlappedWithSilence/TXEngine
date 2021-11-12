@@ -67,9 +67,9 @@ public class Recipe {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        for (Pair<Integer, Integer> pair : ingredients) sb.append("[").append(Manager.itemHashMap.get(pair.getKey()).getName()).append(": ").append(pair.getValue()).append("]");
+        for (Pair<Integer, Integer> pair : ingredients) sb.append("[").append(Manager.itemManager.get_instance(pair.getKey()).getName()).append(": ").append(pair.getValue()).append("]");
         sb.append(" -> ");
-        for (Pair<Integer, Integer> pair : products) sb.append("[").append(Manager.itemHashMap.get(pair.getKey()).getName()).append(": ").append(pair.getValue()).append("]");
+        for (Pair<Integer, Integer> pair : products) sb.append("[").append(Manager.itemManager.get_instance(pair.getKey()).getName()).append(": ").append(pair.getValue()).append("]");
 
         return sb.toString();
     }
@@ -83,10 +83,10 @@ public class Recipe {
             if (Manager.player.getInventory().getItemQuantity(pair.getKey()) >= pair.getValue()) color = Colors.GREEN;
             else color = Colors.RED;
 
-            sb.append("[").append(Manager.itemHashMap.get(pair.getKey()).getName()).append(": ").append(color).append(pair.getValue()).append(Colors.RESET).append("]");
+            sb.append("[").append(Manager.itemManager.get_instance(pair.getKey()).getName()).append(": ").append(color).append(pair.getValue()).append(Colors.RESET).append("]");
         }
         sb.append(" -> ");
-        for (Pair<Integer, Integer> pair : products) sb.append("[").append(Manager.itemHashMap.get(pair.getKey()).getName()).append(": ").append(pair.getValue()).append("]");
+        for (Pair<Integer, Integer> pair : products) sb.append("[").append(Manager.itemManager.get_instance(pair.getKey()).getName()).append(": ").append(pair.getValue()).append("]");
 
         return sb.toString();
     }

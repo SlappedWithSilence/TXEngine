@@ -129,7 +129,7 @@ public class Inventory {
 
 	// An overload for addItem() that allows the programmer to specify the item ID instead of a literal object
 	public void addItem(int id) {
-		addItem(Manager.itemHashMap.get(id));
+		addItem(Manager.itemManager.get_instance(id));
 	}
 
 	// An overload for addItem() that allows the programmer to specify the item ID instead of a literal object as well as quantity
@@ -246,11 +246,11 @@ public class Inventory {
 
 	// Returns an instance of the item class associated with the ID located at 'index' in the inventory
 	public Item getItemInstance(Integer index) {
-		return Manager.itemHashMap.get( itemIDs.get(index) );
+		return Manager.itemManager.get_instance( itemIDs.get(index) );
 	}
 
 	public List<Item> getItemInstances() {
-		return itemIDs.stream().map(integer -> Manager.itemHashMap.get(integer)).toList();
+		return itemIDs.stream().map(integer -> Manager.itemManager.get_instance(integer)).toList();
 	}
 
 	public List<Integer> getItemQuantities() {

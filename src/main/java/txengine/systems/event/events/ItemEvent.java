@@ -22,7 +22,7 @@ public class ItemEvent extends Event {
 
     @Override
     public String print() {
-        return Colors.GREEN_BOLD +  "You received " + itemQuantity + " " + Manager.itemHashMap.get(itemID).getName() + "(s)!" + Colors.RESET;
+        return Colors.GREEN_BOLD +  "You received " + itemQuantity + " " + Manager.itemManager.get_instance(itemID).getName() + "(s)!" + Colors.RESET;
     }
 
 

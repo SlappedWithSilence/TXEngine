@@ -45,7 +45,7 @@ public class RecipeManager {
         for (Pair<Integer, Integer> pair : recipe.getIngredients()) {
             StringBuilder sb = new StringBuilder();
 
-            sb.append(Manager.itemHashMap.get(pair.getKey())).append(": ");
+            sb.append(Manager.itemManager.get_instance(pair.getKey())).append(": ");
 
             // Make the item quantity green if it is satisfied, red otherwise
             if (Manager.player.getInventory().getItemQuantity(pair.getKey()) < pair.getValue()) {

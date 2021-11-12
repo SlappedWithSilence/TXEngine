@@ -52,7 +52,7 @@ public class ConsumeItemRequirement extends Requirement {
 
         sb.append("You must have ");
 
-        for (int id : Utils.toInts(List.of(properties))) sb.append(Manager.itemHashMap.get(id).getName()).append(",");
+        for (int id : Utils.toInts(List.of(properties))) sb.append(Manager.itemManager.get_instance(id).getName()).append(",");
         sb.replace(sb.length()-1, sb.length(), " ");
         sb.append("in your inventory.");
 
@@ -71,7 +71,7 @@ public class ConsumeItemRequirement extends Requirement {
         if (Manager.player.getInventory().getItemIDs().containsAll(ids)) {
             StringBuilder names = new StringBuilder();
             for (int id : ids) {
-                names.append(", ").append(Manager.itemHashMap.get(id).getName());
+                names.append(", ").append(Manager.itemManager.get_instance(id).getName());
             }
             System.out.println("Are you sure you want to use " + names.toString() + "?");
             if (LogUtils.getAffirmative()) {

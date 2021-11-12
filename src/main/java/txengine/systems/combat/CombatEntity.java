@@ -135,7 +135,7 @@ public class CombatEntity implements CombatAgency, Components.Tabable {
             ArrayList<Integer> healingItems = CombatEntityLogic.getHealingItems(this.getInventory());
 
             // If the entity possesses healing items in its inventory, use a random one
-            if (healingItems.size() > 0) return new Pair<>(null, Manager.itemHashMap.get(healingItems.get(new Random().nextInt(healingItems.size())))); // TODO: Verify that this won't go out of bounds
+            if (healingItems.size() > 0) return new Pair<>(null, Manager.itemManager.get_instance(healingItems.get(new Random().nextInt(healingItems.size())))); // TODO: Verify that this won't go out of bounds
 
             ArrayList<Ability> healingAbilities = CombatEntityLogic.getHealingAbilities(this.abilityManager);
 

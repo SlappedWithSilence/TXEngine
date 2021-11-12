@@ -37,7 +37,7 @@ public class CombatEntityLogic {
     public static ArrayList<Integer> getHealingItems(Inventory inventory) {
         ArrayList<Integer> itemIDs = new ArrayList<>();
 
-        ArrayList<Integer> usableIDS = new ArrayList<>(inventory.getItemIDs().stream().filter(integer -> Manager.itemHashMap.get(integer) instanceof Usable).toList());
+        ArrayList<Integer> usableIDS = new ArrayList<>(inventory.getItemIDs().stream().filter(integer -> Manager.itemManager.get_instance(integer) instanceof Usable).toList());
 
         if (usableIDS.size() == 0) return itemIDs;
 
@@ -54,9 +54,9 @@ public class CombatEntityLogic {
     }
 
     public static boolean isHealingItem(int i) {
-        if (!(Manager.itemHashMap.get(i) instanceof Usable)) return false;
+        if (!(Manager.itemManager.get_instance(i) instanceof Usable)) return false;
 
-        return ((Usable) Manager.itemHashMap.get(i)).getEffects().stream().anyMatch(effect -> effect.getProperties()[0].equals(Manager.primaryResource) &&
+        return ((Usable) Manager.itemManager.get_instance(i)).getEffects().stream().anyMatch(effect -> effect.getProperties()[0].equals(Manager.primaryResource) &&
                 Double.parseDouble(effect.getProperties()[1]) > 0);
     }
 

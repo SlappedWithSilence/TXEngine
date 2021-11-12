@@ -87,7 +87,7 @@ public class StoreAction extends Action {
 				Components.subHeader(List.of("Money: " + Manager.player.getMoney()));
 
 				if (Manager.player.getMoney() >= costs.get(choice)) {
-					ColorConsole.d("Are you sure you want to purchase " + Manager.itemHashMap.get(itemChoiceID).getName() + "? ", false);
+					ColorConsole.d("Are you sure you want to purchase " + Manager.itemManager.get_instance(itemChoiceID).getName() + "? ", false);
 
 					if (LogUtils.getAffirmative()) {
 						costs.set(choice, purchase(choice)); // Purchase the item, and update the cost of the item based on the store's purchase mode.
@@ -113,7 +113,7 @@ public class StoreAction extends Action {
 		ColorConsole.d(CHOICE_PROMPT+"\n", false);
 		for (int i = 0; i < inventoryIDs.size(); i++ ) {
 			System.out.println("[" + i + "] " +
-					Manager.itemHashMap.get(inventoryIDs.get(i)).getName()
+					Manager.itemManager.get_instance(inventoryIDs.get(i)).getName()
 							+ "\t" + Colors.CYAN_BOLD + costs.get(i) + Colors.RESET);
 		}
 		Components.bar();

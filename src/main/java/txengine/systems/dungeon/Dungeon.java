@@ -67,7 +67,7 @@ public class Dungeon {
         seed = rand.nextLong();
         rand = new Random(seed);
 
-        rewardsPool = Manager.itemHashMap.keySet().stream().toList();
+        rewardsPool = Manager.itemManager.get_all_ids().stream().toList();
         enemyPool = Manager.combatEntityHashMap.keySet().toArray(new Integer[0]);
 
         lootQuantity = DEFAULT_LOOT_QUANTITY;

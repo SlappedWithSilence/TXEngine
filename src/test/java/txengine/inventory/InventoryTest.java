@@ -43,7 +43,7 @@ public class InventoryTest {
     public void addItemWithQuantity() {
         Manager.player.setInventory(new Inventory(10));
 
-        Manager.player.getInventory().addItem(1, Manager.itemHashMap.get(1).getMaxStacks());
+        Manager.player.getInventory().addItem(1, Manager.itemManager.get_instance(1).getMaxStacks());
 
         assert Manager.player.getInventory().getUsage() == 1;
         assert Manager.player.getInventory().getItemIDs().size() == 1;
@@ -53,7 +53,7 @@ public class InventoryTest {
     @Test
     public void addItemOverflow() {
         Manager.player.setInventory(new Inventory(10));
-        Manager.player.getInventory().addItem(1, Manager.itemHashMap.get(1).getMaxStacks());
+        Manager.player.getInventory().addItem(1, Manager.itemManager.get_instance(1).getMaxStacks());
         assert Manager.player.getInventory().getUsage() == 1;
         assert Manager.player.getInventory().getItemIDs().size() == 1;
 
