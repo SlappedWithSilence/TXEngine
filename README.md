@@ -2,6 +2,8 @@
 
 TXEngine is a text-based game engine written in Java. The goal of this project is to create a rich toolset of game elements that empower designers to build flexible and unique worlds. With TXEngine, designers create games entirely by manipulating a set of JSON files--no code needed. TXEngine also features a rich content designer that can assist users of the engine with writing, tracking, and checking their JSON game components (coming soon).
 
+*Looking for usage documentation? [Visit the wiki](https://github.com/SlappedWithSilence/TXEngine/wiki)!*
+
 ## Technologies
 
 TXEngine is designed to be as portable and lightweight as possible. As such, it does not use any heavy frameworks or engines. 
